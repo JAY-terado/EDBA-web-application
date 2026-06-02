@@ -29,7 +29,7 @@ export default function Community() {
     <section className="py-24 bg-[#f1f3f6] border-b border-zinc-200/50">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-          
+
           {/* Left Text Block */}
           <div className="lg:col-span-6">
             <span className="text-xs font-bold tracking-wider uppercase text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-100 mb-4 inline-block">
@@ -106,10 +106,7 @@ export default function Community() {
                   </div>
                 </div>
 
-                {/* Notification Bubble */}
-                <div className="mx-auto bg-zinc-900/60 border border-zinc-800/60 rounded-xl py-1.5 px-3 text-[9px] text-zinc-400 text-center font-medium max-w-[90%]">
-                  ⚡ New Invoice Paid: Science Lab Fee (₹1,200)
-                </div>
+
               </div>
 
               {/* Chat Input */}
