@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { ArrowRight, Play } from "lucide-react";
 
@@ -25,12 +27,18 @@ export default function Cta() {
 
             {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-              <button className="inline-flex items-center justify-center px-6 py-4 text-base font-semibold text-zinc-900 neu-btn-light rounded-xl group">
+              <button
+                onClick={() => window.dispatchEvent(new CustomEvent("open-demo-modal"))}
+                className="inline-flex items-center justify-center px-6 py-4 text-base font-semibold text-zinc-900 neu-btn-light rounded-xl group cursor-pointer"
+              >
                 Get Started Now
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </button>
               
-              <button className="inline-flex items-center justify-center px-6 py-4 text-base font-semibold text-white bg-white/10 hover:bg-white/20 border border-white/10 transition-all rounded-xl shadow-inner">
+              <button
+                onClick={() => window.dispatchEvent(new CustomEvent("open-demo-modal"))}
+                className="inline-flex items-center justify-center px-6 py-4 text-base font-semibold text-white bg-white/10 hover:bg-white/20 border border-white/10 transition-all rounded-xl shadow-inner cursor-pointer"
+              >
                 <Play className="mr-2 h-4 w-4 fill-white text-white" />
                 Book a Demo Call
               </button>

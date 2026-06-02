@@ -107,12 +107,12 @@ export default function Hero() {
               variants={itemVariants}
               className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-8"
             >
-              <a
-                href="#cta"
-                className="inline-flex items-center justify-center px-6 py-3.5 neu-btn-blue text-sm font-semibold text-white rounded-full group"
+              <button
+                onClick={() => window.dispatchEvent(new CustomEvent("open-demo-modal"))}
+                className="inline-flex items-center justify-center px-6 py-3.5 neu-btn-blue text-sm font-semibold text-white rounded-full group cursor-pointer"
               >
                 Book a Free Demo →
-              </a>
+              </button>
               <button
                 className="inline-flex items-center justify-center px-6 py-3.5 neu-btn-light text-sm font-semibold text-zinc-700 rounded-full gap-2"
               >

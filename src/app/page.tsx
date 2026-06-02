@@ -16,6 +16,7 @@ import Faq from "@/components/Faq";
 import Cta from "@/components/Cta";
 import Footer from "@/components/Footer";
 import FloatingCta from "@/components/FloatingCta";
+import DemoModal from "@/components/DemoModal";
 
 export default function Home() {
   return (
@@ -39,6 +40,7 @@ export default function Home() {
       </main>
       <Footer />
       <FloatingCta />
+      <DemoModal />
     </>
   );
 }

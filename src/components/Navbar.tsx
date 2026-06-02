@@ -24,6 +24,11 @@ export default function Navbar() {
     { name: "FAQ", href: "#faq" },
   ];
 
+  const handleDemoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.dispatchEvent(new CustomEvent("open-demo-modal"));
+  };
+
   return (
     <nav
       className={`fixed left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-[1440px] z-50 transition-all duration-300 rounded-2xl ${scrolled
@@ -59,13 +64,13 @@ export default function Navbar() {
             >
               Log in
             </a>
-            <a
-              href="#cta"
-              className="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-all rounded-xl shadow-md shadow-blue-600/10 hover:shadow-blue-600/20 group"
+            <button
+              onClick={handleDemoClick}
+              className="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-all rounded-xl shadow-md shadow-blue-600/10 hover:shadow-blue-600/20 group cursor-pointer"
             >
               Book a Free Demo
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </a>
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -108,13 +113,15 @@ export default function Navbar() {
             >
               Log in
             </a>
-            <a
-              href="#cta"
-              onClick={() => setIsOpen(false)}
-              className="w-full py-2.5 text-center font-semibold text-sm text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-lg transition-colors"
+            <button
+              onClick={(e) => {
+                setIsOpen(false);
+                handleDemoClick(e);
+              }}
+              className="w-full py-2.5 text-center font-semibold text-sm text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-lg transition-colors cursor-pointer"
             >
               Book a Free Demo
-            </a>
+            </button>
           </div>
         </div>
       </div>
