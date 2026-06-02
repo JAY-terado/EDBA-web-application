@@ -58,6 +58,8 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-4">
             <a
               href="https://appv1.edba.io/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-sm font-medium text-zinc-700 hover:text-zinc-950 transition-colors"
             >
               Log in
@@ -106,6 +108,8 @@ export default function Navbar() {
           <div className="flex flex-col gap-3">
             <a
               href="https://appv1.edba.io/"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setIsOpen(false)}
               className="w-full py-2.5 text-center font-medium text-sm text-zinc-800 hover:bg-zinc-100/50 rounded-xl transition-colors"
             >
