@@ -53,9 +53,12 @@ export default function Navbar() {
 
           {/* Action Buttons */}
           <div className="hidden md:flex items-center gap-4">
-            <button className="text-sm font-medium text-zinc-700 hover:text-zinc-950 transition-colors">
+            <a
+              href="https://appv1.edba.io/"
+              className="text-sm font-medium text-zinc-700 hover:text-zinc-950 transition-colors"
+            >
               Log in
-            </button>
+            </a>
             <a
               href="#cta"
               className="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-all rounded-xl shadow-md shadow-blue-600/10 hover:shadow-blue-600/20 group"
@@ -98,12 +101,13 @@ export default function Navbar() {
           </div>
 
           <div className="flex flex-col gap-3">
-            <button
+            <a
+              href="https://appv1.edba.io/"
               onClick={() => setIsOpen(false)}
               className="w-full py-2.5 text-center font-medium text-sm text-zinc-800 hover:bg-zinc-100/50 rounded-xl transition-colors"
             >
               Log in
-            </button>
+            </a>
             <a
               href="#cta"
               onClick={() => setIsOpen(false)}

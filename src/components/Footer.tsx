@@ -10,10 +10,10 @@ export default function Footer() {
       { name: "Parent Portal", href: "#" },
     ],
     features: [
-      { name: "AI Proctoring", href: "#" },
-      { name: "Exam Scheduling", href: "#" },
-      { name: "Fee Billing Gateways", href: "#" },
-      { name: "RFID Student Safety", href: "#" },
+      { name: "AI Proctoring", href: "https://appv1.edba.io/" },
+      { name: "Exam Scheduling", href: "https://appv1.edba.io/" },
+      { name: "Fee Billing Gateways", href: "https://appv1.edba.io/" },
+      { name: "RFID Student Safety", href: "https://appv1.edba.io/" },
     ],
     resources: [
       { name: "LMS Documentation", href: "#" },
@@ -39,10 +39,7 @@ export default function Footer() {
           {/* Brand Info */}
           <div className="col-span-2 flex flex-col items-start gap-4">
             <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center text-white text-sm font-black font-display shadow-md">
-                E
-              </div>
-              <span className="font-display font-bold text-lg text-white tracking-tight">EDBA</span>
+              <img src="/logo.png" alt="EDBA Logo" className="h-8 w-auto" />
             </div>
             <p className="text-zinc-500 text-xs leading-relaxed max-w-sm">
               The next-generation enterprise Institute LMS management platform. Automate operations, grading, and safety updates with integrated AI tools.
