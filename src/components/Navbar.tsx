@@ -88,30 +88,31 @@ export default function Navbar() {
 
       {/* Mobile Drawer Overlay */}
       <div
-        className={`fixed top-[76px] left-4 right-4 z-40 p-6 rounded-2xl bg-white/85 backdrop-blur-lg border border-white/30 transition-all duration-300 md:hidden shadow-xl ${isOpen ? "translate-y-0 opacity-100 pointer-events-auto" : "-translate-y-4 opacity-0 pointer-events-none"
-          }`}
+        className={`absolute top-[calc(100%+12px)] left-0 right-0 z-45 p-6 rounded-2xl bg-white border border-zinc-200/50 shadow-2xl transition-all duration-300 md:hidden ${
+          isOpen ? "translate-y-0 opacity-100 pointer-events-auto" : "-translate-y-4 opacity-0 pointer-events-none"
+        }`}
       >
         <div className="space-y-6">
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-1 items-center">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="text-base font-semibold text-zinc-800 hover:text-blue-600 transition-colors py-2 border-b border-zinc-100/50"
+                className="text-base font-semibold text-zinc-800 hover:text-blue-600 hover:bg-zinc-50/80 py-3 px-4 rounded-xl transition-all w-full text-center duration-200"
               >
                 {link.name}
               </a>
             ))}
           </div>
 
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 pt-4 border-t border-zinc-100">
             <a
               href="https://appv1.edba.io/"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsOpen(false)}
-              className="w-full py-2.5 text-center font-medium text-sm text-zinc-800 hover:bg-zinc-100/50 rounded-xl transition-colors"
+              className="w-full py-3 text-center font-semibold text-sm text-zinc-800 hover:bg-zinc-50/80 rounded-xl transition-colors border border-zinc-200/60 duration-200"
             >
               Log in
             </a>
@@ -120,7 +121,7 @@ export default function Navbar() {
                 setIsOpen(false);
                 handleDemoClick(e);
               }}
-              className="w-full py-2.5 text-center font-semibold text-sm text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-lg transition-colors cursor-pointer"
+              className="w-full py-3 text-center font-semibold text-sm text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-lg shadow-blue-500/10 transition-all duration-200 cursor-pointer"
             >
               Book a Free Demo
             </button>

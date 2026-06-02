@@ -361,9 +361,7 @@ export default function DemoModal() {
                         >
                           Privacy Policy
                         </a>
-                        {" & "}
-                        <span className="text-zinc-600 underline underline-offset-2 cursor-pointer">Terms of Service</span>.
-                        No spam, ever.
+                        . No spam, ever.
                       </p>
                     </motion.form>
                   )}
