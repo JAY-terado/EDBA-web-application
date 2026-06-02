@@ -317,3 +317,23 @@ select,
 [contenteditable="true"] {
   cursor: text !important;
 }
+
+/* ----------------------------------------------------
+   INFINITE SCROLL TICKER UTILITY
+   ---------------------------------------------------- */
+@keyframes infinite-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-infinite-scroll {
+  animation: infinite-scroll 45s linear infinite;
+}
+
+.animate-infinite-scroll:hover {
+  animation-play-state: paused;
+}

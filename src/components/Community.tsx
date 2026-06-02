@@ -69,11 +69,11 @@ export default function Community() {
               {/* Chat Interface Header */}
               <div className="flex items-center gap-3 pt-6 pb-3 border-b border-zinc-900 mb-4">
                 <div className="h-9 w-9 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-xs">
-                  T
+                  P
                 </div>
                 <div>
-                  <div className="text-xs font-semibold text-white">Mrs. Evelyn Harris</div>
-                  <div className="text-[9px] text-emerald-400 font-medium">Grade 5 Science Teacher</div>
+                  <div className="text-xs font-semibold text-white">Mrs. Priya Sharma</div>
+                  <div className="text-[9px] text-emerald-400 font-medium">Class 5 Science Teacher</div>
                 </div>
               </div>
 
@@ -82,33 +82,33 @@ export default function Community() {
                 {/* Teacher Msg */}
                 <div className="flex gap-2 items-end max-w-[85%]">
                   <div className="h-6 w-6 rounded-full bg-blue-600 flex items-center justify-center text-[9px] text-white font-bold flex-shrink-0">
-                    T
+                    P
                   </div>
                   <div className="bg-zinc-900 border border-zinc-800/80 rounded-2xl px-3 py-2 text-[11px] text-zinc-300">
-                    Hi! Just wanted to share that Lucas did an amazing job on his solar system project today. 🌟
+                    Namaste! Just wanted to share that Aarav did an amazing job on his Science project today. 🌟
                   </div>
                 </div>
 
                 {/* Parent Reply */}
                 <div className="flex justify-end">
                   <div className="bg-blue-600 rounded-2xl px-3 py-2 text-[11px] text-white max-w-[85%] font-medium">
-                    That is so wonderful to hear! Thank you for the update, Mrs. Harris. Did he submit the project file?
+                    That is so wonderful to hear! Thank you for the update, Priya Ma'am. Did he submit the project file?
                   </div>
                 </div>
 
                 {/* Teacher Msg */}
                 <div className="flex gap-2 items-end max-w-[85%]">
                   <div className="h-6 w-6 rounded-full bg-blue-600 flex items-center justify-center text-[9px] text-white font-bold flex-shrink-0">
-                    T
+                    P
                   </div>
                   <div className="bg-zinc-900 border border-zinc-800/80 rounded-2xl px-3 py-2 text-[11px] text-zinc-300">
-                    Yes, he did! I've uploaded the marks and feedback directly to the Student Portal. You can check it there.
+                    Yes, he did! I have uploaded the marks and feedback directly to the Student Portal. You can check it there.
                   </div>
                 </div>
 
                 {/* Notification Bubble */}
                 <div className="mx-auto bg-zinc-900/60 border border-zinc-800/60 rounded-xl py-1.5 px-3 text-[9px] text-zinc-400 text-center font-medium max-w-[90%]">
-                  ⚡ New Invoice Paid: Science Lab Fee ($15.00)
+                  ⚡ New Invoice Paid: Science Lab Fee (₹1,200)
                 </div>
               </div>
 

@@ -8,28 +8,28 @@ export default function FeaturesGrid() {
   const features = [
     {
       title: "Admin LMS",
-      desc: "Streamline operations with admissions management, automated billing, timetables, and staff directory portals.",
+      desc: "Streamline operations with admissions management, fee ledger tracking, timetables, and staff directory portals.",
       icon: ShieldCheck,
       color: "from-blue-500 to-indigo-600",
       glowColor: "shadow-blue-500/10",
     },
     {
       title: "AI-Powered Grading",
-      desc: "Speed up assessments. Generate automatic performance feedback, proctor online exams, and analyze student GPA gaps.",
+      desc: "Speed up assessments. Generate automatic performance feedback and analyze student GPA gaps.",
       icon: Brain,
       color: "from-cyan-500 to-blue-500",
       glowColor: "shadow-cyan-500/10",
     },
     {
       title: "Student Portal",
-      desc: "Empower students to check homework schedules, view course syllabi, join live online classes, and track goals.",
+      desc: "Empower students to check homework schedules, view course syllabus, submit digital assignments, and track goals.",
       icon: User,
       color: "from-teal-500 to-cyan-500",
       glowColor: "shadow-teal-500/10",
     },
     {
       title: "Parent Portal",
-      desc: "Keep parents informed. Direct messaging with teachers, instant fee invoice payments, and real-time institute bus GPS tracking.",
+      desc: "Keep parents informed. Direct messaging with teachers, secure online fee payments, and real-time institute bus GPS tracking.",
       icon: HeartHandshake,
       color: "from-indigo-500 to-purple-500",
       glowColor: "shadow-indigo-500/10",
@@ -57,9 +57,9 @@ export default function FeaturesGrid() {
   return (
     <section id="features" className="py-24 bg-[#f1f3f6] relative">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Section Header */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -78,7 +78,7 @@ export default function FeaturesGrid() {
         </motion.div>
 
         {/* Feature Cards Grid */}
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"

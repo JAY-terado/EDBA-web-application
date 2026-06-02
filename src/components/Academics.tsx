@@ -1,5 +1,5 @@
 import React from "react";
-import { BookMarked, Award, Video, Check } from "lucide-react";
+import { BookMarked, Award, BookOpen, Check } from "lucide-react";
 
 export default function Academics() {
   const cards = [
@@ -18,10 +18,10 @@ export default function Academics() {
       color: "bg-cyan-500 text-white shadow-md shadow-cyan-500/10",
     },
     {
-      title: "Online Classrooms",
-      desc: "Enable remote learning. Broadcast live streams, host study materials, and manage homework submissions inside portals.",
-      icon: Video,
-      features: ["Live whiteboard streaming", "Cloud files storage hub", "Digital assignment lockers"],
+      title: "Library Management",
+      desc: "Digitize your library operations. Manage physical and digital book stocks, track issue & return logs, and configure fine structures.",
+      icon: BookOpen,
+      features: ["OPAC digital search catalog", "Auto late return reminders", "Fines ledger configuration"],
       color: "bg-teal-500 text-white shadow-md shadow-teal-500/10",
     },
   ];

@@ -1,5 +1,5 @@
 import React from "react";
-import { CalendarRange, ShieldAlert, BarChart3, HelpCircle } from "lucide-react";
+import { CalendarRange, CheckSquare, BarChart3, HelpCircle } from "lucide-react";
 
 export default function Assessment() {
   const assessmentFeatures = [
@@ -10,10 +10,10 @@ export default function Assessment() {
       color: "bg-blue-600 text-white shadow-md shadow-blue-500/10",
     },
     {
-      title: "AI Proctoring",
-      desc: "Maintain test integrity. Prevent copy-paste behaviors, restrict tab switching, and log student browser focus status.",
-      icon: ShieldAlert,
-      color: "bg-red-600 text-white shadow-md shadow-red-500/10",
+      title: "Self-Assessment Practice",
+      desc: "Empower students to improve. Generate adaptive practice tests, access mock exams, and review conceptual explanations at their own pace.",
+      icon: CheckSquare,
+      color: "bg-indigo-500 text-white shadow-md shadow-indigo-500/10",
     },
     {
       title: "Result Analysis",
@@ -62,7 +62,7 @@ export default function Assessment() {
               
               <div className="pt-4 border-t border-zinc-100 flex items-center text-xs font-bold text-zinc-400 gap-1.5 cursor-pointer hover:text-blue-600 transition-colors">
                 <HelpCircle className="h-3.5 w-3.5" />
-                <span>How EDBA secures this module</span>
+                <span>How EDBA powers this module</span>
               </div>
             </div>
           ))}

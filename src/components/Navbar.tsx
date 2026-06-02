@@ -19,9 +19,7 @@ export default function Navbar() {
     { name: "Features", href: "#features" },
     { name: "Solutions", href: "#solutions" },
     { name: "AI Assistant", href: "#ai-assistant" },
-    { name: "Safety", href: "#safety" },
     { name: "Mobile Apps", href: "#mobile-apps" },
-    { name: "FAQ", href: "#faq" },
   ];
 
   const handleDemoClick = (e: React.MouseEvent) => {

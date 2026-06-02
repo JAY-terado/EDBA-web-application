@@ -7,7 +7,7 @@ import { CheckCircle2, TrendingUp, Cpu, Award } from "lucide-react";
 export default function WhyChooseUs() {
   const benefits = [
     { title: "One-Click Attendance Sync", desc: "Mark attendance in seconds and notify parents instantly." },
-    { title: "Secure Payment System", desc: "Automated invoices, online payment portals, and tracking in one place." },
+    { title: "Secure Online Fee Payments", desc: "Configure billing structures, track due fee ledgers, and accept secure instant digital clearance." },
     { title: "Gradebook & Digital Reports", desc: "Calculate GPAs automatically and publish PDF report cards instantly." },
     { title: "Real-time Notifications", desc: "Instant mobile notifications for announcements, events, and bus details." },
     { title: "Interactive Reports", desc: "Visual charts for test records, grade tracking, and performance analysis." },
@@ -83,40 +83,51 @@ export default function WhyChooseUs() {
 
           {/* Right visual card */}
           <div className="lg:col-span-6">
+            {/* Viewport Entry Wrapper */}
             <motion.div
               initial={{ opacity: 0, scale: 0.96 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6 }}
-              className="neu-card-dark rounded-2xl p-6 relative overflow-hidden"
             >
-              <div className="absolute top-0 right-0 h-40 w-40 bg-cyan-500/5 rounded-full blur-3xl"></div>
+              {/* Continuous Floating Loop Card */}
+              <motion.div
+                animate={{ y: [0, -12, 0] }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 6,
+                  ease: "easeInOut"
+                }}
+                className="neu-card rounded-3xl p-8 relative overflow-hidden border border-white/80 shadow-[0_32px_64px_-16px_rgba(163,177,198,0.5),_0_16px_32px_-10px_rgba(37,99,235,0.06)]"
+              >
+              {/* Soft blue glowing gradient orb */}
+              <div className="absolute top-0 right-0 h-40 w-40 bg-blue-500/8 rounded-full blur-3xl pointer-events-none"></div>
 
-              <div className="flex items-center justify-between pb-4 border-b border-zinc-800 mb-6">
+              <div className="flex items-center justify-between pb-5 border-b border-zinc-200/80 mb-6">
                 <div>
-                  <h4 className="font-display font-semibold text-white text-base">Efficiency Gains</h4>
-                  <p className="text-zinc-500 text-xs">Comparison between traditional vs. EDBA LMS</p>
+                  <h4 className="font-display font-bold text-zinc-900 text-lg leading-tight">Efficiency Gains</h4>
+                  <p className="text-zinc-500 text-xs mt-0.5">Comparison between traditional vs. EDBA LMS</p>
                 </div>
-                <div className="p-2 rounded-lg neu-btn-dark">
-                  <TrendingUp className="h-4 w-4 text-emerald-400" />
+                <div className="p-2.5 rounded-xl bg-blue-50 border border-blue-100 text-blue-600 shadow-sm flex items-center justify-center">
+                  <TrendingUp className="h-4 w-4" />
                 </div>
               </div>
 
               {/* Bar charts comparing operations time */}
-              <div className="space-y-5">
+              <div className="space-y-6">
                 {compareBars.map((bar, idx) => (
                   <div key={idx}>
-                    <div className="flex justify-between text-xs font-semibold text-zinc-400 mb-2">
-                      <span>{bar.title}</span>
-                      <span className="text-white">{bar.text}</span>
+                    <div className="flex justify-between text-xs font-semibold mb-2">
+                      <span className="text-zinc-600">{bar.title}</span>
+                      <span className="text-zinc-900 font-mono">{bar.text}</span>
                     </div>
-                    <div className="w-full bg-zinc-900 h-3 rounded-full overflow-hidden border border-zinc-800">
+                    <div className="w-full bg-zinc-200/70 h-3 rounded-full overflow-hidden border border-zinc-300/20">
                       <motion.div
                         initial={{ width: 0 }}
                         whileInView={{ width: `${bar.val}%` }}
                         viewport={{ once: true }}
                         transition={{ duration: 1, delay: 0.2 + idx * 0.1 }}
-                        className="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full"
+                        className="bg-gradient-to-r from-blue-600 to-cyan-500 h-full rounded-full"
                       ></motion.div>
                     </div>
                   </div>
@@ -124,28 +135,29 @@ export default function WhyChooseUs() {
               </div>
 
               {/* Extra micro metric stats */}
-              <div className="grid grid-cols-2 gap-4 mt-8 pt-6 border-t border-zinc-800">
+              <div className="grid grid-cols-2 gap-4 mt-8 pt-6 border-t border-zinc-200/80">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-blue-600 text-white shadow-md shadow-blue-500/10">
+                  <div className="p-2.5 rounded-xl bg-blue-600 text-white shadow-lg shadow-blue-500/20 flex items-center justify-center">
                     <Cpu className="h-4 w-4" />
                   </div>
                   <div>
-                    <span className="text-[10px] text-zinc-500 block uppercase font-mono">Operations</span>
-                    <span className="text-sm font-semibold text-white">92% Faster</span>
+                    <span className="text-[10px] text-zinc-400 block uppercase font-bold tracking-wider font-mono">Operations</span>
+                    <span className="text-sm font-extrabold text-zinc-900">92% Faster</span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-cyan-500 text-white shadow-md shadow-cyan-500/10">
+                  <div className="p-2.5 rounded-xl bg-cyan-500 text-white shadow-lg shadow-cyan-500/20 flex items-center justify-center">
                     <Award className="h-4 w-4" />
                   </div>
                   <div>
-                    <span className="text-[10px] text-zinc-500 block uppercase font-mono">Errors</span>
-                    <span className="text-sm font-semibold text-white">99% Less</span>
+                    <span className="text-[10px] text-zinc-400 block uppercase font-bold tracking-wider font-mono">Errors</span>
+                    <span className="text-sm font-extrabold text-zinc-900">99% Less</span>
                   </div>
                 </div>
               </div>
 
+              </motion.div>
             </motion.div>
           </div>
 

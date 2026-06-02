@@ -2,49 +2,22 @@ import React from "react";
 import { Mail } from "lucide-react";
 
 export default function Footer() {
-  const links = {
-    product: [
-      { name: "Admin Portal", href: "#" },
-      { name: "Teacher Portal", href: "#" },
-      { name: "Student Portal", href: "#" },
-      { name: "Parent Portal", href: "#" },
-    ],
-    features: [
-      { name: "AI Proctoring", href: "https://appv1.edba.io/" },
-      { name: "Exam Scheduling", href: "https://appv1.edba.io/" },
-      { name: "Fee Billing Gateways", href: "https://appv1.edba.io/" },
-      { name: "RFID Student Safety", href: "https://appv1.edba.io/" },
-    ],
-    resources: [
-      { name: "LMS Documentation", href: "#" },
-      { name: "System Uptime Status", href: "#" },
-      { name: "Privacy Guidelines", href: "#" },
-      { name: "Support Ticket Desk", href: "#" },
-    ],
-    company: [
-      { name: "About EDBA", href: "#" },
-      { name: "Meet the Team", href: "#" },
-      { name: "Enterprise Pricing", href: "#" },
-      { name: "Press Kit & Assets", href: "#" },
-    ],
-  };
-
   return (
     <footer className="bg-zinc-950 text-zinc-400 border-t border-zinc-900 py-16">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Columns Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
-          
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-12 mb-12">
+
           {/* Brand Info */}
-          <div className="col-span-2 flex flex-col items-start gap-4">
+          <div className="md:col-span-3 flex flex-col items-start gap-4">
             <div className="flex items-center gap-2">
               <img src="/logo.png" alt="EDBA Logo" className="h-8 w-auto" />
             </div>
             <p className="text-zinc-500 text-xs leading-relaxed max-w-sm">
               The next-generation enterprise Institute LMS management platform. Automate operations, grading, and safety updates with integrated AI tools.
             </p>
-            <div className="flex gap-4 mt-2">
+            {/* <div className="flex gap-4 mt-2">
               <a href="#" className="hover:text-white transition-colors" aria-label="Twitter">
                 <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
@@ -63,49 +36,28 @@ export default function Footer() {
               <a href="#" className="hover:text-white transition-colors" aria-label="Email">
                 <Mail className="h-4 w-4" />
               </a>
+            </div> */}
+          </div>
+
+          {/* Address Info */}
+          <div className="md:col-span-1 flex flex-col items-start gap-4">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-1">Address</h4>
+            <div className="text-zinc-500 text-xs leading-relaxed space-y-1 font-sans">
+              <p className="font-semibold text-zinc-300">EDBA Software LLP</p>
+              <p>8<sup>th</sup> Floor, New Viva College,</p>
+              <p>Chintamani Vihar, Y.K. Nagar,</p>
+              <p>Virar (West), 401303</p>
             </div>
           </div>
 
-          {/* Product links */}
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">Product</h4>
-            <ul className="space-y-2">
-              {links.product.map((l) => (
-                <li key={l.name}>
-                  <a href={l.href} className="text-xs hover:text-white transition-colors">
-                    {l.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Features links */}
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">Features</h4>
-            <ul className="space-y-2">
-              {links.features.map((l) => (
-                <li key={l.name}>
-                  <a href={l.href} className="text-xs hover:text-white transition-colors">
-                    {l.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Resources links */}
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">Resources</h4>
-            <ul className="space-y-2">
-              {links.resources.map((l) => (
-                <li key={l.name}>
-                  <a href={l.href} className="text-xs hover:text-white transition-colors">
-                    {l.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          {/* Support Info */}
+          <div className="md:col-span-1 flex flex-col items-start gap-4">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-1">Support</h4>
+            <div className="text-zinc-500 text-xs leading-relaxed font-sans">
+              <a href="mailto:support@edba.io" className="text-blue-500 hover:text-blue-400 transition-colors font-medium">
+                support@edba.io
+              </a>
+            </div>
           </div>
 
         </div>
@@ -113,12 +65,10 @@ export default function Footer() {
         {/* Bottom footer */}
         <div className="pt-8 border-t border-zinc-900 flex flex-col sm:flex-row justify-between items-center gap-4">
           <span className="text-[10px] text-zinc-600 font-mono">
-            © {new Date().getFullYear()} EDBA Education LMS Systems Inc. All rights reserved.
+            © Copyright 2026 EDBA Software LLP All Rights Reserved.
           </span>
-          <div className="flex gap-6 text-[10px] text-zinc-600 font-mono">
-            <a href="#" className="hover:text-zinc-400">Privacy Policy</a>
-            <a href="#" className="hover:text-zinc-400">Terms of Service</a>
-            <a href="#" className="hover:text-zinc-400">Trust & Security</a>
+          <div className="flex gap-6 text-[10px] text-zinc-650 font-mono">
+            <a href="/privacy" className="hover:text-zinc-400 transition-colors cursor-pointer">Privacy Policy</a>
           </div>
         </div>
 

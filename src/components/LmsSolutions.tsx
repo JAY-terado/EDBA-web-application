@@ -25,7 +25,7 @@ export default function LmsSolutions() {
     },
     {
       title: "Attendance Tracker",
-      desc: "Track student and staff attendance using automated RFID card entry scanner gates or dynamic roll-call apps.",
+      desc: "Track student and staff daily attendance using dynamic teacher roll-call apps, face recognition, or biometric entry logs.",
       icon: CalendarCheck2,
       color: "bg-teal-500 text-white shadow-md shadow-teal-500/10",
     },
@@ -37,13 +37,13 @@ export default function LmsSolutions() {
     },
     {
       title: "Library System",
-      desc: "Search digital catalog, log book issue and return transactions, send automated return reminders and calculate fine logs.",
+      desc: "Search resources via OPAC (Online Public Access Catalog), log book transactions, send auto-reminders, and calculate fine logs.",
       icon: BookOpen,
       color: "bg-purple-500 text-white shadow-md shadow-purple-500/10",
     },
     {
-      title: "Transport & Hostel",
-      desc: "Real-time institute bus GPS tracking routes, parent notification alerts, boarding status logs, and hostel room allocation.",
+      title: "Transport System",
+      desc: "Real-time institute bus GPS tracking, dynamic route mapping, passenger boarding logs, and parent arrival notification alerts.",
       icon: Bus,
       color: "bg-emerald-500 text-white shadow-md shadow-emerald-500/10",
     },

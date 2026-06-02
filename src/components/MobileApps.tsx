@@ -1,60 +1,28 @@
-import React from "react";
-import { Shield, Sparkles, UserCheck, MessageCircle, CreditCard, Award, GraduationCap, MapPin } from "lucide-react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 
 export default function MobileApps() {
-  const apps = [
-    {
-      role: "Admins",
-      title: "Institute LMS Admin",
-      color: "border-blue-600/30 shadow-blue-500/5",
-      accentBg: "bg-blue-600",
-      accentText: "text-blue-500",
-      widgets: [
-        { label: "Today's Collection", val: "$24,500", icon: CreditCard, color: "text-blue-500" },
-        { label: "Staff Present", val: "98.2%", icon: UserCheck, color: "text-emerald-500" },
-      ],
-    },
-    {
-      role: "Teachers",
-      title: "Classroom Manager",
-      color: "border-cyan-600/30 shadow-cyan-500/5",
-      accentBg: "bg-cyan-600",
-      accentText: "text-cyan-500",
-      widgets: [
-        { label: "Pending Gradings", val: "14 tests", icon: Award, color: "text-cyan-500" },
-        { label: "Active Live Stream", val: "Grade 8 Sc.", icon: Sparkles, color: "text-purple-500" },
-      ],
-    },
-    {
-      role: "Students",
-      title: "Student Portal Mobile",
-      color: "border-teal-600/30 shadow-teal-500/5",
-      accentBg: "bg-teal-600",
-      accentText: "text-teal-500",
-      widgets: [
-        { label: "Today's Assignments", val: "3 pending", icon: GraduationCap, color: "text-teal-500" },
-        { label: "Calculus Quiz Score", val: "92 / 100", icon: Award, color: "text-emerald-500" },
-      ],
-    },
-    {
-      role: "Parents",
-      title: "EDBA Parent App",
-      color: "border-indigo-600/30 shadow-indigo-500/5",
-      accentBg: "bg-indigo-600",
-      accentText: "text-indigo-500",
-      widgets: [
-        { label: "Bus Location", val: "ETA 8 mins", icon: MapPin, color: "text-indigo-500" },
-        { label: "Recent Messages", val: "2 unread", icon: MessageCircle, color: "text-amber-500" },
-      ],
-    },
-  ];
+  const [downloadLink, setDownloadLink] = useState("https://apps.apple.com/in/app/edba/id6747445951");
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && navigator) {
+      const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera;
+      if (/android/i.test(userAgent)) {
+        setDownloadLink("https://play.google.com/store/apps/details?id=com.edba.app&hl=en_IN&pli=1");
+      } else {
+        // Default to iOS App Store
+        setDownloadLink("https://apps.apple.com/in/app/edba/id6747445951");
+      }
+    }
+  }, []);
 
   return (
     <section id="mobile-apps" className="py-24 bg-[#f1f3f6] border-b border-zinc-200/50">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <span className="text-xs font-bold tracking-wider uppercase text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-100 mb-4 inline-block">
             On the Go
           </span>
@@ -66,59 +34,45 @@ export default function MobileApps() {
           </p>
         </div>
 
-        {/* 4 Cards Phones */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {apps.map((app, idx) => (
-            <div
-              key={idx}
-              className="p-6 neu-card rounded-2xl flex flex-col items-center"
+        {/* Download App Content & Button */}
+        <div className="flex flex-col items-center justify-center max-w-lg mx-auto text-center">
+          <div className="neu-card p-8 rounded-2xl w-full flex flex-col items-center gap-6">
+            <div className="h-14 flex items-center justify-center bg-white border border-zinc-200/40 px-5 py-2.5 rounded-2xl shadow-inner shadow-zinc-100/50">
+              <img src="/logo.png" alt="EDBA Logo" className="h-6 w-auto" />
+            </div>
+            
+            <div>
+              <h3 className="font-display font-bold text-xl text-zinc-950 mb-2">Get EDBA on Your Device</h3>
+              <p className="text-zinc-500 text-sm leading-relaxed">
+                Experience EDBA's AI-Powered ecosystem directly on your mobile device. Click below to download the application.
+              </p>
+            </div>
+
+            <a
+              href={downloadLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full inline-flex items-center justify-center px-6 py-3.5 text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 transition-all rounded-xl shadow-lg shadow-blue-500/15 hover:shadow-xl cursor-pointer"
             >
-              {/* Role Title */}
-              <div className="mb-4 text-center">
-                <span className="text-xs text-zinc-400 font-bold uppercase tracking-wider block">PORTAL FOR</span>
-                <span className="text-base font-bold text-zinc-900 font-display">{app.role}</span>
-              </div>
+              Download Application
+            </a>
+          </div>
+        </div>
 
-              {/* Mobile Phone Mock */}
-              <div className={`w-full max-w-[200px] aspect-[9/18] bg-zinc-950 border-4 border-zinc-800 rounded-3xl p-3 shadow-lg relative flex flex-col ${app.color}`}>
-                
-                {/* Speaker top notches */}
-                <div className="h-3 w-16 bg-zinc-800 rounded-b-lg absolute top-0 left-1/2 -translate-x-1/2 flex items-center justify-center">
-                  <span className="h-0.5 w-4 rounded bg-zinc-900"></span>
-                </div>
-
-                {/* Phone screen UI */}
-                <div className="mt-3 flex-grow flex flex-col justify-between">
-                  {/* Phone Header */}
-                  <div className="flex justify-between items-center pb-2 border-b border-zinc-900/60 mb-2">
-                    <span className="text-[9px] font-bold text-white font-mono">{app.title}</span>
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
-                  </div>
-
-                  {/* Widgets List */}
-                  <div className="space-y-2 flex-grow">
-                    {app.widgets.map((w, wIdx) => (
-                      <div key={wIdx} className="bg-zinc-900/60 border border-zinc-850 p-2 rounded-lg flex items-center gap-2">
-                        <w.icon className={`h-3 w-3 ${w.color}`} />
-                        <div>
-                          <span className="text-[7px] text-zinc-500 block uppercase font-mono tracking-wider">{w.label}</span>
-                          <span className="text-[9px] font-bold text-white leading-none">{w.val}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* App brand footer */}
-                  <div className="pt-2 border-t border-zinc-900/60 flex items-center justify-center gap-1">
-                    <div className={`h-3 w-3 rounded-md ${app.accentBg} flex items-center justify-center text-[6px] text-white font-black`}>E</div>
-                    <span className="text-[8px] text-zinc-500 font-bold uppercase tracking-wider">EDBA Portal</span>
-                  </div>
-                </div>
-
+        {/* Commented out original 4 screens mockups code as requested
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
+          <div className="p-6 neu-card rounded-2xl flex flex-col items-center">
+            <div className="mb-6 text-center">
+              <span className="text-xs text-zinc-400 font-bold uppercase tracking-wider block mb-1">PORTAL FOR Admins</span>
+            </div>
+            <div className="w-full max-w-[210px] aspect-[9/19] bg-zinc-950 border-[6px] border-zinc-800 rounded-[2.5rem] p-1.5 shadow-xl relative flex flex-col">
+              <div className="w-full h-full rounded-[2rem] overflow-hidden bg-zinc-900 relative shadow-inner">
+                <img src="/IMG_3474.PNG" className="w-full h-full object-cover object-top" />
               </div>
             </div>
-          ))}
+          </div>
         </div>
+        */}
 
       </div>
     </section>

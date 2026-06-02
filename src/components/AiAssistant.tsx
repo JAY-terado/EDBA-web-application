@@ -16,27 +16,19 @@ export default function AiAssistant() {
       q: "Draft parent email regarding exam scheduling.",
       reply: "Here is your drafted email template:",
       type: "text",
-      content: "Subject: Upcoming Mid-Term Examination Schedule\n\nDear Parents,\n\nPlease find attached the mid-term examination timetable starting June 15th. Exams will run daily from 9:00 AM to 12:00 PM. Please ensure your child arrives at institute 15 minutes before the start time.\n\nWarm regards,\nGrade Coordinator",
+      content: "Subject: Upcoming Mid-Term Examination Schedule\n\nDear Parents,\n\nPlease find attached the mid-term examination timetable starting June 15th. Exams will run daily from 9:00 AM to 12:00 PM. Please ensure your child arrives at school 15 minutes before the start time.\n\nWarm regards,\nGrade Coordinator",
     },
     {
-      q: "Compare Grade 10 math scores across sections.",
-      reply: "Here is the comparison between Sections A, B and C:",
-      type: "chart",
-      content: [
-        { label: "Grade 10A (Math)", val: 84, color: "bg-blue-500" },
-        { label: "Grade 10B (Math)", val: 76, color: "bg-cyan-500" },
-        { label: "Grade 10C (Math)", val: 89, color: "bg-teal-500" },
-      ],
+      q: "Create a lesson outline for introducing Photosynthesis.",
+      reply: "Here is a 45-minute lesson plan outline:",
+      type: "text",
+      content: "Topic: Light-Dependent Reactions\n\n1. Hook (5 min): Show a wilted vs. healthy plant. Ask what they consume.\n2. Concept (15 min): Explain chloroplasts, chlorophyll, and light absorption.\n3. Activity (15 min): Hands-on microscopic leaf cell observation.\n4. Wrap-up (10 min): Exit slip asking students to define the role of water.",
     },
     {
-      q: "Summarize pending library fees & late returns.",
-      reply: "Pending library late fees for this term totals $1,240. Here is the list of top overdue books:",
-      type: "list",
-      content: [
-        { title: "Introduction to Calculus", student: "Sarah Jenkins", overdue: "12 Days" },
-        { title: "Organic Chemistry Vol II", student: "Michael Vance", overdue: "8 Days" },
-        { title: "A Brief History of Time", student: "Liam O'Connor", overdue: "5 Days" },
-      ],
+      q: "Generate a biology MCQ quiz on cell structures.",
+      reply: "Here is your generated classroom MCQ quiz:",
+      type: "text",
+      content: "Quiz: Cell Biology (Grade 9)\n\nQ1: Which organelle is primarily responsible for generating cellular energy (ATP)?\nA) Ribosome\nB) Golgi apparatus\nC) Mitochondria [Correct]\nD) Vacuole\n\nQ2: What is the main structural component of the plant cell wall?\nA) Cellulose [Correct]\nB) Chitin\nC) Peptidoglycan\nD) Keratin",
     },
   ];
 
@@ -214,7 +206,7 @@ export default function AiAssistant() {
 
                               {query.type === "chart" && (
                                 <div className="space-y-3 bg-zinc-950 p-4 rounded-lg border border-zinc-800">
-                                  {(query.content as any[]).map((item, idx) => (
+                                  {(query.content as any).map((item: any, idx: number) => (
                                     <div key={idx}>
                                       <div className="flex justify-between text-[10px] text-zinc-400 font-semibold mb-1">
                                         <span>{item.label}</span>
@@ -231,12 +223,12 @@ export default function AiAssistant() {
                               {query.type === "list" && (
                                 <div className="bg-zinc-950 rounded-lg border border-zinc-800 overflow-hidden text-[11px]">
                                   <div className="grid grid-cols-3 gap-2 p-2 bg-zinc-900 border-b border-zinc-800 font-semibold text-zinc-400">
-                                    <span>Book Title</span>
+                                    <span>Academic Course</span>
                                     <span>Student</span>
-                                    <span className="text-right">Overdue</span>
+                                    <span className="text-right">Pending Work</span>
                                   </div>
                                   <div className="divide-y divide-zinc-800/60">
-                                    {(query.content as any[]).map((item, idx) => (
+                                    {(query.content as any).map((item: any, idx: number) => (
                                       <div key={idx} className="grid grid-cols-3 gap-2 p-2 text-zinc-300">
                                         <span className="font-medium truncate">{item.title}</span>
                                         <span className="text-zinc-400">{item.student}</span>
@@ -311,7 +303,7 @@ export default function AiAssistant() {
 
                                     {query.type === "chart" && (
                                       <div className="space-y-3 bg-zinc-950 p-4 rounded-lg border border-zinc-800">
-                                        {(query.content as any[]).map((item, idx) => (
+                                        {(query.content as any).map((item: any, idx: number) => (
                                           <div key={idx}>
                                             <div className="flex justify-between text-[10px] text-zinc-400 font-semibold mb-1">
                                               <span>{item.label}</span>
@@ -333,12 +325,12 @@ export default function AiAssistant() {
                                     {query.type === "list" && (
                                       <div className="bg-zinc-950 rounded-lg border border-zinc-800 overflow-hidden text-[11px]">
                                         <div className="grid grid-cols-3 gap-2 p-2 bg-zinc-900 border-b border-zinc-800 font-semibold text-zinc-400">
-                                          <span>Book Title</span>
+                                          <span>Academic Course</span>
                                           <span>Student</span>
-                                          <span className="text-right">Overdue</span>
+                                          <span className="text-right">Pending Work</span>
                                         </div>
                                         <div className="divide-y divide-zinc-800/60">
-                                          {(query.content as any[]).map((item, idx) => (
+                                          {(query.content as any).map((item: any, idx: number) => (
                                             <motion.div 
                                               key={idx} 
                                               initial={{ opacity: 0, x: -5 }}
