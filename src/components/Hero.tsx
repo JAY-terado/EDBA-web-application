@@ -2,18 +2,9 @@
 
 import React from "react";
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
-import { Play, Check } from "lucide-react";
+import { Play } from "lucide-react";
 
 export default function Hero() {
-  const pills = [
-    "Complete Institute LMS",
-    "AI Learning Assistant",
-    "Auto Timetable",
-    "Smart Assessments",
-    "GPS Transport",
-    "Parent Communication",
-  ];
-
   // Framer Motion 3D Parallax Hook Logic
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -78,10 +69,8 @@ export default function Hero() {
               variants={itemVariants}
               className="font-display font-extrabold text-4xl sm:text-5xl lg:text-[54px] leading-tight text-zinc-900 mb-6 tracking-tight"
             >
-              Transform Your Institute with <br />
-              <span className="text-blue-600">AI-Powered</span>{" "}
-              <span className="text-teal-500">Education</span> <br />
-              Management
+              Put your Institute’s <br />
+              operations on <span className="text-blue-600">autopilot</span> with <span className="text-teal-500">AI</span>.
             </motion.h1>
 
             {/* Subheading */}
@@ -89,9 +78,9 @@ export default function Hero() {
               variants={itemVariants}
               className="text-zinc-500 text-base sm:text-lg font-normal leading-relaxed mb-8 max-w-xl"
             >
-              One Platform. One Login. Complete Institute Operations. <br />
-              Manage admissions, academics, fees, transport, <br />
-              communication, and AI-powered learning with EDBA.
+              EDBA replaces fragmented tools with a single, <br />
+              intelligent workflow—unifying your admissions, academics, <br />
+              fees, communication and more into one seamless login.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -113,25 +102,7 @@ export default function Hero() {
               </button>
             </motion.div>
 
-            {/* Verification Pills */}
-            <motion.div
-              variants={containerVariants}
-              className="flex flex-wrap gap-2.5 max-w-xl"
-            >
-              {pills.map((pill, idx) => (
-                <motion.div
-                  key={idx}
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.03 }}
-                  className="flex items-center gap-1.5 px-3.5 py-1.5 neu-pill-inset rounded-full text-xs text-zinc-600 font-semibold"
-                >
-                  <div className="h-4 w-4 rounded-full bg-emerald-100/50 text-emerald-600 flex items-center justify-center border border-emerald-200">
-                    <Check className="h-2.5 w-2.5 stroke-[3]" />
-                  </div>
-                  {pill}
-                </motion.div>
-              ))}
-            </motion.div>
+
           </motion.div>
 
           {/* ── Right: Real Dashboard Screenshot with 3D Tilt ── */}

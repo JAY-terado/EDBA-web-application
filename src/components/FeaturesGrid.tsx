@@ -7,29 +7,29 @@ import { ShieldCheck, Brain, User, HeartHandshake, ArrowRight } from "lucide-rea
 export default function FeaturesGrid() {
   const features = [
     {
-      title: "Admin LMS",
-      desc: "Streamline operations with admissions management, fee ledger tracking, timetables, and staff directory portals.",
+      title: "Campus Command Hub",
+      desc: "Automate your enrollment pipeline, track real-time fee balances, and synchronize campus timetables without the manual paperwork.",
       icon: ShieldCheck,
       color: "from-blue-500 to-indigo-600",
       glowColor: "shadow-blue-500/10",
     },
     {
-      title: "AI-Powered Grading",
-      desc: "Speed up assessments. Generate automatic performance feedback and analyze student GPA gaps.",
+      title: "Intelligent Evaluation Engine",
+      desc: "Cut assessment cycles in half. Instantly deliver personalized student feedback and track academic GPA trends with zero manual effort.",
       icon: Brain,
       color: "from-cyan-500 to-blue-500",
       glowColor: "shadow-cyan-500/10",
     },
     {
-      title: "Student Portal",
-      desc: "Empower students to check homework schedules, view course syllabus, submit digital assignments, and track goals.",
+      title: "Digital Campus Companion",
+      desc: "Give students complete control over their learning. Track schedules, access syllabi, submit digital assignments, and hit academic milestones from any device.",
       icon: User,
       color: "from-teal-500 to-cyan-500",
       glowColor: "shadow-teal-500/10",
     },
     {
-      title: "Parent Portal",
-      desc: "Keep parents informed. Direct messaging with teachers, secure online fee payments, and real-time institute bus GPS tracking.",
+      title: "Parent Engagement Hub",
+      desc: "Give parents total peace of mind. Provide direct messaging with educators, secure one-click fee payments, and live Campus bus GPS tracking right on their phones.",
       icon: HeartHandshake,
       color: "from-indigo-500 to-purple-500",
       glowColor: "shadow-indigo-500/10",
@@ -67,13 +67,13 @@ export default function FeaturesGrid() {
           className="text-center max-w-3xl mx-auto mb-16"
         >
           <span className="text-xs font-bold tracking-wider uppercase text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-100 mb-4 inline-block">
-            Core Modules
+            The edbā Ecosystem
           </span>
           <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-[42px] leading-tight text-zinc-950 mt-3 mb-6">
-            Everything Your Institute Needs, in One Intelligent Platform
+            Run your entire institution from a single, smart workspace.
           </h2>
           <p className="text-zinc-500 text-lg leading-relaxed font-normal">
-            No more disconnected spreadsheets or legacy portals. EDBA unifies all stakeholders inside a responsive, real-time environment.
+            Ditch the messy spreadsheets and outdated portals. EDBA brings your entire campus—admins, teachers, parents, and students—into one beautifully synchronized workspace.
           </p>
         </motion.div>
 

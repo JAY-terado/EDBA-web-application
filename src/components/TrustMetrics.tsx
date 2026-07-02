@@ -56,7 +56,7 @@ export default function TrustMetrics() {
         {/* Header */}
         <div className="text-center mb-10">
           <h3 className="text-xs font-bold tracking-widest uppercase text-zinc-400 font-mono">
-            Trusted by Progressive Schools Across India
+            Trusted by India’s forward-thinking educational institutions.
           </h3>
         </div>
 

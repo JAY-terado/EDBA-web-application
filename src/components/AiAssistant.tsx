@@ -159,7 +159,7 @@ export default function AiAssistant() {
               </div>
               
               <div className="text-center text-xs font-mono text-zinc-500 mb-6 border-b border-zinc-800/80 pb-3">
-                EDBA Assistant Terminal
+                EDBA Nexus
               </div>
 
               {/* Chat Thread */}
@@ -369,7 +369,7 @@ export default function AiAssistant() {
               className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold text-cyan-400 bg-cyan-950/40 border border-cyan-900/50 mb-6"
             >
               <Sparkles className="h-3.5 w-3.5" />
-              Next-Gen Copilot
+              EDBA Autopilot
             </motion.div>
             
             <motion.h2 
@@ -379,7 +379,7 @@ export default function AiAssistant() {
               transition={{ duration: 0.6 }}
               className="font-display font-extrabold text-3xl sm:text-4xl text-white mb-6"
             >
-              Meet EDBA AI Assistant: The Ultimate Institute Admin Copilot
+              Enter the EDBA Nexus: Institutional Operations on Absolute Autopilot.
             </motion.h2>
             
             <motion.p 
@@ -389,7 +389,7 @@ export default function AiAssistant() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-zinc-400 text-lg leading-relaxed mb-8"
             >
-              Empower your staff to gather metrics, write emails, and review student risks instantly through secure natural language querying.
+              Command your campus infrastructure using simple language. Surface deep operational telemetry, draft contextual updates, and isolate student risk profiles instantly via a secure conversational interface.
             </motion.p>
 
             <motion.ul 
@@ -402,25 +402,25 @@ export default function AiAssistant() {
               <li className="flex items-start gap-3">
                 <CheckCircle2 className="h-5 w-5 text-blue-500 mt-0.5 flex-shrink-0" />
                 <span className="text-zinc-300 text-sm">
-                  <strong>Instant Reports:</strong> Query grading averages or attendance metrics in natural language.
+                  <strong>Instant Reports:</strong> Surface academic performance curves and real-time campus presence data instantly via simple language prompts.
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <CheckCircle2 className="h-5 w-5 text-blue-500 mt-0.5 flex-shrink-0" />
                 <span className="text-zinc-300 text-sm">
-                  <strong>AI grading suggestions:</strong> Speed up writing comments and identifying student weaknesses.
+                  <strong>Intelligent Evaluation Assistance:</strong> Accelerate report card commentary and detect student performance vulnerabilities seamlessly.
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <CheckCircle2 className="h-5 w-5 text-blue-500 mt-0.5 flex-shrink-0" />
                 <span className="text-zinc-300 text-sm">
-                  <strong>Parent Writer:</strong> Instantly draft letters regarding fee notifications, warnings, and schedules.
+                  <strong>Stakeholder Alignment Hub:</strong> Deliver high-touch, data-driven parent communications. Instantly draft hyper-personalized notices—from collaborative fee restructuring options to sensitive academic interventions—tailored to individual family dynamics.
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <CheckCircle2 className="h-5 w-5 text-blue-500 mt-0.5 flex-shrink-0" />
                 <span className="text-zinc-300 text-sm">
-                  <strong>Academic risk prediction:</strong> Spot early signs of GPA drops or absenteeism.
+                  <strong>Predictive Risk Telemetry:</strong> Preempt institutional attrition before it occurs. Continuously scan performance datasets to flag subtle GPA trajectory anomalies and early indicators of campus presence degradation.
                 </span>
               </li>
             </motion.ul>

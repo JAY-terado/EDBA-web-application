@@ -4,7 +4,7 @@ import { BookMarked, Award, BookOpen, Check } from "lucide-react";
 export default function Academics() {
   const cards = [
     {
-      title: "Course Management",
+      title: "Curriculum Architecture Core",
       desc: "Maintain complete course control. Define academic terms, assign teachers to subjects, and track lesson plan progress.",
       icon: BookMarked,
       features: ["Syllabus & curriculum tracking", "Lesson plan approvals", "Teacher-subject allocation"],
@@ -36,10 +36,10 @@ export default function Academics() {
             Academics
           </span>
           <h2 className="font-display font-bold text-3xl sm:text-4xl text-zinc-950 mt-3 mb-6">
-            Smarter Academic Management
+            Academic Performance Architecture
           </h2>
           <p className="text-zinc-500 text-lg leading-relaxed font-normal">
-            Equip teachers with digital tools that simplify class design, scoring, and remote lessons.
+            Empower educators with an integrated instructional infrastructure. Streamline curriculum architecture, accelerate performance calibration, and orchestrate hybrid learning modalities seamlessly.
           </p>
         </div>
 
