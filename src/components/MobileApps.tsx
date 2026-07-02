@@ -20,14 +20,14 @@ export default function MobileApps() {
   return (
     <section id="mobile-apps" className="py-24 bg-[#f1f3f6] border-b border-zinc-200/50">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <span className="text-xs font-bold tracking-wider uppercase text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-100 mb-4 inline-block">
             On the Go
           </span>
           <h2 className="font-display font-bold text-3xl sm:text-4xl text-zinc-950 mt-3 mb-6">
-            Mobile Apps for Everyone
+            Mobile Apps for Everyone, Should try
           </h2>
           <p className="text-zinc-500 text-lg leading-relaxed font-normal">
             EDBA delivers tailored, native iOS and Android experiences, custom-built for every stakeholder in the institute ecosystem.
@@ -40,7 +40,7 @@ export default function MobileApps() {
             <div className="h-14 flex items-center justify-center bg-white border border-zinc-200/40 px-5 py-2.5 rounded-2xl shadow-inner shadow-zinc-100/50">
               <img src="/logo.png" alt="EDBA Logo" className="h-6 w-auto" />
             </div>
-            
+
             <div>
               <h3 className="font-display font-bold text-xl text-zinc-950 mb-2">Get EDBA on Your Device</h3>
               <p className="text-zinc-500 text-sm leading-relaxed">
