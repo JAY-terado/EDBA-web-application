@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import TrustMetrics from "@/components/TrustMetrics";
+import Pioneers from "@/components/Pioneers";
 import FeaturesGrid from "@/components/FeaturesGrid";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import LmsSolutions from "@/components/LmsSolutions";
@@ -22,6 +23,7 @@ export default function Home() {
       <main className="flex-grow">
         <Hero />
         <TrustMetrics />
+        <Pioneers />
         <FeaturesGrid />
         <WhyChooseUs />
         <LmsSolutions />
