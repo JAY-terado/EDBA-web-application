@@ -1,4 +1,5 @@
 export * from "./Hero";
+export * from "./HeroShowcase";
 export * from "./HeroCarousel";
 export * from "./TrustMetrics";
 export * from "./Pioneers";
