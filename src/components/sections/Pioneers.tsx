@@ -3,50 +3,30 @@ import { motion, useInView } from "framer-motion";
 
 interface ClientInstitution {
   name: string;
-  code: string;
-  accent: "blue" | "emerald" | "amber" | "purple" | "rose";
-  logo?: string;
+  logo: string;
 }
 
 const clientListRow1: ClientInstitution[] = [
-  { name: "Delhi Public School", code: "DPS", accent: "blue", logo: "/LOGOS/AIKTC.png" },
-  { name: "VIVA Institute of Technology", code: "VIT", accent: "emerald", logo: "/LOGOS/vivalogo.png" },
-  { name: "Saraswati College of Engineering", code: "SCOE", accent: "purple", logo: "/LOGOS/Saraswati_logo.jpg" },
-  { name: "Rizvi College of Arts & Science", code: "RC", accent: "rose", logo: "/LOGOS/rizvi_logo.png" },
-  { name: "Podar World School", code: "PWS", accent: "amber", logo: "/LOGOS/vivautkarsha-english-logo.png" },
-  { name: "Muljibhai Mehta International School", code: "MMIS", accent: "blue", logo: "/LOGOS/Logo.jpg" },
-  { name: "Sardar Patel Institute of Technology", code: "SPIT", accent: "emerald", logo: "/LOGOS/SPIT.jpg" },
-  { name: "Bharat College Of Engineering", code: "BCE", accent: "purple", logo: "/LOGOS/b.jpg" },
+  { name: "VIVA Group of Institutes", logo: "/LOGOS/vivalogo.png" },
+  { name: "AIKTC Technical Campus", logo: "/LOGOS/AIKTC.png" },
+  { name: "Saraswati College of Eng.", logo: "/LOGOS/Saraswati_logo.jpg" },
+  { name: "Rizvi College of Arts & Sci.", logo: "/LOGOS/rizvi_logo.png" },
+  { name: "Utkarsha Vidyalaya & Jr. Col.", logo: "/LOGOS/vivautkarsha-english-logo.png" },
+  { name: "Sardar Patel Institute of Tech", logo: "/LOGOS/SPIT.jpg" },
+  { name: "New Horizon Inst. of Tech", logo: "/LOGOS/NHITM_LOGO_new_logo.png" },
+  { name: "Rajiv Gandhi Inst. of Tech", logo: "/LOGOS/rgit-logo.png" },
 ];
 
 const clientListRow2: ClientInstitution[] = [
-  { name: "Rajiv Gandhi Institute of Technology", code: "RGIT", accent: "blue", logo: "/LOGOS/rgit-logo.png" },
-  { name: "New Horizon Institute of Technology", code: "NHITM", accent: "amber", logo: "/LOGOS/NHITM_LOGO_new_logo.png" },
-  { name: "Lokmanya Tilak College of Engineering", code: "LTCE", accent: "rose", logo: "/LOGOS/LTCE_fav.png" },
-  { name: "St. Xavier's High School", code: "SXH", accent: "emerald", logo: "/LOGOS/omgurudev.jpg" },
-  { name: "Orchid International Group", code: "OIG", accent: "purple", logo: "/LOGOS/Amrit.jpg" },
-  { name: "Heritage Global School", code: "HGS", accent: "blue", logo: "/LOGOS/CSMIT.jpg" },
-  { name: "Utkarsha Vidyalaya & Jr. College", code: "UVJC", accent: "amber", logo: "/LOGOS/vivautkarsha-english-logo.png" },
-  { name: "MGM Institute of Technology", code: "MGM", accent: "rose", logo: "/LOGOS/MGMIT.jpg" },
+  { name: "Lokmanya Tilak College of Eng.", logo: "/LOGOS/LTCE_fav.png" },
+  { name: "Muljibhai Mehta International", logo: "/LOGOS/Logo.jpg" },
+  { name: "Om Gurudev Shikshan Sanstha", logo: "/LOGOS/omgurudev.jpg" },
+  { name: "Chhatrapati Shivaji Maharaj Inst.", logo: "/LOGOS/CSMIT.jpg" },
+  { name: "MGM Institute of Technology", logo: "/LOGOS/MGMIT.jpg" },
+  { name: "Amrit Institute of Management", logo: "/LOGOS/Amrit.jpg" },
+  { name: "Jivdani Educational Campus", logo: "/LOGOS/Jivdani_logo.png" },
+  { name: "Bharat College Of Engineering", logo: "/LOGOS/b.jpg" },
 ];
-
-// Helper to resolve badge colors
-const getAccentClasses = (accent: ClientInstitution["accent"]) => {
-  switch (accent) {
-    case "blue":
-      return "bg-blue-50 text-blue-600 border-blue-200";
-    case "emerald":
-      return "bg-emerald-50 text-emerald-600 border-emerald-200";
-    case "amber":
-      return "bg-amber-50 text-amber-600 border-amber-200";
-    case "purple":
-      return "bg-purple-50 text-purple-600 border-purple-200";
-    case "rose":
-      return "bg-rose-50 text-rose-600 border-rose-200";
-    default:
-      return "bg-slate-50 text-slate-600 border-slate-200";
-  }
-};
 
 // Animated Counter component
 const AnimatedCounter: React.FC<{ target: number; suffix?: string; isVisible: boolean }> = ({
@@ -91,14 +71,51 @@ export default function Pioneers() {
   const isInView = useInView(statsRef, { once: true, margin: "-80px" });
 
   return (
-    <section id="our-clients" className="py-16 sm:py-20 lg:py-24 bg-[#f8fafc] relative overflow-hidden border-b border-slate-200/80">
-      {/* Subtle background ambient glows */}
-      <div className="absolute top-10 left-[15%] w-72 h-72 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-[15%] w-80 h-80 bg-orange-500/5 rounded-full blur-3xl pointer-events-none" />
+    <section id="our-clients" className="py-20 sm:py-24 lg:py-28 bg-[#f8fafc] relative overflow-hidden border-b border-slate-200/80">
+      {/* ── Reference Design Background Elements ── */}
+      {/* 1. Left Concentric Orbital Ripple Rings & Ambient Soft Glow */}
+      <div className="absolute -left-48 sm:-left-28 top-4 sm:top-10 w-[560px] h-[560px] pointer-events-none select-none z-0">
+        <div className="absolute inset-0 bg-gradient-to-tr from-blue-400/15 via-blue-300/8 to-transparent rounded-full blur-3xl transform -translate-x-10" />
+        <svg
+          className="w-full h-full text-blue-400/30"
+          viewBox="0 0 560 560"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="160" cy="280" r="140" stroke="currentColor" strokeWidth="1.2" opacity="0.4" />
+          <circle cx="160" cy="280" r="210" stroke="currentColor" strokeWidth="1.2" opacity="0.6" />
+          <circle cx="160" cy="280" r="285" stroke="currentColor" strokeWidth="1.2" opacity="0.75" />
+          <circle cx="160" cy="280" r="360" stroke="currentColor" strokeWidth="1" opacity="0.45" />
+        </svg>
+      </div>
+
+      {/* 2. Right Side Decorative Dot Matrix Grid */}
+      <div className="absolute right-6 sm:right-14 lg:right-24 top-16 sm:top-24 pointer-events-none select-none z-0 opacity-60 sm:opacity-80">
+        <svg width="112" height="68" viewBox="0 0 112 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <pattern id="client-dot-grid" x="0" y="0" width="16" height="17" patternUnits="userSpaceOnUse">
+            <circle cx="3" cy="3" r="1.5" className="fill-blue-400/60" />
+          </pattern>
+          <rect width="112" height="68" fill="url(#client-dot-grid)" />
+        </svg>
+      </div>
+
+      {/* 3. Right Side Orbital Curved Wave & Soft Glow */}
+      <div className="absolute -right-48 sm:-right-28 top-16 sm:top-24 w-[500px] h-[500px] pointer-events-none select-none z-0">
+        <div className="absolute inset-0 bg-blue-300/10 rounded-full blur-3xl transform translate-x-10" />
+        <svg
+          className="w-full h-full text-blue-300/25"
+          viewBox="0 0 500 500"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="360" cy="250" r="200" stroke="currentColor" strokeWidth="1" opacity="0.5" />
+          <circle cx="360" cy="250" r="290" stroke="currentColor" strokeWidth="1" opacity="0.35" />
+        </svg>
+      </div>
 
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-        {/* ── Section Header ── */}
+        {/* ── Section Header (Apple-style minimalism) ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -109,71 +126,80 @@ export default function Pioneers() {
           <span className="text-xs font-bold tracking-wider uppercase text-blue-700 bg-blue-50/90 px-3.5 py-1.5 rounded-full border border-blue-200/70 mb-4 inline-block shadow-xs">
             Our Clients
           </span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-[42px] leading-tight text-slate-900 mt-2 mb-3 tracking-tight">
+          <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-[44px] leading-tight text-slate-900 mt-2 mb-3 tracking-tight">
             The edbā Pioneers.
           </h2>
-          <p className="text-slate-500 text-sm sm:text-base leading-relaxed font-normal">
+          <p className="text-slate-500 text-base sm:text-lg leading-relaxed font-normal">
             Purpose. Precision. Progress.
           </p>
         </motion.div>
 
-        {/* ── 3 Stats Grid with Live Animated Counters ── */}
-        <div ref={statsRef} className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 max-w-4xl mx-auto mb-10 sm:mb-12">
+        {/* ── Apple-Style Borderless Stats (No Boxes, Clean Hairline Dividers) ── */}
+        <div
+          ref={statsRef}
+          className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-slate-200/70 max-w-2xl sm:max-w-3xl mx-auto mb-10 sm:mb-12"
+        >
           {/* Stat 1: Schools */}
-          <div className="bg-white border border-slate-200/80 rounded-2xl p-4 sm:p-5 text-center shadow-[0_2px_8px_-2px_rgba(15,23,42,0.04)] hover:shadow-md hover:border-slate-300 transition-all duration-300">
-            <div className="font-display font-bold text-2xl sm:text-3xl text-slate-900 tracking-tight mb-0.5">
+          <div className="py-3 sm:py-1 px-4 sm:px-6 text-center">
+            <div className="font-display font-bold text-2xl sm:text-3xl lg:text-[32px] text-slate-900 tracking-tight leading-none mb-1.5">
               <AnimatedCounter target={50} isVisible={isInView} />
             </div>
-            <div className="text-xs sm:text-[13px] font-medium text-slate-500">Schools</div>
+            <div className="text-xs sm:text-sm font-medium text-slate-500 tracking-normal">
+              Schools
+            </div>
           </div>
 
           {/* Stat 2: Students */}
-          <div className="bg-white border border-slate-200/80 rounded-2xl p-4 sm:p-5 text-center shadow-[0_2px_8px_-2px_rgba(15,23,42,0.04)] hover:shadow-md hover:border-slate-300 transition-all duration-300">
-            <div className="font-display font-bold text-2xl sm:text-3xl text-slate-900 tracking-tight mb-0.5">
+          <div className="py-3 sm:py-1 px-4 sm:px-6 text-center">
+            <div className="font-display font-bold text-2xl sm:text-3xl lg:text-[32px] text-slate-900 tracking-tight leading-none mb-1.5">
               <AnimatedCounter target={25000} isVisible={isInView} />
             </div>
-            <div className="text-xs sm:text-[13px] font-medium text-slate-500">Students</div>
+            <div className="text-xs sm:text-sm font-medium text-slate-500 tracking-normal">
+              Students
+            </div>
           </div>
 
           {/* Stat 3: Admissions Handled */}
-          <div className="bg-white border border-slate-200/80 rounded-2xl p-4 sm:p-5 text-center shadow-[0_2px_8px_-2px_rgba(15,23,42,0.04)] hover:shadow-md hover:border-slate-300 transition-all duration-300">
-            <div className="font-display font-bold text-2xl sm:text-3xl text-slate-900 tracking-tight mb-0.5">
+          <div className="py-3 sm:py-1 px-4 sm:px-6 text-center">
+            <div className="font-display font-bold text-2xl sm:text-3xl lg:text-[32px] text-slate-900 tracking-tight leading-none mb-1.5">
               <AnimatedCounter target={8000} isVisible={isInView} />
             </div>
-            <div className="text-xs sm:text-[13px] font-medium text-slate-500">Admissions handled</div>
+            <div className="text-xs sm:text-sm font-medium text-slate-500 tracking-normal">
+              Admissions handled
+            </div>
           </div>
         </div>
 
-        {/* ── Marquee Title ── */}
-        <p className="text-center text-xs sm:text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4 sm:mb-5">
+        {/* ── Refined Headline Above Marquee ── */}
+        <p className="text-center text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest mb-8 sm:mb-10 font-mono">
           Trusted by schools across India
         </p>
 
-        {/* ── Scrolling Client Rows with Smooth Edge Fades & Hover Pause ── */}
-        <div className="relative w-full overflow-hidden py-2 select-none">
-          {/* Left & Right Edge Vignette Fades */}
-          <div className="absolute top-0 bottom-0 left-0 w-16 sm:w-36 bg-gradient-to-r from-[#f8fafc] via-[#f8fafc]/80 to-transparent z-10 pointer-events-none" />
-          <div className="absolute top-0 bottom-0 right-0 w-16 sm:w-36 bg-gradient-to-l from-[#f8fafc] via-[#f8fafc]/80 to-transparent z-10 pointer-events-none" />
+        {/* ── Borderless Floating Logo Reels (No Boxes, Prominent Logos) ── */}
+        <div className="relative w-full overflow-hidden select-none border-y border-slate-200/60 py-6 sm:py-8">
+          {/* Edge Vignette Fades */}
+          <div className="absolute top-0 bottom-0 left-0 w-20 sm:w-44 bg-gradient-to-r from-[#f8fafc] via-[#f8fafc]/90 to-transparent z-10 pointer-events-none" />
+          <div className="absolute top-0 bottom-0 right-0 w-20 sm:w-44 bg-gradient-to-l from-[#f8fafc] via-[#f8fafc]/90 to-transparent z-10 pointer-events-none" />
 
           {/* Row 1: Leftward Infinite Marquee */}
-          <div className="overflow-hidden border-t border-slate-200/80 py-3 mb-2">
-            <div className="flex gap-3 w-max animate-marquee-left">
+          <div className="overflow-hidden mb-8 sm:mb-10">
+            <div className="flex gap-12 sm:gap-16 lg:gap-20 w-max animate-marquee-left items-center">
               {[...clientListRow1, ...clientListRow1, ...clientListRow1].map((client, idx) => (
                 <div
                   key={`r1-${idx}`}
-                  className="flex items-center gap-3 px-4 py-2.5 bg-white border border-slate-200/90 rounded-xl shadow-xs whitespace-nowrap hover:border-blue-300 hover:shadow-md hover:scale-[1.03] transition-all duration-200 cursor-pointer"
+                  className="flex flex-col items-center justify-center gap-2.5 group cursor-pointer"
                 >
-                  {/* Client Logo Image */}
-                  {client.logo && (
+                  {/* Large Prominent Logo Container */}
+                  <div className="h-12 sm:h-14 md:h-16 w-32 sm:w-36 md:w-40 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
                     <img
                       src={client.logo}
                       alt={`${client.name} logo`}
-                      className="h-5 sm:h-6 max-w-[55px] sm:max-w-[65px] object-contain flex-shrink-0"
+                      className="max-h-full max-w-full object-contain filter drop-shadow-2xs transition-all duration-300"
                       loading="lazy"
                     />
-                  )}
-                  {/* Institution Name */}
-                  <span className="text-xs sm:text-[13px] font-semibold text-slate-800">
+                  </div>
+                  {/* Refined Institution Name Caption */}
+                  <span className="text-[11px] sm:text-xs font-medium text-slate-500 tracking-tight text-center max-w-[150px] truncate group-hover:text-slate-800 transition-colors">
                     {client.name}
                   </span>
                 </div>
@@ -182,24 +208,24 @@ export default function Pioneers() {
           </div>
 
           {/* Row 2: Rightward (Reverse) Infinite Marquee */}
-          <div className="overflow-hidden border-b border-slate-200/80 py-3">
-            <div className="flex gap-3 w-max animate-marquee-right">
+          <div className="overflow-hidden">
+            <div className="flex gap-12 sm:gap-16 lg:gap-20 w-max animate-marquee-right items-center">
               {[...clientListRow2, ...clientListRow2, ...clientListRow2].map((client, idx) => (
                 <div
                   key={`r2-${idx}`}
-                  className="flex items-center gap-3 px-4 py-2.5 bg-white border border-slate-200/90 rounded-xl shadow-xs whitespace-nowrap hover:border-blue-300 hover:shadow-md hover:scale-[1.03] transition-all duration-200 cursor-pointer"
+                  className="flex flex-col items-center justify-center gap-2.5 group cursor-pointer"
                 >
-                  {/* Client Logo Image */}
-                  {client.logo && (
+                  {/* Large Prominent Logo Container */}
+                  <div className="h-12 sm:h-14 md:h-16 w-32 sm:w-36 md:w-40 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
                     <img
                       src={client.logo}
                       alt={`${client.name} logo`}
-                      className="h-5 sm:h-6 max-w-[55px] sm:max-w-[65px] object-contain flex-shrink-0"
+                      className="max-h-full max-w-full object-contain filter drop-shadow-2xs transition-all duration-300"
                       loading="lazy"
                     />
-                  )}
-                  {/* Institution Name */}
-                  <span className="text-xs sm:text-[13px] font-semibold text-slate-800">
+                  </div>
+                  {/* Refined Institution Name Caption */}
+                  <span className="text-[11px] sm:text-xs font-medium text-slate-500 tracking-tight text-center max-w-[150px] truncate group-hover:text-slate-800 transition-colors">
                     {client.name}
                   </span>
                 </div>
