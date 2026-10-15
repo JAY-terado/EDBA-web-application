@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap');
+@import "tailwindcss";
+
+/* ----------------------------------------------------
+   THEME STYLING & DESIGN TOKENS
+   ---------------------------------------------------- */
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+}
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --color-brand-blue: #2563eb;
+  --color-brand-teal: #0d9488;
+  --color-brand-cyan: #06b6d4;
+  --color-brand-dark: #0f172a;
+  --color-brand-gray: #64748b;
+}
+
+html {
+  scroll-behavior: smooth;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ----------------------------------------------------
+   ACCESSIBILITY & FOCUS CONTROLS
+   ---------------------------------------------------- */
+
+:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ----------------------------------------------------
+   RESPONSIVE DEVICE ENHANCEMENTS
+   (Mobile, Tablets, Nest Hub & Nest Hub Max Smart Displays)
+   ---------------------------------------------------- */
+
+/* Google Nest Hub (1024x600 landscape) & Nest Hub Max (1280x800 landscape) */
+@media (max-height: 720px) and (orientation: landscape) {
+  .hero-compact {
+    padding-top: 5.5rem !important;
+    padding-bottom: 3rem !important;
+  }
+  .smart-display-tight {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+}
+
+/* Mobile & Touch Minimum Size Rules */
+@media (pointer: coarse) {
+  button, 
+  a[role="button"],
+  input[type="button"],
+  input[type="submit"] {
+    min-height: 44px;
+  }
+}
+
+/* ----------------------------------------------------
+   BACKGROUND UTILITIES
+   ---------------------------------------------------- */
+
+.grid-bg-light {
+  background-size: 32px 32px;
+  background-image:
+    linear-gradient(to right, rgba(15, 23, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.035) 1px, transparent 1px);
+}
+
+.grid-bg-dark {
+  background-size: 32px 32px;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+}
+
+/* ----------------------------------------------------
+   MODERN ELEVATED SURFACE UTILITIES
+   ---------------------------------------------------- */
+
+/* Modern White Card Surface */
+.neu-card {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  box-shadow:
+    0 1px 3px 0 rgba(15, 23, 42, 0.03),
+    0 10px 25px -5px rgba(15, 23, 42, 0.05);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neu-card:hover {
+  border-color: rgba(191, 219, 254, 0.9);
+  box-shadow:
+    0 4px 6px -1px rgba(15, 23, 42, 0.04),
+    0 18px 36px -6px rgba(37, 99, 235, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Inset (Embedded Container) */
+.neu-card-inset {
+  background: #f1f5f9;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: inset 0 2px 4px 0 rgba(15, 23, 42, 0.05);
+}
+
+/* Primary Brand Button */
+.neu-btn-blue {
+  background: #2563eb;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.35);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neu-btn-blue:hover {
+  background: #1d4ed8;
+  box-shadow: 0 6px 20px 0 rgba(37, 99, 235, 0.45);
+  transform: translateY(-1px);
+}
+
+.neu-btn-blue:active {
+  background: #1e40af;
+  box-shadow: 0 2px 8px 0 rgba(37, 99, 235, 0.35);
+  transform: translateY(0.5px);
+}
+
+/* Secondary Light Button */
+.neu-btn-light {
+  background: #ffffff;
+  color: #1e293b;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.04);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neu-btn-light:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px 0 rgba(15, 23, 42, 0.07);
+  transform: translateY(-1px);
+}
+
+.neu-btn-light:active {
+  background: #f1f5f9;
+  box-shadow: inset 0 1px 2px 0 rgba(15, 23, 42, 0.06);
+  transform: translateY(0.5px);
+}
+
+/* Pill / Badge */
+.neu-pill {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 2px 0 rgba(15, 23, 42, 0.03);
+}
+
+.neu-pill-inset {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  box-shadow: inset 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+}
+
+/* Dark Surface Utilities */
+.neu-card-dark {
+  background: #09090b;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.7);
+}
+
+.neu-btn-dark {
+  background: #18181b;
+  color: #f4f4f5;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease-in-out;
+}
+
+.neu-btn-dark:hover {
+  background: #27272a;
+  border-color: rgba(255, 255, 255, 0.16);
+  transform: translateY(-1px);
+}
+
+.neu-btn-dark-active {
+  background: #18181b;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* ----------------------------------------------------
+   INFINITE SCROLL TICKER UTILITY
+   ---------------------------------------------------- */
+@keyframes infinite-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-infinite-scroll {
+  animation: infinite-scroll 45s linear infinite;
+  will-change: transform;
+}
+
+.animate-infinite-scroll:hover {
+  animation-play-state: paused;
+}
