@@ -1,4 +1,5 @@
 export * from "./Hero";
+export * from "./HeroCarousel";
 export * from "./TrustMetrics";
 export * from "./Pioneers";
 export * from "./FeaturesGrid";
