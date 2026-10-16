@@ -22,10 +22,10 @@ export const HeroShowcase: React.FC = () => {
         className="absolute -top-16 -right-8 w-[400px] sm:w-[500px] h-[400px] sm:h-[500px] rounded-full bg-gradient-to-br from-amber-400/80 via-orange-500/70 to-rose-400/45 blur-[80px] pointer-events-none -z-10"
       />
 
-      {/* 2. Top-Center & Left Radiant Royal Blue / Cyan Glow */}
+      {/* 2. Top-Center & Left Radiant Royal Blue / Indigo Glow */}
       <div
         aria-hidden="true"
-        className="absolute -top-14 left-2 sm:left-10 w-[450px] sm:w-[550px] h-[450px] sm:h-[550px] rounded-full bg-gradient-to-tr from-blue-600/70 via-sky-400/60 to-cyan-300/50 blur-[85px] pointer-events-none -z-10"
+        className="absolute -top-14 left-2 sm:left-10 w-[450px] sm:w-[550px] h-[450px] sm:h-[550px] rounded-full bg-gradient-to-tr from-blue-600/80 via-indigo-500/70 to-purple-500/55 blur-[85px] pointer-events-none -z-10"
       />
 
       {/* 3. Bottom Violet / Soft Indigo Accent Glow */}

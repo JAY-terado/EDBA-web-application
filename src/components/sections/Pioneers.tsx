@@ -71,21 +71,24 @@ export default function Pioneers() {
   const isInView = useInView(statsRef, { once: true, margin: "-80px" });
 
   return (
-    <section id="our-clients" className="py-20 sm:py-24 lg:py-28 bg-[#f8fafc] relative overflow-hidden border-b border-slate-200/80">
+    <section id="our-clients" className="pt-8 sm:pt-12 pb-20 sm:pb-24 lg:pb-28 bg-[#f8fafc] relative overflow-x-clip overflow-y-visible border-b border-slate-200/80">
+      {/* ── Seamless Ambient Mesh Glow Bridging Hero & Pioneers ── */}
+      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-full max-w-6xl h-64 bg-gradient-to-b from-blue-400/10 via-indigo-300/6 to-transparent blur-3xl pointer-events-none z-0" />
+
       {/* ── Reference Design Background Elements ── */}
-      {/* 1. Left Concentric Orbital Ripple Rings & Ambient Soft Glow */}
-      <div className="absolute -left-48 sm:-left-28 top-4 sm:top-10 w-[560px] h-[560px] pointer-events-none select-none z-0">
-        <div className="absolute inset-0 bg-gradient-to-tr from-blue-400/15 via-blue-300/8 to-transparent rounded-full blur-3xl transform -translate-x-10" />
+      {/* 1. Left Concentric Orbital Ripple Rings & Ambient Soft Glow (Overlapping Hero) */}
+      <div className="absolute -left-52 sm:-left-36 -top-40 sm:-top-36 w-[760px] h-[760px] pointer-events-none select-none z-0 overflow-visible">
+        <div className="absolute inset-0 bg-gradient-to-tr from-blue-400/12 via-indigo-300/8 to-transparent rounded-full blur-3xl transform -translate-x-10" />
         <svg
-          className="w-full h-full text-blue-400/30"
-          viewBox="0 0 560 560"
+          className="w-full h-full text-blue-400/35 overflow-visible"
+          viewBox="0 0 760 760"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <circle cx="160" cy="280" r="140" stroke="currentColor" strokeWidth="1.2" opacity="0.4" />
-          <circle cx="160" cy="280" r="210" stroke="currentColor" strokeWidth="1.2" opacity="0.6" />
-          <circle cx="160" cy="280" r="285" stroke="currentColor" strokeWidth="1.2" opacity="0.75" />
-          <circle cx="160" cy="280" r="360" stroke="currentColor" strokeWidth="1" opacity="0.45" />
+          <circle cx="240" cy="380" r="135" stroke="currentColor" strokeWidth="1.2" opacity="0.4" />
+          <circle cx="240" cy="380" r="205" stroke="currentColor" strokeWidth="1.2" opacity="0.6" />
+          <circle cx="240" cy="380" r="285" stroke="currentColor" strokeWidth="1.2" opacity="0.75" />
+          <circle cx="240" cy="380" r="370" stroke="currentColor" strokeWidth="1.2" opacity="0.5" />
         </svg>
       </div>
 
@@ -103,7 +106,7 @@ export default function Pioneers() {
       <div className="absolute -right-48 sm:-right-28 top-16 sm:top-24 w-[500px] h-[500px] pointer-events-none select-none z-0">
         <div className="absolute inset-0 bg-blue-300/10 rounded-full blur-3xl transform translate-x-10" />
         <svg
-          className="w-full h-full text-blue-300/25"
+          className="w-full h-full text-blue-300/25 overflow-visible"
           viewBox="0 0 500 500"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -134,39 +137,39 @@ export default function Pioneers() {
           </p>
         </motion.div>
 
-        {/* ── Apple-Style Borderless Stats (No Boxes, Clean Hairline Dividers) ── */}
+        {/* ── Borderless Stats (No Boxes, Clean Dividers, Large & Colorful) ── */}
         <div
           ref={statsRef}
-          className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-slate-200/70 max-w-2xl sm:max-w-3xl mx-auto mb-10 sm:mb-12"
+          className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-slate-200/70 max-w-2xl sm:max-w-3xl mx-auto mb-10 sm:mb-14"
         >
           {/* Stat 1: Schools */}
-          <div className="py-3 sm:py-1 px-4 sm:px-6 text-center">
-            <div className="font-display font-bold text-2xl sm:text-3xl lg:text-[32px] text-slate-900 tracking-tight leading-none mb-1.5">
+          <div className="py-4 sm:py-2 px-4 sm:px-6 text-center flex flex-col items-center justify-center">
+            <span className="font-display font-extrabold text-3xl sm:text-5xl lg:text-[48px] leading-none text-indigo-600 mb-2 tracking-tight">
               <AnimatedCounter target={50} isVisible={isInView} />
-            </div>
-            <div className="text-xs sm:text-sm font-medium text-slate-500 tracking-normal">
+            </span>
+            <span className="font-bold text-xs sm:text-sm text-slate-700 tracking-normal">
               Schools
-            </div>
+            </span>
           </div>
 
           {/* Stat 2: Students */}
-          <div className="py-3 sm:py-1 px-4 sm:px-6 text-center">
-            <div className="font-display font-bold text-2xl sm:text-3xl lg:text-[32px] text-slate-900 tracking-tight leading-none mb-1.5">
+          <div className="py-4 sm:py-2 px-4 sm:px-6 text-center flex flex-col items-center justify-center">
+            <span className="font-display font-extrabold text-3xl sm:text-5xl lg:text-[48px] leading-none text-blue-600 mb-2 tracking-tight">
               <AnimatedCounter target={25000} isVisible={isInView} />
-            </div>
-            <div className="text-xs sm:text-sm font-medium text-slate-500 tracking-normal">
+            </span>
+            <span className="font-bold text-xs sm:text-sm text-slate-700 tracking-normal">
               Students
-            </div>
+            </span>
           </div>
 
           {/* Stat 3: Admissions Handled */}
-          <div className="py-3 sm:py-1 px-4 sm:px-6 text-center">
-            <div className="font-display font-bold text-2xl sm:text-3xl lg:text-[32px] text-slate-900 tracking-tight leading-none mb-1.5">
+          <div className="py-4 sm:py-2 px-4 sm:px-6 text-center flex flex-col items-center justify-center">
+            <span className="font-display font-extrabold text-3xl sm:text-5xl lg:text-[48px] leading-none text-purple-600 mb-2 tracking-tight">
               <AnimatedCounter target={8000} isVisible={isInView} />
-            </div>
-            <div className="text-xs sm:text-sm font-medium text-slate-500 tracking-normal">
+            </span>
+            <span className="font-bold text-xs sm:text-sm text-slate-700 tracking-normal">
               Admissions handled
-            </div>
+            </span>
           </div>
         </div>
 

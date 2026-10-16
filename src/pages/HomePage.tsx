@@ -4,7 +4,6 @@ import Footer from "@/components/layout/Footer";
 import FloatingCta from "@/components/layout/FloatingCta";
 import DemoModal from "@/components/modals/DemoModal";
 import Hero from "@/components/sections/Hero";
-import TrustMetrics from "@/components/sections/TrustMetrics";
 import Pioneers from "@/components/sections/Pioneers";
 import FeaturesGrid from "@/components/sections/FeaturesGrid";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
@@ -21,9 +20,8 @@ export const HomePage: React.FC = () => {
     <div className="min-h-screen bg-white text-slate-900 font-sans flex flex-col selection:bg-blue-600 selection:text-white">
       <Navbar />
       
-      <main className="flex-1 w-full">
+      <main className="flex-1 w-full overflow-x-clip">
         <Hero />
-        <TrustMetrics />
         <Pioneers />
         <FeaturesGrid />
         <WhyChooseUs />

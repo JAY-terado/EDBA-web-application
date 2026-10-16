@@ -18,10 +18,10 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-28 hero-compact overflow-hidden bg-gradient-to-b from-blue-50/40 via-white to-[#f8fafc]">
+    <section className="relative pt-28 pb-10 sm:pt-32 sm:pb-12 lg:pt-36 lg:pb-14 hero-compact overflow-x-clip overflow-y-visible bg-gradient-to-b from-blue-50/40 via-white/80 via-40% to-[#f8fafc]">
       {/* Soft background radial glows */}
       <div className="absolute top-10 right-[12%] h-[350px] w-[350px] sm:h-[500px] sm:w-[500px] bg-blue-500/8 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-[8%] h-[250px] w-[250px] sm:h-[360px] sm:w-[360px] bg-cyan-500/8 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 left-[8%] h-[250px] w-[250px] sm:h-[360px] sm:w-[360px] bg-indigo-500/8 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 xl:gap-16 items-center">
