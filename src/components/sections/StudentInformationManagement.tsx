@@ -1,22 +1,90 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { GraduationCap, CalendarCheck, FileText, Bell, Award, Users, ArrowRight, Check } from "lucide-react";
+import {
+  Users,
+  Building2,
+  Star,
+  Headphones,
+  Search,
+  MessageSquare,
+  Camera,
+  Settings,
+  LayoutDashboard,
+  CalendarCheck,
+  FileText,
+  Clock,
+  Bell,
+  FileSpreadsheet,
+  GraduationCap,
+  ArrowRight,
+  Send,
+  Sparkles,
+} from "lucide-react";
+import studentGirlImg from "@/assets/student-girl.webp";
 
-const studentFeatures = [
-  { icon: Users, title: "Student Records & Information", desc: "Centralized student data management for accurate, organized records" },
-  { icon: CalendarCheck, title: "Attendance Tracking", desc: "Monitor student attendance with ease and address discrepancies promptly" },
-  { icon: FileText, title: "Examination & Results", desc: "Manage exam workflows and student progression with structured tools" },
-  { icon: Award, title: "Certificates & Promotion", desc: "Handle leaving certificates, documents, and student promotion records" },
-  { icon: Bell, title: "Announcements & Updates", desc: "Share institutional updates and keep students and parents informed" },
+const metricStats = [
+  {
+    value: "1.2M+",
+    label: "Students",
+    icon: Users,
+    iconColor: "text-blue-600",
+    iconBg: "bg-blue-50",
+  },
+  {
+    value: "100+",
+    label: "Institutions",
+    icon: Building2,
+    iconColor: "text-emerald-600",
+    iconBg: "bg-emerald-50",
+  },
+  {
+    value: "98%",
+    label: "Satisfaction",
+    icon: Star,
+    iconColor: "text-amber-500 fill-amber-500",
+    iconBg: "bg-amber-50",
+  },
+  {
+    value: "24/7",
+    label: "Support",
+    icon: Headphones,
+    iconColor: "text-purple-600",
+    iconBg: "bg-purple-50",
+  },
 ];
 
-const userStats = [
-  { label: "Students on Platform", val: "1.2M+" },
-  { label: "Active Institutions", val: "100+" },
-  { label: "Records Managed", val: "5M+" },
+const recentActivities = [
+  {
+    tag: "Examination",
+    text: "Chemistry Mid-term result published",
+    time: "2h ago",
+    badgeClass: "bg-blue-50 text-blue-700 border-blue-200/60",
+  },
+  {
+    tag: "Attendance",
+    text: "Present on Monday, Oct 14",
+    time: "1d ago",
+    badgeClass: "bg-emerald-50 text-emerald-700 border-emerald-200/60",
+  },
+  {
+    tag: "Academics",
+    text: "Math Assignment submitted",
+    time: "2d ago",
+    badgeClass: "bg-violet-50 text-violet-700 border-violet-200/60",
+  },
+  {
+    tag: "Announcement",
+    text: "Annual Sports Day notice shared",
+    time: "3d ago",
+    badgeClass: "bg-amber-50 text-amber-700 border-amber-200/60",
+  },
 ];
 
 export default function StudentInformationManagement() {
+  const handleOpenDemo = () => {
+    window.dispatchEvent(new CustomEvent("open-demo-modal"));
+  };
+
   return (
     <section
       id="student-management"
@@ -24,113 +92,247 @@ export default function StudentInformationManagement() {
     >
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20 items-center">
-
-          {/* Left: Student Profile Mockup */}
+          
+          {/* ========================================================= */}
+          {/* LEFT COLUMN: Girl Hero + Doodles + Dashboard Mockup       */}
+          {/* ========================================================= */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7 }}
-            className="lg:col-span-6 relative"
+            className="lg:col-span-6 relative flex flex-col items-center order-2 lg:order-1"
           >
-            {/* Student Portal Card */}
-            <div className="bg-white border border-slate-200 rounded-2xl shadow-2xl shadow-slate-200/60 overflow-hidden">
-              {/* Portal Header */}
-              <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-5">
-                <div className="flex items-center gap-4">
-                  <div className="h-12 w-12 rounded-full bg-white/20 border-2 border-white/30 flex items-center justify-center">
-                    <GraduationCap className="h-6 w-6 text-white" />
+            {/* Visual Container */}
+            <div className="w-full relative max-w-[580px] mx-auto">
+              
+              {/* --- TOP VISUAL: Smiling Schoolgirl with Lucide Doodles --- */}
+              <div className="relative w-full h-[310px] sm:h-[370px] flex justify-center items-end -mb-16 sm:-mb-20 z-10 pointer-events-none">
+                
+                {/* DOODLE: Flying Paper Plane with Lucide Send icon & dashed trail */}
+                <div className="absolute left-2 sm:left-6 top-3 sm:top-5 z-20 pointer-events-none select-none">
+                  <div className="relative w-20 h-20 sm:w-24 sm:h-24">
+                    <svg
+                      className="w-full h-full text-blue-500"
+                      viewBox="0 0 100 100"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M 15 85 C 10 55, 25 35, 62 20"
+                        stroke="#2563EB"
+                        strokeWidth="2.2"
+                        strokeDasharray="4 5"
+                        strokeLinecap="round"
+                      />
+                      <circle cx="15" cy="85" r="2.5" fill="#2563EB" />
+                    </svg>
+                    <div className="absolute top-1 right-2 -rotate-[20deg] text-blue-600 drop-shadow-sm">
+                      <Send className="w-7 h-7 sm:w-8 sm:h-8 fill-blue-500/20 stroke-[2]" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* DOODLE: Floating Line-Art Graduation Cap (No box, clean floating doodle) */}
+                <div className="absolute right-10 sm:right-16 top-2 sm:top-4 z-20 pointer-events-none select-none">
+                  <GraduationCap className="w-11 h-11 sm:w-13 sm:h-13 text-slate-800 -rotate-12 stroke-[1.8] drop-shadow-sm" />
+                </div>
+
+                {/* FLOATING PILL 1: Attendance (Left of girl) */}
+                <motion.div
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute left-1 sm:left-4 top-[38%] sm:top-[40%] z-30 pointer-events-auto bg-white border border-slate-200/90 rounded-2xl p-2.5 sm:px-4 sm:py-3 shadow-xl shadow-slate-200/80 flex items-center gap-3 transition-transform hover:scale-105"
+                >
+                  <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center flex-shrink-0">
+                    <CalendarCheck className="h-5 w-5 text-emerald-600" />
                   </div>
                   <div>
-                    <p className="text-white font-bold text-base">Aryan Mehta</p>
-                    <p className="text-blue-200 text-xs">Student ID: 2024-BCS-0147 | Class XII Science</p>
+                    <p className="text-sm sm:text-base font-black text-slate-900 leading-none">93.5%</p>
+                    <p className="text-[10px] sm:text-xs text-slate-400 font-medium mt-0.5">Attendance</p>
                   </div>
-                  <div className="ml-auto px-2.5 py-1 bg-white/15 rounded-lg">
-                    <span className="text-white text-xs font-semibold">Active</span>
+                </motion.div>
+
+                {/* FLOATING PILL 2: Overall Grade with Lucide Sparkles */}
+                <motion.div
+                  animate={{ y: [0, 6, 0] }}
+                  transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                  className="absolute right-1 sm:right-4 top-[26%] sm:top-[28%] z-30 pointer-events-auto bg-white border border-slate-200/90 rounded-2xl px-3.5 py-2.5 sm:px-4 sm:py-3 shadow-xl shadow-slate-200/80 flex items-center gap-2.5 transition-transform hover:scale-105"
+                >
+                  <span className="text-xl sm:text-2xl font-black text-emerald-600 leading-none">A+</span>
+                  <div>
+                    <p className="text-[10px] sm:text-xs text-slate-500 font-semibold leading-tight">
+                      Overall Grade
+                    </p>
                   </div>
-                </div>
+
+                  {/* Lucide Sparkles around A+ badge */}
+                  <div className="absolute -bottom-2.5 -right-2 pointer-events-none text-blue-600">
+                    <Sparkles className="w-5 h-5 animate-pulse" />
+                  </div>
+                </motion.div>
+
+                {/* Cutout Girl Image */}
+                <img
+                  src={studentGirlImg}
+                  alt="Student girl holding books"
+                  className="h-[280px] sm:h-[350px] w-auto object-contain object-bottom drop-shadow-[0_15px_30px_rgba(0,0,0,0.12)] select-none pointer-events-none"
+                />
               </div>
 
-              {/* Stats Row */}
-              <div className="grid grid-cols-3 border-b border-slate-100">
-                {[
-                  { label: "Attendance", val: "93.5%", good: true },
-                  { label: "Overall Grade", val: "A+", good: true },
-                  { label: "Pending Fees", val: "₹0", good: true },
-                ].map((s, i) => (
-                  <div key={i} className="py-4 px-3 text-center border-r last:border-r-0 border-slate-100">
-                    <p className={`text-lg font-black ${s.good ? "text-emerald-600" : "text-red-500"}`}>{s.val}</p>
-                    <p className="text-[10px] text-slate-400 font-medium mt-0.5">{s.label}</p>
+              {/* --- BOTTOM VISUAL: Modern White SaaS Dashboard Window --- */}
+              <div className="relative z-20 bg-white rounded-2xl border border-slate-200 shadow-2xl shadow-slate-200/60 overflow-hidden">
+                
+                {/* Dashboard Topbar */}
+                <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-slate-100 bg-white">
+                  {/* Brand Logo */}
+                  <div className="flex items-center gap-2">
+                    <img src="/logo.png" alt="EDBA" className="h-6 w-auto object-contain" />
                   </div>
-                ))}
-              </div>
 
-              {/* Recent Activity */}
-              <div className="p-5">
-                <p className="text-xs font-black text-slate-400 uppercase tracking-wider mb-3">Recent Activity</p>
-                <div className="space-y-2.5">
-                  {[
-                    { text: "Chemistry Mid-term result published", tag: "Examination", color: "bg-blue-50 text-blue-700" },
-                    { text: "Present on Monday, Oct 14", tag: "Attendance", color: "bg-emerald-50 text-emerald-700" },
-                    { text: "Math Assignment submitted", tag: "Academics", color: "bg-violet-50 text-violet-700" },
-                    { text: "Annual Sports Day notice shared", tag: "Announcement", color: "bg-amber-50 text-amber-700" },
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors">
-                      <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full whitespace-nowrap ${item.color}`}>
-                        {item.tag}
-                      </span>
-                      <p className="text-xs text-slate-600 font-medium">{item.text}</p>
+                  {/* Search Bar */}
+                  <div className="flex-1 max-w-[200px] sm:max-w-xs mx-3 sm:mx-4">
+                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-50 border border-slate-200 text-slate-400 text-xs">
+                      <Search className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
+                      <span className="truncate text-[11px] sm:text-xs">Search, Career Guardians</span>
                     </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+                  </div>
 
-            {/* Parent View Badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5 }}
-              className="absolute -bottom-6 -right-4 bg-white border border-slate-200 rounded-2xl shadow-xl p-4 z-10 w-56"
-            >
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-wider mb-2">Parent View</p>
-              <div className="flex items-center gap-2 mb-2">
-                <div className="h-7 w-7 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold">P</div>
-                <div>
-                  <p className="text-xs font-semibold text-slate-700">Parent of Aryan</p>
-                  <p className="text-[10px] text-emerald-600 font-medium">✓ All updates received</p>
+                  {/* Header Utility Icons */}
+                  <div className="flex items-center gap-2 sm:gap-2.5 text-slate-400">
+                    <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4 hover:text-slate-600 cursor-pointer transition-colors" />
+                    <Camera className="w-3.5 h-3.5 sm:w-4 sm:h-4 hover:text-slate-600 cursor-pointer transition-colors" />
+                    <Settings className="w-3.5 h-3.5 sm:w-4 sm:h-4 hover:text-slate-600 cursor-pointer transition-colors" />
+                  </div>
                 </div>
-              </div>
-              <div className="text-[10px] text-slate-500 bg-slate-50 rounded-lg px-2.5 py-2">
-                Son's attendance 93.5% — On track for exams
-              </div>
-            </motion.div>
 
-            {/* Stats Badges */}
-            <div className="mt-10 grid grid-cols-3 gap-3">
-              {userStats.map((s, i) => (
-                <div key={i} className="bg-white border border-slate-200 rounded-xl p-3 text-center shadow-sm">
-                  <p className="text-lg font-black text-blue-600">{s.val}</p>
-                  <p className="text-[10px] text-slate-400 font-medium leading-tight mt-0.5">{s.label}</p>
+                {/* Dashboard Body (Sidebar + Content) */}
+                <div className="flex">
+                  
+                  {/* Mini Sidebar (hidden on very small mobile) */}
+                  <div className="hidden sm:block w-36 border-r border-slate-100 p-2.5 space-y-1 bg-slate-50/60">
+                    <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-blue-50 text-blue-700 font-bold text-xs">
+                      <LayoutDashboard className="w-3.5 h-3.5 text-blue-600" />
+                      <span>Dashboard</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-slate-600 text-xs hover:bg-slate-100/70 cursor-pointer transition-colors">
+                      <Users className="w-3.5 h-3.5 text-slate-400" />
+                      <span>Students</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-slate-600 text-xs hover:bg-slate-100/70 cursor-pointer transition-colors">
+                      <CalendarCheck className="w-3.5 h-3.5 text-slate-400" />
+                      <span>Attendance</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-slate-600 text-xs hover:bg-slate-100/70 cursor-pointer transition-colors">
+                      <FileText className="w-3.5 h-3.5 text-slate-400" />
+                      <span>Examinations</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-slate-600 text-xs hover:bg-slate-100/70 cursor-pointer transition-colors">
+                      <Clock className="w-3.5 h-3.5 text-slate-400" />
+                      <span>Timetable</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-slate-600 text-xs hover:bg-slate-100/70 cursor-pointer transition-colors">
+                      <Bell className="w-3.5 h-3.5 text-slate-400" />
+                      <span>Announcements</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-slate-600 text-xs hover:bg-slate-100/70 cursor-pointer transition-colors">
+                      <FileSpreadsheet className="w-3.5 h-3.5 text-slate-400" />
+                      <span>Reports</span>
+                    </div>
+                  </div>
+
+                  {/* Main Content Area */}
+                  <div className="flex-1 p-4 sm:p-5">
+                    
+                    {/* Student Profile Row */}
+                    <div className="flex items-center justify-between pb-3.5 border-b border-slate-100">
+                      <div className="flex items-center gap-3">
+                        <div className="h-10 w-10 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold text-sm shadow-sm ring-2 ring-blue-100">
+                          AM
+                        </div>
+                        <div>
+                          <p className="text-sm font-bold text-slate-900 leading-snug">Aryan Mehta</p>
+                          <p className="text-[11px] text-slate-400 font-medium">
+                            Student ID: 2024-BCS-0147 | Class XI Science
+                          </p>
+                        </div>
+                      </div>
+                      <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200">
+                        Active
+                      </span>
+                    </div>
+
+                    {/* Stats 3-Box Grid */}
+                    <div className="grid grid-cols-3 gap-2.5 py-3.5 border-b border-slate-100">
+                      <div className="p-2 sm:p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-center">
+                        <p className="text-base sm:text-lg font-black text-emerald-600 leading-none">93.5%</p>
+                        <p className="text-[10px] text-slate-400 font-medium mt-1">Attendance</p>
+                      </div>
+                      <div className="p-2 sm:p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-center">
+                        <p className="text-base sm:text-lg font-black text-emerald-600 leading-none">A+</p>
+                        <p className="text-[10px] text-slate-400 font-medium mt-1">Overall Grade</p>
+                      </div>
+                      <div className="p-2 sm:p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-center">
+                        <p className="text-base sm:text-lg font-black text-emerald-600 leading-none">₹0</p>
+                        <p className="text-[10px] text-slate-400 font-medium mt-1">Pending Fees</p>
+                      </div>
+                    </div>
+
+                    {/* Recent Activity Feed */}
+                    <div className="pt-3">
+                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-wider mb-2.5">
+                        RECENT ACTIVITY
+                      </p>
+                      <div className="space-y-1.5 sm:space-y-2">
+                        {recentActivities.map((act, idx) => (
+                          <div
+                            key={idx}
+                            className="flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100 text-xs"
+                          >
+                            <div className="flex items-center gap-2.5 min-w-0 pr-2">
+                              <span
+                                className={`text-[10px] font-bold px-2 py-0.5 rounded-md border flex-shrink-0 ${act.badgeClass}`}
+                              >
+                                {act.tag}
+                              </span>
+                              <span className="text-slate-700 font-medium truncate text-[11px] sm:text-xs">
+                                {act.text}
+                              </span>
+                            </div>
+                            <span className="text-[10px] text-slate-400 flex-shrink-0 font-medium">
+                              {act.time}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                  </div>
+
                 </div>
-              ))}
+
+              </div>
+
             </div>
           </motion.div>
 
-          {/* Right: Text Content */}
+          {/* ========================================================= */}
+          {/* RIGHT COLUMN: Text Content & Structured Metrics           */}
+          {/* ========================================================= */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7 }}
-            className="lg:col-span-6 flex flex-col"
+            className="lg:col-span-6 flex flex-col order-1 lg:order-2"
           >
+            {/* Eyebrow Pill */}
             <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200/70 mb-5 w-fit shadow-xs">
               <GraduationCap className="w-3.5 h-3.5" aria-hidden="true" />
               Student Information & Management System
             </span>
 
+            {/* Main Headline (Harmonized with Section 6 & 8) */}
             <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-[42px] leading-[1.15] text-slate-900 tracking-tight mb-5">
               Empowering Students Through{" "}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
@@ -138,6 +340,7 @@ export default function StudentInformationManagement() {
               </span>
             </h2>
 
+            {/* Full 4-Paragraph Content formatted exactly like other sections */}
             <p className="text-slate-600 text-base leading-relaxed mb-4 font-normal">
               EDBA provides a centralized platform for managing student information and supporting students throughout their educational journey. By bringing essential academic records, attendance information, examination details, and institutional updates together, EDBA helps create a more organized and transparent educational experience.
             </p>
@@ -146,37 +349,46 @@ export default function StudentInformationManagement() {
               With access to relevant information through the platform, students and parents can stay informed about academic activities, attendance, examination-related updates, announcements, and other important information shared by the institution.
             </p>
 
+            <p className="text-slate-600 text-base leading-relaxed mb-4 font-normal">
+              Through integrated Student Management, Academics, Attendance, Examinations, Promotion, Certificates, and Communication capabilities, EDBA helps institutions maintain accurate student records, improve coordination, and support informed academic decisions.
+            </p>
+
             <p className="text-slate-600 text-base leading-relaxed mb-8 font-normal">
               Designed for schools, junior colleges, colleges, universities, and specialised educational institutions, EDBA supports a connected learning environment where students, educators, parents, and administrators can stay aligned throughout the academic journey.
             </p>
 
-            {/* Feature list */}
-            <div className="space-y-3 mb-8">
-              {studentFeatures.map((f, i) => {
-                const Icon = f.icon;
+            {/* 4 Metrics in App Card Theme (matching ParentCommunicationPlatform / FeaturesGrid) */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+              {metricStats.map((item, index) => {
+                const Icon = item.icon;
                 return (
-                  <div key={i} className="flex items-start gap-3.5 p-3 rounded-xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-200">
-                    <div className="h-8 w-8 rounded-lg bg-blue-600 flex items-center justify-center flex-shrink-0">
-                      <Icon className="h-4 w-4 text-white" />
+                  <div
+                    key={index}
+                    className="p-3 rounded-xl bg-white border border-slate-200/80 hover:border-blue-200 hover:bg-blue-50/20 transition-all duration-200 shadow-xs"
+                  >
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <div className={`h-7 w-7 rounded-lg flex items-center justify-center ${item.iconBg}`}>
+                        <Icon className={`h-3.5 w-3.5 ${item.iconColor}`} />
+                      </div>
+                      <p className="text-lg font-black text-slate-900 leading-none">{item.value}</p>
                     </div>
-                    <div>
-                      <p className="text-sm font-bold text-slate-800">{f.title}</p>
-                      <p className="text-xs text-slate-500 font-normal leading-snug">{f.desc}</p>
-                    </div>
-                    <Check className="h-4 w-4 text-emerald-500 flex-shrink-0 mt-0.5 ml-auto" />
+                    <p className="text-xs text-slate-500 font-medium leading-tight">{item.label}</p>
                   </div>
                 );
               })}
             </div>
 
-            <button
-              type="button"
-              onClick={() => window.dispatchEvent(new CustomEvent("open-demo-modal"))}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl transition-all shadow-lg shadow-blue-500/25 cursor-pointer w-fit group"
-            >
-              <span>Explore Student Management</span>
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </button>
+            {/* Primary Action Button */}
+            <div>
+              <button
+                type="button"
+                onClick={handleOpenDemo}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl transition-all shadow-lg shadow-blue-500/25 cursor-pointer w-fit group"
+              >
+                <span>Explore Student Management</span>
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </button>
+            </div>
           </motion.div>
 
         </div>
@@ -184,3 +396,7 @@ export default function StudentInformationManagement() {
     </section>
   );
 }
+
+
+
+
