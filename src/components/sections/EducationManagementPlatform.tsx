@@ -12,11 +12,11 @@ import {
   LayoutDashboard,
 } from "lucide-react";
 
-import screenDashboard from "@/assets/screens/dashboard.webp";
-import screenClasswall from "@/assets/screens/classwall.webp";
-import screenAttendance from "@/assets/screens/attendance.webp";
-import screenAssistant from "@/assets/screens/assistant.webp";
-import screenCirculars from "@/assets/screens/circulars.webp";
+import screenDashboard from "@/assets/screens/dashboard.png";
+import screenClasswall from "@/assets/screens/classwall.png";
+import screenAttendance from "@/assets/screens/attendance.png";
+import screenAssistant from "@/assets/screens/assistant.png";
+import screenCirculars from "@/assets/screens/circulars.png";
 
 interface SlideItem {
   id: number;
@@ -78,9 +78,6 @@ const SLIDES_DATA: SlideItem[] = [
 
 export default function EducationManagementPlatform() {
   const [pos, setPos] = useState(0);
-  const posRef = useRef(0);
-  const targetRef = useRef(0);
-  const animRef = useRef<number | null>(null);
 
   // Drag tracking refs
   const isDraggingRef = useRef(false);
@@ -94,125 +91,57 @@ export default function EducationManagementPlatform() {
 
   // Autoplay control
   const [isHovered, setIsHovered] = useState(false);
-  const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const CARD_WIDTH = 248;
-  const CARD_HEIGHT = 512;
+  const CARD_HEIGHT = 550;
   const TOTAL_SLIDES = SLIDES_DATA.length;
-  const DRAG_SENSITIVITY = 180; // pixels of drag per slide
+  const DRAG_SENSITIVITY = 190; // pixels of drag per slide
 
   // Active slide index (0 to 4) calculated modularly from current pos
   const activeSlideIndex = ((Math.round(pos) % TOTAL_SLIDES) + TOTAL_SLIDES) % TOTAL_SLIDES;
   const currentSlide = SLIDES_DATA[activeSlideIndex];
 
   // --------------------------------------------------------------------------
-  // Spring Physics Animation Engine (Buttery smooth Apple-like harmonic motion)
-  // --------------------------------------------------------------------------
-  const animateTo = (target: number, initialVelocity = 0) => {
-    if (animRef.current) {
-      cancelAnimationFrame(animRef.current);
-      animRef.current = null;
-    }
-
-    targetRef.current = target;
-    let current = posRef.current;
-    let velocity = initialVelocity;
-
-    // Critically damped spring parameters
-    const stiffness = 140;
-    const damping = 20;
-    const mass = 1;
-    let lastTime = performance.now();
-
-    const tick = (now: number) => {
-      const dt = Math.min((now - lastTime) / 1000, 0.032);
-      lastTime = now;
-
-      const displacement = current - targetRef.current;
-      const springForce = -stiffness * displacement;
-      const dampingForce = -damping * velocity;
-      const acceleration = (springForce + dampingForce) / mass;
-
-      velocity += acceleration * dt;
-      current += velocity * dt;
-
-      posRef.current = current;
-      setPos(current);
-
-      // Settle check
-      if (Math.abs(displacement) < 0.001 && Math.abs(velocity) < 0.005) {
-        current = targetRef.current;
-        posRef.current = current;
-        setPos(current);
-        animRef.current = null;
-        return;
-      }
-
-      animRef.current = requestAnimationFrame(tick);
-    };
-
-    animRef.current = requestAnimationFrame(tick);
-  };
-
-  // --------------------------------------------------------------------------
-  // Autoplay
+  // Autoplay (Fluid & Pause on Interaction)
   // --------------------------------------------------------------------------
   useEffect(() => {
-    if (isHovered || isDragging) {
-      if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
-      return;
-    }
+    if (isHovered || isDragging) return;
 
-    autoPlayTimerRef.current = setInterval(() => {
-      animateTo(Math.round(posRef.current) + 1);
-    }, 4000);
+    const timer = setInterval(() => {
+      setPos((prev) => Math.round(prev) + 1);
+    }, 4200);
 
-    return () => {
-      if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
-    };
+    return () => clearInterval(timer);
   }, [isHovered, isDragging]);
-
-  // Clean up RAF on unmount
-  useEffect(() => {
-    return () => {
-      if (animRef.current) cancelAnimationFrame(animRef.current);
-      if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
-    };
-  }, []);
 
   // --------------------------------------------------------------------------
   // Navigation Handlers
   // --------------------------------------------------------------------------
   const handleStep = (direction: number) => {
-    animateTo(Math.round(posRef.current) + direction);
+    setPos((prev) => Math.round(prev) + direction);
   };
 
   const goToSlide = (targetIdx: number) => {
-    const current = posRef.current;
-    const currentActive = ((Math.round(current) % TOTAL_SLIDES) + TOTAL_SLIDES) % TOTAL_SLIDES;
-    let diff = targetIdx - currentActive;
-    if (diff > TOTAL_SLIDES / 2) diff -= TOTAL_SLIDES;
-    if (diff < -TOTAL_SLIDES / 2) diff += TOTAL_SLIDES;
-    animateTo(Math.round(current) + diff);
+    setPos((prev) => {
+      const currentActive = ((Math.round(prev) % TOTAL_SLIDES) + TOTAL_SLIDES) % TOTAL_SLIDES;
+      let diff = targetIdx - currentActive;
+      if (diff > TOTAL_SLIDES / 2) diff -= TOTAL_SLIDES;
+      if (diff < -TOTAL_SLIDES / 2) diff += TOTAL_SLIDES;
+      return Math.round(prev) + diff;
+    });
   };
 
   // --------------------------------------------------------------------------
   // Drag / Swipe Pointer Handlers (1:1 buttery smooth tracking)
   // --------------------------------------------------------------------------
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    // Only respond to primary button (left mouse or touch)
     if (e.button !== 0) return;
-
-    if (animRef.current) {
-      cancelAnimationFrame(animRef.current);
-      animRef.current = null;
-    }
 
     isDraggingRef.current = true;
     setIsDragging(true);
     hasDraggedRef.current = false;
     startXRef.current = e.clientX;
-    startPosRef.current = posRef.current;
+    startPosRef.current = pos;
     lastXRef.current = e.clientX;
     lastTimeRef.current = performance.now();
     velocityRef.current = 0;
@@ -226,7 +155,7 @@ export default function EducationManagementPlatform() {
     if (!isDraggingRef.current) return;
 
     const deltaX = e.clientX - startXRef.current;
-    if (Math.abs(deltaX) > 6) {
+    if (Math.abs(deltaX) > 5) {
       hasDraggedRef.current = true;
     }
 
@@ -240,7 +169,6 @@ export default function EducationManagementPlatform() {
 
     // Follow finger 1:1 in continuous circular motion
     const newPos = startPosRef.current - deltaX / DRAG_SENSITIVITY;
-    posRef.current = newPos;
     setPos(newPos);
   };
 
@@ -253,8 +181,7 @@ export default function EducationManagementPlatform() {
       (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
     } catch {}
 
-    const current = posRef.current;
-    // Slide velocity in units per second
+    const current = pos;
     const slideVelocity = -(velocityRef.current * 1000) / DRAG_SENSITIVITY;
 
     let target = Math.round(current);
@@ -264,7 +191,7 @@ export default function EducationManagementPlatform() {
       target = Math.ceil(current) - 1;
     }
 
-    animateTo(target, slideVelocity * 0.35);
+    setPos(target);
   };
 
   const handleOpenDemo = () => {
@@ -342,7 +269,7 @@ export default function EducationManagementPlatform() {
         {/* BUTTERY SMOOTH 3D CIRCULAR CAROUSEL STAGE                 */}
         {/* ========================================================= */}
         <div
-          className="relative w-full max-w-[1300px] mx-auto h-[550px] sm:h-[580px] flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing select-none"
+          className="relative w-full max-w-[1300px] mx-auto h-[610px] sm:h-[640px] flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing select-none"
           style={{ perspective: "1200px", touchAction: "pan-y" }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
@@ -353,24 +280,38 @@ export default function EducationManagementPlatform() {
         >
           {/* Navigation Chevron Left */}
           <button
+            type="button"
+            onPointerDown={(e) => {
+              e.stopPropagation();
+            }}
+            onPointerUp={(e) => {
+              e.stopPropagation();
+            }}
             onClick={(e) => {
               e.stopPropagation();
               handleStep(-1);
             }}
             aria-label="Previous screenshot"
-            className="absolute left-2 sm:left-6 lg:left-10 top-1/2 -translate-y-1/2 z-40 w-11 h-11 rounded-full bg-white/95 hover:bg-white text-slate-700 shadow-xl shadow-slate-300/40 border border-slate-200/90 flex items-center justify-center transition-transform hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-sm"
+            className="absolute left-2 sm:left-6 lg:left-10 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-white/95 hover:bg-white text-slate-700 shadow-xl shadow-slate-300/50 border border-slate-200/90 flex items-center justify-center transition-transform hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-sm pointer-events-auto"
           >
             <ChevronLeft className="w-5 h-5 stroke-[2.5]" />
           </button>
 
           {/* Navigation Chevron Right */}
           <button
+            type="button"
+            onPointerDown={(e) => {
+              e.stopPropagation();
+            }}
+            onPointerUp={(e) => {
+              e.stopPropagation();
+            }}
             onClick={(e) => {
               e.stopPropagation();
               handleStep(1);
             }}
             aria-label="Next screenshot"
-            className="absolute right-2 sm:right-6 lg:right-10 top-1/2 -translate-y-1/2 z-40 w-11 h-11 rounded-full bg-white/95 hover:bg-white text-slate-700 shadow-xl shadow-slate-300/40 border border-slate-200/90 flex items-center justify-center transition-transform hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-sm"
+            className="absolute right-2 sm:right-6 lg:right-10 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-white/95 hover:bg-white text-slate-700 shadow-xl shadow-slate-300/50 border border-slate-200/90 flex items-center justify-center transition-transform hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-sm pointer-events-auto"
           >
             <ChevronRight className="w-5 h-5 stroke-[2.5]" />
           </button>
@@ -378,27 +319,21 @@ export default function EducationManagementPlatform() {
           {/* Stationary Center iPhone Mockup Frame Overlay */}
           <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-35 flex items-center justify-center">
             <div
-              style={{ width: `${CARD_WIDTH + 20}px`, height: "532px" }}
-              className="rounded-[42px] border-[10px] border-[#18191b] shadow-[0_25px_60px_rgba(0,0,0,0.32),0_0_0_1px_rgba(255,255,255,0.12)] relative box-border bg-transparent"
+              style={{ width: `${CARD_WIDTH + 20}px`, height: `${CARD_HEIGHT + 20}px` }}
+              className="rounded-[42px] border-[10px] border-[#18191b] shadow-[0_20px_50px_-10px_rgba(0,0,0,0.22)] relative box-border bg-transparent"
             >
               {/* Metallic inner rim highlight */}
               <div className="absolute inset-0 rounded-[32px] border border-white/20 pointer-events-none" />
-
-              {/* Dynamic Island / Top Notch */}
-              <div className="absolute -top-[1px] left-1/2 -translate-x-1/2 w-[116px] h-[20px] bg-[#18191b] rounded-b-2xl flex items-center justify-center space-x-2">
-                <div className="w-8 h-1 bg-[#2a2b2e] rounded-full" />
-                <div className="w-2.5 h-2.5 bg-[#253249] rounded-full border border-[#111]" />
-              </div>
 
               {/* Hardware Side Buttons */}
               <div className="absolute -left-[12px] top-20 w-[3px] h-6 bg-[#242528] rounded-l-md" />
               <div className="absolute -left-[12px] top-32 w-[3px] h-10 bg-[#242528] rounded-l-md" />
               <div className="absolute -left-[12px] top-45 w-[3px] h-10 bg-[#242528] rounded-l-md" />
               <div className="absolute -right-[12px] top-32 w-[3px] h-14 bg-[#242528] rounded-r-md" />
-
-              {/* Home Indicator Bar */}
-              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-28 h-1 bg-black/80 rounded-full" />
             </div>
+
+            {/* Soft ground ambient shadow (smooth diffuse blur, zero sharp edges) */}
+            <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 w-[220px] h-6 bg-slate-900/10 blur-xl rounded-full pointer-events-none" />
           </div>
 
           {/* 3D Circular Cards Track Container */}
@@ -463,7 +398,7 @@ export default function EducationManagementPlatform() {
                   key={k}
                   onClick={() => {
                     if (!hasDraggedRef.current && absDist > 0.25) {
-                      animateTo(k);
+                      setPos(k);
                     }
                   }}
                   style={{
@@ -473,33 +408,38 @@ export default function EducationManagementPlatform() {
                     opacity,
                     transform: `translate3d(calc(-50% + ${xPos}px), -50%, ${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`,
                     transformStyle: "preserve-3d",
-                    willChange: "transform, opacity",
+                    transition: isDragging
+                      ? "none"
+                      : "transform 600ms cubic-bezier(0.22, 1, 0.36, 1), opacity 600ms cubic-bezier(0.22, 1, 0.36, 1)",
                   }}
                   className={`absolute left-1/2 top-1/2 rounded-[32px] overflow-hidden transition-shadow duration-300 ${
                     isCenter
-                      ? "shadow-[0_25px_60px_-10px_rgba(45,118,196,0.35),0_12px_24px_rgba(0,0,0,0.12)] border border-white/80 ring-2 ring-blue-500/20 bg-white"
-                      : "shadow-[0_20px_50px_rgba(15,23,42,0.18)] border border-slate-200/80 bg-white/80 hover:opacity-85 cursor-pointer"
+                      ? "shadow-[0_20px_45px_-12px_rgba(15,23,42,0.22)] bg-white"
+                      : "shadow-[0_16px_36px_-8px_rgba(15,23,42,0.14)] border border-slate-200/70 bg-white/85 hover:opacity-90 cursor-pointer"
                   }`}
                 >
-                  {/* Phone Screen Image (4K Super-Sampled WebP with Crystal-Clear Contrast) */}
+                  {/* Phone Screen Image (4K Lossless PNG with 100% Native Pixel Sharpness) */}
                   <img
                     src={slide.image}
                     alt={slide.title}
-                    className="w-full h-full object-cover object-top select-none pointer-events-none"
+                    className="w-full h-full object-fill select-none pointer-events-none rounded-[30px]"
+                    loading="eager"
+                    decoding="sync"
+                    draggable="false"
                     style={{
                       imageRendering: "-webkit-optimize-contrast",
-                      transform: "translateZ(0)",
-                      backfaceVisibility: "hidden",
                     }}
-                    loading="eager"
-                    decoding="async"
-                    draggable="false"
                   />
 
                   {/* Translucent Frosted Glass Overlay on side cards */}
                   <div
-                    className="absolute inset-0 bg-white/20 backdrop-blur-[1px] pointer-events-none transition-opacity duration-200"
-                    style={{ opacity: Math.min(1, Math.max(0, absDist * 1.15)) }}
+                    className="absolute inset-0 bg-white/20 backdrop-blur-[1px] pointer-events-none"
+                    style={{
+                      opacity: Math.min(1, Math.max(0, (absDist - 0.2) * 1.3)),
+                      transition: isDragging
+                        ? "none"
+                        : "opacity 600ms cubic-bezier(0.22, 1, 0.36, 1)",
+                    }}
                     aria-hidden="true"
                   />
                 </div>
