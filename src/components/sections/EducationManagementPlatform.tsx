@@ -77,66 +77,203 @@ const SLIDES_DATA: SlideItem[] = [
 ];
 
 export default function EducationManagementPlatform() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [pos, setPos] = useState(0);
+  const posRef = useRef(0);
+  const targetRef = useRef(0);
+  const animRef = useRef<number | null>(null);
+
+  // Drag tracking refs
+  const isDraggingRef = useRef(false);
   const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [dragOffset, setDragOffset] = useState(0);
-  const [autoPlay, setAutoPlay] = useState(true);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const startXRef = useRef(0);
+  const startPosRef = useRef(0);
+  const lastXRef = useRef(0);
+  const lastTimeRef = useRef(0);
+  const velocityRef = useRef(0);
+  const hasDraggedRef = useRef(false);
+
+  // Autoplay control
+  const [isHovered, setIsHovered] = useState(false);
+  const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const CARD_WIDTH = 248;
   const CARD_HEIGHT = 512;
   const TOTAL_SLIDES = SLIDES_DATA.length;
+  const DRAG_SENSITIVITY = 180; // pixels of drag per slide
 
-  const currentSlide = SLIDES_DATA[activeIndex];
+  // Active slide index (0 to 4) calculated modularly from current pos
+  const activeSlideIndex = ((Math.round(pos) % TOTAL_SLIDES) + TOTAL_SLIDES) % TOTAL_SLIDES;
+  const currentSlide = SLIDES_DATA[activeSlideIndex];
 
-  // Auto-advance slides every 3.5 seconds
-  useEffect(() => {
-    if (!autoPlay || isDragging) return;
-    timeoutRef.current = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % TOTAL_SLIDES);
-    }, 3500);
-    return () => {
-      if (timeoutRef.current) clearInterval(timeoutRef.current);
+  // --------------------------------------------------------------------------
+  // Spring Physics Animation Engine (Buttery smooth Apple-like harmonic motion)
+  // --------------------------------------------------------------------------
+  const animateTo = (target: number, initialVelocity = 0) => {
+    if (animRef.current) {
+      cancelAnimationFrame(animRef.current);
+      animRef.current = null;
+    }
+
+    targetRef.current = target;
+    let current = posRef.current;
+    let velocity = initialVelocity;
+
+    // Critically damped spring parameters
+    const stiffness = 140;
+    const damping = 20;
+    const mass = 1;
+    let lastTime = performance.now();
+
+    const tick = (now: number) => {
+      const dt = Math.min((now - lastTime) / 1000, 0.032);
+      lastTime = now;
+
+      const displacement = current - targetRef.current;
+      const springForce = -stiffness * displacement;
+      const dampingForce = -damping * velocity;
+      const acceleration = (springForce + dampingForce) / mass;
+
+      velocity += acceleration * dt;
+      current += velocity * dt;
+
+      posRef.current = current;
+      setPos(current);
+
+      // Settle check
+      if (Math.abs(displacement) < 0.001 && Math.abs(velocity) < 0.005) {
+        current = targetRef.current;
+        posRef.current = current;
+        setPos(current);
+        animRef.current = null;
+        return;
+      }
+
+      animRef.current = requestAnimationFrame(tick);
     };
-  }, [autoPlay, isDragging, TOTAL_SLIDES]);
 
+    animRef.current = requestAnimationFrame(tick);
+  };
+
+  // --------------------------------------------------------------------------
+  // Autoplay
+  // --------------------------------------------------------------------------
+  useEffect(() => {
+    if (isHovered || isDragging) {
+      if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
+      return;
+    }
+
+    autoPlayTimerRef.current = setInterval(() => {
+      animateTo(Math.round(posRef.current) + 1);
+    }, 4000);
+
+    return () => {
+      if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
+    };
+  }, [isHovered, isDragging]);
+
+  // Clean up RAF on unmount
+  useEffect(() => {
+    return () => {
+      if (animRef.current) cancelAnimationFrame(animRef.current);
+      if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
+    };
+  }, []);
+
+  // --------------------------------------------------------------------------
+  // Navigation Handlers
+  // --------------------------------------------------------------------------
   const handleStep = (direction: number) => {
-    setActiveIndex((prev) => (prev + direction + TOTAL_SLIDES) % TOTAL_SLIDES);
+    animateTo(Math.round(posRef.current) + direction);
   };
 
-  const goToSlide = (index: number) => {
-    setActiveIndex(index);
+  const goToSlide = (targetIdx: number) => {
+    const current = posRef.current;
+    const currentActive = ((Math.round(current) % TOTAL_SLIDES) + TOTAL_SLIDES) % TOTAL_SLIDES;
+    let diff = targetIdx - currentActive;
+    if (diff > TOTAL_SLIDES / 2) diff -= TOTAL_SLIDES;
+    if (diff < -TOTAL_SLIDES / 2) diff += TOTAL_SLIDES;
+    animateTo(Math.round(current) + diff);
   };
 
-  // Drag / Swipe gesture handlers
-  const handleDragStart = (clientX: number) => {
+  // --------------------------------------------------------------------------
+  // Drag / Swipe Pointer Handlers (1:1 buttery smooth tracking)
+  // --------------------------------------------------------------------------
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    // Only respond to primary button (left mouse or touch)
+    if (e.button !== 0) return;
+
+    if (animRef.current) {
+      cancelAnimationFrame(animRef.current);
+      animRef.current = null;
+    }
+
+    isDraggingRef.current = true;
     setIsDragging(true);
-    setStartX(clientX);
-    setDragOffset(0);
+    hasDraggedRef.current = false;
+    startXRef.current = e.clientX;
+    startPosRef.current = posRef.current;
+    lastXRef.current = e.clientX;
+    lastTimeRef.current = performance.now();
+    velocityRef.current = 0;
+
+    try {
+      (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+    } catch {}
   };
 
-  const handleDragMove = (clientX: number) => {
-    if (!isDragging) return;
-    const delta = clientX - startX;
-    setDragOffset(delta);
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDraggingRef.current) return;
+
+    const deltaX = e.clientX - startXRef.current;
+    if (Math.abs(deltaX) > 6) {
+      hasDraggedRef.current = true;
+    }
+
+    const now = performance.now();
+    const dt = now - lastTimeRef.current;
+    if (dt > 0) {
+      velocityRef.current = (e.clientX - lastXRef.current) / dt;
+    }
+    lastXRef.current = e.clientX;
+    lastTimeRef.current = now;
+
+    // Follow finger 1:1 in continuous circular motion
+    const newPos = startPosRef.current - deltaX / DRAG_SENSITIVITY;
+    posRef.current = newPos;
+    setPos(newPos);
   };
 
-  const handleDragEnd = () => {
-    if (!isDragging) return;
+  const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDraggingRef.current) return;
+    isDraggingRef.current = false;
     setIsDragging(false);
 
-    if (dragOffset < -50) {
-      handleStep(1);
-    } else if (dragOffset > 50) {
-      handleStep(-1);
+    try {
+      (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
+    } catch {}
+
+    const current = posRef.current;
+    // Slide velocity in units per second
+    const slideVelocity = -(velocityRef.current * 1000) / DRAG_SENSITIVITY;
+
+    let target = Math.round(current);
+    if (slideVelocity > 1.2) {
+      target = Math.floor(current) + 1;
+    } else if (slideVelocity < -1.2) {
+      target = Math.ceil(current) - 1;
     }
-    setDragOffset(0);
+
+    animateTo(target, slideVelocity * 0.35);
   };
 
   const handleOpenDemo = () => {
     window.dispatchEvent(new CustomEvent("open-demo-modal"));
   };
+
+  // Generate 7 virtual slots around the current position for smooth infinite looping
+  const centerK = Math.round(pos);
+  const slots = [-3, -2, -1, 0, 1, 2, 3].map((offset) => centerK + offset);
 
   return (
     <section
@@ -181,7 +318,7 @@ export default function EducationManagementPlatform() {
           {/* Interactive Screen Category Selector Pills */}
           <div className="flex flex-wrap items-center justify-center gap-2 mt-7">
             {SLIDES_DATA.map((slide, idx) => {
-              const isActive = activeIndex === idx;
+              const isActive = activeSlideIndex === idx;
               const IconComp = slide.icon;
               return (
                 <button
@@ -202,21 +339,17 @@ export default function EducationManagementPlatform() {
         </div>
 
         {/* ========================================================= */}
-        {/* OVERLAPPING PHONE CAROUSEL AREA (2 Left + Center + 2 Right) */}
+        {/* BUTTERY SMOOTH 3D CIRCULAR CAROUSEL STAGE                 */}
         {/* ========================================================= */}
         <div
           className="relative w-full max-w-[1300px] mx-auto h-[550px] sm:h-[580px] flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing select-none"
-          onMouseEnter={() => setAutoPlay(false)}
-          onMouseLeave={() => {
-            setAutoPlay(true);
-            if (isDragging) handleDragEnd();
-          }}
-          onMouseDown={(e) => handleDragStart(e.clientX)}
-          onMouseMove={(e) => handleDragMove(e.clientX)}
-          onMouseUp={handleDragEnd}
-          onTouchStart={(e) => handleDragStart(e.touches[0].clientX)}
-          onTouchMove={(e) => handleDragMove(e.touches[0].clientX)}
-          onTouchEnd={handleDragEnd}
+          style={{ perspective: "1200px", touchAction: "pan-y" }}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
         >
           {/* Navigation Chevron Left */}
           <button
@@ -268,59 +401,69 @@ export default function EducationManagementPlatform() {
             </div>
           </div>
 
-          {/* Cards Stage Container */}
-          <div className="relative w-full h-full flex items-center justify-center">
-            {SLIDES_DATA.map((slide, idx) => {
-              // Calculate modular shortest distance to activeIndex: [-2, -1, 0, 1, 2]
-              let offset = (idx - activeIndex) % TOTAL_SLIDES;
-              if (offset < -2) offset += TOTAL_SLIDES;
-              if (offset > 2) offset -= TOTAL_SLIDES;
+          {/* 3D Circular Cards Track Container */}
+          <div
+            className="relative w-full h-full flex items-center justify-center"
+            style={{ transformStyle: "preserve-3d" }}
+          >
+            {slots.map((k) => {
+              // Map virtual slot index to slide
+              const slideIdx = ((k % TOTAL_SLIDES) + TOTAL_SLIDES) % TOTAL_SLIDES;
+              const slide = SLIDES_DATA[slideIdx];
 
-              const isCenter = offset === 0;
+              // Continuous float distance from center
+              const dist = k - pos;
+              const absDist = Math.abs(dist);
 
-              // X position mapping with cascading overlap
-              // Each adjacent card is shifted by 165px (leaving 83px overlap under the card in front)
+              // Hide far offscreen cards
+              if (absDist > 2.8) return null;
+
+              const sign = dist < 0 ? -1 : 1;
+
+              // Smooth curved X-offset with cascading overlap
               let xPos = 0;
-              let zIndex = 1;
-              let opacity = 0;
-              let scale = 0.82;
-
-              if (offset === 0) {
-                xPos = 0;
-                zIndex = 30; // Center card inside phone frame
-                opacity = 1.0; // 100% opaque, crystal clear
-                scale = 1.0;
-              } else if (offset === -1) {
-                xPos = -165; // 1st card left (under center card)
-                zIndex = 20;
-                opacity = 0.58; // Translucent
-                scale = 0.92;
-              } else if (offset === 1) {
-                xPos = 165; // 1st card right (under center card)
-                zIndex = 20;
-                opacity = 0.58; // Translucent
-                scale = 0.92;
-              } else if (offset === -2) {
-                xPos = -305; // 2nd card left (under 1st left card)
-                zIndex = 10;
-                opacity = 0.32; // More translucent
-                scale = 0.84;
-              } else if (offset === 2) {
-                xPos = 305; // 2nd card right (under 1st right card)
-                zIndex = 10;
-                opacity = 0.32; // More translucent
-                scale = 0.84;
+              if (absDist <= 1) {
+                xPos = sign * absDist * 165;
+              } else if (absDist <= 2) {
+                xPos = sign * (165 + (absDist - 1) * 140);
+              } else {
+                xPos = sign * (305 + (absDist - 2) * 135);
               }
 
-              // Apply drag offset dynamically
-              const currentX = xPos + dragOffset;
+              // Smooth 3D circular cylinder depth and inward rotation
+              const translateZ = -absDist * 28;
+              const rotateY = -sign * Math.min(absDist * 12, 25);
+
+              // Smooth scale
+              let scale = 1.0;
+              if (absDist <= 1) {
+                scale = 1.0 - absDist * 0.08;
+              } else if (absDist <= 2) {
+                scale = 0.92 - (absDist - 1) * 0.08;
+              } else {
+                scale = Math.max(0.72, 0.84 - (absDist - 2) * 0.08);
+              }
+
+              // Smooth opacity: center is 1.0, 1st offset is 0.58, 2nd is 0.32, fading to 0 at edges
+              let opacity = 1.0;
+              if (absDist <= 1) {
+                opacity = 1.0 - absDist * (1.0 - 0.58);
+              } else if (absDist <= 2) {
+                opacity = 0.58 - (absDist - 1) * (0.58 - 0.32);
+              } else {
+                opacity = Math.max(0, 0.32 - (absDist - 2) * (0.32 / 0.7));
+              }
+
+              // Layering: card closest to center is on top
+              const zIndex = Math.max(1, Math.round(30 - absDist * 8));
+              const isCenter = absDist < 0.25;
 
               return (
                 <div
-                  key={slide.id}
+                  key={k}
                   onClick={() => {
-                    if (Math.abs(dragOffset) < 5 && !isCenter) {
-                      goToSlide(idx);
+                    if (!hasDraggedRef.current && absDist > 0.25) {
+                      animateTo(k);
                     }
                   }}
                   style={{
@@ -328,15 +471,14 @@ export default function EducationManagementPlatform() {
                     height: `${CARD_HEIGHT}px`,
                     zIndex,
                     opacity,
-                    transform: `translate3d(calc(-50% + ${currentX}px), -50%, 0) scale(${scale})`,
-                    transition: isDragging
-                      ? "none"
-                      : "transform 550ms cubic-bezier(0.22, 1, 0.36, 1), opacity 550ms cubic-bezier(0.22, 1, 0.36, 1)",
+                    transform: `translate3d(calc(-50% + ${xPos}px), -50%, ${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`,
+                    transformStyle: "preserve-3d",
+                    willChange: "transform, opacity",
                   }}
-                  className={`absolute left-1/2 top-1/2 rounded-[32px] overflow-hidden ${
+                  className={`absolute left-1/2 top-1/2 rounded-[32px] overflow-hidden transition-shadow duration-300 ${
                     isCenter
                       ? "shadow-[0_25px_60px_-10px_rgba(45,118,196,0.35),0_12px_24px_rgba(0,0,0,0.12)] border border-white/80 ring-2 ring-blue-500/20 bg-white"
-                      : "shadow-[0_20px_50px_rgba(15,23,42,0.18)] border border-slate-200/80 bg-white/80 hover:opacity-80 cursor-pointer"
+                      : "shadow-[0_20px_50px_rgba(15,23,42,0.18)] border border-slate-200/80 bg-white/80 hover:opacity-85 cursor-pointer"
                   }`}
                 >
                   {/* Phone Screen Image (4K Super-Sampled WebP with Crystal-Clear Contrast) */}
@@ -354,13 +496,12 @@ export default function EducationManagementPlatform() {
                     draggable="false"
                   />
 
-                  {/* Translucent Frosted Glass Overlay on non-center slides */}
-                  {!isCenter && (
-                    <div
-                      className="absolute inset-0 bg-white/20 backdrop-blur-[1px] pointer-events-none transition-all duration-300"
-                      aria-hidden="true"
-                    />
-                  )}
+                  {/* Translucent Frosted Glass Overlay on side cards */}
+                  <div
+                    className="absolute inset-0 bg-white/20 backdrop-blur-[1px] pointer-events-none transition-opacity duration-200"
+                    style={{ opacity: Math.min(1, Math.max(0, absDist * 1.15)) }}
+                    aria-hidden="true"
+                  />
                 </div>
               );
             })}
@@ -395,7 +536,7 @@ export default function EducationManagementPlatform() {
           {/* Pagination Indicators */}
           <div className="flex items-center justify-center space-x-2.5 mb-7">
             {SLIDES_DATA.map((slide, idx) => {
-              const isActive = activeIndex === idx;
+              const isActive = activeSlideIndex === idx;
               return (
                 <button
                   key={slide.id}
