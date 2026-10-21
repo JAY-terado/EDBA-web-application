@@ -53,7 +53,7 @@ export default function FeaturesGrid() {
   };
 
   return (
-    <section id="features" className="py-16 sm:py-24 smart-display-tight bg-white border-b border-slate-200/80 relative">
+    <section id="features" className="py-20 sm:py-28 smart-display-tight:py-12 bg-white bg-grid-soft border-b border-slate-200/80 relative">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Section Header */}
@@ -64,13 +64,14 @@ export default function FeaturesGrid() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-12 sm:mb-16"
         >
-          <span className="text-xs font-bold tracking-wider uppercase text-blue-700 bg-blue-50/90 px-3.5 py-1.5 rounded-full border border-blue-200/70 mb-4 inline-block shadow-xs">
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200/70 mb-4 shadow-xs">
+            <ShieldCheck className="w-3.5 h-3.5" aria-hidden="true" />
             The edbā Ecosystem
           </span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-[42px] leading-tight text-slate-900 mt-2 mb-3 sm:mb-4 tracking-tight">
-            Run your entire institution from a single, smart workspace.
+          <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight text-slate-900 mt-2 mb-3 sm:mb-4 tracking-tight">
+            Run your entire institution from a <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500">single, smart workspace</span>.
           </h2>
-          <p className="text-slate-600 text-sm sm:text-lg leading-relaxed font-normal">
+          <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal">
             Ditch messy spreadsheets and fragmented portals. EDBA brings your entire campus—admins, teachers, parents, and students—into one beautifully synchronized workspace.
           </p>
         </motion.div>
@@ -87,8 +88,8 @@ export default function FeaturesGrid() {
             <motion.div
               key={idx}
               variants={cardVariants}
-              whileHover={{ y: -6, transition: { duration: 0.25 } }}
-              className="group relative bg-white border border-slate-200/80 hover:border-blue-300 rounded-2xl p-6 sm:p-7 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+              whileHover={{ y: -2, transition: { duration: 0.2, ease: [0.16, 1, 0.3, 1] } }}
+              className="group relative bg-white border border-slate-200/80 hover:border-blue-300 rounded-2xl p-6 sm:p-7 shadow-sm hover:shadow-lg transition-all duration-200 flex flex-col justify-between"
             >
               <div>
                 {/* Card Gradient Icon */}
@@ -97,10 +98,10 @@ export default function FeaturesGrid() {
                 </div>
 
                 {/* Title & Desc */}
-                <h3 className="font-display font-semibold text-base sm:text-lg text-slate-900 mb-2 sm:mb-2.5 group-hover:text-blue-600 transition-colors">
+                <h3 className="font-display font-semibold text-lg text-slate-900 mb-2 sm:mb-2.5 group-hover:text-blue-600 transition-colors">
                   {f.title}
                 </h3>
-                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6 font-normal">
+                <p className="text-slate-600 text-sm leading-relaxed mb-6 font-normal">
                   {f.desc}
                 </p>
               </div>
@@ -108,10 +109,10 @@ export default function FeaturesGrid() {
               {/* Link Arrow */}
               <a
                 href="#solutions"
-                className="inline-flex items-center text-xs font-bold text-blue-600 group-hover:text-blue-700 hover:underline focus-visible:ring-2 focus-visible:ring-blue-600 rounded-sm pt-2"
+                className="inline-flex items-center text-sm font-semibold text-blue-600 group-hover:text-blue-700 hover:underline focus-visible:ring-2 focus-visible:ring-blue-600 rounded-sm pt-2"
               >
                 <span>Learn More</span>
-                <ArrowRight className="ml-1.5 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                <ArrowRight className="ml-1.5 h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
               </a>
             </motion.div>
           ))}

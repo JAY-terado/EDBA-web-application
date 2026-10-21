@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   Users,
   GraduationCap,
@@ -9,10 +9,14 @@ import {
   Bell,
   ChevronDown,
   Calendar,
+  CheckCircle2,
+  TrendingUp,
 } from "lucide-react";
 import MobilePhoneSvg from "./MobilePhoneSvg";
 
 export const HeroShowcase: React.FC = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <div className="relative w-full mx-auto select-none py-6 sm:py-8 lg:py-10">
       {/* ── Vibrant Glowing Gradient Mesh (Blue & Orange - High Opacity & Rich Saturation) ── */}
@@ -47,7 +51,7 @@ export const HeroShowcase: React.FC = () => {
             transformStyle: "preserve-3d",
             transformOrigin: "center center",
           }}
-          className="relative w-full rounded-3xl bg-white border border-slate-200/90 shadow-[0_25px_60px_-15px_rgba(15,23,42,0.14),0_45px_100px_-20px_rgba(37,99,235,0.18)] overflow-hidden"
+          className="relative w-full rounded-3xl bg-white border border-slate-200/90 shadow-[0_25px_60px_-15px_rgba(15,23,42,0.14),0_45px_100px_-20px_rgba(45,118,196,0.18)] overflow-hidden"
         >
           {/* Main Desktop Interface */}
           <div className="flex h-full min-h-[400px] sm:min-h-[450px] lg:min-h-[480px] text-slate-800 font-sans">
@@ -272,17 +276,69 @@ export const HeroShowcase: React.FC = () => {
         </motion.div>
 
         {/* ============================================================ */}
-        {/* 2. MOBILE PHONE SVG VECTOR ILLUSTRATION (Exact Vector Art)   */}
+        {/* 2. FLOATING GLASS STAT PILLS (Gentle Floating Loop)         */}
+        {/* ============================================================ */}
+
+        {/* Pill 1: 99.4% Attendance Today (Top Left) */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: [0, -6, 0] }}
+          transition={shouldReduceMotion ? { duration: 0.4 } : { repeat: Infinity, duration: 4.5, ease: "easeInOut" }}
+          className="absolute -top-3 -left-2 sm:-top-5 sm:-left-5 lg:-top-6 lg:-left-7 z-40 bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-[0_16px_36px_-6px_rgba(15,23,42,0.12)] rounded-2xl p-2.5 sm:p-3 flex items-center gap-3 select-none"
+        >
+          <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-xl bg-teal-50 text-teal-600 border border-teal-200/70 flex items-center justify-center flex-shrink-0 shadow-xs">
+            <CheckCircle2 className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
+          </div>
+          <div className="flex flex-col text-left">
+            <span className="text-xs sm:text-sm font-bold text-slate-900 leading-tight">99.4% Attendance</span>
+            <span className="text-[10px] sm:text-xs text-slate-500 font-medium">Logged today across 42 batches</span>
+          </div>
+        </motion.div>
+
+        {/* Pill 2: Parent Alert Sent (Top Right) */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: [0, 6, 0] }}
+          transition={shouldReduceMotion ? { duration: 0.4 } : { repeat: Infinity, duration: 5, ease: "easeInOut", delay: 0.4 }}
+          className="absolute -top-3 -right-2 sm:-top-4 sm:-right-4 lg:-top-5 lg:-right-5 z-40 bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-[0_16px_36px_-6px_rgba(15,23,42,0.12)] rounded-2xl p-2.5 sm:p-3 flex items-center gap-3 select-none"
+        >
+          <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-xl bg-blue-50 text-blue-600 border border-blue-200/70 flex items-center justify-center flex-shrink-0 shadow-xs">
+            <Bell className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
+          </div>
+          <div className="flex flex-col text-left">
+            <span className="text-xs sm:text-sm font-bold text-slate-900 leading-tight">Parent Alert Sent</span>
+            <span className="text-[10px] sm:text-xs text-emerald-600 font-semibold">Delivered to 1,240 parents</span>
+          </div>
+        </motion.div>
+
+        {/* Pill 3: Fee Collected +12% (Bottom Left) */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: [-2, 6, -2] }}
+          transition={shouldReduceMotion ? { duration: 0.4 } : { repeat: Infinity, duration: 4.2, ease: "easeInOut", delay: 0.8 }}
+          className="absolute -bottom-3 left-2 sm:-bottom-5 sm:left-5 lg:-bottom-6 lg:left-6 z-40 bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-[0_16px_36px_-6px_rgba(15,23,42,0.12)] rounded-2xl p-2.5 sm:p-3 flex items-center gap-3 select-none"
+        >
+          <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200/70 flex items-center justify-center flex-shrink-0 shadow-xs">
+            <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
+          </div>
+          <div className="flex flex-col text-left">
+            <span className="text-xs sm:text-sm font-bold text-slate-900 leading-tight">Fee Collected +12%</span>
+            <span className="text-[10px] sm:text-xs text-slate-500 font-medium">Auto-reconciled this term</span>
+          </div>
+        </motion.div>
+
+        {/* ============================================================ */}
+        {/* 3. MOBILE PHONE SVG VECTOR ILLUSTRATION (Bottom-Right Overlap) */}
         {/* ============================================================ */}
         <motion.div
-          initial={{ opacity: 0, y: 30, x: -15 }}
+          initial={{ opacity: 0, y: 30, x: 15 }}
           animate={{ opacity: 1, y: 0, x: 0 }}
           transition={{ duration: 0.8, delay: 0.25, ease: "easeOut" }}
-          className="absolute -bottom-7 sm:-bottom-9 lg:-bottom-11 -left-3 sm:-left-5 md:-left-7 lg:-left-9 w-28 sm:w-32 md:w-36 lg:w-[150px] xl:w-[160px] z-30 pointer-events-none select-none drop-shadow-[0_20px_35px_rgba(15,23,42,0.4)]"
+          className="absolute -bottom-7 sm:-bottom-9 lg:-bottom-11 -right-2 sm:-right-4 md:-right-6 lg:-right-8 w-32 sm:w-36 md:w-44 lg:w-[185px] xl:w-[205px] z-30 pointer-events-none select-none drop-shadow-[0_25px_45px_rgba(15,23,42,0.35)]"
         >
           <div
             style={{
-              transform: "translateZ(50px) rotateX(6deg) rotateY(12deg) rotateZ(-8.5deg)",
+              transform: "translateZ(50px) rotateX(4deg) rotateY(-8deg) rotateZ(5deg)",
               transformStyle: "preserve-3d",
               backfaceVisibility: "hidden",
               WebkitBackfaceVisibility: "hidden",

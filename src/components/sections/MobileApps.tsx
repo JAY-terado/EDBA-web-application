@@ -14,16 +14,17 @@ export const MobileApps: React.FC = () => {
   const androidUrl = "https://play.google.com/store/apps/details?id=com.edba.app&hl=en_IN&pli=1";
 
   return (
-    <section id="mobile-apps" className="py-16 sm:py-20 lg:py-24 smart-display-tight:py-12 bg-white border-b border-slate-200/80">
+    <section id="mobile-apps" className="py-20 sm:py-28 smart-display-tight:py-12 bg-[#f8fafc] border-b border-slate-200/80">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 smart-display-tight:mb-8">
-          <span className="text-xs font-bold tracking-wider uppercase text-blue-700 bg-blue-50/90 px-3.5 py-1.5 rounded-full border border-blue-200/70 mb-4 inline-block shadow-xs">
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200/70 mb-4 shadow-xs">
+            <Smartphone className="w-3.5 h-3.5" aria-hidden="true" />
             On the Go
           </span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-[42px] leading-tight text-slate-900 mt-2 mb-4 tracking-tight">
-            Tailored Mobile Experiences for Every Role
+          <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight text-slate-900 mt-2 mb-4 tracking-tight">
+            Tailored Mobile Experiences for <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500">Every Role</span>
           </h2>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal">
             EDBA delivers tailored, native iOS and Android experiences, custom-built for administrators, educators, students, and parents.
@@ -76,7 +77,7 @@ export const MobileApps: React.FC = () => {
               </a>
             </div>
 
-            <span className="text-[11px] text-slate-400 font-medium">
+            <span className="text-xs text-slate-400 font-medium">
               Compatible with iOS 15+ and Android 9+
             </span>
           </div>

@@ -78,7 +78,7 @@ export default function WhyChooseUs() {
   const current = conversationTabs[activeIdx];
 
   return (
-    <section className="py-16 sm:py-24 smart-display-tight bg-[#f8fafc] grid-bg-light relative border-y border-slate-200/80">
+    <section className="py-20 sm:py-28 smart-display-tight:py-12 bg-[#f8fafc] grid-bg-light relative border-y border-slate-200/80">
       {/* Decorative top gradient */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-40 bg-gradient-to-b from-blue-500/5 via-transparent to-transparent blur-3xl pointer-events-none" />
 
@@ -86,28 +86,31 @@ export default function WhyChooseUs() {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          <motion.span
+          <motion.div
             initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-xs font-bold tracking-wider uppercase text-blue-700 bg-blue-50/90 px-3.5 py-1.5 rounded-full border border-blue-200/70 mb-4 inline-block shadow-xs"
+            className="mb-4"
           >
-            Why Choose Us
-          </motion.span>
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200/70 shadow-xs">
+              <Workflow className="w-3.5 h-3.5" aria-hidden="true" />
+              Why Choose Us
+            </span>
+          </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-display font-bold text-3xl sm:text-4xl lg:text-[42px] leading-tight text-slate-900 mt-2 mb-3 sm:mb-4 tracking-tight"
+            className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight text-slate-900 mt-2 mb-3 sm:mb-4 tracking-tight"
           >
-            Solving Real Campus Challenges, Day-to-Day
+            Solving Real Campus Challenges, <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500">Day-to-Day</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-slate-600 text-sm sm:text-lg leading-relaxed font-normal"
+            className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal"
           >
             See how EDBA simplifies operations, streamlines data, and guarantees absolute security through real-world dialogues with campus administrators, staff, and directors.
           </motion.p>
@@ -142,7 +145,7 @@ export default function WhyChooseUs() {
                       whileTap={{ scale: 0.98 }}
                       className={`w-full flex items-center gap-3 sm:gap-4 p-3 sm:px-5 sm:py-4 rounded-xl sm:rounded-2xl text-left border transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 min-h-[44px] ${
                         isActive
-                          ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white border-blue-700 font-bold shadow-[0_8px_20px_-6px_rgba(37,99,235,0.4)]"
+                          ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white border-blue-700 font-bold shadow-[0_8px_20px_-6px_rgba(45,118,196,0.4)]"
                           : "bg-white hover:bg-slate-50 text-slate-700 border-slate-200/80 hover:border-slate-300 font-medium"
                       }`}
                     >
@@ -151,7 +154,7 @@ export default function WhyChooseUs() {
                       }`}>
                         <Icon className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
                       </div>
-                      <span className="text-xs sm:text-base tracking-normal">{tab.label}</span>
+                      <span className="text-sm sm:text-base tracking-normal">{tab.label}</span>
                     </motion.button>
                   );
                 })}
@@ -159,7 +162,7 @@ export default function WhyChooseUs() {
 
               {/* Decorative brand label */}
               <div className="hidden lg:block pt-6 border-t border-slate-100 text-center lg:text-left">
-                <p className="text-[10px] text-slate-400 uppercase tracking-widest font-bold">EDBA Interactive Preview</p>
+                <p className="text-xs text-slate-400 uppercase tracking-widest font-bold">EDBA Interactive Preview</p>
                 <p className="text-xs text-slate-500 mt-1">Select any tab above to see the interactive conversation</p>
               </div>
             </div>
@@ -210,10 +213,10 @@ export default function WhyChooseUs() {
                     <div className="flex flex-col gap-1 sm:gap-1.5 max-w-[85%] sm:max-w-[80%]">
                       <div className="flex items-center gap-2">
                         <span className="font-semibold text-slate-800 text-xs sm:text-sm">{current.questioner.name}</span>
-                        <span className="text-slate-500 text-[10px] sm:text-xs">({current.questioner.role})</span>
+                        <span className="text-slate-500 text-xs">({current.questioner.role})</span>
                       </div>
-                      <div className="relative bg-gradient-to-br from-blue-600 to-indigo-600 text-white py-2.5 px-4 sm:py-3 sm:px-5 rounded-2xl rounded-tl-none shadow-[0_4px_12px_rgba(37,99,235,0.15)]">
-                        <p className="font-medium text-xs sm:text-base leading-relaxed">
+                      <div className="relative bg-gradient-to-br from-blue-600 to-indigo-600 text-white py-2.5 px-4 sm:py-3 sm:px-5 rounded-2xl rounded-tl-none shadow-[0_4px_12px_rgba(45,118,196,0.15)]">
+                        <p className="font-medium text-sm sm:text-base leading-relaxed">
                           {current.question}
                         </p>
                         <div className="absolute top-0 -left-2 w-0 h-0 border-t-[10px] sm:border-t-[12px] border-t-blue-600 border-l-[10px] sm:border-l-[12px] border-l-transparent"></div>
@@ -232,10 +235,10 @@ export default function WhyChooseUs() {
                   >
                     <div className="flex items-center gap-2 justify-end">
                       <span className="font-semibold text-blue-700 text-xs sm:text-sm">EDBA Platform</span>
-                      <span className="bg-blue-50 text-blue-700 text-[9px] font-extrabold px-1.5 py-0.5 rounded-md uppercase border border-blue-200">System Response</span>
+                      <span className="bg-blue-50 text-blue-700 text-xs font-extrabold px-2 py-0.5 rounded-md uppercase border border-blue-200">System Response</span>
                     </div>
                     <div className="relative bg-white border border-slate-200 text-slate-800 py-3 px-4 sm:py-4 sm:px-6 rounded-2xl rounded-tr-none shadow-[0_4px_12px_rgba(0,0,0,0.03)]">
-                      <p className="font-normal text-xs sm:text-base leading-relaxed">
+                      <p className="font-normal text-sm sm:text-base leading-relaxed">
                         {current.answer}
                       </p>
                       <div className="absolute top-0 -right-2 w-0 h-0 border-t-[10px] sm:border-t-[12px] border-t-white border-r-[10px] sm:border-r-[12px] border-r-transparent"></div>

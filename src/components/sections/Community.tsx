@@ -32,17 +32,18 @@ const COMMUNITY_POINTS: CommunityPoint[] = [
 
 export const Community: React.FC = () => {
   return (
-    <section id="community" className="py-16 sm:py-20 lg:py-24 smart-display-tight:py-12 bg-[#f8fafc] border-b border-slate-200/80">
+    <section id="community" className="py-20 sm:py-28 smart-display-tight:py-12 bg-white border-b border-slate-200/80">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
 
           {/* Left Text Block */}
           <div className="lg:col-span-6">
-            <span className="text-xs font-bold tracking-wider uppercase text-blue-700 bg-blue-50/90 px-3.5 py-1.5 rounded-full border border-blue-200/70 mb-4 inline-block shadow-xs">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200/70 mb-4 shadow-xs">
+              <MessageSquare className="w-3.5 h-3.5" aria-hidden="true" />
               Communication Hub
             </span>
-            <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-[42px] leading-tight text-slate-900 mt-2 mb-4 tracking-tight">
-              Connected Institute Community
+            <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight text-slate-900 mt-2 mb-4 tracking-tight">
+              Connected <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500">Institute Community</span>
             </h2>
             <p className="text-slate-600 text-base sm:text-lg leading-relaxed mb-8 font-normal">
               Bridge the communication gap between administrators, teachers, parents, and students with real-time updates and notifications.
@@ -52,7 +53,7 @@ export const Community: React.FC = () => {
               {COMMUNITY_POINTS.map((p, idx) => (
                 <div
                   key={idx}
-                  className="flex gap-4 items-start p-3 sm:p-3.5 rounded-2xl hover:bg-white hover:border-slate-200/80 border border-transparent hover:shadow-sm transition-all duration-200"
+                  className="flex gap-4 items-start p-3 sm:p-3.5 rounded-2xl hover:bg-slate-50 hover:border-slate-200/80 border border-transparent hover:shadow-sm hover:-translate-y-0.5 transition-all duration-200"
                 >
                   <div className="mt-1 p-2.5 rounded-xl bg-blue-600 text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-blue-500/20">
                     <p.icon className="h-5 w-5" aria-hidden="true" />
@@ -82,7 +83,7 @@ export const Community: React.FC = () => {
                 </div>
                 <div>
                   <div className="text-xs font-semibold text-white">Mrs. Priya Sharma</div>
-                  <div className="text-[10px] text-emerald-400 font-medium">Class 5 Science Teacher</div>
+                  <div className="text-xs text-teal-400 font-medium">Class 5 Science Teacher</div>
                 </div>
               </div>
 
@@ -90,27 +91,27 @@ export const Community: React.FC = () => {
               <div className="space-y-3 h-72 sm:h-80 overflow-y-auto pr-1 flex flex-col justify-end">
                 {/* Teacher Msg */}
                 <div className="flex gap-2 items-end max-w-[85%]">
-                  <div className="h-6 w-6 rounded-full bg-blue-600 flex items-center justify-center text-[9px] text-white font-bold flex-shrink-0">
+                  <div className="h-6 w-6 rounded-full bg-blue-600 flex items-center justify-center text-xs text-white font-bold flex-shrink-0">
                     P
                   </div>
-                  <div className="bg-slate-900 border border-slate-800/80 rounded-2xl px-3.5 py-2.5 text-[11px] text-slate-300 leading-relaxed">
+                  <div className="bg-slate-900 border border-slate-800/80 rounded-2xl px-3.5 py-2.5 text-sm text-slate-300 leading-relaxed">
                     Namaste! Just wanted to share that Aarav did an amazing job on his Science project today.
                   </div>
                 </div>
 
                 {/* Parent Reply */}
                 <div className="flex justify-end">
-                  <div className="bg-blue-600 rounded-2xl px-3.5 py-2.5 text-[11px] text-white max-w-[85%] font-medium leading-relaxed shadow-sm">
+                  <div className="bg-blue-600 rounded-2xl px-3.5 py-2.5 text-sm text-white max-w-[85%] font-medium leading-relaxed shadow-sm">
                     That is so wonderful to hear! Thank you for the update, Priya Ma&apos;am. Did he submit the project file?
                   </div>
                 </div>
 
                 {/* Teacher Msg */}
                 <div className="flex gap-2 items-end max-w-[85%]">
-                  <div className="h-6 w-6 rounded-full bg-blue-600 flex items-center justify-center text-[9px] text-white font-bold flex-shrink-0">
+                  <div className="h-6 w-6 rounded-full bg-blue-600 flex items-center justify-center text-xs text-white font-bold flex-shrink-0">
                     P
                   </div>
-                  <div className="bg-slate-900 border border-slate-800/80 rounded-2xl px-3.5 py-2.5 text-[11px] text-slate-300 leading-relaxed">
+                  <div className="bg-slate-900 border border-slate-800/80 rounded-2xl px-3.5 py-2.5 text-sm text-slate-300 leading-relaxed">
                     Yes, he did! I have uploaded the marks and feedback directly to the Student Portal. You can check it there.
                   </div>
                 </div>
@@ -118,10 +119,10 @@ export const Community: React.FC = () => {
 
               {/* Chat Input */}
               <div className="mt-4 pt-3 border-t border-slate-900 flex items-center justify-between">
-                <span className="text-[11px] text-slate-500 font-medium ml-1">Write your reply...</span>
+                <span className="text-xs text-slate-500 font-medium ml-1">Write your reply...</span>
                 <button
                   type="button"
-                  className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-[10px] font-bold rounded-lg transition-colors cursor-pointer"
+                  className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition-colors cursor-pointer"
                 >
                   Send
                 </button>

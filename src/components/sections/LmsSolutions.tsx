@@ -50,39 +50,40 @@ export default function LmsSolutions() {
   ];
 
   return (
-    <section id="solutions" className="py-16 sm:py-24 smart-display-tight bg-white border-b border-slate-200/80">
+    <section id="solutions" className="py-20 sm:py-28 smart-display-tight:py-12 bg-white border-b border-slate-200/80">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          <span className="text-xs font-bold tracking-wider uppercase text-blue-700 bg-blue-50/90 px-3.5 py-1.5 rounded-full border border-blue-200/70 mb-4 inline-block shadow-xs">
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200/70 mb-4 shadow-xs">
+            <BookOpen className="w-3.5 h-3.5" aria-hidden="true" />
             Platform Blueprint
           </span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-[42px] leading-tight text-slate-900 mt-2 mb-3 sm:mb-4 tracking-tight">
-            The Complete Campus Operating System
+          <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight text-slate-900 mt-2 mb-3 sm:mb-4 tracking-tight">
+            The Complete <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500">Campus Operating System</span>
           </h2>
-          <p className="text-slate-600 text-sm sm:text-lg leading-relaxed font-normal">
+          <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal">
             Put your entire campus on autopilot. Seamlessly synchronize everything from back-office administration and classroom learning to Campus Mobility Network and parent engagement.
           </p>
         </div>
 
         {/* LMS Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 mb-10 sm:mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 mb-12 sm:mb-16">
           {lmsFeatures.map((f, idx) => (
             <div
               key={idx}
-              className="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200/80 hover:border-blue-300 shadow-sm hover:shadow-lg transition-all duration-300 flex gap-4 sm:gap-5 group"
+              className="p-6 sm:p-7 rounded-2xl bg-white border border-slate-200/80 hover:border-blue-300 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 flex gap-4 sm:gap-5 group"
             >
               {/* Feature Icon container */}
-              <div className={`h-11 w-11 sm:h-12 sm:w-12 rounded-xl flex items-center justify-center flex-shrink-0 ${f.color}`}>
-                <f.icon className="h-5 w-5" aria-hidden="true" />
+              <div className={`h-12 w-12 rounded-xl flex items-center justify-center flex-shrink-0 ${f.color}`}>
+                <f.icon className="h-6 w-6" aria-hidden="true" />
               </div>
               
               <div>
-                <h3 className="font-display font-semibold text-base text-slate-900 mb-1.5 sm:mb-2 group-hover:text-blue-600 transition-colors">
+                <h3 className="font-display font-semibold text-lg text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
                   {f.title}
                 </h3>
-                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal">
+                <p className="text-slate-600 text-sm leading-relaxed font-normal">
                   {f.desc}
                 </p>
               </div>
@@ -94,7 +95,7 @@ export default function LmsSolutions() {
         <div className="text-center">
           <a
             href="#cta"
-            className="inline-flex items-center text-sm font-bold text-blue-600 hover:text-blue-700 hover:underline gap-1.5 group focus-visible:ring-2 focus-visible:ring-blue-600 rounded-sm"
+            className="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-700 hover:underline gap-1.5 group focus-visible:ring-2 focus-visible:ring-blue-600 rounded-sm"
           >
             <span>Explore the Platform Blueprint</span>
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />

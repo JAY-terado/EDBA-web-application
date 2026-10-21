@@ -33,16 +33,17 @@ export const Faq: React.FC = () => {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-16 sm:py-20 lg:py-24 smart-display-tight:py-12 bg-[#f8fafc] border-b border-slate-200/80">
+    <section id="faq" className="py-20 sm:py-28 smart-display-tight:py-12 bg-[#f8fafc] border-b border-slate-200/80">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
         <div className="text-center mb-12 sm:mb-16 smart-display-tight:mb-8">
-          <span className="text-xs font-bold tracking-wider uppercase text-blue-700 bg-blue-50/90 px-3.5 py-1.5 rounded-full border border-blue-200/70 mb-4 inline-block shadow-xs">
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200/70 mb-4 shadow-xs">
+            <HelpCircle className="w-3.5 h-3.5" aria-hidden="true" />
             Support
           </span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 mt-2 mb-4 tracking-tight">
-            Frequently Asked Questions
+          <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight text-slate-900 mt-2 mb-4 tracking-tight">
+            Frequently <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500">Asked Questions</span>
           </h2>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal">
             Everything you need to know about setting up and configuring EDBA on your campus.
@@ -56,7 +57,7 @@ export const Faq: React.FC = () => {
             return (
               <div
                 key={idx}
-                className="bg-white border border-slate-200/80 rounded-2xl overflow-hidden shadow-xs"
+                className="bg-white border border-slate-200/80 hover:border-slate-300 rounded-2xl overflow-hidden shadow-xs hover:shadow-sm transition-all duration-200"
               >
                 <button
                   type="button"
@@ -65,7 +66,7 @@ export const Faq: React.FC = () => {
                 >
                   <div className="flex gap-3 items-center">
                     <HelpCircle className="h-5 w-5 text-blue-600 flex-shrink-0" aria-hidden="true" />
-                    <span className="text-sm font-semibold text-slate-900 leading-snug">
+                    <span className="text-base font-semibold text-slate-900 leading-snug">
                       {item.q}
                     </span>
                   </div>
@@ -80,7 +81,7 @@ export const Faq: React.FC = () => {
                     isOpen ? "max-h-48 opacity-100 border-t border-slate-100" : "max-h-0 opacity-0 pointer-events-none"
                   }`}
                 >
-                  <p className="px-6 py-5 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                  <p className="px-6 py-5 text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
                     {item.a}
                   </p>
                 </div>

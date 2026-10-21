@@ -15,10 +15,10 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "Features", href: "#features" },
-    { name: "Solutions", href: "#solutions" },
-    { name: "AI Assistant", href: "#ai-assistant" },
-    { name: "Mobile Apps", href: "#mobile-apps" },
+    { name: "Features", href: "#why-edba" },
+    { name: "Solutions", href: "#ecosystem" },
+    { name: "Users", href: "#student-management" },
+    { name: "AI Assistant", href: "#platform" },
   ];
 
   const handleDemoClick = (e: React.MouseEvent) => {
@@ -31,8 +31,8 @@ export default function Navbar() {
       aria-label="Main Navigation"
       className={`fixed left-1/2 -translate-x-1/2 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] max-w-[1440px] z-50 transition-all duration-300 rounded-2xl ${
         scrolled
-          ? "top-2.5 sm:top-3 py-2.5 sm:py-3 bg-white/85 backdrop-blur-xl border border-slate-200/80 shadow-[0_8px_30px_rgb(0,0,0,0.06)]"
-          : "top-3 sm:top-4 py-3 sm:py-3.5 bg-white/65 backdrop-blur-lg border border-slate-200/50 shadow-[0_4px_20px_rgb(0,0,0,0.03)]"
+          ? "top-2.5 sm:top-3 py-2.5 sm:py-3 bg-white/90 backdrop-blur-xl border border-slate-200/80 shadow-[0_8px_30px_rgb(0,0,0,0.08)]"
+          : "top-3 sm:top-4 py-3 sm:py-3.5 bg-white/70 backdrop-blur-lg border border-slate-200/50 shadow-[0_4px_20px_rgb(0,0,0,0.04)]"
       }`}
     >
       <div className="w-full px-3 sm:px-6 lg:px-8">
@@ -63,7 +63,7 @@ export default function Navbar() {
               rel="noopener noreferrer"
               className="text-sm font-semibold text-slate-700 hover:text-slate-950 focus-visible:ring-2 focus-visible:ring-blue-600 px-3.5 py-2 rounded-xl transition-colors"
             >
-              Log in
+              Log In
             </a>
             <button
               onClick={handleDemoClick}
@@ -88,7 +88,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Drawer Overlay */}
+      {/* Mobile Drawer */}
       <div
         className={`absolute top-[calc(100%+8px)] left-0 right-0 z-45 p-5 sm:p-6 rounded-2xl bg-white/95 backdrop-blur-2xl border border-slate-200/80 shadow-2xl transition-all duration-300 md:hidden ${
           isOpen ? "translate-y-0 opacity-100 pointer-events-auto" : "-translate-y-4 opacity-0 pointer-events-none"
@@ -116,7 +116,7 @@ export default function Navbar() {
               onClick={() => setIsOpen(false)}
               className="w-full py-3 text-center font-semibold text-sm text-slate-800 hover:bg-slate-50 rounded-xl transition-colors border border-slate-200 duration-200 min-h-[44px] flex items-center justify-center"
             >
-              Log in
+              Log In
             </a>
             <button
               onClick={(e) => {

@@ -35,16 +35,17 @@ const CARDS: AcademicCard[] = [
 
 export const Academics: React.FC = () => {
   return (
-    <section id="academics" className="py-16 sm:py-20 lg:py-24 smart-display-tight:py-12 bg-[#f8fafc] border-b border-slate-200/80">
+    <section id="academics" className="py-20 sm:py-28 smart-display-tight:py-12 bg-white border-b border-slate-200/80">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 smart-display-tight:mb-8">
-          <span className="text-xs font-bold tracking-wider uppercase text-blue-700 bg-blue-50/90 px-3.5 py-1.5 rounded-full border border-blue-200/70 mb-4 inline-block shadow-xs">
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200/70 mb-4 shadow-xs">
+            <BookMarked className="w-3.5 h-3.5" aria-hidden="true" />
             Academics
           </span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-[42px] leading-tight text-slate-900 mt-2 mb-4 tracking-tight">
-            Academic Performance Architecture
+          <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight text-slate-900 mt-2 mb-4 tracking-tight">
+            Academic <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500">Performance Architecture</span>
           </h2>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal">
             Empower educators with an integrated instructional infrastructure. Streamline curriculum architecture, accelerate performance calibration, and orchestrate hybrid learning modalities seamlessly.
@@ -56,7 +57,7 @@ export const Academics: React.FC = () => {
           {CARDS.map((c, idx) => (
             <div
               key={idx}
-              className="p-6 sm:p-8 bg-white border border-slate-200/80 hover:border-blue-300 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+              className="p-6 sm:p-8 bg-white border border-slate-200/80 hover:border-blue-300 rounded-2xl shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between"
             >
               <div>
                 {/* Header Icon */}
@@ -76,7 +77,7 @@ export const Academics: React.FC = () => {
               {/* Bullets */}
               <ul className="space-y-3 pt-6 border-t border-slate-100">
                 {c.features.map((feat, fIdx) => (
-                  <li key={fIdx} className="flex items-center gap-2.5 text-xs text-slate-700 font-medium">
+                  <li key={fIdx} className="flex items-center gap-2.5 text-sm text-slate-700 font-medium">
                     <div className="h-4 w-4 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 border border-emerald-200">
                       <Check className="h-3 w-3" aria-hidden="true" />
                     </div>

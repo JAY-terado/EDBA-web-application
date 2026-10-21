@@ -141,7 +141,7 @@ export const HeroCarousel: React.FC = () => {
                   ease: [0.32, 0.72, 0, 1], // Card fly-away exit
                 },
               }}
-              className="w-full h-full rounded-2xl overflow-hidden border border-slate-200/90 bg-white shadow-[0_15px_30px_-10px_rgba(15,23,42,0.08),0_25px_50px_-12px_rgba(15,23,42,0.12),0_40px_80px_-20px_rgba(37,99,235,0.08)]"
+              className="w-full h-full rounded-2xl overflow-hidden border border-slate-200/90 bg-white shadow-[0_15px_30px_-10px_rgba(15,23,42,0.08),0_25px_50px_-12px_rgba(15,23,42,0.12),0_40px_80px_-20px_rgba(45,118,196,0.08)]"
             >
               <img
                 src={activeSlide.src}

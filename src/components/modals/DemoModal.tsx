@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, CheckCircle2, Building2, Mail, Phone, User, Users, UsersRound, MapPin, ArrowRight, Shield, Zap } from "lucide-react";
+import { siteStats } from "@/data/siteStats";
 
 const BENEFITS = [
   "Setup in under 48 hours",
@@ -10,9 +11,9 @@ const BENEFITS = [
 ];
 
 const TRUST_STATS = [
-  { value: "500+", label: "Institutes" },
-  { value: "1.2M+", label: "Students" },
-  { value: "98%", label: "Satisfaction" },
+  { value: siteStats.institutes.display, label: "Institutes" },
+  { value: siteStats.students.display, label: "Students" },
+  { value: siteStats.uptime.display, label: "Uptime" },
 ];
 
 export default function DemoModal() {
@@ -162,12 +163,12 @@ export default function DemoModal() {
               {/* Trust stats */}
               <div className="relative z-10 pt-6">
                 <div className="h-px bg-white/20 mb-4 xl:mb-6" />
-                <p className="text-white/60 text-[10px] uppercase tracking-widest font-semibold mb-3">Trusted across India</p>
+                <p className="text-white/60 text-xs uppercase tracking-widest font-semibold mb-3">Trusted across India</p>
                 <div className="flex gap-6">
                   {TRUST_STATS.map((s, i) => (
                     <div key={i}>
                       <div className="text-xl xl:text-2xl font-extrabold text-white font-display tracking-tight">{s.value}</div>
-                      <div className="text-[11px] text-white/70 font-medium">{s.label}</div>
+                      <div className="text-xs text-white/70 font-medium">{s.label}</div>
                     </div>
                   ))}
                 </div>

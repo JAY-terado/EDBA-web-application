@@ -31,16 +31,17 @@ const ASSESSMENT_FEATURES: AssessmentItem[] = [
 
 export const Assessment: React.FC = () => {
   return (
-    <section id="assessment" className="py-16 sm:py-20 lg:py-24 smart-display-tight:py-12 bg-white border-b border-slate-200/80">
+    <section id="assessment" className="py-20 sm:py-28 smart-display-tight:py-12 bg-[#f8fafc] border-b border-slate-200/80">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 smart-display-tight:mb-8">
-          <span className="text-xs font-bold tracking-wider uppercase text-blue-700 bg-blue-50/90 px-3.5 py-1.5 rounded-full border border-blue-200/70 mb-4 inline-block shadow-xs">
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200/70 mb-4 shadow-xs">
+            <CalendarRange className="w-3.5 h-3.5" aria-hidden="true" />
             Assessments
           </span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-[42px] leading-tight text-slate-900 mt-2 mb-4 tracking-tight">
-            Modern Assessment Management
+          <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight text-slate-900 mt-2 mb-4 tracking-tight">
+            Modern <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500">Assessment Management</span>
           </h2>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal">
             Schedule exams, supervise digital test environments, and analyze results seamlessly.
@@ -52,7 +53,7 @@ export const Assessment: React.FC = () => {
           {ASSESSMENT_FEATURES.map((feat, idx) => (
             <div
               key={idx}
-              className="p-6 sm:p-7 bg-white border border-slate-200/80 hover:border-blue-300 rounded-2xl flex flex-col justify-between shadow-sm hover:shadow-lg transition-all duration-300 group"
+              className="p-6 sm:p-7 bg-white border border-slate-200/80 hover:border-blue-300 rounded-2xl flex flex-col justify-between shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 group"
             >
               <div>
                 {/* Card Icon */}
@@ -69,8 +70,8 @@ export const Assessment: React.FC = () => {
                 </p>
               </div>
               
-              <div className="pt-4 border-t border-slate-100 flex items-center text-xs font-semibold text-slate-500 gap-1.5 group-hover:text-blue-600 transition-colors">
-                <HelpCircle className="h-3.5 w-3.5 text-blue-500" aria-hidden="true" />
+              <div className="pt-4 border-t border-slate-100 flex items-center text-sm font-semibold text-slate-500 gap-1.5 group-hover:text-blue-600 transition-colors">
+                <HelpCircle className="h-4 w-4 text-blue-500" aria-hidden="true" />
                 <span>How EDBA powers this module</span>
               </div>
             </div>

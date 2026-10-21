@@ -40,8 +40,8 @@ export const MobilePhoneSvg: React.FC<MobilePhoneSvgProps> = ({ className = "" }
 
         {/* Action Tile Gradients */}
         <linearGradient id="tile-blue-grad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#2563EB" />
-          <stop offset="100%" stopColor="#1D4ED8" />
+          <stop offset="0%" stopColor="#2D76C4" />
+          <stop offset="100%" stopColor="#235EA0" />
         </linearGradient>
 
         <linearGradient id="tile-rose-grad" x1="0" y1="0" x2="0" y2="1">
@@ -94,7 +94,7 @@ export const MobilePhoneSvg: React.FC<MobilePhoneSvgProps> = ({ className = "" }
             fontSize="19"
             letterSpacing="-0.5"
           >
-            <tspan fill="#2563EB">ed</tspan>
+            <tspan fill="#2D76C4">ed</tspan>
             <tspan fill="#F97316">bā</tspan>
           </text>
         </g>
@@ -286,10 +286,10 @@ export const MobilePhoneSvg: React.FC<MobilePhoneSvgProps> = ({ className = "" }
             UPCOMING CLASS
           </text>
           {/* Clock Badge */}
-          <rect x="14" y="28" width="36" height="36" rx="10" fill="#DBEAFE" />
+          <rect x="14" y="28" width="36" height="36" rx="10" fill="#DDECFA" />
           {/* Clock Icon */}
-          <circle cx="32" cy="46" r="9" stroke="#2563EB" strokeWidth="1.8" fill="none" />
-          <polyline points="32 41 32 46 35 48" stroke="#2563EB" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+          <circle cx="32" cy="46" r="9" stroke="#2D76C4" strokeWidth="1.8" fill="none" />
+          <polyline points="32 41 32 46 35 48" stroke="#2D76C4" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
 
           {/* Class details */}
           <text
@@ -322,12 +322,12 @@ export const MobilePhoneSvg: React.FC<MobilePhoneSvgProps> = ({ className = "" }
           <g transform="translate(34, 18)">
             <path
               d="M3 11L10 3L17 11V18C17 18.6 16.6 19 16 19H4C3.4 19 3 18.6 3 18V11Z"
-              stroke="#2563EB"
+              stroke="#2D76C4"
               strokeWidth="2"
               fill="#EFF6FF"
               strokeLinejoin="round"
             />
-            <path d="M8 19V12H12V19" stroke="#2563EB" strokeWidth="2" fill="none" />
+            <path d="M8 19V12H12V19" stroke="#2D76C4" strokeWidth="2" fill="none" />
           </g>
 
           {/* 2. Calendar */}

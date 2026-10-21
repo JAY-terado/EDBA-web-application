@@ -1,30 +1,40 @@
 import React from "react";
+import { siteStats } from "@/data/siteStats";
+import { MetricCounter } from "@/components/ui/MetricCounter";
 
 export default function TrustMetrics() {
   const metrics = [
     {
-      label: "Students Enrolled",
-      value: "1,00,000+",
+      label: "Students Supported",
+      target: 1.2,
+      decimals: 1,
+      suffix: "M+",
       color: "text-blue-600",
-      description: "Active learners using EDBA daily",
+      description: siteStats.students.description,
     },
     {
       label: "Institutes Onboarded",
-      value: "15+",
+      target: siteStats.institutes.count,
+      decimals: 0,
+      suffix: "+",
       color: "text-teal-600",
-      description: "Colleges and school chains",
+      description: siteStats.institutes.description,
     },
     {
-      label: "Parent Engagement",
-      value: "95%",
-      color: "text-purple-600",
-      description: "Direct real-time app participation",
-    },
-    {
-      label: "Admin Time Saved",
-      value: "70%",
+      label: "Admissions Processed",
+      target: siteStats.admissions.count,
+      decimals: 0,
+      suffix: "+",
       color: "text-indigo-600",
-      description: "Automated paperwork and roll-calls",
+      description: siteStats.admissions.description,
+    },
+    {
+      label: "High Availability Uptime",
+      target: siteStats.uptime.count,
+      decimals: 2,
+      suffix: "%",
+      color: "text-purple-600",
+      description: siteStats.uptime.description,
     },
   ];
 
@@ -69,10 +79,10 @@ export default function TrustMetrics() {
           {metrics.map((m, idx) => (
             <div
               key={idx}
-              className="flex flex-col items-center text-center p-4 sm:p-6 rounded-2xl bg-slate-50/70 border border-slate-200/70 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-300"
+              className="flex flex-col items-center text-center p-4 sm:p-6 rounded-2xl bg-slate-50/70 border border-slate-200/70 shadow-sm hover:shadow-md hover:border-slate-300 hover:-translate-y-0.5 transition-all duration-200"
             >
-              <span className={`font-display font-extrabold text-3xl sm:text-5xl lg:text-[50px] leading-tight ${m.color} mb-1 tracking-tight`}>
-                {m.value}
+              <span className={`font-display font-extrabold text-3xl sm:text-5xl lg:text-[48px] leading-tight ${m.color} mb-1 tracking-tight`}>
+                <MetricCounter target={m.target} decimals={m.decimals} suffix={m.suffix} />
               </span>
               <span className="font-bold text-xs sm:text-base text-slate-800">{m.label}</span>
               <span className="text-xs text-slate-500 mt-1 hidden sm:block">{m.description}</span>
@@ -90,7 +100,7 @@ export default function TrustMetrics() {
             {[...schools, ...schools].map((school, idx) => (
               <span
                 key={idx}
-                className="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs font-semibold text-slate-600 bg-white border border-slate-200/90 shadow-sm whitespace-nowrap hover:border-blue-400 hover:text-blue-600 hover:scale-105 transition-all duration-200"
+                className="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs font-semibold text-slate-600 bg-white border border-slate-200/90 shadow-sm whitespace-nowrap hover:border-blue-400 hover:text-blue-600 hover:-translate-y-0.5 transition-all duration-200"
               >
                 {school}
               </span>

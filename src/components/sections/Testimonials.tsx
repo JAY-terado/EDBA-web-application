@@ -1,6 +1,8 @@
 import React from "react";
 import { Star, Quote } from "lucide-react";
 
+import { siteStats } from "@/data/siteStats";
+
 interface Testimonial {
   name: string;
   role: string;
@@ -31,16 +33,17 @@ const REVIEWS: Testimonial[] = [
 
 export const Testimonials: React.FC = () => {
   return (
-    <section id="testimonials" className="py-16 sm:py-20 lg:py-24 smart-display-tight:py-12 bg-white border-b border-slate-200/80">
+    <section id="testimonials" className="py-20 sm:py-28 smart-display-tight:py-12 bg-white border-b border-slate-200/80">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 smart-display-tight:mb-8">
-          <span className="text-xs font-bold tracking-wider uppercase text-blue-700 bg-blue-50/90 px-3.5 py-1.5 rounded-full border border-blue-200/70 mb-4 inline-block shadow-xs">
-            Endorsements
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200/70 mb-4 shadow-xs">
+            <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" aria-hidden="true" />
+            Endorsements • Rated {siteStats.rating.display}
           </span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 mt-2 mb-4 tracking-tight">
-            Loved by Educators
+          <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight text-slate-900 mt-2 mb-4 tracking-tight">
+            Loved by Educators Across <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500">{siteStats.institutes.display} Institutes</span>
           </h2>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal">
             See how principals and administrative teams globally are transforming their campuses with EDBA.
@@ -52,7 +55,7 @@ export const Testimonials: React.FC = () => {
           {REVIEWS.map((rev, idx) => (
             <div
               key={idx}
-              className="p-6 sm:p-8 rounded-2xl bg-white border border-slate-200/80 hover:border-blue-300 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between relative"
+              className="p-6 sm:p-8 rounded-2xl bg-white border border-slate-200/80 hover:border-blue-300 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between relative"
             >
               <Quote className="absolute top-6 right-6 h-8 w-8 text-slate-200 pointer-events-none" aria-hidden="true" />
 

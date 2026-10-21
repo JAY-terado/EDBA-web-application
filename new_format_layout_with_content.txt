@@ -1,0 +1,164 @@
+first section 
+Logo
+Menus    Features  Solutions  Users  AI Assistant                 Log IN           Book A Free Demo
+Front page first section 
+AI-Powered Education Management Software
+One Intelligent Platform for Every Educational Institution
+Transform the way your institution manages everyday operations with EDBA — an intelligent, secure, and user-friendly education management platform designed for the evolving needs of the education sector.
+From schools and junior colleges to colleges, universities, professional institutes, and specialised educational institutions, EDBA brings academic, administrative, financial, communication, and operational processes together in one connected environment.
+Simplify day-to-day work, reduce manual processes, improve collaboration, and gain better visibility across your institution. With intelligent workflows and a scalable technology foundation, EDBA helps educational institutions work more efficiently, stay connected, and deliver a better experience for administrators, educators, students, and parents.
+Built for education. Designed for simplicity. Ready to grow with your institution.
+(Use web and mobile app images)
+Second section 
+Live Classes & Interactive Learning
+Bring Teachers, Students, and Parents Together in Real Time
+Conduct live classes through the EDBA platform, allowing teachers to connect with students and parents through an interactive digital learning experience.
+Teachers can stream live sessions, while students and parents can join, interact, and communicate through live chat. Important updates, discussions, and information can be highlighted and easily accessed when needed.
+Recorded classroom highlights and short learning videos can also be made available alongside the live session, helping students quickly catch up on missed lessons and stay connected with their learning journey.
+(Live streaming -Take videos from Varun)
+
+
+
+Third Section 
+Why institutes choose EDBA
+One platform that cuts paperwork, keeps parents informed and keeps fees on track.
+
+Sr.No.
+Benefit headline
+Website text
+EDBA modules it connects to
+One-line card version
+1
+Less paperwork, more time for teaching
+Import students, staff and timetables from a file. Mark attendance, enter marks and generate results without paper registers.
+Student Management, Staff Management, Academics, Examinations
+Less paperwork, more teaching time
+2
+Your whole institute in one place
+Admissions, classes, exams, fees and the library work together, so nothing is entered twice.
+Overview, Admissions, Academics, Library Operations
+Everything in one place
+3
+Stay connected with parents and students
+Send notices and circulars, run live classes with chat, and let parents follow everything on the mobile app.
+Communications, Live classroom and chat, Mobile apps, Student Management (leave requests and doubts)
+Parents always in the loop
+4
+Fees that are easy to collect and track
+Set the fee structure for each class, record payments and see what is pending at any time.
+Finance & Fees, Admissions
+Fees collected on time
+5
+A better day for teachers and staff
+Ready timetables, lecture planning, homework and approvals in one place, so teachers spend time on students.
+Academics, LMS, Staff Management, Examinations
+Happier teachers and staff
+6
+Build trust in your school community
+Share events, photos and class updates, and give parents a clear view of their child's progress.
+Communications (events, photo gallery), Live classroom and chat, Shorts videos, Mobile apps
+A school parents trust
+
+
+Fourth Section 
+Education Management Platform
+Designed for Easy Adoption Across Your Entire Institution
+EDBA provides an intuitive, user-friendly digital environment that enables administrators, educators, staff, students, and parents to navigate and use the platform with ease.
+From setting up your institution and managing student and staff information to organizing academic and administrative processes, EDBA helps create a structured digital foundation and simplifies everyday operations.
+With centralized tools for attendance, academics, examinations, communication, fees, student management, and administration, EDBA brings essential institutional processes together in one connected platform—helping improve efficiency, visibility, and collaboration.
+Designed to adapt to the unique needs of different educational institutions, EDBA offers a flexible and scalable environment that can align with your institution's processes, requirements, and digital ecosystem while supporting accurate data management and efficient operations.
+Fifth Section
+AI-Powered Education Management Software
+One Intelligent Platform to Manage, Connect, and Empower Your Institution
+EDBA brings academic, administrative, financial, and communication processes together in one connected platform. Simplify everyday operations, improve coordination, and create a seamless digital experience for administrators, educators, students, and parents.
+Explore the EDBA Ecosystem
+1. Institution & Administrative Management
+Streamline institutional operations with centralized student records, staff information, admissions, and administrative workflows. Reduce paperwork, improve data accessibility, and manage institutional activities more efficiently.
+Key capabilities: Admissions, Student Management, Staff & Employee Management, Administration, Reports, and Policies & Approvals.
+2. Classroom & Academic Management
+Simplify academic planning and classroom coordination with tools that help institutions organize timetables, manage attendance, and coordinate academic activities across classes and departments.
+Key capabilities: Classroom Management, Academics, Timetable Coordination, Student Attendance, Attendance Correction, and Student Leave Applications.
+3. Parent, Student & Staff Communication
+Keep your institution's community connected through streamlined communication. Share announcements, important updates, and messages to help administrators, teachers, students, and parents stay informed.
+Key capabilities: Announcements, Messages, Communication Updates, and Parent & Student Engagement.
+4. Examination & Student Progress Management
+Organize examination activities and academic records through centralized examination workflows. Manage marks, examination data, and student progression to support effective academic monitoring.
+Key capabilities: Examination Management, Exam Masters, Marks & Data Entry, Reports, and Student Promotion.
+5. Fees & Financial Management
+Simplify fee administration and payment tracking with centralized financial workflows that support better record management and visibility into student fee transactions.
+Key capabilities: Fees Management, Payments, and Miscellaneous Payments.
+6. Certificates & Student Documentation
+Manage essential student documents and institutional records in a structured digital environment. Simplify certificate-related processes and make important documents easier to access when required.
+Key capabilities: Certificates, Leaving Certificate (LC), Student Documents, and Photo Gallery.
+7. Sports & Physical Education
+Support sports and physical education activities alongside academic administration, helping institutions coordinate student participation and related records.
+Key capabilities: Sports & Physical Education Management.
+8. Learning & Digital Engagement
+Support a connected learning environment with digital learning resources and classroom-related information that can help students and parents stay informed about academic activities.
+Key capabilities: Learning Management System (LMS), Classroom Wall, and Learning Updates.
+Built Around the Needs of Education
+Whether you manage a school, junior college, higher education institution, or specialised institute, EDBA provides a scalable digital foundation to bring essential institutional processes together.
+Simplify operations. Strengthen communication. Empower education with EDBA.
+Sixth Section 
+Classroom & Academic Management Software
+Simplify Academic Workflows and Empower Educators with EDBA
+EDBA helps educators and academic teams manage everyday classroom activities through a centralized, easy-to-use platform. By bringing essential academic information and administrative tasks together, EDBA helps reduce manual effort, improve coordination, and give educators more time to focus on teaching and student development.
+Accessible through the digital platform, educators and authorized staff can manage student attendance, access timetables, coordinate academic activities, maintain student records, and communicate important updates efficiently.
+With integrated capabilities for Classroom Management, Academics, Attendance, Examinations, Learning Management, and Communication, EDBA supports smoother academic operations and better collaboration among educators, administrators, students, and parents.
+Designed to meet the evolving needs of schools, colleges, and other educational institutions, EDBA helps create a more organized, connected, and efficient learning environment.
+Seventh Section 
+Student Information & Management System
+Empowering Students Through Connected Education Management
+EDBA provides a centralized platform for managing student information and supporting students throughout their educational journey. By bringing essential academic records, attendance information, examination details, and institutional updates together, EDBA helps create a more organized and transparent educational experience.
+With access to relevant information through the platform, students and parents can stay informed about academic activities, attendance, examination-related updates, announcements, and other important information shared by the institution.
+Through integrated Student Management, Academics, Attendance, Examinations, Promotion, Certificates, and Communication capabilities, EDBA helps institutions maintain accurate student records, improve coordination, and support informed academic decisions.
+Designed for schools, junior colleges, colleges, universities, and specialised educational institutions, EDBA supports a connected learning environment where students, educators, parents, and administrators can stay aligned throughout the academic journey.
+
+Eighth Section 
+
+Parent & Institutional Communication Platform
+Bringing Parents and Educational Institutions Closer Together
+EDBA helps strengthen the connection between educational institutions and families by making important information and updates easier to share and access. Through centralized communication, parents can stay informed about their children's academic activities, attendance, announcements, and other important institutional updates.
+With integrated features for Announcements, Messages, Attendance, Academics, and Fees & Payments, EDBA supports transparent communication and helps parents remain actively involved in their children's educational journey.
+By bringing parents, educators, and administrators into a connected digital environment, EDBA encourages better coordination, timely information sharing, and a stronger partnership between families and educational institutions.
+Designed for schools, colleges, and other educational institutions, EDBA helps make communication simpler, more accessible, and more effective.
+Ninth Section 
+
+Trusted by Leading Educational Institutions 
+Logos with name 
+Logo large in size name small 
+
+Tenth Section 
+
+4 Simple Steps Towards Digital Transformation
+Your Institution’s Journey with EDBA
+1. Discover
+Understand Your Institution’s Needs
+We begin by understanding your institution’s existing processes, challenges, and goals. Through personalized discussions and a product demonstration, we explore how EDBA can support your academic and administrative requirements.
+2. Customize
+Configure EDBA Around Your Requirements
+Every educational institution works differently. We align EDBA with your institution’s workflows, requirements, and operational processes to create a solution that fits your needs.
+3. Implement
+Connect Your Teams and Simplify Adoption
+Our team supports the implementation process, including system configuration, data preparation, user access, and guidance for administrators and staff to help ensure a smooth transition to EDBA.
+4. Grow
+Continuous Support for Lasting Success
+As your institution evolves, EDBA supports your ongoing digital journey through technical assistance, system improvements, and guidance to help you make the most of your education management platform.
+From your first discussion to ongoing growth, EDBA is your partner in digital education management.
+Eleventh Section 
+Data Privacy & Security with EDBA
+Protecting Institutional Data. Building Digital Trust.
+EDBA is designed to help educational institutions manage student information, staff records, academic data, and administrative processes within a structured digital environment. With controlled access and organized information management, EDBA supports responsible data handling and helps institutions maintain the confidentiality of essential records.
+
+Role-Based Access Control
+EDBA supports structured user access based on assigned roles and permissions, helping ensure that administrators, educators, and other authorized users can access the information relevant to their responsibilities.
+Controlled Information Sharing
+Share institutional updates, announcements, and relevant information with designated users through EDBA’s communication features. This helps institutions coordinate information sharing while maintaining appropriate access boundaries.
+Organized Financial Records
+Manage student fee details, payment records, and other financial information through EDBA’s Fees & Payments capabilities, supporting better recordkeeping and visibility into institutional transactions.
+Reliable Data Management
+Keep student, staff, academic, examination, and administrative information organized within the EDBA platform. A structured approach to digital record management helps institutions improve data accessibility and operational continuity.
+Confidential Student & Staff Information
+EDBA brings essential institutional records together in a centralized environment, helping authorized users manage information systematically while supporting the institution’s data privacy practices.
+EDBA — Empowering education through responsible data management, controlled access, and digital trust.
+Footer 

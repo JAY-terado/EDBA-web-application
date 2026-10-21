@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { siteStats } from "@/data/siteStats";
 
 export default function Footer() {
   return (
@@ -15,8 +16,19 @@ export default function Footer() {
               <img src="/logo.png" alt="EDBA Logo" className="h-8 w-auto" />
             </div>
             <p className="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-sm">
-              The next-generation enterprise Institute LMS management platform. Automate operations, grading, and safety updates with integrated AI tools.
+              The next-generation enterprise Institute LMS platform. Trusted by {siteStats.institutes.display} institutions supporting {siteStats.students.display} students with {siteStats.uptime.display} verified uptime.
             </p>
+            <div className="flex flex-wrap gap-2 pt-1 text-xs font-medium text-slate-400">
+              <span className="px-2.5 py-1 rounded-full bg-slate-900 border border-slate-800 text-slate-300">
+                {siteStats.institutes.display} Institutes
+              </span>
+              <span className="px-2.5 py-1 rounded-full bg-slate-900 border border-slate-800 text-slate-300">
+                {siteStats.students.display} Students
+              </span>
+              <span className="px-2.5 py-1 rounded-full bg-slate-900 border border-slate-800 text-emerald-400">
+                {siteStats.uptime.display} Uptime
+              </span>
+            </div>
           </div>
 
           {/* Address Info */}

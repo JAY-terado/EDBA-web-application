@@ -1,5 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
+import { Building2 } from "lucide-react";
+import { siteStats } from "@/data/siteStats";
+import { MetricCounter } from "@/components/ui/MetricCounter";
 
 interface ClientInstitution {
   name: string;
@@ -28,50 +31,9 @@ const clientListRow2: ClientInstitution[] = [
   { name: "Bharat College Of Engineering", logo: "/LOGOS/b.jpg" },
 ];
 
-// Animated Counter component
-const AnimatedCounter: React.FC<{ target: number; suffix?: string; isVisible: boolean }> = ({
-  target,
-  suffix = "+",
-  isVisible,
-}) => {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (!isVisible) return;
-
-    let startTime: number | null = null;
-    const duration = 1800; // ms
-
-    const step = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      // Ease out cubic
-      const easeProgress = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.round(target * easeProgress));
-
-      if (progress < 1) {
-        requestAnimationFrame(step);
-      }
-    };
-
-    const animFrame = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(animFrame);
-  }, [target, isVisible]);
-
-  return (
-    <span>
-      {count.toLocaleString()}
-      {count >= target ? suffix : ""}
-    </span>
-  );
-};
-
 export default function Pioneers() {
-  const statsRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(statsRef, { once: true, margin: "-80px" });
-
   return (
-    <section id="our-clients" className="pt-8 sm:pt-12 pb-20 sm:pb-24 lg:pb-28 bg-[#f8fafc] relative overflow-x-clip overflow-y-visible border-b border-slate-200/80">
+    <section id="our-clients" className="py-20 sm:py-28 smart-display-tight:py-12 bg-[#f8fafc] relative overflow-x-clip overflow-y-visible border-b border-slate-200/80">
       {/* ── Seamless Ambient Mesh Glow Bridging Hero & Pioneers ── */}
       <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-full max-w-6xl h-64 bg-gradient-to-b from-blue-400/10 via-indigo-300/6 to-transparent blur-3xl pointer-events-none z-0" />
 
@@ -118,57 +80,57 @@ export default function Pioneers() {
 
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-        {/* ── Section Header (Apple-style minimalism) ── */}
+        {/* ── Section Header ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
-          className="text-center max-w-3xl mx-auto mb-10 sm:mb-12"
+          className="text-center max-w-3xl mx-auto mb-12 sm:mb-16"
         >
-          <span className="text-xs font-bold tracking-wider uppercase text-blue-700 bg-blue-50/90 px-3.5 py-1.5 rounded-full border border-blue-200/70 mb-4 inline-block shadow-xs">
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200/70 mb-4 shadow-xs">
+            <Building2 className="w-3.5 h-3.5" aria-hidden="true" />
             Our Clients
           </span>
-          <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-[44px] leading-tight text-slate-900 mt-2 mb-3 tracking-tight">
-            The edbā Pioneers.
+          <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight text-slate-900 mt-2 mb-3 tracking-tight">
+            The edbā <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500">Pioneers</span>.
           </h2>
-          <p className="text-slate-500 text-base sm:text-lg leading-relaxed font-normal">
+          <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal">
             Purpose. Precision. Progress.
           </p>
         </motion.div>
 
         {/* ── Borderless Stats (No Boxes, Clean Dividers, Large & Colorful) ── */}
         <div
-          ref={statsRef}
-          className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-slate-200/70 max-w-2xl sm:max-w-3xl mx-auto mb-10 sm:mb-14"
+          className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-slate-200/70 max-w-2xl sm:max-w-3xl mx-auto mb-12 sm:mb-16"
         >
-          {/* Stat 1: Schools */}
+          {/* Stat 1: Institutes */}
           <div className="py-4 sm:py-2 px-4 sm:px-6 text-center flex flex-col items-center justify-center">
             <span className="font-display font-extrabold text-3xl sm:text-5xl lg:text-[48px] leading-none text-indigo-600 mb-2 tracking-tight">
-              <AnimatedCounter target={50} isVisible={isInView} />
+              <MetricCounter target={siteStats.institutes.count} suffix="+" />
             </span>
-            <span className="font-bold text-xs sm:text-sm text-slate-700 tracking-normal">
-              Schools
+            <span className="font-semibold text-sm text-slate-700 tracking-normal">
+              {siteStats.institutes.label}
             </span>
           </div>
 
           {/* Stat 2: Students */}
           <div className="py-4 sm:py-2 px-4 sm:px-6 text-center flex flex-col items-center justify-center">
             <span className="font-display font-extrabold text-3xl sm:text-5xl lg:text-[48px] leading-none text-blue-600 mb-2 tracking-tight">
-              <AnimatedCounter target={25000} isVisible={isInView} />
+              <MetricCounter target={1.2} decimals={1} suffix="M+" />
             </span>
-            <span className="font-bold text-xs sm:text-sm text-slate-700 tracking-normal">
-              Students
+            <span className="font-semibold text-sm text-slate-700 tracking-normal">
+              {siteStats.students.label}
             </span>
           </div>
 
           {/* Stat 3: Admissions Handled */}
           <div className="py-4 sm:py-2 px-4 sm:px-6 text-center flex flex-col items-center justify-center">
             <span className="font-display font-extrabold text-3xl sm:text-5xl lg:text-[48px] leading-none text-purple-600 mb-2 tracking-tight">
-              <AnimatedCounter target={8000} isVisible={isInView} />
+              <MetricCounter target={siteStats.admissions.count} suffix="+" />
             </span>
-            <span className="font-bold text-xs sm:text-sm text-slate-700 tracking-normal">
-              Admissions handled
+            <span className="font-semibold text-sm text-slate-700 tracking-normal">
+              {siteStats.admissions.label}
             </span>
           </div>
         </div>
@@ -193,16 +155,16 @@ export default function Pioneers() {
                   className="flex flex-col items-center justify-center gap-2.5 group cursor-pointer"
                 >
                   {/* Large Prominent Logo Container */}
-                  <div className="h-12 sm:h-14 md:h-16 w-32 sm:w-36 md:w-40 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                  <div className="h-12 sm:h-14 md:h-16 w-32 sm:w-36 md:w-40 flex items-center justify-center transition-all duration-200 group-hover:-translate-y-0.5 group-hover:drop-shadow-md">
                     <img
                       src={client.logo}
                       alt={`${client.name} logo`}
-                      className="max-h-full max-w-full object-contain filter drop-shadow-2xs transition-all duration-300"
+                      className="max-h-full max-w-full object-contain filter drop-shadow-2xs transition-all duration-200"
                       loading="lazy"
                     />
                   </div>
                   {/* Refined Institution Name Caption */}
-                  <span className="text-[11px] sm:text-xs font-medium text-slate-500 tracking-tight text-center max-w-[150px] truncate group-hover:text-slate-800 transition-colors">
+                  <span className="text-xs font-medium text-slate-500 tracking-tight text-center max-w-[150px] truncate group-hover:text-slate-800 transition-colors">
                     {client.name}
                   </span>
                 </div>
@@ -219,16 +181,16 @@ export default function Pioneers() {
                   className="flex flex-col items-center justify-center gap-2.5 group cursor-pointer"
                 >
                   {/* Large Prominent Logo Container */}
-                  <div className="h-12 sm:h-14 md:h-16 w-32 sm:w-36 md:w-40 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                  <div className="h-12 sm:h-14 md:h-16 w-32 sm:w-36 md:w-40 flex items-center justify-center transition-all duration-200 group-hover:-translate-y-0.5 group-hover:drop-shadow-md">
                     <img
                       src={client.logo}
                       alt={`${client.name} logo`}
-                      className="max-h-full max-w-full object-contain filter drop-shadow-2xs transition-all duration-300"
+                      className="max-h-full max-w-full object-contain filter drop-shadow-2xs transition-all duration-200"
                       loading="lazy"
                     />
                   </div>
                   {/* Refined Institution Name Caption */}
-                  <span className="text-[11px] sm:text-xs font-medium text-slate-500 tracking-tight text-center max-w-[150px] truncate group-hover:text-slate-800 transition-colors">
+                  <span className="text-xs font-medium text-slate-500 tracking-tight text-center max-w-[150px] truncate group-hover:text-slate-800 transition-colors">
                     {client.name}
                   </span>
                 </div>
