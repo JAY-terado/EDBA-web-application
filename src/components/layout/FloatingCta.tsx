@@ -25,7 +25,7 @@ export default function FloatingCta() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.9 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50"
+          className="fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-4 sm:bottom-6 sm:right-6 z-50"
         >
           <button
             onClick={() => window.dispatchEvent(new CustomEvent("open-demo-modal"))}

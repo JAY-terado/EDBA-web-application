@@ -175,13 +175,13 @@ export const Hero: React.FC = () => {
               As trusted by
             </span>
             <div className="relative w-full overflow-hidden">
-              <div className="absolute top-0 bottom-0 left-0 w-12 sm:w-20 bg-gradient-to-r from-[#f8fafc] to-transparent z-10 pointer-events-none" />
-              <div className="absolute top-0 bottom-0 right-0 w-12 sm:w-20 bg-gradient-to-l from-[#f8fafc] to-transparent z-10 pointer-events-none" />
+              <div className="absolute top-0 bottom-0 left-0 w-6 sm:w-20 bg-gradient-to-r from-[#f8fafc] to-transparent z-10 pointer-events-none" />
+              <div className="absolute top-0 bottom-0 right-0 w-6 sm:w-20 bg-gradient-to-l from-[#f8fafc] to-transparent z-10 pointer-events-none" />
               <div className="flex w-max animate-marquee-left gap-8 sm:gap-12 lg:gap-14 items-center py-1">
                 {[...heroTrustLogos, ...heroTrustLogos].map((client, idx) => (
                   <div
                     key={idx}
-                    className="h-8 sm:h-9 w-24 sm:w-28 flex items-center justify-center flex-shrink-0 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer"
+                    className="h-8 sm:h-9 w-24 sm:w-28 flex items-center justify-center flex-shrink-0 transition-transform duration-200 hover:scale-105 cursor-pointer"
                   >
                     <img
                       src={client.logo}

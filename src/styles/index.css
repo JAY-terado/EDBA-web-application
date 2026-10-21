@@ -76,21 +76,35 @@ body {
 /* Google Nest Hub (1024x600 landscape) & Nest Hub Max (1280x800 landscape) */
 @media (max-height: 720px) and (orientation: landscape) {
   .hero-compact {
-    padding-top: 5.5rem !important;
-    padding-bottom: 3rem !important;
+    padding-top: 5.25rem !important;
+    padding-bottom: 2.5rem !important;
   }
   .smart-display-tight {
-    padding-top: 3.5rem !important;
-    padding-bottom: 3.5rem !important;
+    padding-top: 2.75rem !important;
+    padding-bottom: 2.75rem !important;
   }
   .stage-nest-hub {
     min-height: 380px !important;
   }
   .stage-nest-hub-card {
     min-height: 380px !important;
-    padding: 1.75rem !important;
+    padding: 1.5rem !important;
+  }
+  .stage-carousel-nest-hub {
+    height: 480px !important;
+  }
+  .phone-frame-nest-hub {
+    transform: scale(0.82) !important;
+    transform-origin: center center !important;
+  }
+  .modal-nest-hub {
+    max-height: 96vh !important;
+  }
+  .modal-left-nest-hub {
+    padding: 1.5rem !important;
   }
 }
+
 
 /* Progress Rail Animation */
 @keyframes railFill {
@@ -279,19 +293,19 @@ body {
 
 @keyframes marqueeLeft {
   from {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
 @keyframes marqueeRight {
   from {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
   to {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -305,13 +319,22 @@ body {
 }
 
 .animate-marquee-left {
-  animation: marqueeLeft 58s linear infinite;
+  animation: marqueeLeft 34s linear infinite;
   will-change: transform;
 }
 
 .animate-marquee-right {
-  animation: marqueeRight 64s linear infinite;
+  animation: marqueeRight 38s linear infinite;
   will-change: transform;
+}
+
+@media (min-width: 768px) {
+  .animate-marquee-left {
+    animation-duration: 52s;
+  }
+  .animate-marquee-right {
+    animation-duration: 56s;
+  }
 }
 
 .animate-marquee-left:hover,

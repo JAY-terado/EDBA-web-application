@@ -98,7 +98,7 @@ export default function WhyInstitutesChooseEdba() {
                 ease: [0.16, 1, 0.3, 1],
               }
         }
-        className="group rounded-[20px] border border-[#1F293D] bg-[#111A2E] p-4 sm:p-5 flex gap-3.5 sm:gap-4 items-start shadow-xl shadow-black/20 hover:border-blue-500/40 hover:shadow-blue-500/10 hover:-translate-y-0.5 transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] h-full"
+        className="group rounded-[20px] border border-[#1F293D] bg-[#111A2E] p-4 sm:p-5 flex gap-3.5 sm:gap-4 items-start shadow-xl shadow-black/20 hover:border-blue-500/40 hover:shadow-blue-500/10 hover:-translate-y-0.5 transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] h-full min-w-[85vw] sm:min-w-[340px] md:min-w-0 snap-center shrink-0 md:shrink"
       >
         {/* LEFT: Round illustration */}
         <div className="shrink-0 pt-0.5">
@@ -215,9 +215,15 @@ export default function WhyInstitutesChooseEdba() {
           </p>
         </div>
 
-        {/* 3 Cards in 1st Row aligned & next 3 Cards in 2nd Row below */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5">
+        {/* 3 Cards in 1st Row aligned & next 3 Cards in 2nd Row below - slidable on mobile screens */}
+        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-3 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-none">
           {benefits.map((b, i) => renderCard(b, i))}
+        </div>
+
+        {/* Mobile Swipe Hint */}
+        <div className="flex md:hidden items-center justify-center gap-1.5 mt-3 text-xs text-slate-400 select-none">
+          <span>Swipe to explore reasons</span>
+          <span>→</span>
         </div>
       </div>
     </section>

@@ -5,6 +5,7 @@ import { ecosystemModules } from "@/data/ecosystemModules";
 
 export default function EdbaEcosystem() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
   const [isHovered, setIsHovered] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [isIntersecting, setIsIntersecting] = useState(true);
@@ -13,6 +14,12 @@ export default function EdbaEcosystem() {
   const shouldReduceMotion = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  // Touch & Pointer Swipe refs
+  const touchStartXRef = useRef<number | null>(null);
+  const touchStartYRef = useRef<number | null>(null);
+  const pointerStartXRef = useRef<number | null>(null);
+  const pointerStartYRef = useRef<number | null>(null);
 
   // Preload images 2-8 on idle
   useEffect(() => {
@@ -62,9 +69,67 @@ export default function EdbaEcosystem() {
   // Determine if progress rail fill is paused
   const isPaused = isHovered || isFocused || !isIntersecting || isDocHidden;
 
-  // Advance to next module on animation completion
+  // Advance to next module
   const handleNext = () => {
+    setDirection(1);
     setActiveIndex((prev) => (prev + 1) % ecosystemModules.length);
+  };
+
+  // Move to previous module
+  const handlePrev = () => {
+    setDirection(-1);
+    setActiveIndex((prev) => (prev - 1 + ecosystemModules.length) % ecosystemModules.length);
+  };
+
+  // Jump to specific slide
+  const handleSelect = (idx: number) => {
+    setDirection(idx > activeIndex ? 1 : -1);
+    setActiveIndex(idx);
+  };
+
+  // Touch swipe handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.touches[0].clientX;
+    touchStartYRef.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartXRef.current === null || touchStartYRef.current === null) return;
+    const deltaX = touchStartXRef.current - e.changedTouches[0].clientX;
+    const deltaY = touchStartYRef.current - e.changedTouches[0].clientY;
+    touchStartXRef.current = null;
+    touchStartYRef.current = null;
+
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 35) {
+      if (deltaX > 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
+    }
+  };
+
+  // Pointer drag handlers for desktop/mouse swipe
+  const handlePointerDown = (e: React.PointerEvent) => {
+    if (e.pointerType === "touch") return;
+    pointerStartXRef.current = e.clientX;
+    pointerStartYRef.current = e.clientY;
+  };
+
+  const handlePointerUp = (e: React.PointerEvent) => {
+    if (pointerStartXRef.current === null || pointerStartYRef.current === null) return;
+    const deltaX = pointerStartXRef.current - e.clientX;
+    const deltaY = pointerStartYRef.current - e.clientY;
+    pointerStartXRef.current = null;
+    pointerStartYRef.current = null;
+
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 40) {
+      if (deltaX > 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
+    }
   };
 
   // Auto-scroll active rail tab into view on smaller viewports
@@ -94,7 +159,7 @@ export default function EdbaEcosystem() {
 
     if (nextIndex !== -1) {
       e.preventDefault();
-      setActiveIndex(nextIndex);
+      handleSelect(nextIndex);
       tabRefs.current[nextIndex]?.focus();
     }
   };
@@ -123,7 +188,7 @@ export default function EdbaEcosystem() {
         aria-hidden="true"
       />
 
-      <div className="max-w-[1240px] mx-auto px-5 relative z-10">
+      <div className="max-w-[1240px] mx-auto px-4 sm:px-5 relative z-10">
         {/* SECTION HEADER (centered, max-w-[900px], mb-6) */}
         <div className="text-center max-w-[900px] mx-auto mb-6">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200 mb-3 shadow-xs">
@@ -139,7 +204,7 @@ export default function EdbaEcosystem() {
             </span>{" "}
             Your Institution
           </h2>
-          <p className="text-[16px] text-slate-600 leading-relaxed max-w-[760px] mx-auto mt-3">
+          <p className="text-[15px] sm:text-[16px] text-slate-600 leading-relaxed max-w-[760px] mx-auto mt-3">
             EDBA brings academic, administrative, financial, and communication processes together in
             one connected platform. Simplify everyday operations, improve coordination, and create a
             seamless digital experience for administrators, educators, students, and parents.
@@ -158,8 +223,14 @@ export default function EdbaEcosystem() {
           }}
           className="w-full"
         >
-          {/* THE STAGE (main element) */}
-          <div className="relative overflow-hidden bg-slate-900 rounded-3xl shadow-[0_20px_44px_-18px_rgba(15,23,42,0.35)] min-[1000px]:min-h-[500px] stage-nest-hub flex flex-col min-[1000px]:block">
+          {/* THE STAGE (main element - touch slidable) */}
+          <div
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            onPointerDown={handlePointerDown}
+            onPointerUp={handlePointerUp}
+            className="relative overflow-hidden bg-slate-900 rounded-3xl shadow-[0_20px_44px_-18px_rgba(15,23,42,0.35)] min-[1000px]:min-h-[500px] stage-nest-hub flex flex-col min-[1000px]:block select-none cursor-grab active:cursor-grabbing touch-pan-y"
+          >
             {/* Background Images Stack (crossfade 0.5s without blank frames) */}
             <div className="relative w-full aspect-[16/10] min-[1000px]:aspect-auto min-[1000px]:absolute min-[1000px]:inset-0 min-[1000px]:h-full overflow-hidden bg-slate-900">
               {ecosystemModules.map((m, idx) => (
@@ -202,30 +273,35 @@ export default function EdbaEcosystem() {
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={activeIndex}
-                  initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={shouldReduceMotion ? undefined : { opacity: 0, y: -8 }}
+                  initial={shouldReduceMotion ? false : { opacity: 0, x: direction * 40 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={shouldReduceMotion ? undefined : { opacity: 0, x: -direction * 40 }}
                   transition={
                     shouldReduceMotion
                       ? { duration: 0 }
-                      : { duration: 0.5, ease: [0.16, 1, 0.3, 1] }
+                      : { duration: 0.35, ease: [0.16, 1, 0.3, 1] }
                   }
                   className="flex flex-col gap-3.5"
                 >
                   {/* 1. Number pill */}
-                  <div>
+                  <div className="flex items-center justify-between">
                     <span className="text-[11px] font-extrabold tracking-wider text-white bg-blue-600/90 rounded-full px-2.5 py-0.5 inline-block shadow-xs">
                       {String(activeIndex + 1).padStart(2, "0")}
+                    </span>
+
+                    {/* Mobile swipe hint */}
+                    <span className="text-[10px] text-slate-400 font-medium min-[1000px]:hidden">
+                      Swipe left / right →
                     </span>
                   </div>
 
                   {/* 2. Title h3 */}
-                  <h3 className="text-[22px] sm:text-[24px] min-[1000px]:text-[28px] font-extrabold tracking-tight leading-tight text-white">
+                  <h3 className="text-[20px] sm:text-[24px] min-[1000px]:text-[28px] font-extrabold tracking-tight leading-tight text-white">
                     {activeModule.title}
                   </h3>
 
                   {/* 3. Description */}
-                  <p className="text-[15px] leading-relaxed text-slate-200">
+                  <p className="text-[14px] sm:text-[15px] leading-relaxed text-slate-200">
                     {activeModule.description}
                   </p>
 
@@ -238,7 +314,7 @@ export default function EdbaEcosystem() {
                       {activeModule.capabilities.map((cap) => (
                         <li
                           key={cap}
-                          className="text-[12.5px] font-semibold text-white bg-white/12 border border-white/28 rounded-full px-2.5 py-1 backdrop-blur-xs"
+                          className="text-[11.5px] sm:text-[12.5px] font-semibold text-white bg-white/12 border border-white/28 rounded-full px-2.5 py-1 backdrop-blur-xs"
                         >
                           {cap}
                         </li>
@@ -271,7 +347,7 @@ export default function EdbaEcosystem() {
                   aria-selected={isActive}
                   aria-controls="stage-panel"
                   tabIndex={isActive ? 0 : -1}
-                  onClick={() => setActiveIndex(idx)}
+                  onClick={() => handleSelect(idx)}
                   onKeyDown={(e) => handleKeyDown(e, idx)}
                   className="group min-h-[68px] text-left flex flex-col gap-2 cursor-pointer focus:outline-hidden focus-visible:outline-2 focus-visible:outline-blue-600 focus-visible:outline-offset-2 rounded-lg p-1.5 min-w-[150px] min-[1000px]:min-w-0 shrink-0 snap-start transition-colors"
                 >

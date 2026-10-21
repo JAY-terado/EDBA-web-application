@@ -150,7 +150,7 @@ export const TabletMockup: React.FC<TabletMockupProps> = ({ className = "" }) =>
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
-          className="absolute -bottom-4 -left-3 sm:-bottom-5 sm:-left-5 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-2xl shadow-xl p-3 sm:p-3.5 z-20 pointer-events-auto"
+          className="absolute -bottom-4 left-1 sm:-bottom-5 sm:-left-5 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-2xl shadow-xl p-2.5 sm:p-3.5 z-20 pointer-events-auto"
         >
           <div className="flex items-center gap-2.5">
             <div className="h-8 w-8 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">

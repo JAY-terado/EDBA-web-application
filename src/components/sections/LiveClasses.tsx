@@ -109,7 +109,7 @@ export default function LiveClasses() {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4, duration: 0.5 }}
-              className="absolute -bottom-6 -right-4 w-64 bg-white rounded-2xl shadow-xl border border-slate-200/80 p-4 z-10"
+              className="absolute -bottom-6 right-0 sm:-right-4 w-56 sm:w-64 bg-white rounded-2xl shadow-xl border border-slate-200/80 p-3 sm:p-4 z-10"
             >
               <div className="flex items-center gap-2 mb-3 pb-2 border-b border-slate-100">
                 <MessageSquare className="h-4 w-4 text-blue-600" />

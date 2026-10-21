@@ -243,7 +243,7 @@ export default function EducationManagementPlatform() {
           </motion.div>
 
           {/* Interactive Screen Category Selector Pills */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mt-7">
+          <div className="flex flex-wrap items-center justify-center gap-2 mt-7 max-w-full overflow-x-auto pb-1 scrollbar-none px-2">
             {SLIDES_DATA.map((slide, idx) => {
               const isActive = activeSlideIndex === idx;
               const IconComp = slide.icon;
@@ -269,7 +269,7 @@ export default function EducationManagementPlatform() {
         {/* BUTTERY SMOOTH 3D CIRCULAR CAROUSEL STAGE                 */}
         {/* ========================================================= */}
         <div
-          className="relative w-full max-w-[1300px] mx-auto h-[610px] sm:h-[640px] flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing select-none"
+          className="relative w-full max-w-[1300px] mx-auto h-[550px] sm:h-[620px] lg:h-[640px] stage-carousel-nest-hub flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing select-none"
           style={{ perspective: "1200px", touchAction: "pan-y" }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
@@ -292,7 +292,7 @@ export default function EducationManagementPlatform() {
               handleStep(-1);
             }}
             aria-label="Previous screenshot"
-            className="absolute left-2 sm:left-6 lg:left-10 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-white/95 hover:bg-white text-slate-700 shadow-xl shadow-slate-300/50 border border-slate-200/90 flex items-center justify-center transition-transform hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-sm pointer-events-auto"
+            className="absolute left-1.5 sm:left-6 lg:left-10 top-1/2 -translate-y-1/2 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 hover:bg-white text-slate-700 shadow-xl shadow-slate-300/50 border border-slate-200/90 flex items-center justify-center transition-transform hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-sm pointer-events-auto"
           >
             <ChevronLeft className="w-5 h-5 stroke-[2.5]" />
           </button>
@@ -311,13 +311,13 @@ export default function EducationManagementPlatform() {
               handleStep(1);
             }}
             aria-label="Next screenshot"
-            className="absolute right-2 sm:right-6 lg:right-10 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-white/95 hover:bg-white text-slate-700 shadow-xl shadow-slate-300/50 border border-slate-200/90 flex items-center justify-center transition-transform hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-sm pointer-events-auto"
+            className="absolute right-1.5 sm:right-6 lg:right-10 top-1/2 -translate-y-1/2 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 hover:bg-white text-slate-700 shadow-xl shadow-slate-300/50 border border-slate-200/90 flex items-center justify-center transition-transform hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-sm pointer-events-auto"
           >
             <ChevronRight className="w-5 h-5 stroke-[2.5]" />
           </button>
 
           {/* Stationary Center iPhone Mockup Frame Overlay */}
-          <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-35 flex items-center justify-center">
+          <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-35 flex items-center justify-center scale-[0.86] sm:scale-100 phone-frame-nest-hub origin-center transition-transform duration-300">
             <div
               style={{ width: `${CARD_WIDTH + 20}px`, height: `${CARD_HEIGHT + 20}px` }}
               className="rounded-[42px] border-[10px] border-[#18191b] shadow-[0_20px_50px_-10px_rgba(0,0,0,0.22)] relative box-border bg-transparent"
@@ -338,7 +338,7 @@ export default function EducationManagementPlatform() {
 
           {/* 3D Circular Cards Track Container */}
           <div
-            className="relative w-full h-full flex items-center justify-center"
+            className="relative w-full h-full flex items-center justify-center scale-[0.86] sm:scale-100 phone-frame-nest-hub origin-center transition-transform duration-300"
             style={{ transformStyle: "preserve-3d" }}
           >
             {slots.map((k) => {
@@ -469,28 +469,9 @@ export default function EducationManagementPlatform() {
             </span>
           </motion.div>
 
-          <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto leading-relaxed mb-5">
+          <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto leading-relaxed mb-6">
             {currentSlide.description}
           </p>
-
-          {/* Pagination Indicators */}
-          <div className="flex items-center justify-center space-x-2.5 mb-7">
-            {SLIDES_DATA.map((slide, idx) => {
-              const isActive = activeSlideIndex === idx;
-              return (
-                <button
-                  key={slide.id}
-                  onClick={() => goToSlide(idx)}
-                  aria-label={`Go to ${slide.title}`}
-                  className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                    isActive
-                      ? "w-8 bg-blue-600 shadow-xs"
-                      : "w-2.5 bg-slate-300 hover:bg-slate-400"
-                  }`}
-                />
-              );
-            })}
-          </div>
 
           {/* Primary Call to Action */}
           <div>

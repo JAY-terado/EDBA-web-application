@@ -92,7 +92,7 @@ export default function StudentInformationManagement() {
     >
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20 items-center">
-          
+
           {/* ========================================================= */}
           {/* LEFT COLUMN: Girl Hero + Doodles + Dashboard Mockup       */}
           {/* ========================================================= */}
@@ -105,10 +105,10 @@ export default function StudentInformationManagement() {
           >
             {/* Visual Container */}
             <div className="w-full relative max-w-[580px] mx-auto">
-              
+
               {/* --- TOP VISUAL: Smiling Schoolgirl with Lucide Doodles --- */}
               <div className="relative w-full h-[310px] sm:h-[370px] flex justify-center items-end -mb-16 sm:-mb-20 z-10 pointer-events-none">
-                
+
                 {/* DOODLE: Flying Paper Plane with Lucide Send icon & dashed trail */}
                 <div className="absolute left-2 sm:left-6 top-3 sm:top-5 z-20 pointer-events-none select-none">
                   <div className="relative w-20 h-20 sm:w-24 sm:h-24">
@@ -134,22 +134,22 @@ export default function StudentInformationManagement() {
                 </div>
 
                 {/* DOODLE: Floating Line-Art Graduation Cap (No box, clean floating doodle) */}
-                <div className="absolute right-10 sm:right-16 top-2 sm:top-4 z-20 pointer-events-none select-none">
-                  <GraduationCap className="w-11 h-11 sm:w-13 sm:h-13 text-slate-800 -rotate-12 stroke-[1.8] drop-shadow-sm" />
+                <div className="absolute right-4 sm:right-16 top-2 sm:top-4 z-20 pointer-events-none select-none">
+                  <GraduationCap className="w-9 h-9 sm:w-13 sm:h-13 text-slate-800 -rotate-12 stroke-[1.8] drop-shadow-sm" />
                 </div>
 
                 {/* FLOATING PILL 1: Attendance (Left of girl) */}
                 <motion.div
                   animate={{ y: [0, -6, 0] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute left-1 sm:left-4 top-[38%] sm:top-[40%] z-30 pointer-events-auto bg-white border border-slate-200/90 rounded-2xl p-2.5 sm:px-4 sm:py-3 shadow-xl shadow-slate-200/80 flex items-center gap-3 transition-transform hover:scale-105"
+                  className="absolute left-0.5 sm:left-4 top-[38%] sm:top-[40%] z-30 pointer-events-auto bg-white border border-slate-200/90 rounded-2xl p-2 sm:px-4 sm:py-3 shadow-xl shadow-slate-200/80 flex items-center gap-2 sm:gap-3 transition-transform hover:scale-105"
                 >
-                  <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center flex-shrink-0">
-                    <CalendarCheck className="h-5 w-5 text-emerald-600" />
+                  <div className="h-7 w-7 sm:h-10 sm:w-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center flex-shrink-0">
+                    <CalendarCheck className="h-4 w-4 sm:h-5 sm:w-5 text-emerald-600" />
                   </div>
                   <div>
-                    <p className="text-sm sm:text-base font-black text-slate-900 leading-none">93.5%</p>
-                    <p className="text-[10px] sm:text-xs text-slate-400 font-medium mt-0.5">Attendance</p>
+                    <p className="text-xs sm:text-base font-black text-slate-900 leading-none">93.5%</p>
+                    <p className="text-[9px] sm:text-xs text-slate-400 font-medium mt-0.5">Attendance</p>
                   </div>
                 </motion.div>
 
@@ -157,18 +157,18 @@ export default function StudentInformationManagement() {
                 <motion.div
                   animate={{ y: [0, 6, 0] }}
                   transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                  className="absolute right-1 sm:right-4 top-[26%] sm:top-[28%] z-30 pointer-events-auto bg-white border border-slate-200/90 rounded-2xl px-3.5 py-2.5 sm:px-4 sm:py-3 shadow-xl shadow-slate-200/80 flex items-center gap-2.5 transition-transform hover:scale-105"
+                  className="absolute right-0.5 sm:right-4 top-[26%] sm:top-[28%] z-30 pointer-events-auto bg-white border border-slate-200/90 rounded-2xl px-2.5 py-1.5 sm:px-4 sm:py-3 shadow-xl shadow-slate-200/80 flex items-center gap-2 sm:gap-2.5 transition-transform hover:scale-105"
                 >
-                  <span className="text-xl sm:text-2xl font-black text-emerald-600 leading-none">A+</span>
+                  <span className="text-lg sm:text-2xl font-black text-emerald-600 leading-none">A+</span>
                   <div>
-                    <p className="text-[10px] sm:text-xs text-slate-500 font-semibold leading-tight">
+                    <p className="text-[9px] sm:text-xs text-slate-500 font-semibold leading-tight">
                       Overall Grade
                     </p>
                   </div>
 
                   {/* Lucide Sparkles around A+ badge */}
-                  <div className="absolute -bottom-2.5 -right-2 pointer-events-none text-blue-600">
-                    <Sparkles className="w-5 h-5 animate-pulse" />
+                  <div className="absolute -bottom-2 -right-1.5 pointer-events-none text-blue-600">
+                    <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 animate-pulse" />
                   </div>
                 </motion.div>
 
@@ -182,7 +182,7 @@ export default function StudentInformationManagement() {
 
               {/* --- BOTTOM VISUAL: Modern White SaaS Dashboard Window --- */}
               <div className="relative z-20 bg-white rounded-2xl border border-slate-200 shadow-2xl shadow-slate-200/60 overflow-hidden">
-                
+
                 {/* Dashboard Topbar */}
                 <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-slate-100 bg-white">
                   {/* Brand Logo */}
@@ -208,7 +208,7 @@ export default function StudentInformationManagement() {
 
                 {/* Dashboard Body (Sidebar + Content) */}
                 <div className="flex">
-                  
+
                   {/* Mini Sidebar (hidden on very small mobile) */}
                   <div className="hidden sm:block w-36 border-r border-slate-100 p-2.5 space-y-1 bg-slate-50/60">
                     <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-blue-50 text-blue-700 font-bold text-xs">
@@ -243,7 +243,7 @@ export default function StudentInformationManagement() {
 
                   {/* Main Content Area */}
                   <div className="flex-1 p-4 sm:p-5">
-                    
+
                     {/* Student Profile Row */}
                     <div className="flex items-center justify-between pb-3.5 border-b border-slate-100">
                       <div className="flex items-center gap-3">
@@ -251,7 +251,7 @@ export default function StudentInformationManagement() {
                           AM
                         </div>
                         <div>
-                          <p className="text-sm font-bold text-slate-900 leading-snug">Aryan Mehta</p>
+                          <p className="text-sm font-bold text-slate-900 leading-snug">Riya Mehta</p>
                           <p className="text-[11px] text-slate-400 font-medium">
                             Student ID: 2024-BCS-0147 | Class XI Science
                           </p>

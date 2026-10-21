@@ -124,22 +124,22 @@ export default function DemoModal() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 16 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="relative w-full max-w-4xl bg-white rounded-3xl overflow-hidden shadow-[0_40px_100px_-20px_rgba(15,23,42,0.35)] flex flex-col lg:flex-row border border-slate-200/80 max-h-[94vh] sm:max-h-[92vh]"
+            className="relative w-full max-w-4xl bg-white rounded-3xl overflow-hidden shadow-[0_40px_100px_-20px_rgba(15,23,42,0.35)] flex flex-col lg:flex-row border border-slate-200/80 max-h-[94vh] sm:max-h-[92vh] modal-nest-hub"
           >
             {/* ── Left panel ── */}
-            <div className="hidden lg:flex lg:w-[42%] flex-col justify-between p-8 xl:p-10 bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-700 text-white relative overflow-hidden">
+            <div className="hidden lg:flex lg:w-[42%] flex-col justify-between p-6 xl:p-10 bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-700 text-white relative overflow-y-auto modal-left-nest-hub">
               {/* Decorative blobs */}
               <div className="absolute -top-16 -left-16 h-48 w-48 bg-white/10 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute bottom-0 right-0 h-64 w-64 bg-cyan-400/10 rounded-full blur-3xl pointer-events-none" />
 
               {/* Brand */}
               <div className="relative z-10">
-                <div className="inline-flex items-center justify-center bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-2xl shadow-sm border border-white/40 mb-8 xl:mb-10">
+                <div className="inline-flex items-center justify-center bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-2xl shadow-sm border border-white/40 mb-4 xl:mb-8">
                   <img src="/logo.png" alt="EDBA" className="h-6 w-auto" />
                 </div>
 
-                <div className="mb-6 xl:mb-8">
-                  <h2 className="font-display font-extrabold text-2xl xl:text-3xl text-white leading-tight mb-3 tracking-tight">
+                <div className="mb-4 xl:mb-6">
+                  <h2 className="font-display font-extrabold text-xl xl:text-3xl text-white leading-tight mb-2 tracking-tight">
                     See EDBA in action — live, with your data
                   </h2>
                   <p className="text-blue-100 text-xs xl:text-sm leading-relaxed font-normal">
@@ -148,10 +148,10 @@ export default function DemoModal() {
                 </div>
 
                 {/* Benefits */}
-                <ul className="space-y-3">
+                <ul className="space-y-2.5 xl:space-y-3">
                   {BENEFITS.map((b, i) => (
-                    <li key={i} className="flex items-center gap-3 text-xs xl:text-sm text-white/95">
-                      <div className="h-5 w-5 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 border border-white/30">
+                    <li key={i} className="flex items-center gap-2.5 text-xs xl:text-sm text-white/95">
+                      <div className="h-4.5 w-4.5 xl:h-5 xl:w-5 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 border border-white/30">
                         <CheckCircle2 className="h-3 w-3 text-white" aria-hidden="true" />
                       </div>
                       <span>{b}</span>
@@ -161,14 +161,14 @@ export default function DemoModal() {
               </div>
 
               {/* Trust stats */}
-              <div className="relative z-10 pt-6">
-                <div className="h-px bg-white/20 mb-4 xl:mb-6" />
-                <p className="text-white/60 text-xs uppercase tracking-widest font-semibold mb-3">Trusted across India</p>
-                <div className="flex gap-6">
+              <div className="relative z-10 pt-4 xl:pt-6">
+                <div className="h-px bg-white/20 mb-3 xl:mb-5" />
+                <p className="text-white/60 text-[11px] uppercase tracking-widest font-semibold mb-2">Trusted across India</p>
+                <div className="flex gap-5 xl:gap-6">
                   {TRUST_STATS.map((s, i) => (
                     <div key={i}>
-                      <div className="text-xl xl:text-2xl font-extrabold text-white font-display tracking-tight">{s.value}</div>
-                      <div className="text-xs text-white/70 font-medium">{s.label}</div>
+                      <div className="text-lg xl:text-2xl font-extrabold text-white font-display tracking-tight">{s.value}</div>
+                      <div className="text-[11px] xl:text-xs text-white/70 font-medium">{s.label}</div>
                     </div>
                   ))}
                 </div>
@@ -178,7 +178,7 @@ export default function DemoModal() {
             {/* ── Right panel: Form ── */}
             <div className="flex-1 flex flex-col overflow-hidden bg-white">
               {/* Top bar */}
-              <div className="flex items-center justify-between px-5 sm:px-7 pt-5 sm:pt-7 pb-4 sm:pb-5 border-b border-slate-100 flex-shrink-0">
+              <div className="flex items-center justify-between px-5 sm:px-7 pt-4 sm:pt-6 pb-3.5 sm:pb-4 border-b border-slate-100 flex-shrink-0">
                 <div>
                   <h3 id="demo-modal-title" className="font-display font-bold text-lg sm:text-xl text-slate-900 leading-tight">
                     Book Your Free Demo
