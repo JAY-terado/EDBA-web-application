@@ -4,6 +4,7 @@ import {
   Layers,
   ChevronLeft,
   ChevronRight,
+  ArrowLeft,
   ArrowRight,
   BookOpen,
   CalendarCheck,
@@ -89,6 +90,9 @@ export default function EducationManagementPlatform() {
   const velocityRef = useRef(0);
   const hasDraggedRef = useRef(false);
 
+  // Carousel container ref for 2-finger trackpad slide gesture
+  const carouselContainerRef = useRef<HTMLDivElement>(null);
+
   // Autoplay control
   const [isHovered, setIsHovered] = useState(false);
 
@@ -113,6 +117,57 @@ export default function EducationManagementPlatform() {
 
     return () => clearInterval(timer);
   }, [isHovered, isDragging]);
+
+  // --------------------------------------------------------------------------
+  // Two-Finger Trackpad / Wheel Horizontal Slide Gesture (Large Screens)
+  // --------------------------------------------------------------------------
+  useEffect(() => {
+    const el = carouselContainerRef.current;
+    if (!el) return;
+
+    let wheelTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    const onWheel = (e: WheelEvent) => {
+      // Detect horizontal swipe (2 fingers on trackpad or shift+wheel)
+      const isHorizontal = Math.abs(e.deltaX) > Math.abs(e.deltaY) || e.shiftKey;
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
+
+      if (isHorizontal && Math.abs(delta) > 2) {
+        // Stop browser back/forward page navigation when swiping
+        e.preventDefault();
+
+        // 1:1 fluid tracking with dampening factor
+        setPos((prev) => prev + delta * 0.0035);
+
+        // Snap cleanly to nearest slide on gesture completion
+        if (wheelTimeout) clearTimeout(wheelTimeout);
+        wheelTimeout = setTimeout(() => {
+          setPos((prev) => Math.round(prev));
+        }, 160);
+      }
+    };
+
+    // Keyboard arrow keys navigation when hovered
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (!isHovered) return;
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        setPos((prev) => Math.round(prev) - 1);
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        setPos((prev) => Math.round(prev) + 1);
+      }
+    };
+
+    el.addEventListener("wheel", onWheel, { passive: false });
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      el.removeEventListener("wheel", onWheel);
+      window.removeEventListener("keydown", onKeyDown);
+      if (wheelTimeout) clearTimeout(wheelTimeout);
+    };
+  }, [isHovered]);
 
   // --------------------------------------------------------------------------
   // Navigation Handlers
@@ -269,6 +324,7 @@ export default function EducationManagementPlatform() {
         {/* BUTTERY SMOOTH 3D CIRCULAR CAROUSEL STAGE                 */}
         {/* ========================================================= */}
         <div
+          ref={carouselContainerRef}
           className="relative w-full max-w-[1300px] mx-auto h-[550px] sm:h-[620px] lg:h-[640px] stage-carousel-nest-hub flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing select-none"
           style={{ perspective: "1200px", touchAction: "pan-y" }}
           onMouseEnter={() => setIsHovered(true)}
@@ -278,42 +334,40 @@ export default function EducationManagementPlatform() {
           onPointerUp={handlePointerUp}
           onPointerCancel={handlePointerUp}
         >
-          {/* Navigation Chevron Left */}
+          {/* Navigation Button Left - Apple Glass Frosted Disc */}
           <button
             type="button"
-            onPointerDown={(e) => {
-              e.stopPropagation();
-            }}
-            onPointerUp={(e) => {
-              e.stopPropagation();
-            }}
+            onPointerDown={(e) => e.stopPropagation()}
+            onPointerUp={(e) => e.stopPropagation()}
             onClick={(e) => {
               e.stopPropagation();
               handleStep(-1);
             }}
             aria-label="Previous screenshot"
-            className="absolute left-1.5 sm:left-6 lg:left-10 top-1/2 -translate-y-1/2 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 hover:bg-white text-slate-700 shadow-xl shadow-slate-300/50 border border-slate-200/90 flex items-center justify-center transition-transform hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-sm pointer-events-auto"
+            className="absolute left-2 sm:left-6 lg:left-8 top-1/2 -translate-y-1/2 z-50 h-11 w-11 sm:h-13 sm:w-13 rounded-full apple-glass shadow-[0_8px_30px_rgba(15,23,42,0.12)] hover:shadow-[0_12px_32px_rgba(45,118,196,0.25)] flex items-center justify-center transition-all duration-200 text-slate-700 hover:text-blue-600 hover:scale-110 active:scale-95 cursor-pointer pointer-events-auto group focus-visible:ring-2 focus-visible:ring-blue-600"
           >
-            <ChevronLeft className="w-5 h-5 stroke-[2.5]" />
+            <div className="relative flex items-center justify-center">
+              <span className="absolute inset-0 rounded-full bg-blue-500/10 scale-0 group-hover:scale-150 transition-transform duration-300 pointer-events-none" />
+              <ArrowLeft className="w-5 h-5 transition-transform duration-200 group-hover:-translate-x-0.5 stroke-[2.2]" />
+            </div>
           </button>
 
-          {/* Navigation Chevron Right */}
+          {/* Navigation Button Right - Apple Glass Frosted Disc */}
           <button
             type="button"
-            onPointerDown={(e) => {
-              e.stopPropagation();
-            }}
-            onPointerUp={(e) => {
-              e.stopPropagation();
-            }}
+            onPointerDown={(e) => e.stopPropagation()}
+            onPointerUp={(e) => e.stopPropagation()}
             onClick={(e) => {
               e.stopPropagation();
               handleStep(1);
             }}
             aria-label="Next screenshot"
-            className="absolute right-1.5 sm:right-6 lg:right-10 top-1/2 -translate-y-1/2 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 hover:bg-white text-slate-700 shadow-xl shadow-slate-300/50 border border-slate-200/90 flex items-center justify-center transition-transform hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-sm pointer-events-auto"
+            className="absolute right-2 sm:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-50 h-11 w-11 sm:h-13 sm:w-13 rounded-full apple-glass shadow-[0_8px_30px_rgba(15,23,42,0.12)] hover:shadow-[0_12px_32px_rgba(45,118,196,0.25)] flex items-center justify-center transition-all duration-200 text-slate-700 hover:text-blue-600 hover:scale-110 active:scale-95 cursor-pointer pointer-events-auto group focus-visible:ring-2 focus-visible:ring-blue-600"
           >
-            <ChevronRight className="w-5 h-5 stroke-[2.5]" />
+            <div className="relative flex items-center justify-center">
+              <span className="absolute inset-0 rounded-full bg-blue-500/10 scale-0 group-hover:scale-150 transition-transform duration-300 pointer-events-none" />
+              <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-0.5 stroke-[2.2]" />
+            </div>
           </button>
 
           {/* Stationary Center iPhone Mockup Frame Overlay */}
