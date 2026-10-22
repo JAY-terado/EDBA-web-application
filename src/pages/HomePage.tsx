@@ -32,7 +32,7 @@ export const HomePage: React.FC = () => {
     <div className="min-h-screen bg-white text-slate-900 font-sans flex flex-col selection:bg-blue-600 selection:text-white">
       <Navbar />
 
-      <main className="flex-1 w-full overflow-x-clip">
+      <main className="flex-1 w-full">
         {/* Section 1 */}
         <Hero />
         {/* Section 2 */}

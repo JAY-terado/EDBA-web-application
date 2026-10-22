@@ -1,265 +1,388 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { Search, Settings, Zap, TrendingUp, ArrowRight, Check } from "lucide-react";
+import {
+  Search,
+  Settings,
+  Zap,
+  TrendingUp,
+  ArrowDown,
+  CheckCircle2,
+  Sparkles,
+  Cloud,
+  ShieldCheck,
+  Users,
+  HeartHandshake,
+  Sliders,
+  FileCheck2,
+  ChevronRight,
+  Layers,
+} from "lucide-react";
 
-const steps = [
+interface Step {
+  id: string;
+  no: string;
+  stepNumber: number;
+  title: string;
+  tagline: string;
+  subtitle: string;
+  desc: string;
+  icon: React.ComponentType<{ className?: string }>;
+  image: string;
+  badgeColor: string;
+  accentBg: string;
+  accentText: string;
+  accentBorder: string;
+  floatingBadges: {
+    icon: React.ComponentType<{ className?: string }>;
+    title: string;
+    subtitle?: string;
+    position: string;
+    colorClass: string;
+  }[];
+  highlights: string[];
+}
+
+const steps: Step[] = [
   {
-    no: "1",
+    id: "discover",
+    no: "01",
+    stepNumber: 1,
     title: "Discover",
+    tagline: "Exploration & Consultation",
     subtitle: "Understand Your Institution's Needs",
-    desc: "We begin by understanding your institution's existing processes, challenges, and goals. Through personalized discussions and a product demonstration, we explore how EDBA can support your academic and administrative requirements.",
+    desc: "We begin by understanding your institution's existing processes, challenges, and goals. Through personalized discussions and tailored demonstrations, we map how EDBA accelerates academic excellence and operational efficiency.",
     icon: Search,
-    color: "from-blue-600 to-indigo-600",
-    glow: "shadow-blue-500/30",
-    accent: "text-blue-600",
-    bg: "bg-blue-50",
-    border: "border-blue-200",
+    image: "/images/journey/step-1-discover.jpg",
+    badgeColor: "bg-blue-600 text-white",
+    accentBg: "bg-blue-50",
+    accentText: "text-blue-700",
+    accentBorder: "border-blue-200/80",
+    floatingBadges: [
+      {
+        icon: FileCheck2,
+        title: "Needs Assessment Complete",
+        subtitle: "360° Workflow Mapped",
+        position: "top-4 left-4 sm:top-6 sm:left-6",
+        colorClass: "text-blue-600 bg-blue-50 border-blue-100",
+      },
+      {
+        icon: Sparkles,
+        title: "Personalized Roadmap Ready",
+        subtitle: "Aligned with Institutional Goals",
+        position: "bottom-4 right-4 sm:bottom-6 sm:right-6",
+        colorClass: "text-indigo-600 bg-indigo-50 border-indigo-100",
+      },
+    ],
     highlights: [
-      "Understanding your workflows",
-      "Product demonstration",
-      "Personalized consultation",
-      "Goals & requirements mapping",
+      "In-depth workflow & operations assessment",
+      "Interactive leadership consultation",
+      "Custom product demonstration",
+      "Institutional transformation blueprint",
     ],
   },
   {
-    no: "2",
+    id: "customize",
+    no: "02",
+    stepNumber: 2,
     title: "Customize",
+    tagline: "Tailored Configuration",
     subtitle: "Configure EDBA Around Your Requirements",
-    desc: "Every educational institution works differently. We align EDBA with your institution's workflows, requirements, and operational processes to create a solution that fits your needs.",
+    desc: "Every educational institution operates uniquely. We configure EDBA to fit your exact grading structures, department hierarchies, fee rules, and administrative workflows without forcing rigid templates.",
     icon: Settings,
-    color: "from-cyan-500 to-blue-600",
-    glow: "shadow-cyan-500/30",
-    accent: "text-cyan-700",
-    bg: "bg-cyan-50",
-    border: "border-cyan-200",
+    image: "/images/journey/step-2-customize.jpg",
+    badgeColor: "bg-cyan-600 text-white",
+    accentBg: "bg-cyan-50",
+    accentText: "text-cyan-800",
+    accentBorder: "border-cyan-200/80",
+    floatingBadges: [
+      {
+        icon: Sliders,
+        title: "Custom Workflows Active",
+        subtitle: "Curriculum & Timetables Configured",
+        position: "top-4 left-4 sm:top-6 sm:left-6",
+        colorClass: "text-cyan-600 bg-cyan-50 border-cyan-100",
+      },
+      {
+        icon: ShieldCheck,
+        title: "Granular RBAC Security",
+        subtitle: "Role-Based Access Verified",
+        position: "bottom-4 right-4 sm:bottom-6 sm:right-6",
+        colorClass: "text-blue-600 bg-blue-50 border-blue-100",
+      },
+    ],
     highlights: [
-      "Institution-specific configuration",
-      "Workflow alignment",
-      "Flexible module setup",
-      "Tailored data structures",
+      "Institution-specific module configuration",
+      "Automated timetable & academic scheduling",
+      "Flexible fee structures & payment gateways",
+      "Role-based permission architecture",
     ],
   },
   {
-    no: "3",
+    id: "implement",
+    no: "03",
+    stepNumber: 3,
     title: "Implement",
+    tagline: "Adoption & Rollout",
     subtitle: "Connect Your Teams and Simplify Adoption",
-    desc: "Our team supports the implementation process, including system configuration, data preparation, user access, and guidance for administrators and staff to help ensure a smooth transition to EDBA.",
+    desc: "Our engineering and onboarding team manages full deployment—from secure data migration and SIS setup to hands-on faculty and staff training—guaranteeing a frictionless transition with zero downtime.",
     icon: Zap,
-    color: "from-violet-600 to-purple-600",
-    glow: "shadow-violet-500/30",
-    accent: "text-violet-700",
-    bg: "bg-violet-50",
-    border: "border-violet-200",
+    image: "/images/journey/step-3-implement.jpg",
+    badgeColor: "bg-violet-600 text-white",
+    accentBg: "bg-violet-50",
+    accentText: "text-violet-800",
+    accentBorder: "border-violet-200/80",
+    floatingBadges: [
+      {
+        icon: Cloud,
+        title: "Uploaded to Cloud",
+        subtitle: "Encrypted & Secure Sync",
+        position: "top-4 left-4 sm:top-6 sm:left-6",
+        colorClass: "text-blue-600 bg-blue-50 border-blue-100",
+      },
+      {
+        icon: Users,
+        title: "Faculty & Staff Onboarded",
+        subtitle: "100% Adoption Milestone",
+        position: "bottom-4 right-4 sm:bottom-6 sm:right-6",
+        colorClass: "text-violet-600 bg-violet-50 border-violet-100",
+      },
+    ],
     highlights: [
-      "System configuration & setup",
-      "Data preparation & migration",
-      "User access management",
-      "Staff onboarding guidance",
+      "Turnkey data preparation & historical migration",
+      "Interactive flat panel & classroom sync",
+      "Role-specific training for staff & faculty",
+      "Dedicated deployment manager on-call",
     ],
   },
   {
-    no: "4",
+    id: "grow",
+    no: "04",
+    stepNumber: 4,
     title: "Grow",
+    tagline: "Continuous Excellence",
     subtitle: "Continuous Support for Lasting Success",
-    desc: "As your institution evolves, EDBA supports your ongoing digital journey through technical assistance, system improvements, and guidance to help you make the most of your education management platform.",
+    desc: "Your digital transformation continues long after rollout. EDBA provides 24/7 technical monitoring, regular software enhancements, and ongoing success reviews to ensure your institution remains at the cutting edge.",
     icon: TrendingUp,
-    color: "from-emerald-600 to-teal-600",
-    glow: "shadow-emerald-500/30",
-    accent: "text-emerald-700",
-    bg: "bg-emerald-50",
-    border: "border-emerald-200",
+    image: "/images/journey/step-4-grow.jpg",
+    badgeColor: "bg-emerald-600 text-white",
+    accentBg: "bg-emerald-50",
+    accentText: "text-emerald-800",
+    accentBorder: "border-emerald-200/80",
+    floatingBadges: [
+      {
+        icon: TrendingUp,
+        title: "99.98% System Uptime",
+        subtitle: "High-Availability Cloud",
+        position: "top-4 left-4 sm:top-6 sm:left-6",
+        colorClass: "text-emerald-600 bg-emerald-50 border-emerald-100",
+      },
+      {
+        icon: HeartHandshake,
+        title: "Dedicated Success Partner",
+        subtitle: "Proactive Priority Support",
+        position: "bottom-4 right-4 sm:bottom-6 sm:right-6",
+        colorClass: "text-teal-600 bg-teal-50 border-teal-100",
+      },
+    ],
     highlights: [
-      "Ongoing technical assistance",
-      "System improvements",
-      "Feature updates & enhancements",
-      "Dedicated support partnership",
+      "24/7 high-availability infrastructure monitoring",
+      "Automatic quarterly feature upgrades",
+      "Priority SLA & dedicated account manager",
+      "Annual institutional growth analytics reviews",
     ],
   },
 ];
 
 export default function DigitalTransformationJourney() {
-  const [activeStep, setActiveStep] = useState(0);
-  const step = steps[activeStep];
-  const StepIcon = step.icon;
-
   return (
     <section
       id="journey"
-      className="py-20 sm:py-28 bg-white border-b border-slate-200/80 overflow-hidden"
+      className="py-20 sm:py-28 bg-gradient-to-b from-white via-slate-50/60 to-white border-b border-slate-200/80 relative"
     >
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-
-        {/* Header */}
+      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-14"
+          className="text-center max-w-3xl mx-auto mb-14 sm:mb-20"
         >
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200/70 mb-5 shadow-xs">
-            <Zap className="w-3.5 h-3.5" aria-hidden="true" />
-            Digital Transformation
-          </span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50/90 border border-blue-200/80 mb-5 shadow-xs backdrop-blur-sm">
+            <Zap className="w-3.5 h-3.5 text-blue-600" aria-hidden="true" />
+            <span>Digital Transformation</span>
+          </div>
+
           <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight text-slate-900 tracking-tight mb-4">
             4 Simple Steps Towards{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500">
               Digital Transformation
             </span>
           </h2>
-          <p className="text-slate-600 text-base sm:text-lg font-semibold mb-2">
+
+          <p className="text-slate-700 text-base sm:text-lg font-semibold mb-2">
             Your Institution's Journey with EDBA
           </p>
-          <p className="text-slate-500 text-base leading-relaxed font-normal">
-            From your first discussion to ongoing growth, EDBA is your partner in digital education management.
+          <p className="text-slate-500 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto mb-6">
+            From initial consultation to campus-wide deployment and continuous evolution, EDBA is your dedicated partner in modern education management.
           </p>
+
+          {/* Stacking Deck Scroll Cue */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100/90 border border-slate-200/80 text-xs font-bold text-slate-600 shadow-2xs">
+            <Layers className="w-3.5 h-3.5 text-blue-600" />
+            <span>Scroll vertically — cards stack and overlap as you navigate</span>
+            <ArrowDown className="w-3.5 h-3.5 text-slate-400 animate-bounce" />
+          </div>
         </motion.div>
 
-        {/* Step Tabs */}
-        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-10">
-          {steps.map((s, i) => {
-            const Icon = s.icon;
+        {/* TEACHMINT-STYLE STACKING CARDS CONTAINER (Direct siblings in same sticky context) */}
+        <div className="relative">
+          {steps.map((step, index) => {
+            const isLast = index === steps.length - 1;
+
             return (
-              <button
-                key={i}
-                onClick={() => setActiveStep(i)}
-                className={`flex items-center gap-3 px-5 py-3.5 rounded-2xl border font-semibold text-sm transition-all duration-200 cursor-pointer ${
-                  i === activeStep
-                    ? `bg-gradient-to-r ${s.color} text-white border-transparent shadow-lg ${s.glow}`
-                    : "bg-white border-slate-200 text-slate-600 hover:border-slate-300 hover:shadow-sm"
-                }`}
+              <div
+                key={step.id}
+                className="sticky w-full bg-white rounded-3xl sm:rounded-[36px] border border-slate-200/90 shadow-[0_-12px_36px_rgba(15,23,42,0.08),0_24px_48px_rgba(15,23,42,0.12)] overflow-hidden transition-all duration-300"
+                style={{
+                  // Clean sticky top position below navbar
+                  top: `${90 + index * 10}px`,
+                  // Higher zIndex ensures later cards slide directly over previous cards
+                  zIndex: (index + 1) * 10,
+                  // Ample vertical scroll margin before the next card rolls up over it
+                  marginBottom: isLast ? "0px" : "40vh",
+                }}
               >
-                <div className={`h-7 w-7 rounded-xl flex items-center justify-center ${
-                  i === activeStep ? "bg-white/15" : "bg-slate-100"
-                }`}>
-                  <Icon className={`h-4 w-4 ${i === activeStep ? "text-white" : "text-slate-500"}`} />
+                {/* Main Card Content (Teachmint Connected Classroom Layout) */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 relative">
+                  
+                  {/* Left Column: Descriptive Narrative & Capabilities */}
+                  <div className="lg:col-span-5 p-6 sm:p-8 lg:p-10 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-slate-100 bg-white">
+                    <div>
+
+                      {/* Step Heading */}
+                      <h3 className="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 leading-tight mb-3.5 tracking-tight">
+                        {step.subtitle}
+                      </h3>
+
+                      {/* Narrative */}
+                      <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-6 font-normal">
+                        {step.desc}
+                      </p>
+
+                      {/* Key Deliverables / Highlights */}
+                      <div className="space-y-2.5 mb-6">
+                        {step.highlights.map((item) => (
+                          <div
+                            key={item}
+                            className="flex items-start gap-2.5 p-2.5 rounded-xl bg-slate-50/90 border border-slate-100 hover:bg-slate-100/70 transition-colors"
+                          >
+                            <div className="h-5 w-5 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5 text-blue-700">
+                              <CheckCircle2 className="h-3.5 w-3.5" />
+                            </div>
+                            <span className="text-slate-700 text-xs sm:text-sm font-semibold leading-snug">
+                              {item}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Bottom Actions */}
+                    <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+                      <button
+                        type="button"
+                        onClick={() => window.dispatchEvent(new CustomEvent("open-demo-modal"))}
+                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-md shadow-blue-600/20 hover:shadow-lg hover:shadow-blue-600/30 transition-all cursor-pointer group active:scale-95"
+                      >
+                        <span>Book a Free Demo</span>
+                        <ChevronRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+                      </button>
+
+                      <span className="text-xs text-slate-400 font-medium">
+                        {isLast ? "Final Transformation Stage" : `Next: Step 0${index + 2}`}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Right Column: High-Resolution Visual with Floating Frosted Badges */}
+                  <div className="lg:col-span-7 bg-slate-900/5 relative p-4 sm:p-6 lg:p-7 flex items-center justify-center">
+                    <div className="relative w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg border border-slate-200/80 bg-slate-100 aspect-[4/3] sm:aspect-[16/11] lg:aspect-auto lg:h-[460px]">
+                      
+                      {/* Minimal Photorealistic Educational Technology Image */}
+                      <img
+                        src={step.image}
+                        alt={step.subtitle}
+                        className="w-full h-full object-cover object-center select-none"
+                        loading="lazy"
+                      />
+
+                      {/* Soft gradient overlay for badge contrast */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-slate-950/15 pointer-events-none" />
+
+                      {/* Floating Frosted Glass Badges (Teachmint Reference) */}
+                      {step.floatingBadges.map((badge) => {
+                        const BadgeIcon = badge.icon;
+                        return (
+                          <div
+                            key={badge.title}
+                            className={`absolute ${badge.position} z-20`}
+                          >
+                            <div className="flex items-center gap-3 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/92 backdrop-blur-md border border-white/80 shadow-xl shadow-slate-900/10 text-slate-900 hover:scale-[1.02] transition-transform duration-200">
+                              <div
+                                className={`h-8 w-8 sm:h-9 sm:w-9 rounded-xl flex items-center justify-center flex-shrink-0 border ${badge.colorClass}`}
+                              >
+                                <BadgeIcon className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
+                              </div>
+                              <div className="text-left pr-1">
+                                <p className="text-xs sm:text-sm font-bold text-slate-900 leading-tight">
+                                  {badge.title}
+                                </p>
+                                {badge.subtitle && (
+                                  <p className="text-[10px] sm:text-xs font-medium text-slate-500 leading-none mt-1">
+                                    {badge.subtitle}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+
+                      {/* Live Connected Ecosystem Pill */}
+                      <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 z-20">
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-950/70 backdrop-blur-md border border-white/20 text-white shadow-lg text-[11px] font-semibold">
+                          <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                          <span>Connected EDBA Ecosystem</span>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
                 </div>
-                <span>
-                  <span className="text-[10px] font-bold opacity-70 block leading-none mb-0.5">Step {s.no}</span>
-                  {s.title}
-                </span>
-              </button>
+              </div>
             );
           })}
         </div>
 
-        {/* Active Step Detail */}
+        {/* Bottom Partnership Banner */}
         <motion.div
-          key={activeStep}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center"
-        >
-          {/* Left: Visual */}
-          <div className="lg:col-span-5">
-            <div className={`relative rounded-3xl p-8 bg-gradient-to-br ${step.color} text-white shadow-2xl ${step.glow} overflow-hidden`}>
-              {/* Background circles */}
-              <div className="absolute top-0 right-0 h-48 w-48 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-              <div className="absolute bottom-0 left-0 h-36 w-36 bg-white/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
-
-              <div className="relative z-10">
-                {/* Step number */}
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="h-16 w-16 rounded-2xl bg-white/15 flex items-center justify-center border border-white/20">
-                    <StepIcon className="h-8 w-8 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-white/70 text-xs font-bold uppercase tracking-widest">Step {step.no} of 4</p>
-                    <p className="text-white text-xl font-extrabold">{step.title}</p>
-                  </div>
-                </div>
-
-                {/* Progress bar */}
-                <div className="mb-8">
-                  <div className="flex gap-2">
-                    {steps.map((_, i) => (
-                      <div
-                        key={i}
-                        className={`h-1.5 flex-1 rounded-full transition-all duration-300 ${
-                          i <= activeStep ? "bg-white" : "bg-white/30"
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  <p className="text-white/70 text-[10px] mt-2 font-medium">{activeStep + 1} of {steps.length} steps</p>
-                </div>
-
-                {/* Subtitle */}
-                <p className="text-white/90 text-base font-semibold mb-4">{step.subtitle}</p>
-
-                {/* Highlights */}
-                <div className="space-y-2.5">
-                  {step.highlights.map((h, i) => (
-                    <div key={i} className="flex items-center gap-2.5">
-                      <div className="h-5 w-5 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-                        <Check className="h-3 w-3 text-white" />
-                      </div>
-                      <span className="text-white/90 text-sm font-medium">{h}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right: Content */}
-          <div className="lg:col-span-7">
-            <div className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold ${step.bg} ${step.accent} border ${step.border} mb-5`}>
-              <span>Step {step.no}</span>
-              <span>•</span>
-              <span>{step.title}</span>
-            </div>
-
-            <h3 className="font-display font-extrabold text-2xl sm:text-3xl lg:text-4xl text-slate-900 leading-tight mb-5">
-              {step.subtitle}
-            </h3>
-
-            <p className="text-slate-600 text-base leading-relaxed mb-8 font-normal">
-              {step.desc}
-            </p>
-
-            {/* Navigation arrows */}
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => setActiveStep(Math.max(0, activeStep - 1))}
-                disabled={activeStep === 0}
-                className="h-10 w-10 rounded-xl border border-slate-200 flex items-center justify-center text-slate-500 hover:border-slate-300 hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"
-              >
-                <ArrowRight className="h-4 w-4 rotate-180" />
-              </button>
-
-              <button
-                onClick={() => setActiveStep(Math.min(steps.length - 1, activeStep + 1))}
-                disabled={activeStep === steps.length - 1}
-                className={`h-10 px-5 rounded-xl flex items-center gap-2 text-sm font-bold transition-all cursor-pointer bg-gradient-to-r ${step.color} text-white shadow-md disabled:opacity-30 disabled:cursor-not-allowed`}
-              >
-                <span>Next Step</span>
-                <ArrowRight className="h-4 w-4" />
-              </button>
-
-              <button
-                type="button"
-                onClick={() => window.dispatchEvent(new CustomEvent("open-demo-modal"))}
-                className="ml-4 text-sm font-semibold text-blue-600 hover:text-blue-700 hover:underline cursor-pointer"
-              >
-                Book a Free Demo →
-              </button>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Bottom tagline */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="mt-14 text-center p-6 bg-slate-50 border border-slate-200 rounded-2xl max-w-2xl mx-auto"
+          transition={{ delay: 0.2 }}
+          className="mt-16 sm:mt-24 text-center p-6 sm:p-8 bg-white border border-slate-200/80 rounded-2xl sm:rounded-3xl max-w-3xl mx-auto shadow-xs"
         >
-          <p className="text-slate-600 text-sm leading-relaxed">
-            <span className="font-bold text-slate-800">From your first discussion to ongoing growth,</span> EDBA is your partner in digital education management — every step of the way.
-          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            <div className="h-9 w-9 rounded-full bg-blue-50 border border-blue-200/60 flex items-center justify-center text-blue-600 flex-shrink-0 shadow-xs">
+              <Sparkles className="h-4.5 w-4.5" />
+            </div>
+            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed text-center sm:text-left">
+              <span className="font-bold text-slate-900">From your first discussion to campus-wide growth,</span> EDBA is your partner in digital education management — backed by dedicated experts every step of the way.
+            </p>
+          </div>
         </motion.div>
 
       </div>

@@ -283,29 +283,24 @@ export default function EdbaEcosystem() {
                   }
                   className="flex flex-col gap-3.5"
                 >
-                  {/* 1. Number pill */}
-                  <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-extrabold tracking-wider text-white bg-blue-600/90 rounded-full px-2.5 py-0.5 inline-block shadow-xs">
-                      {String(activeIndex + 1).padStart(2, "0")}
-                    </span>
-
-                    {/* Mobile swipe hint */}
-                    <span className="text-[10px] text-slate-400 font-medium min-[1000px]:hidden">
+                  {/* Mobile swipe hint */}
+                  <div className="flex items-center justify-end min-[1000px]:hidden">
+                    <span className="text-[10px] text-slate-400 font-medium">
                       Swipe left / right →
                     </span>
                   </div>
 
-                  {/* 2. Title h3 */}
+                  {/* 1. Title h3 */}
                   <h3 className="text-[20px] sm:text-[24px] min-[1000px]:text-[28px] font-extrabold tracking-tight leading-tight text-white">
                     {activeModule.title}
                   </h3>
 
-                  {/* 3. Description */}
+                  {/* 2. Description */}
                   <p className="text-[14px] sm:text-[15px] leading-relaxed text-slate-200">
                     {activeModule.description}
                   </p>
 
-                  {/* 4. KEY CAPABILITIES label + Chips in semantic <ul> */}
+                  {/* 3. KEY CAPABILITIES label + Chips in semantic <ul> */}
                   <div className="pt-1">
                     <span className="text-[11px] uppercase tracking-wider font-bold text-slate-300 block mb-2">
                       KEY CAPABILITIES
@@ -324,6 +319,22 @@ export default function EdbaEcosystem() {
                 </motion.div>
               </AnimatePresence>
             </div>
+
+            {/* Full-Length Thin Loader Line at Bottom Border of Image Stage */}
+            <div className="absolute bottom-0 left-0 right-0 z-20 h-[2.5px] bg-slate-950/40 backdrop-blur-xs overflow-hidden">
+              {shouldReduceMotion ? (
+                <div className="w-full h-full bg-blue-500" />
+              ) : (
+                <div
+                  key={`stage-loader-${activeIndex}`}
+                  onAnimationEnd={handleNext}
+                  className="h-full bg-gradient-to-r from-blue-500 to-cyan-400 animate-rail-fill shadow-[0_0_8px_rgba(56,189,248,0.8)]"
+                  style={{
+                    animationPlayState: isPaused ? "paused" : "running",
+                  }}
+                />
+              )}
+            </div>
           </div>
 
           {/* PROGRESS RAIL (directly below the stage, mt-3.5) */}
@@ -334,7 +345,6 @@ export default function EdbaEcosystem() {
           >
             {ecosystemModules.map((m, idx) => {
               const isActive = idx === activeIndex;
-              const isPast = idx < activeIndex;
 
               return (
                 <button
@@ -351,33 +361,21 @@ export default function EdbaEcosystem() {
                   onKeyDown={(e) => handleKeyDown(e, idx)}
                   className="group min-h-[68px] text-left flex flex-col gap-2 cursor-pointer focus:outline-hidden focus-visible:outline-2 focus-visible:outline-blue-600 focus-visible:outline-offset-2 rounded-lg p-1.5 min-w-[150px] min-[1000px]:min-w-0 shrink-0 snap-start transition-colors"
                 >
-                  {/* 3px rounded bar track */}
+                  {/* Indicator track: Static Dark Blue for the image in the box, static Gray for rest (not a loader) */}
                   <div className="w-full h-[3px] bg-slate-200 rounded-full overflow-hidden">
-                    {/* Fill element */}
-                    {isPast && (
-                      <div className="w-full h-full bg-blue-600 rounded-full" />
-                    )}
-                    {isActive && (
-                      shouldReduceMotion ? (
-                        <div className="w-full h-full bg-blue-600 rounded-full" />
-                      ) : (
-                        <div
-                          key={`rail-fill-${activeIndex}`}
-                          onAnimationEnd={handleNext}
-                          className="h-full bg-blue-600 rounded-full animate-rail-fill"
-                          style={{
-                            animationPlayState: isPaused ? "paused" : "running",
-                          }}
-                        />
-                      )
-                    )}
-                    {!isActive && !isPast && (
-                      <div className="w-0 h-full bg-blue-600 rounded-full" />
-                    )}
+                    <div
+                      className={`h-full w-full rounded-full transition-colors duration-200 ${
+                        isActive ? "bg-blue-600" : "bg-slate-200"
+                      }`}
+                    />
                   </div>
 
                   {/* Segment number */}
-                  <span className="text-[11px] font-bold text-blue-600 tracking-wider">
+                  <span
+                    className={`text-[11px] font-bold tracking-wider transition-colors ${
+                      isActive ? "text-blue-600 font-extrabold" : "text-slate-400 group-hover:text-slate-600"
+                    }`}
+                  >
                     {String(idx + 1).padStart(2, "0")}
                   </span>
 
@@ -385,7 +383,7 @@ export default function EdbaEcosystem() {
                   <span
                     className={`text-[12px] font-semibold leading-snug transition-colors ${
                       isActive
-                        ? "text-slate-900"
+                        ? "text-slate-900 font-bold"
                         : "text-slate-600 group-hover:text-slate-800"
                     }`}
                   >
