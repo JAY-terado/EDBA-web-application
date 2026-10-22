@@ -11,14 +11,14 @@ export const PrivacyPage: React.FC = () => {
     <div className="min-h-screen bg-[#f8fafc] flex flex-col justify-between font-sans selection:bg-blue-600 selection:text-white">
       
       {/* Header Bar */}
-      <header className="w-full bg-white/80 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-50">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5 flex justify-between items-center">
+      <header className="w-full apple-glass sticky top-0 z-50">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-3.5 sm:py-4 flex justify-between items-center">
           <Link
             to="/"
-            className="flex items-center gap-2 group cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-600 rounded-md p-1 min-h-[44px]"
+            className="flex items-center gap-2 group cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-600 rounded-full px-3 py-1.5 hover:bg-black/[0.04] transition-all min-h-[44px]"
           >
             <ArrowLeft className="h-4 w-4 text-slate-500 group-hover:-translate-x-1 transition-transform" />
-            <span className="text-sm font-semibold text-slate-600 group-hover:text-slate-950 transition-colors">
+            <span className="text-sm font-semibold text-slate-700 group-hover:text-slate-950 transition-colors">
               Back to Home
             </span>
           </Link>

@@ -29,26 +29,29 @@ export default function Navbar() {
   return (
     <nav
       aria-label="Main Navigation"
-      className={`fixed left-1/2 -translate-x-1/2 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] max-w-[1440px] z-50 transition-all duration-300 rounded-2xl ${
+      className={`fixed left-1/2 -translate-x-1/2 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] max-w-[1440px] z-50 transition-all duration-300 rounded-full ${
         scrolled
-          ? "top-2.5 sm:top-3 py-2.5 sm:py-3 bg-white/90 backdrop-blur-xl border border-slate-200/80 shadow-[0_8px_30px_rgb(0,0,0,0.08)]"
-          : "top-3 sm:top-4 py-3 sm:py-3.5 bg-white/70 backdrop-blur-lg border border-slate-200/50 shadow-[0_4px_20px_rgb(0,0,0,0.04)]"
+          ? "top-2.5 sm:top-3 py-2 sm:py-2.5 apple-glass-scrolled"
+          : "top-3 sm:top-4 py-2.5 sm:py-3 apple-glass"
       }`}
     >
-      <div className="w-full px-3 sm:px-6 lg:px-8">
+      <div className="w-full px-3.5 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-blue-600 rounded-lg p-1">
+          <Link
+            to="/"
+            className="flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-blue-600 rounded-full p-1 transition-transform hover:scale-[1.02]"
+          >
             <img src="/logo.png" alt="EDBA Logo" className="h-7 sm:h-8 w-auto" />
           </Link>
 
-          {/* Desktop Nav Links */}
-          <div className="hidden md:flex items-center gap-5 lg:gap-8">
+          {/* Desktop Nav Links with Apple-style rounded pill hover */}
+          <div className="hidden md:flex items-center gap-1 lg:gap-1.5">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-semibold text-slate-600 hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 rounded-md px-2 py-1 transition-colors duration-200"
+                className="text-[13px] font-medium text-slate-700 hover:text-slate-950 px-3.5 py-1.5 rounded-full hover:bg-black/[0.04] active:bg-black/[0.08] transition-all duration-150 focus-visible:ring-2 focus-visible:ring-blue-600"
               >
                 {link.name}
               </a>
@@ -56,21 +59,22 @@ export default function Navbar() {
           </div>
 
           {/* Action Buttons */}
-          <div className="hidden md:flex items-center gap-2.5 lg:gap-3">
+          <div className="hidden md:flex items-center gap-2">
             <a
               href="https://appv1.edba.io/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-semibold text-slate-700 hover:text-slate-950 focus-visible:ring-2 focus-visible:ring-blue-600 px-3.5 py-2 rounded-xl transition-colors"
+              className="text-[13px] font-medium text-slate-700 hover:text-slate-950 px-3.5 py-1.5 rounded-full hover:bg-black/[0.04] active:bg-black/[0.08] transition-all duration-150 focus-visible:ring-2 focus-visible:ring-blue-600"
             >
               Log In
             </a>
             <button
+              type="button"
               onClick={handleDemoClick}
-              className="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 transition-all rounded-xl shadow-sm shadow-blue-500/25 hover:shadow-md hover:shadow-blue-500/30 group cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+              className="inline-flex items-center justify-center px-4 py-1.5 text-[13px] font-semibold text-white bg-blue-600 hover:bg-blue-500 active:bg-blue-700 transition-all duration-150 rounded-full shadow-[0_2px_8px_rgba(37,99,235,0.28)] hover:shadow-[0_4px_14px_rgba(37,99,235,0.38)] cursor-pointer group focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
             >
               <span>Book a Free Demo</span>
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+              <ArrowRight className="ml-1.5 h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true" />
             </button>
           </div>
 
@@ -78,11 +82,11 @@ export default function Navbar() {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="min-h-[44px] min-w-[44px] p-2.5 rounded-xl text-slate-700 hover:text-slate-950 hover:bg-slate-100/80 focus-visible:ring-2 focus-visible:ring-blue-600 focus:outline-none transition-colors"
+              className="min-h-[44px] min-w-[44px] p-2 rounded-full text-slate-700 hover:text-slate-950 hover:bg-black/[0.04] focus-visible:ring-2 focus-visible:ring-blue-600 focus:outline-none transition-colors"
               aria-label="Toggle navigation menu"
               aria-expanded={isOpen}
             >
-              {isOpen ? <X className="h-6 w-6" aria-hidden="true" /> : <Menu className="h-6 w-6" aria-hidden="true" />}
+              {isOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
             </button>
           </div>
         </div>
@@ -90,40 +94,41 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       <div
-        className={`absolute top-[calc(100%+8px)] left-0 right-0 z-45 p-5 sm:p-6 rounded-2xl bg-white/95 backdrop-blur-2xl border border-slate-200/80 shadow-2xl transition-all duration-300 md:hidden ${
-          isOpen ? "translate-y-0 opacity-100 pointer-events-auto" : "-translate-y-4 opacity-0 pointer-events-none"
+        className={`absolute top-[calc(100%+8px)] left-0 right-0 z-45 p-5 sm:p-6 rounded-3xl apple-glass shadow-[0_24px_48px_rgba(0,0,0,0.1)] transition-all duration-300 md:hidden ${
+          isOpen ? "translate-y-0 opacity-100 pointer-events-auto" : "-translate-y-3 opacity-0 pointer-events-none"
         }`}
       >
-        <div className="space-y-5">
+        <div className="space-y-4">
           <div className="flex flex-col gap-1 items-center">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="text-base font-semibold text-slate-800 hover:text-blue-600 hover:bg-slate-50 py-3 px-4 rounded-xl transition-all w-full text-center duration-200 min-h-[44px] flex items-center justify-center"
+                className="text-sm font-semibold text-slate-800 hover:text-blue-600 hover:bg-black/[0.04] py-2.5 px-4 rounded-xl transition-all w-full text-center duration-150 min-h-[44px] flex items-center justify-center"
               >
                 {link.name}
               </a>
             ))}
           </div>
 
-          <div className="flex flex-col gap-3 pt-4 border-t border-slate-100">
+          <div className="flex flex-col gap-2.5 pt-3 border-t border-slate-200/60">
             <a
               href="https://appv1.edba.io/"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsOpen(false)}
-              className="w-full py-3 text-center font-semibold text-sm text-slate-800 hover:bg-slate-50 rounded-xl transition-colors border border-slate-200 duration-200 min-h-[44px] flex items-center justify-center"
+              className="w-full py-2.5 text-center font-semibold text-sm text-slate-800 hover:bg-black/[0.04] rounded-full transition-colors border border-slate-200/80 duration-150 min-h-[44px] flex items-center justify-center"
             >
               Log In
             </a>
             <button
+              type="button"
               onClick={(e) => {
                 setIsOpen(false);
                 handleDemoClick(e);
               }}
-              className="w-full py-3 text-center font-semibold text-sm text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-lg shadow-blue-500/15 transition-all duration-200 cursor-pointer min-h-[44px] flex items-center justify-center"
+              className="w-full py-2.5 text-center font-semibold text-sm text-white bg-blue-600 hover:bg-blue-500 rounded-full shadow-lg shadow-blue-500/25 transition-all duration-150 cursor-pointer min-h-[44px] flex items-center justify-center"
             >
               Book a Free Demo
             </button>

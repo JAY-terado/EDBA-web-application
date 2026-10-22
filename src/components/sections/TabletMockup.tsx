@@ -11,7 +11,7 @@ export const TabletMockup: React.FC<TabletMockupProps> = ({ className = "" }) =>
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <div className={`relative w-full max-w-[580px] mx-auto select-none ${className}`}>
+    <div className={`relative w-full max-w-[620px] sm:max-w-[680px] lg:max-w-[720px] xl:max-w-[780px] 2xl:max-w-[840px] mx-auto select-none ${className}`}>
       {/* 3D Floating Tablet Wrapper */}
       <motion.div
         animate={

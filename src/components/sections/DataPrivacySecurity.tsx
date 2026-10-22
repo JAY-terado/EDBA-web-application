@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ShieldCheck, Lock, Share2, CreditCard, Database, Users, ArrowRight } from "lucide-react";
+import { ShieldCheck, Lock, Share2, CreditCard, Database, Users } from "lucide-react";
 
 const privacyPillars = [
   {
@@ -87,9 +87,16 @@ export default function DataPrivacySecurity() {
         </motion.div>
 
         {/* Privacy Pillars Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-5">
           {privacyPillars.map((pillar, i) => {
             const Icon = pillar.icon;
+            const columnClasses =
+              i === 3
+                ? "md:col-span-1 lg:col-span-2 lg:col-start-2"
+                : i === 4
+                ? "md:col-span-2 md:max-w-md md:mx-auto w-full lg:max-w-none lg:col-span-2 lg:col-start-4"
+                : "md:col-span-1 lg:col-span-2";
+
             return (
               <motion.div
                 key={i}
@@ -97,9 +104,7 @@ export default function DataPrivacySecurity() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`group relative bg-slate-900/80 border border-slate-800/80 hover:border-slate-700 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl ${
-                  i === 4 ? "md:col-span-2 lg:col-span-2" : ""
-                }`}
+                className={`group relative bg-slate-900/80 border border-slate-800/80 hover:border-slate-700 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl flex flex-col h-full ${columnClasses}`}
               >
                 {/* Icon */}
                 <div className={`h-12 w-12 rounded-xl bg-gradient-to-tr ${pillar.color} flex items-center justify-center text-white mb-5 shadow-lg`}>
@@ -110,7 +115,7 @@ export default function DataPrivacySecurity() {
                 <h3 className="font-display font-bold text-white text-base mb-3 leading-snug">
                   {pillar.title}
                 </h3>
-                <p className="text-slate-400 text-sm leading-relaxed font-normal">
+                <p className="text-slate-400 text-sm leading-relaxed font-normal flex-1">
                   {pillar.desc}
                 </p>
 
@@ -121,30 +126,24 @@ export default function DataPrivacySecurity() {
           })}
         </div>
 
-        {/* Bottom tagline + CTA */}
+        {/* Bottom Trust Assurance Card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
-          className="mt-14 text-center"
+          className="mt-12 sm:mt-14 text-center"
         >
-          <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-8 max-w-2xl mx-auto">
-            <ShieldCheck className="h-10 w-10 text-blue-400 mx-auto mb-4" />
-            <p className="text-slate-300 text-base font-semibold mb-2">
+          <div className="relative bg-gradient-to-b from-slate-900/70 to-slate-900/40 border border-slate-800/80 rounded-2xl p-6 sm:p-8 max-w-2xl mx-auto shadow-xl backdrop-blur-xs">
+            <div className="h-12 w-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mx-auto mb-4 text-blue-400 shadow-inner">
+              <ShieldCheck className="h-6 w-6" />
+            </div>
+            <h4 className="text-slate-200 text-base sm:text-lg font-semibold leading-snug mb-2 max-w-xl mx-auto">
               EDBA — Empowering education through responsible data management, controlled access, and digital trust.
-            </p>
-            <p className="text-slate-500 text-sm mb-6">
+            </h4>
+            <p className="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto font-normal">
               Built for schools, colleges, and educational institutions that prioritize data responsibility.
             </p>
-            <button
-              type="button"
-              onClick={() => window.dispatchEvent(new CustomEvent("open-demo-modal"))}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl transition-all shadow-lg shadow-blue-500/25 cursor-pointer group"
-            >
-              <span>Learn About Our Security Practices</span>
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </button>
           </div>
         </motion.div>
 

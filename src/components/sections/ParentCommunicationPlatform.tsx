@@ -37,7 +37,7 @@ export default function ParentCommunicationPlatform() {
       className="py-20 sm:py-28 bg-white border-b border-slate-200/80 overflow-hidden"
     >
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 xl:gap-14 items-center">
 
           {/* Left: Text Content */}
           <motion.div
@@ -105,7 +105,7 @@ export default function ParentCommunicationPlatform() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-6 relative flex flex-col items-center justify-center"
+            className="lg:col-span-6 relative flex flex-col items-center justify-center w-full"
           >
             <TabletMockup />
           </motion.div>

@@ -4,18 +4,7 @@ import { ArrowRight, Sparkles, Star } from "lucide-react";
 import HeroShowcase from "./HeroShowcase";
 import { siteStats } from "@/data/siteStats";
 
-const heroTrustLogos = [
-  { name: "VIVA Group of Institutes", logo: "/LOGOS/vivalogo.png" },
-  { name: "AIKTC Technical Campus", logo: "/LOGOS/AIKTC.png" },
-  { name: "Saraswati College of Eng.", logo: "/LOGOS/Saraswati_logo.jpg" },
-  { name: "Rizvi College of Arts & Sci.", logo: "/LOGOS/rizvi_logo.png" },
-  { name: "Sardar Patel Institute of Tech", logo: "/LOGOS/SPIT.jpg" },
-  { name: "New Horizon Inst. of Tech", logo: "/LOGOS/NHITM_LOGO_new_logo.png" },
-  { name: "Rajiv Gandhi Inst. of Tech", logo: "/LOGOS/rgit-logo.png" },
-  { name: "Muljibhai Mehta International", logo: "/LOGOS/Logo.jpg" },
-  { name: "Lokmanya Tilak College of Eng.", logo: "/LOGOS/LTCE_fav.png" },
-  { name: "Bharat College Of Engineering", logo: "/LOGOS/b.jpg" },
-];
+
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -29,7 +18,7 @@ const itemVariants = {
 
 export const Hero: React.FC = () => {
   return (
-    <section className="relative pt-28 pb-10 sm:pt-32 sm:pb-12 lg:pt-36 lg:pb-14 hero-compact overflow-x-clip overflow-y-visible bg-gradient-to-b from-blue-50/50 via-white/90 to-[#f8fafc]">
+    <section className="relative pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24 hero-compact overflow-x-clip overflow-y-visible bg-gradient-to-b from-blue-50/50 via-white/90 to-[#f8fafc]">
       {/* Background glows */}
       <div className="absolute top-10 right-[10%] h-[400px] w-[400px] sm:h-[520px] sm:w-[520px] bg-blue-500/7 rounded-full blur-[130px] pointer-events-none" />
       <div className="absolute bottom-0 left-[5%] h-[280px] w-[280px] sm:h-[380px] sm:w-[380px] bg-indigo-500/7 rounded-full blur-[110px] pointer-events-none" />
@@ -168,33 +157,7 @@ export const Hero: React.FC = () => {
 
         </div>
 
-        {/* ── Logo Marquee ── */}
-        <div className="mt-14 sm:mt-16 lg:mt-20 pt-6 sm:pt-8 border-t border-slate-200/70 select-none">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono whitespace-nowrap flex-shrink-0">
-              As trusted by
-            </span>
-            <div className="relative w-full overflow-hidden">
-              <div className="absolute top-0 bottom-0 left-0 w-6 sm:w-20 bg-gradient-to-r from-[#f8fafc] to-transparent z-10 pointer-events-none" />
-              <div className="absolute top-0 bottom-0 right-0 w-6 sm:w-20 bg-gradient-to-l from-[#f8fafc] to-transparent z-10 pointer-events-none" />
-              <div className="flex w-max animate-marquee-left gap-8 sm:gap-12 lg:gap-14 items-center py-1">
-                {[...heroTrustLogos, ...heroTrustLogos].map((client, idx) => (
-                  <div
-                    key={idx}
-                    className="h-8 sm:h-9 w-24 sm:w-28 flex items-center justify-center flex-shrink-0 transition-transform duration-200 hover:scale-105 cursor-pointer"
-                  >
-                    <img
-                      src={client.logo}
-                      alt={`${client.name} logo`}
-                      className="max-h-full max-w-full object-contain"
-                      loading="lazy"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+
 
       </div>
     </section>
