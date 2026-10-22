@@ -29,13 +29,13 @@ export default function Navbar() {
   return (
     <nav
       aria-label="Main Navigation"
-      className={`fixed left-1/2 -translate-x-1/2 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] max-w-[1440px] z-50 transition-all duration-300 rounded-full ${
+      className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ease-in-out ${
         scrolled
-          ? "top-2.5 sm:top-3 py-2 sm:py-2.5 apple-glass-scrolled"
-          : "top-3 sm:top-4 py-2.5 sm:py-3 apple-glass"
+          ? "top-2.5 sm:top-3.5 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2.5rem)] max-w-[1440px] rounded-full py-2 sm:py-2.5 apple-glass-scrolled"
+          : "top-0 w-full max-w-none rounded-none py-3.5 sm:py-4 apple-glass border-b border-slate-200/50 shadow-none border-x-0 border-t-0"
       }`}
     >
-      <div className="w-full px-3.5 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link
@@ -94,7 +94,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       <div
-        className={`absolute top-[calc(100%+8px)] left-0 right-0 z-45 p-5 sm:p-6 rounded-3xl apple-glass shadow-[0_24px_48px_rgba(0,0,0,0.1)] transition-all duration-300 md:hidden ${
+        className={`absolute top-[calc(100%+8px)] left-3 right-3 sm:left-4 sm:right-4 z-45 p-5 sm:p-6 rounded-3xl apple-glass shadow-[0_24px_48px_rgba(0,0,0,0.1)] transition-all duration-300 md:hidden ${
           isOpen ? "translate-y-0 opacity-100 pointer-events-auto" : "-translate-y-3 opacity-0 pointer-events-none"
         }`}
       >
