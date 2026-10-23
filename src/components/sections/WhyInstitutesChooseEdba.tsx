@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 import React, { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Building2, ArrowRight, Image as ImageIcon } from "lucide-react";
 
 // Dynamically resolve point images from /src/assets/why/ (e.g. point1.png, point2.png, etc.)
@@ -77,7 +77,17 @@ const benefits = [
 export default function WhyInstitutesChooseEdba() {
   const shouldReduceMotion = useReducedMotion();
   const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({});
+  const [activeMobileIdx, setActiveMobileIdx] = useState(0);
 
+  const handlePrev = () => {
+    setActiveMobileIdx((prev) => (prev > 0 ? prev - 1 : benefits.length - 1));
+  };
+
+  const handleNext = () => {
+    setActiveMobileIdx((prev) => (prev < benefits.length - 1 ? prev + 1 : 0));
+  };
+
+  // Desktop Card Renderer
   const renderCard = (b: (typeof benefits)[0], i: number) => {
     const pointNumber = i + 1;
     const imgSrc = getPointImage(pointNumber);
@@ -98,7 +108,7 @@ export default function WhyInstitutesChooseEdba() {
                 ease: [0.16, 1, 0.3, 1],
               }
         }
-        className="group rounded-[20px] border border-[#1F293D] bg-[#111A2E] p-4 sm:p-5 flex gap-3.5 sm:gap-4 items-start shadow-xl shadow-black/20 hover:border-blue-500/40 hover:shadow-blue-500/10 hover:-translate-y-0.5 transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] h-full min-w-[85vw] sm:min-w-[340px] md:min-w-0 snap-center shrink-0 md:shrink"
+        className="group rounded-[20px] border border-[#1F293D] bg-[#111A2E] p-4 sm:p-5 flex gap-3.5 sm:gap-4 items-start shadow-xl shadow-black/20 hover:border-blue-500/40 hover:shadow-blue-500/10 hover:-translate-y-0.5 transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] h-full min-w-0"
       >
         {/* LEFT: Round illustration */}
         <div className="shrink-0 pt-0.5">
@@ -177,11 +187,18 @@ export default function WhyInstitutesChooseEdba() {
     );
   };
 
+  const activeMobileBenefit = benefits[activeMobileIdx];
+  const activePointNumber = activeMobileIdx + 1;
+  const activeImgSrc = getPointImage(activePointNumber);
+  const activeHasValidImage = Boolean(
+    activeImgSrc && !imageErrors[activePointNumber]
+  );
+
   return (
     <section
       id="why-edba"
       aria-labelledby="why-edba-heading"
-      className="py-16 sm:py-20 bg-[#0B1220] border-y border-slate-800/80 relative overflow-hidden"
+      className="py-14 sm:py-20 bg-[#0B1220] border-y border-slate-800/80 relative overflow-hidden"
     >
       {/* Top radial blue glow background */}
       <div
@@ -195,8 +212,8 @@ export default function WhyInstitutesChooseEdba() {
 
       <div className="max-w-[1360px] mx-auto px-4 sm:px-6 relative z-10">
         {/* Header (centered, mb-10) */}
-        <div className="text-center max-w-4xl lg:max-w-5xl mx-auto mb-10 sm:mb-12">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-blue-400 bg-blue-500/10 border border-blue-500/30 mb-4 shadow-xs">
+        <div className="text-center max-w-4xl lg:max-w-5xl mx-auto mb-8 sm:mb-12">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-blue-400 bg-blue-500/10 border border-blue-500/30 mb-3 sm:mb-4 shadow-xs">
             <Building2 className="w-3.5 h-3.5" aria-hidden="true" />
             Why Institutes Choose EDBA
           </span>
@@ -204,22 +221,96 @@ export default function WhyInstitutesChooseEdba() {
             id="why-edba-heading"
             className="text-2xl sm:text-3xl lg:text-4xl xl:text-[42px] font-extrabold tracking-tight leading-[1.2] text-white text-balance"
           >
-            One platform that <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">cuts paperwork</span>, keeps parents informed and keeps fees on track.
+            One platform that{" "}
+            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              cuts paperwork
+            </span>
+            , keeps parents informed and keeps fees on track.
           </h2>
-          <p className="text-sm sm:text-base text-slate-300 max-w-2xl lg:max-w-3xl mx-auto mt-3.5 leading-relaxed text-balance">
-            Six powerful reasons leading educational institutions choose EDBA as their trusted management platform.
+          <p className="text-sm sm:text-base text-slate-300 max-w-4xl lg:max-w-5xl mx-auto mt-3 leading-relaxed">
+            Six powerful reasons leading educational institutions choose EDBA as
+            their trusted management platform.
           </p>
         </div>
 
-        {/* 3 Cards in 1st Row aligned & next 3 Cards in 2nd Row below - slidable on mobile screens */}
-        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-3 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-none">
-          {benefits.map((b, i) => renderCard(b, i))}
+        {/* ============================================================== */}
+        {/* MOBILE UI (< md): Interactive Step Carousel                   */}
+        {/* ============================================================== */}
+        <div className="block md:hidden">
+          {/* Featured Reason Card */}
+          <div className="relative overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.article
+                key={activeMobileIdx}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.2}
+                onDragEnd={(_e, { offset }) => {
+                  if (offset.x < -40) handleNext();
+                  else if (offset.x > 40) handlePrev();
+                }}
+                className="w-full rounded-[22px] border border-[#223049] bg-gradient-to-b from-[#121B30] to-[#0D1527] p-5 shadow-2xl shadow-black/40 touch-pan-y"
+              >
+                {/* Round Illustration */}
+                <div className="mb-3.5">
+                  {activeHasValidImage ? (
+                    <img
+                      src={activeImgSrc}
+                      alt={activeMobileBenefit.alt}
+                      width={68}
+                      height={68}
+                      className="w-16 h-16 rounded-full bg-white object-cover border-2 border-white/20 shadow-md shadow-blue-500/10"
+                    />
+                  ) : (
+                    <div
+                      className="w-16 h-16 rounded-full border-2 border-dashed border-slate-700 bg-slate-800 flex items-center justify-center text-slate-500"
+                      aria-hidden="true"
+                    >
+                      <ImageIcon className="w-6 h-6" />
+                    </div>
+                  )}
+                </div>
+
+                {/* Headline: Full-width clear hierarchy */}
+                <h3 className="text-white text-lg font-extrabold tracking-tight leading-snug mb-2">
+                  {activeMobileBenefit.headline}
+                </h3>
+
+                {/* Body description */}
+                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+                  {activeMobileBenefit.body}
+                </p>
+
+                {/* Module chips: Full width */}
+                <div className="pt-3 border-t border-slate-800/80">
+                  <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold block mb-2">
+                    Connected Modules
+                  </span>
+                  <ul className="flex flex-wrap gap-1.5 list-none p-0 m-0">
+                    {activeMobileBenefit.modules.map((mod) => (
+                      <li
+                        key={mod}
+                        className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-[#1C2640] border border-slate-700/80 text-slate-200"
+                      >
+                        {mod}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.article>
+            </AnimatePresence>
+          </div>
         </div>
 
-        {/* Mobile Swipe Hint */}
-        <div className="flex md:hidden items-center justify-center gap-1.5 mt-3 text-xs text-slate-400 select-none">
-          <span>Swipe to explore reasons</span>
-          <span>→</span>
+        {/* ============================================================== */}
+        {/* DESKTOP UI (>= md): 2x3 Grid */}
+        {/* ============================================================== */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5">
+          {benefits.map((b, i) => renderCard(b, i))}
         </div>
       </div>
     </section>

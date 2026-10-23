@@ -205,7 +205,7 @@ export default function DigitalTransformationJourney() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-14 sm:mb-20"
+          className="text-center max-w-4xl lg:max-w-5xl mx-auto mb-14 sm:mb-20"
         >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50/90 border border-blue-200/80 mb-5 shadow-xs backdrop-blur-sm">
             <Zap className="w-3.5 h-3.5 text-blue-600" aria-hidden="true" />
@@ -219,7 +219,7 @@ export default function DigitalTransformationJourney() {
             </span>
           </h2>
 
-          <p className="text-slate-500 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+          <p className="text-slate-500 text-sm sm:text-base lg:text-[16px] leading-relaxed max-w-4xl lg:max-w-5xl mx-auto">
             From initial consultation to campus-wide deployment and continuous evolution, EDBA is your dedicated partner in modern education management.
           </p>
         </motion.div>
@@ -234,12 +234,12 @@ export default function DigitalTransformationJourney() {
                 key={step.id}
                 className="sticky w-full bg-white rounded-2xl sm:rounded-3xl lg:rounded-[36px] border border-slate-200/90 shadow-[0_-12px_36px_rgba(15,23,42,0.08),0_24px_48px_rgba(15,23,42,0.12)] overflow-hidden transition-all duration-300"
                 style={{
-                  // Responsive sticky top position below navbar
-                  top: "clamp(68px, 9vh, 88px)",
+                  // Responsive sticky top position below navbar maintaining exact visual gap from screenshot
+                  top: "clamp(108px, 14vh, 128px)",
                   // Higher zIndex ensures later cards slide directly over previous cards
                   zIndex: (index + 1) * 10,
-                  // Smooth scroll distance between cards, 0 on last card to prevent blank space
-                  marginBottom: isLast ? "0px" : "36vh",
+                  // Full card height scroll distance (clamp 540px to 660px) so Card 4 overlaps Card 3 100%, and 0 on the last card so the screen immediately moves forward
+                  marginBottom: isLast ? 0 : "clamp(540px, 72vh, 660px)",
                 }}
               >
                 {/* Main Card Content (Teachmint Connected Classroom Layout) */}

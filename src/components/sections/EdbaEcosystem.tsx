@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { ecosystemModules } from "@/data/ecosystemModules";
 
 export default function EdbaEcosystem() {
@@ -211,7 +211,90 @@ export default function EdbaEcosystem() {
           </p>
         </div>
 
-        {/* Interactive Stage & Rail Container (manages hover/focus pause) */}
+        {/* ============================================================== */}
+        {/* MOBILE UI (< 1000px): Interactive Step Carousel               */}
+        {/* ============================================================== */}
+        <div className="block min-[1000px]:hidden">
+          {/* Active Mobile Card */}
+          <div
+            className="relative overflow-hidden rounded-[22px] border border-slate-800 bg-gradient-to-b from-slate-900 via-slate-900 to-[#0A101D] text-white shadow-2xl shadow-slate-900/30 touch-pan-y"
+            onTouchStart={() => setIsHovered(true)}
+            onTouchEnd={() => setIsHovered(false)}
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeIndex}
+                initial={shouldReduceMotion ? false : { opacity: 0, x: direction * 24 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={shouldReduceMotion ? undefined : { opacity: 0, x: -direction * 24 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.2}
+                onDragEnd={(_e, { offset }) => {
+                  if (offset.x < -40) handleNext();
+                  else if (offset.x > 40) handlePrev();
+                }}
+              >
+                {/* Module Image with top badge */}
+                <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-950 border-b border-slate-800/80">
+                  <img
+                    src={activeModule.image}
+                    alt={activeModule.alt}
+                    width={1024}
+                    height={565}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-black/30 pointer-events-none" />
+                </div>
+
+                {/* Content Body */}
+                <div className="p-5">
+                  <h3 className="text-white text-lg font-extrabold tracking-tight leading-snug mb-2">
+                    {activeModule.title}
+                  </h3>
+
+                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+                    {activeModule.description}
+                  </p>
+
+                  {/* Key Capabilities */}
+                  <div className="pt-3 border-t border-slate-800/80">
+                    <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold block mb-2">
+                      Key Capabilities
+                    </span>
+                    <ul className="flex flex-wrap gap-1.5 list-none p-0 m-0">
+                      {activeModule.capabilities.map((cap) => (
+                        <li
+                          key={cap}
+                          className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-[#1C2640] border border-slate-700/80 text-slate-200"
+                        >
+                          {cap}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Thin auto-advance progress loader */}
+            <div className="h-[2.5px] bg-slate-950 overflow-hidden">
+              <div
+                key={`mobile-stage-loader-${activeIndex}`}
+                onAnimationEnd={handleNext}
+                className="h-full bg-gradient-to-r from-blue-500 to-cyan-400 animate-rail-fill shadow-[0_0_8px_rgba(56,189,248,0.8)]"
+                style={{
+                  animationPlayState: isPaused ? "paused" : "running",
+                }}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* ============================================================== */}
+        {/* DESKTOP UI (>= 1000px): Interactive Stage & Progress Rail      */}
+        {/* ============================================================== */}
         <div
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
@@ -221,7 +304,7 @@ export default function EdbaEcosystem() {
               setIsFocused(false);
             }
           }}
-          className="w-full"
+          className="hidden min-[1000px]:block w-full"
         >
           {/* THE STAGE (main element - touch slidable) */}
           <div
@@ -229,10 +312,10 @@ export default function EdbaEcosystem() {
             onTouchEnd={handleTouchEnd}
             onPointerDown={handlePointerDown}
             onPointerUp={handlePointerUp}
-            className="relative overflow-hidden bg-slate-900 rounded-3xl shadow-[0_20px_44px_-18px_rgba(15,23,42,0.35)] min-[1000px]:min-h-[500px] stage-nest-hub flex flex-col min-[1000px]:block select-none cursor-grab active:cursor-grabbing touch-pan-y"
+            className="relative overflow-hidden bg-slate-900 rounded-3xl shadow-[0_20px_44px_-18px_rgba(15,23,42,0.35)] min-h-[500px] stage-nest-hub block select-none cursor-grab active:cursor-grabbing"
           >
             {/* Background Images Stack (crossfade 0.5s without blank frames) */}
-            <div className="relative w-full aspect-[16/10] min-[1000px]:aspect-auto min-[1000px]:absolute min-[1000px]:inset-0 min-[1000px]:h-full overflow-hidden bg-slate-900">
+            <div className="relative w-full aspect-auto absolute inset-0 h-full overflow-hidden bg-slate-900">
               {ecosystemModules.map((m, idx) => (
                 <img
                   key={m.title}
@@ -254,7 +337,7 @@ export default function EdbaEcosystem() {
 
             {/* Gradient Overlay: visible >= 1000px to ensure >= 4.5:1 text contrast */}
             <div
-              className="hidden min-[1000px]:block absolute inset-0 pointer-events-none z-[2]"
+              className="absolute inset-0 pointer-events-none z-[2]"
               style={{
                 background:
                   "linear-gradient(90deg, rgba(8,15,32,.92) 0%, rgba(8,15,32,.62) 42%, transparent 74%)",
@@ -268,7 +351,7 @@ export default function EdbaEcosystem() {
               role="tabpanel"
               aria-labelledby={`ecosystem-tab-${activeIndex}`}
               aria-live="off"
-              className="relative z-10 w-full p-5 sm:p-6 min-[1000px]:p-9 min-[1000px]:max-w-[500px] min-[1000px]:min-h-[440px] flex flex-col justify-center gap-3.5 text-white bg-slate-900 min-[1000px]:bg-transparent stage-nest-hub-card"
+              className="relative z-10 w-full p-9 max-w-[500px] min-h-[440px] flex flex-col justify-center gap-3.5 text-white bg-transparent stage-nest-hub-card"
             >
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
@@ -283,20 +366,13 @@ export default function EdbaEcosystem() {
                   }
                   className="flex flex-col gap-3.5"
                 >
-                  {/* Mobile swipe hint */}
-                  <div className="flex items-center justify-end min-[1000px]:hidden">
-                    <span className="text-[10px] text-slate-400 font-medium">
-                      Swipe left / right →
-                    </span>
-                  </div>
-
                   {/* 1. Title h3 */}
-                  <h3 className="text-[20px] sm:text-[24px] min-[1000px]:text-[28px] font-extrabold tracking-tight leading-tight text-white">
+                  <h3 className="text-[28px] font-extrabold tracking-tight leading-tight text-white">
                     {activeModule.title}
                   </h3>
 
                   {/* 2. Description */}
-                  <p className="text-[14px] sm:text-[15px] leading-relaxed text-slate-200">
+                  <p className="text-[15px] leading-relaxed text-slate-200">
                     {activeModule.description}
                   </p>
 
@@ -309,7 +385,7 @@ export default function EdbaEcosystem() {
                       {activeModule.capabilities.map((cap) => (
                         <li
                           key={cap}
-                          className="text-[11.5px] sm:text-[12.5px] font-semibold text-white bg-white/12 border border-white/28 rounded-full px-2.5 py-1 backdrop-blur-xs"
+                          className="text-[12.5px] font-semibold text-white bg-white/12 border border-white/28 rounded-full px-2.5 py-1 backdrop-blur-xs"
                         >
                           {cap}
                         </li>
@@ -341,7 +417,7 @@ export default function EdbaEcosystem() {
           <div
             role="tablist"
             aria-label="EDBA modules"
-            className="mt-3.5 grid min-[1000px]:grid-cols-8 gap-2.5 max-[999px]:flex max-[999px]:overflow-x-auto max-[999px]:snap-x max-[999px]:pb-2 max-[999px]:-mx-5 max-[999px]:px-5 scrollbar-none"
+            className="mt-3.5 grid grid-cols-8 gap-2.5"
           >
             {ecosystemModules.map((m, idx) => {
               const isActive = idx === activeIndex;
@@ -359,7 +435,7 @@ export default function EdbaEcosystem() {
                   tabIndex={isActive ? 0 : -1}
                   onClick={() => handleSelect(idx)}
                   onKeyDown={(e) => handleKeyDown(e, idx)}
-                  className="group min-h-[68px] text-left flex flex-col gap-2 cursor-pointer focus:outline-hidden focus-visible:outline-2 focus-visible:outline-blue-600 focus-visible:outline-offset-2 rounded-lg p-1.5 min-w-[150px] min-[1000px]:min-w-0 shrink-0 snap-start transition-colors"
+                  className="group min-h-[68px] text-left flex flex-col gap-2 cursor-pointer focus:outline-hidden focus-visible:outline-2 focus-visible:outline-blue-600 focus-visible:outline-offset-2 rounded-lg p-1.5 min-w-0 shrink transition-colors"
                 >
                   {/* Indicator track: Static Dark Blue for the image in the box, static Gray for rest (not a loader) */}
                   <div className="w-full h-[3px] bg-slate-200 rounded-full overflow-hidden">

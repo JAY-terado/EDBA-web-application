@@ -62,7 +62,7 @@ export default function TrustedInstitutions() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-10 sm:mb-14"
+          className="text-center max-w-4xl lg:max-w-5xl mx-auto mb-10 sm:mb-14"
         >
           <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200/70 mb-5 shadow-xs">
             <Building2 className="w-3.5 h-3.5" aria-hidden="true" />
@@ -74,7 +74,7 @@ export default function TrustedInstitutions() {
               Educational Institutions
             </span>
           </h2>
-          <p className="text-slate-500 text-base sm:text-lg leading-relaxed font-normal">
+          <p className="text-slate-500 text-sm sm:text-base lg:text-[17px] leading-relaxed font-normal max-w-4xl lg:max-w-5xl mx-auto">
             Institutions across India trust EDBA to manage their academic, administrative, and communication operations.
           </p>
         </motion.div>

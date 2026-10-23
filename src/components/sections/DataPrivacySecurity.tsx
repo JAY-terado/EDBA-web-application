@@ -69,20 +69,21 @@ export default function DataPrivacySecurity() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-14"
+          className="text-center max-w-5xl xl:max-w-[1160px] mx-auto mb-14"
         >
           <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-400 bg-blue-500/10 border border-blue-500/30 mb-5">
             <ShieldCheck className="w-3.5 h-3.5" aria-hidden="true" />
             Data Privacy & Security
           </span>
-          <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight text-white tracking-tight mb-4">
+          <h2 className="font-display font-extrabold text-2xl sm:text-3xl lg:text-4xl xl:text-[42px] leading-tight text-white tracking-tight mb-4 whitespace-normal lg:whitespace-nowrap">
             Protecting Institutional Data.{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-400">
               Building Digital Trust.
             </span>
           </h2>
-          <p className="text-gray-300 text-base sm:text-lg leading-relaxed font-normal">
-            EDBA is designed to help educational institutions manage student information, staff records, academic data, and administrative processes within a structured digital environment. With controlled access and organized information management, EDBA supports responsible data handling and helps institutions maintain the confidentiality of essential records.
+          <p className="text-gray-300 text-xs sm:text-sm lg:text-[15px] leading-relaxed font-normal max-w-5xl xl:max-w-[1140px] mx-auto">
+            EDBA is designed to help educational institutions manage student information, staff records, academic data, and administrative processes within a structured digital environment.<br className="hidden lg:inline" />{" "}
+            With controlled access and organized information management, EDBA supports responsible data handling and helps institutions maintain the confidentiality of essential records.
           </p>
         </motion.div>
 
