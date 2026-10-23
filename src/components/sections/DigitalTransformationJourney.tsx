@@ -5,7 +5,6 @@ import {
   Settings,
   Zap,
   TrendingUp,
-  ArrowDown,
   CheckCircle2,
   Sparkles,
   Cloud,
@@ -15,7 +14,6 @@ import {
   Sliders,
   FileCheck2,
   ChevronRight,
-  Layers,
 } from "lucide-react";
 
 interface Step {
@@ -216,24 +214,14 @@ export default function DigitalTransformationJourney() {
 
           <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight text-slate-900 tracking-tight mb-4">
             4 Simple Steps Towards{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-sky-600 to-cyan-500">
               Digital Transformation
             </span>
           </h2>
 
-          <p className="text-slate-700 text-base sm:text-lg font-semibold mb-2">
-            Your Institution's Journey with EDBA
-          </p>
-          <p className="text-slate-500 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto mb-6">
+          <p className="text-slate-500 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
             From initial consultation to campus-wide deployment and continuous evolution, EDBA is your dedicated partner in modern education management.
           </p>
-
-          {/* Stacking Deck Scroll Cue */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100/90 border border-slate-200/80 text-xs font-bold text-slate-600 shadow-2xs">
-            <Layers className="w-3.5 h-3.5 text-blue-600" />
-            <span>Scroll vertically — cards stack and overlap as you navigate</span>
-            <ArrowDown className="w-3.5 h-3.5 text-slate-400 animate-bounce" />
-          </div>
         </motion.div>
 
         {/* TEACHMINT-STYLE STACKING CARDS CONTAINER (Direct siblings in same sticky context) */}

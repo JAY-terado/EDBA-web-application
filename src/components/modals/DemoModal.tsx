@@ -124,7 +124,7 @@ export default function DemoModal() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 16 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="relative w-full max-w-4xl bg-white rounded-3xl overflow-hidden shadow-[0_40px_100px_-20px_rgba(15,23,42,0.35)] flex flex-col lg:flex-row border border-slate-200/80 max-h-[94vh] sm:max-h-[92vh] modal-nest-hub"
+            className="relative w-full max-w-4xl bg-white rounded-3xl overflow-hidden shadow-[0_30px_90px_-15px_rgba(0,0,0,0.45)] flex flex-col lg:flex-row border-0 border-none max-h-[94vh] sm:max-h-[92vh] modal-nest-hub"
           >
             {/* ── Left panel ── */}
             <div className="hidden lg:flex lg:w-[42%] flex-col justify-between p-6 xl:p-10 bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-700 text-white relative overflow-y-auto modal-left-nest-hub">

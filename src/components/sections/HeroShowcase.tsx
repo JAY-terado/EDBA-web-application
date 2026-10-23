@@ -20,10 +20,10 @@ export const HeroShowcase: React.FC = () => {
   return (
     <div className="relative w-full mx-auto select-none py-6 sm:py-8 lg:py-10">
       {/* ── Vibrant Glowing Gradient Mesh (Blue & Orange - High Opacity & Rich Saturation) ── */}
-      {/* 1. Top-Right Radiant Orange / Amber Mesh Glow */}
+      {/* 1. Top-Right Radiant Logo Orange (#FE8021) Mesh Glow */}
       <div
         aria-hidden="true"
-        className="absolute -top-16 -right-8 w-[400px] sm:w-[500px] h-[400px] sm:h-[500px] rounded-full bg-gradient-to-br from-amber-400/80 via-orange-500/70 to-rose-400/45 blur-[80px] pointer-events-none -z-10"
+        className="absolute -top-16 -right-8 w-[420px] sm:w-[520px] h-[420px] sm:h-[520px] rounded-full bg-gradient-to-br from-[#FE8021]/85 via-[#FE8021]/60 to-[#FF9E4A]/25 blur-[80px] pointer-events-none -z-10"
       />
 
       {/* 2. Top-Center & Left Radiant Royal Blue / Sky Mesh Glow */}
@@ -61,7 +61,7 @@ export const HeroShowcase: React.FC = () => {
                 {/* Logo */}
                 <div className="flex items-center gap-1.5 mb-4 px-1">
                   <span className="font-display font-black text-xl text-blue-600 tracking-tight">
-                    ed<span className="text-orange-500">bā</span>
+                    ed<span className="text-[#FE8021]">bā</span>
                   </span>
                 </div>
 

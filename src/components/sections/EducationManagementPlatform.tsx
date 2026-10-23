@@ -4,7 +4,6 @@ import {
   Layers,
   ChevronLeft,
   ChevronRight,
-  ArrowLeft,
   ArrowRight,
   BookOpen,
   CalendarCheck,
@@ -253,6 +252,23 @@ export default function EducationManagementPlatform() {
     window.dispatchEvent(new CustomEvent("open-demo-modal"));
   };
 
+  const handleExploreMobile = () => {
+    if (typeof window === "undefined") return;
+
+    const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera || "";
+
+    // Detect Apple devices: iOS (iPhone, iPad, iPod, iPadOS) and macOS
+    const isApple =
+      /iPad|iPhone|iPod|Macintosh|Mac OS X/i.test(userAgent) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+    if (isApple) {
+      window.open("https://apps.apple.com/app/edba/id6440000000", "_blank", "noopener,noreferrer");
+    } else {
+      window.open("https://play.google.com/store/apps/details?id=io.edba.app", "_blank", "noopener,noreferrer");
+    }
+  };
+
   // Generate 7 virtual slots around the current position for smooth infinite looping
   const centerK = Math.round(pos);
   const slots = [-3, -2, -1, 0, 1, 2, 3].map((offset) => centerK + offset);
@@ -334,42 +350,6 @@ export default function EducationManagementPlatform() {
           onPointerUp={handlePointerUp}
           onPointerCancel={handlePointerUp}
         >
-          {/* Navigation Button Left - Apple Glass Frosted Disc */}
-          <button
-            type="button"
-            onPointerDown={(e) => e.stopPropagation()}
-            onPointerUp={(e) => e.stopPropagation()}
-            onClick={(e) => {
-              e.stopPropagation();
-              handleStep(-1);
-            }}
-            aria-label="Previous screenshot"
-            className="absolute left-2 sm:left-6 lg:left-8 top-1/2 -translate-y-1/2 z-50 h-11 w-11 sm:h-13 sm:w-13 rounded-full apple-glass shadow-[0_8px_30px_rgba(15,23,42,0.12)] hover:shadow-[0_12px_32px_rgba(45,118,196,0.25)] flex items-center justify-center transition-all duration-200 text-slate-700 hover:text-blue-600 hover:scale-110 active:scale-95 cursor-pointer pointer-events-auto group focus-visible:ring-2 focus-visible:ring-blue-600"
-          >
-            <div className="relative flex items-center justify-center">
-              <span className="absolute inset-0 rounded-full bg-blue-500/10 scale-0 group-hover:scale-150 transition-transform duration-300 pointer-events-none" />
-              <ArrowLeft className="w-5 h-5 transition-transform duration-200 group-hover:-translate-x-0.5 stroke-[2.2]" />
-            </div>
-          </button>
-
-          {/* Navigation Button Right - Apple Glass Frosted Disc */}
-          <button
-            type="button"
-            onPointerDown={(e) => e.stopPropagation()}
-            onPointerUp={(e) => e.stopPropagation()}
-            onClick={(e) => {
-              e.stopPropagation();
-              handleStep(1);
-            }}
-            aria-label="Next screenshot"
-            className="absolute right-2 sm:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-50 h-11 w-11 sm:h-13 sm:w-13 rounded-full apple-glass shadow-[0_8px_30px_rgba(15,23,42,0.12)] hover:shadow-[0_12px_32px_rgba(45,118,196,0.25)] flex items-center justify-center transition-all duration-200 text-slate-700 hover:text-blue-600 hover:scale-110 active:scale-95 cursor-pointer pointer-events-auto group focus-visible:ring-2 focus-visible:ring-blue-600"
-          >
-            <div className="relative flex items-center justify-center">
-              <span className="absolute inset-0 rounded-full bg-blue-500/10 scale-0 group-hover:scale-150 transition-transform duration-300 pointer-events-none" />
-              <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-0.5 stroke-[2.2]" />
-            </div>
-          </button>
-
           {/* Stationary Center iPhone Mockup Frame Overlay */}
           <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-35 flex items-center justify-center scale-[0.86] sm:scale-100 phone-frame-nest-hub origin-center transition-transform duration-300">
             <div
@@ -531,7 +511,7 @@ export default function EducationManagementPlatform() {
           <div>
             <button
               type="button"
-              onClick={handleOpenDemo}
+              onClick={handleExploreMobile}
               className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl transition-all shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/30 cursor-pointer group"
             >
               <span>Explore Mobile App Experience</span>
