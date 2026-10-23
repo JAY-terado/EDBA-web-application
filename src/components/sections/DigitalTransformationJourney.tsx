@@ -237,7 +237,7 @@ export default function DigitalTransformationJourney() {
         </motion.div>
 
         {/* TEACHMINT-STYLE STACKING CARDS CONTAINER (Direct siblings in same sticky context) */}
-        <div className="relative">
+        <div className="relative pb-[40vh] sm:pb-[50vh]">
           {steps.map((step, index) => {
             const isLast = index === steps.length - 1;
 
@@ -246,12 +246,12 @@ export default function DigitalTransformationJourney() {
                 key={step.id}
                 className="sticky w-full bg-white rounded-3xl sm:rounded-[36px] border border-slate-200/90 shadow-[0_-12px_36px_rgba(15,23,42,0.08),0_24px_48px_rgba(15,23,42,0.12)] overflow-hidden transition-all duration-300"
                 style={{
-                  // Clean sticky top position below navbar
-                  top: `${90 + index * 10}px`,
+                  // Uniform sticky top position for 100% full card-on-card overlap
+                  top: "88px",
                   // Higher zIndex ensures later cards slide directly over previous cards
                   zIndex: (index + 1) * 10,
-                  // Ample vertical scroll margin before the next card rolls up over it
-                  marginBottom: isLast ? "0px" : "40vh",
+                  // Ample vertical scroll margin between cards
+                  marginBottom: "40vh",
                 }}
               >
                 {/* Main Card Content (Teachmint Connected Classroom Layout) */}

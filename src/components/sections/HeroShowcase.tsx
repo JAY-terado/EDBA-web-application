@@ -26,16 +26,16 @@ export const HeroShowcase: React.FC = () => {
         className="absolute -top-16 -right-8 w-[400px] sm:w-[500px] h-[400px] sm:h-[500px] rounded-full bg-gradient-to-br from-amber-400/80 via-orange-500/70 to-rose-400/45 blur-[80px] pointer-events-none -z-10"
       />
 
-      {/* 2. Top-Center & Left Radiant Royal Blue / Indigo Glow */}
+      {/* 2. Top-Center & Left Radiant Royal Blue / Sky Mesh Glow */}
       <div
         aria-hidden="true"
-        className="absolute -top-14 left-2 sm:left-10 w-[450px] sm:w-[550px] h-[450px] sm:h-[550px] rounded-full bg-gradient-to-tr from-blue-600/80 via-indigo-500/70 to-purple-500/55 blur-[85px] pointer-events-none -z-10"
+        className="absolute -top-14 left-2 sm:left-10 w-[450px] sm:w-[550px] h-[450px] sm:h-[550px] rounded-full bg-gradient-to-tr from-blue-600/80 via-sky-500/70 to-cyan-400/60 blur-[85px] pointer-events-none -z-10"
       />
 
-      {/* 3. Bottom Violet / Soft Indigo Accent Glow */}
+      {/* 3. Bottom Luminous Electric Cyan & Sky Blue Mesh Glow (Contrasting EDBA Logo) */}
       <div
         aria-hidden="true"
-        className="absolute -bottom-14 right-12 w-[360px] sm:w-[420px] h-[360px] sm:h-[420px] rounded-full bg-gradient-to-tl from-purple-500/50 via-indigo-400/40 to-blue-400/30 blur-[80px] pointer-events-none -z-10"
+        className="absolute -bottom-14 right-12 w-[360px] sm:w-[420px] h-[360px] sm:h-[420px] rounded-full bg-gradient-to-tl from-cyan-400/65 via-sky-400/55 to-blue-500/40 blur-[85px] pointer-events-none -z-10"
       />
 
       {/* ── 3D Perspective Stage ── */}
@@ -126,7 +126,7 @@ export const HeroShowcase: React.FC = () => {
                     <Bell className="h-4 w-4" />
                     <span className="absolute top-1 right-1 h-1.5 w-1.5 rounded-full bg-red-500" />
                   </div>
-                  <div className="h-7 w-7 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-bold text-[10px] flex items-center justify-center shadow-xs">
+                  <div className="h-7 w-7 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-500 text-white font-bold text-[10px] flex items-center justify-center shadow-xs">
                     AD
                   </div>
                 </div>
@@ -176,7 +176,7 @@ export const HeroShowcase: React.FC = () => {
 
                 {/* 3. Active Classes */}
                 <div className="bg-slate-50/70 border border-slate-200/80 p-2.5 sm:p-3 rounded-xl flex items-center gap-2.5">
-                  <div className="h-8 w-8 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center flex-shrink-0">
+                  <div className="h-8 w-8 rounded-lg bg-cyan-100 text-cyan-700 flex items-center justify-center flex-shrink-0">
                     <Layers className="h-4 w-4" />
                   </div>
                   <div>
