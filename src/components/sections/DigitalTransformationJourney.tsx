@@ -225,49 +225,49 @@ export default function DigitalTransformationJourney() {
         </motion.div>
 
         {/* TEACHMINT-STYLE STACKING CARDS CONTAINER (Direct siblings in same sticky context) */}
-        <div className="relative pb-[40vh] sm:pb-[50vh]">
+        <div className="relative">
           {steps.map((step, index) => {
             const isLast = index === steps.length - 1;
 
             return (
               <div
                 key={step.id}
-                className="sticky w-full bg-white rounded-3xl sm:rounded-[36px] border border-slate-200/90 shadow-[0_-12px_36px_rgba(15,23,42,0.08),0_24px_48px_rgba(15,23,42,0.12)] overflow-hidden transition-all duration-300"
+                className="sticky w-full bg-white rounded-2xl sm:rounded-3xl lg:rounded-[36px] border border-slate-200/90 shadow-[0_-12px_36px_rgba(15,23,42,0.08),0_24px_48px_rgba(15,23,42,0.12)] overflow-hidden transition-all duration-300"
                 style={{
-                  // Uniform sticky top position for 100% full card-on-card overlap
-                  top: "88px",
+                  // Responsive sticky top position below navbar
+                  top: "clamp(68px, 9vh, 88px)",
                   // Higher zIndex ensures later cards slide directly over previous cards
                   zIndex: (index + 1) * 10,
-                  // Ample vertical scroll margin between cards
-                  marginBottom: "40vh",
+                  // Smooth scroll distance between cards, 0 on last card to prevent blank space
+                  marginBottom: isLast ? "0px" : "36vh",
                 }}
               >
                 {/* Main Card Content (Teachmint Connected Classroom Layout) */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 relative">
                   
                   {/* Left Column: Descriptive Narrative & Capabilities */}
-                  <div className="lg:col-span-5 p-6 sm:p-8 lg:p-10 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-slate-100 bg-white">
+                  <div className="lg:col-span-5 p-4 sm:p-6 lg:p-10 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-slate-100 bg-white">
                     <div>
 
                       {/* Step Heading */}
-                      <h3 className="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 leading-tight mb-3.5 tracking-tight">
+                      <h3 className="font-display font-extrabold text-xl sm:text-2xl lg:text-3xl text-slate-900 leading-tight mb-2.5 sm:mb-3.5 tracking-tight">
                         {step.subtitle}
                       </h3>
 
                       {/* Narrative */}
-                      <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-6 font-normal">
+                      <p className="text-slate-600 text-xs sm:text-sm lg:text-base leading-relaxed mb-4 sm:mb-6 font-normal">
                         {step.desc}
                       </p>
 
                       {/* Key Deliverables / Highlights */}
-                      <div className="space-y-2.5 mb-6">
+                      <div className="space-y-2 sm:space-y-2.5 mb-4 sm:mb-6">
                         {step.highlights.map((item) => (
                           <div
                             key={item}
-                            className="flex items-start gap-2.5 p-2.5 rounded-xl bg-slate-50/90 border border-slate-100 hover:bg-slate-100/70 transition-colors"
+                            className="flex items-start gap-2 sm:gap-2.5 p-2 sm:p-2.5 rounded-xl bg-slate-50/90 border border-slate-100 hover:bg-slate-100/70 transition-colors"
                           >
-                            <div className="h-5 w-5 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5 text-blue-700">
-                              <CheckCircle2 className="h-3.5 w-3.5" />
+                            <div className="h-4 w-4 sm:h-5 sm:w-5 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5 text-blue-700">
+                              <CheckCircle2 className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                             </div>
                             <span className="text-slate-700 text-xs sm:text-sm font-semibold leading-snug">
                               {item}
@@ -278,25 +278,25 @@ export default function DigitalTransformationJourney() {
                     </div>
 
                     {/* Bottom Actions */}
-                    <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+                    <div className="pt-3 sm:pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
                       <button
                         type="button"
                         onClick={() => window.dispatchEvent(new CustomEvent("open-demo-modal"))}
-                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-md shadow-blue-600/20 hover:shadow-lg hover:shadow-blue-600/30 transition-all cursor-pointer group active:scale-95"
+                        className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-md shadow-blue-600/20 hover:shadow-lg hover:shadow-blue-600/30 transition-all cursor-pointer group active:scale-95"
                       >
                         <span>Book a Free Demo</span>
-                        <ChevronRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+                        <ChevronRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 group-hover:translate-x-0.5 transition-transform" />
                       </button>
 
-                      <span className="text-xs text-slate-400 font-medium">
+                      <span className="text-[11px] sm:text-xs text-slate-400 font-medium">
                         {isLast ? "Final Transformation Stage" : `Next: Step 0${index + 2}`}
                       </span>
                     </div>
                   </div>
 
                   {/* Right Column: High-Resolution Visual with Floating Frosted Badges */}
-                  <div className="lg:col-span-7 bg-slate-900/5 relative p-4 sm:p-6 lg:p-7 flex items-center justify-center">
-                    <div className="relative w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg border border-slate-200/80 bg-slate-100 aspect-[4/3] sm:aspect-[16/11] lg:aspect-auto lg:h-[460px]">
+                  <div className="lg:col-span-7 bg-slate-900/5 relative p-3 sm:p-5 lg:p-7 flex items-center justify-center">
+                    <div className="relative w-full h-[210px] sm:h-[270px] lg:h-[460px] rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden shadow-lg border border-slate-200/80 bg-slate-100">
                       
                       {/* Minimal Photorealistic Educational Technology Image */}
                       <img
@@ -361,7 +361,7 @@ export default function DigitalTransformationJourney() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
-          className="mt-16 sm:mt-24 text-center p-6 sm:p-8 bg-white border border-slate-200/80 rounded-2xl sm:rounded-3xl max-w-3xl mx-auto shadow-xs"
+          className="mt-8 sm:mt-12 text-center p-6 sm:p-8 bg-white border border-slate-200/80 rounded-2xl sm:rounded-3xl max-w-3xl mx-auto shadow-xs"
         >
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             <div className="h-9 w-9 rounded-full bg-blue-50 border border-blue-200/60 flex items-center justify-center text-blue-600 flex-shrink-0 shadow-xs">

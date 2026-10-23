@@ -262,10 +262,13 @@ export default function EducationManagementPlatform() {
       /iPad|iPhone|iPod|Macintosh|Mac OS X/i.test(userAgent) ||
       (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 
+    const iosUrl = "https://apps.apple.com/in/app/edba/id6747445951";
+    const androidUrl = "https://play.google.com/store/apps/details?id=com.edba.app";
+
     if (isApple) {
-      window.open("https://apps.apple.com/app/edba/id6440000000", "_blank", "noopener,noreferrer");
+      window.open(iosUrl, "_blank", "noopener,noreferrer");
     } else {
-      window.open("https://play.google.com/store/apps/details?id=io.edba.app", "_blank", "noopener,noreferrer");
+      window.open(androidUrl, "_blank", "noopener,noreferrer");
     }
   };
 
@@ -289,7 +292,7 @@ export default function EducationManagementPlatform() {
         {/* ========================================================= */}
         {/* SECTION HEADER                                            */}
         {/* ========================================================= */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+        <div className="text-center max-w-4xl lg:max-w-5xl mx-auto mb-10 sm:mb-12">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -308,8 +311,9 @@ export default function EducationManagementPlatform() {
               </span>
             </h2>
 
-            <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal">
-              EDBA brings attendance, academics, exams, fees, communication and administration together in one connected platform, so administrators, teachers, staff, students and parents get their work done with ease.
+            <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal max-w-4xl lg:max-w-5xl mx-auto">
+              EDBA brings attendance, academics, exams, fees, communication and administration together in one connected platform,<br className="hidden md:inline" />{" "}
+              so administrators, teachers, staff, students and parents get their work done with ease.
             </p>
           </motion.div>
 
@@ -341,7 +345,7 @@ export default function EducationManagementPlatform() {
         {/* ========================================================= */}
         <div
           ref={carouselContainerRef}
-          className="relative w-full max-w-[1300px] mx-auto h-[550px] sm:h-[620px] lg:h-[640px] stage-carousel-nest-hub flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing select-none"
+          className="relative w-full max-w-[1400px] mx-auto h-[480px] xs:h-[530px] sm:h-[600px] lg:h-[640px] stage-carousel-nest-hub flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing select-none"
           style={{ perspective: "1200px", touchAction: "pan-y" }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
@@ -350,8 +354,110 @@ export default function EducationManagementPlatform() {
           onPointerUp={handlePointerUp}
           onPointerCancel={handlePointerUp}
         >
+          {/* Left Side Floating Feature Callouts (Fills empty side space on desktop) */}
+          <div className="absolute left-4 xl:left-8 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col gap-4 max-w-[240px] pointer-events-auto">
+            {/* Card 1: AI Doubts */}
+            <button
+              type="button"
+              onClick={() => goToSlide(3)}
+              className={`text-left p-4 rounded-2xl border transition-all duration-300 backdrop-blur-md cursor-pointer group hover:scale-[1.03] ${
+                activeSlideIndex === 3
+                  ? "bg-white/95 border-blue-500 shadow-xl shadow-blue-500/10"
+                  : "bg-white/80 border-slate-200/80 shadow-md hover:bg-white/95 hover:border-slate-300"
+              }`}
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <div className="h-9 w-9 rounded-xl bg-blue-50 border border-blue-200/60 flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform shadow-xs">
+                  <Bot className="h-4.5 w-4.5" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-bold text-blue-600 uppercase tracking-wider block">24/7 Doubts</span>
+                  <h4 className="text-xs font-bold text-slate-900 leading-tight">AI Assistant</h4>
+                </div>
+              </div>
+              <p className="text-[11px] text-slate-500 leading-relaxed font-normal">
+                Instant concept explanations & revision on demand.
+              </p>
+            </button>
+
+            {/* Card 2: Smart Attendance */}
+            <button
+              type="button"
+              onClick={() => goToSlide(2)}
+              className={`text-left p-4 rounded-2xl border transition-all duration-300 backdrop-blur-md cursor-pointer group hover:scale-[1.03] ${
+                activeSlideIndex === 2
+                  ? "bg-white/95 border-emerald-500 shadow-xl shadow-emerald-500/10"
+                  : "bg-white/80 border-slate-200/80 shadow-md hover:bg-white/95 hover:border-slate-300"
+              }`}
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <div className="h-9 w-9 rounded-xl bg-emerald-50 border border-emerald-200/60 flex items-center justify-center text-emerald-600 group-hover:scale-110 transition-transform shadow-xs">
+                  <CalendarCheck className="h-4.5 w-4.5" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-wider block">Live Presence</span>
+                  <h4 className="text-xs font-bold text-slate-900 leading-tight">Smart Attendance</h4>
+                </div>
+              </div>
+              <p className="text-[11px] text-slate-500 leading-relaxed font-normal">
+                Monthly calendar analytics & instant leave requests.
+              </p>
+            </button>
+          </div>
+
+          {/* Right Side Floating Feature Callouts (Fills empty side space on desktop) */}
+          <div className="absolute right-4 xl:right-8 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col gap-4 max-w-[240px] pointer-events-auto">
+            {/* Card 3: Institutional Circulars */}
+            <button
+              type="button"
+              onClick={() => goToSlide(4)}
+              className={`text-left p-4 rounded-2xl border transition-all duration-300 backdrop-blur-md cursor-pointer group hover:scale-[1.03] ${
+                activeSlideIndex === 4
+                  ? "bg-white/95 border-purple-500 shadow-xl shadow-purple-500/10"
+                  : "bg-white/80 border-slate-200/80 shadow-md hover:bg-white/95 hover:border-slate-300"
+              }`}
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <div className="h-9 w-9 rounded-xl bg-purple-50 border border-purple-200/60 flex items-center justify-center text-purple-600 group-hover:scale-110 transition-transform shadow-xs">
+                  <Bell className="h-4.5 w-4.5" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-bold text-purple-600 uppercase tracking-wider block">Campus Alerts</span>
+                  <h4 className="text-xs font-bold text-slate-900 leading-tight">Direct Circulars</h4>
+                </div>
+              </div>
+              <p className="text-[11px] text-slate-500 leading-relaxed font-normal">
+                Notices, exam routines & downloadable attachments.
+              </p>
+            </button>
+
+            {/* Card 4: Class Wall & Academics */}
+            <button
+              type="button"
+              onClick={() => goToSlide(1)}
+              className={`text-left p-4 rounded-2xl border transition-all duration-300 backdrop-blur-md cursor-pointer group hover:scale-[1.03] ${
+                activeSlideIndex === 1
+                  ? "bg-white/95 border-sky-500 shadow-xl shadow-sky-500/10"
+                  : "bg-white/80 border-slate-200/80 shadow-md hover:bg-white/95 hover:border-slate-300"
+              }`}
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <div className="h-9 w-9 rounded-xl bg-sky-50 border border-sky-200/60 flex items-center justify-center text-sky-600 group-hover:scale-110 transition-transform shadow-xs">
+                  <BookOpen className="h-4.5 w-4.5" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-bold text-sky-600 uppercase tracking-wider block">Academics</span>
+                  <h4 className="text-xs font-bold text-slate-900 leading-tight">Class Wall</h4>
+                </div>
+              </div>
+              <p className="text-[11px] text-slate-500 leading-relaxed font-normal">
+                Subject tracking, educator syllabus & study kits.
+              </p>
+            </button>
+          </div>
+
           {/* Stationary Center iPhone Mockup Frame Overlay */}
-          <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-35 flex items-center justify-center scale-[0.86] sm:scale-100 phone-frame-nest-hub origin-center transition-transform duration-300">
+          <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-35 flex items-center justify-center scale-[0.72] xs:scale-[0.80] sm:scale-[0.90] md:scale-100 phone-frame-nest-hub origin-center transition-transform duration-300">
             <div
               style={{ width: `${CARD_WIDTH + 20}px`, height: `${CARD_HEIGHT + 20}px` }}
               className="rounded-[42px] border-[10px] border-[#18191b] shadow-[0_20px_50px_-10px_rgba(0,0,0,0.22)] relative box-border bg-transparent"
@@ -372,7 +478,7 @@ export default function EducationManagementPlatform() {
 
           {/* 3D Circular Cards Track Container */}
           <div
-            className="relative w-full h-full flex items-center justify-center scale-[0.86] sm:scale-100 phone-frame-nest-hub origin-center transition-transform duration-300"
+            className="relative w-full h-full flex items-center justify-center scale-[0.72] xs:scale-[0.80] sm:scale-[0.90] md:scale-100 phone-frame-nest-hub origin-center transition-transform duration-300"
             style={{ transformStyle: "preserve-3d" }}
           >
             {slots.map((k) => {
@@ -482,10 +588,19 @@ export default function EducationManagementPlatform() {
           </div>
         </div>
 
+        {/* Mobile Swipe Cue */}
+        <div className="flex md:hidden items-center justify-center gap-2 mt-2 mb-2 text-xs font-semibold text-slate-500 select-none">
+          <span className="flex h-2 w-2 relative">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-600" />
+          </span>
+          <span>Swipe or drag phone to explore features</span>
+        </div>
+
         {/* ========================================================= */}
         {/* CURRENT SCREEN INFO & CONTROLS                            */}
         {/* ========================================================= */}
-        <div className="mt-4 flex flex-col items-center text-center">
+        <div className="mt-2 sm:mt-4 flex flex-col items-center text-center">
           {/* Active Screen Details Badge */}
           <motion.div
             key={currentSlide.id}

@@ -54,12 +54,12 @@ export default function DataPrivacySecurity() {
   return (
     <section
       id="data-privacy"
-      className="py-20 sm:py-28 bg-slate-950 border-b border-slate-900 relative overflow-hidden"
+      className="py-20 sm:py-28 bg-[#111827] relative overflow-hidden"
     >
       {/* Ambient glows */}
-      <div className="absolute top-0 right-0 h-96 w-96 bg-blue-600/8 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 h-96 w-96 bg-indigo-600/8 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(#ffffff04_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+      <div className="absolute top-0 right-0 h-96 w-96 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 h-96 w-96 bg-slate-600/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(#ffffff05_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
 
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
@@ -71,7 +71,7 @@ export default function DataPrivacySecurity() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-14"
         >
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-400 bg-blue-950/60 border border-blue-800/60 mb-5">
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-400 bg-blue-500/10 border border-blue-500/30 mb-5">
             <ShieldCheck className="w-3.5 h-3.5" aria-hidden="true" />
             Data Privacy & Security
           </span>
@@ -81,7 +81,7 @@ export default function DataPrivacySecurity() {
               Building Digital Trust.
             </span>
           </h2>
-          <p className="text-slate-400 text-base sm:text-lg leading-relaxed font-normal">
+          <p className="text-gray-300 text-base sm:text-lg leading-relaxed font-normal">
             EDBA is designed to help educational institutions manage student information, staff records, academic data, and administrative processes within a structured digital environment. With controlled access and organized information management, EDBA supports responsible data handling and helps institutions maintain the confidentiality of essential records.
           </p>
         </motion.div>
@@ -104,7 +104,7 @@ export default function DataPrivacySecurity() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`group relative bg-slate-900/80 border border-slate-800/80 hover:border-slate-700 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl flex flex-col h-full ${columnClasses}`}
+                className={`group relative bg-[#1F2937]/90 border border-gray-700/80 hover:border-blue-500/50 hover:bg-[#1F2937] rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl flex flex-col h-full ${columnClasses}`}
               >
                 {/* Icon */}
                 <div className={`h-12 w-12 rounded-xl bg-gradient-to-tr ${pillar.color} flex items-center justify-center text-white mb-5 shadow-lg`}>
@@ -115,7 +115,7 @@ export default function DataPrivacySecurity() {
                 <h3 className="font-display font-bold text-white text-base mb-3 leading-snug">
                   {pillar.title}
                 </h3>
-                <p className="text-slate-400 text-sm leading-relaxed font-normal flex-1">
+                <p className="text-gray-300 text-sm leading-relaxed font-normal flex-1">
                   {pillar.desc}
                 </p>
 
@@ -126,25 +126,17 @@ export default function DataPrivacySecurity() {
           })}
         </div>
 
-        {/* Bottom Trust Assurance Card */}
+        {/* Bottom Trust Assurance */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="mt-12 sm:mt-14 text-center"
+          transition={{ delay: 0.3 }}
+          className="mt-12 sm:mt-14 text-center px-4"
         >
-          <div className="relative bg-gradient-to-b from-slate-900/70 to-slate-900/40 border border-slate-800/80 rounded-2xl p-6 sm:p-8 max-w-2xl mx-auto shadow-xl backdrop-blur-xs">
-            <div className="h-12 w-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mx-auto mb-4 text-blue-400 shadow-inner">
-              <ShieldCheck className="h-6 w-6" />
-            </div>
-            <h4 className="text-slate-200 text-base sm:text-lg font-semibold leading-snug mb-2 max-w-xl mx-auto">
-              EDBA — Empowering education through responsible data management, controlled access, and digital trust.
-            </h4>
-            <p className="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto font-normal">
-              Built for schools, colleges, and educational institutions that prioritize data responsibility.
-            </p>
-          </div>
+          <p className="text-gray-300 text-sm sm:text-base font-medium tracking-tight max-w-5xl mx-auto md:whitespace-nowrap">
+            EDBA — Empowering education through responsible data management, controlled access, and digital trust.
+          </p>
         </motion.div>
 
       </div>

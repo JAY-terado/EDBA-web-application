@@ -195,22 +195,18 @@ export default function WhyInstitutesChooseEdba() {
 
       <div className="max-w-[1360px] mx-auto px-4 sm:px-6 relative z-10">
         {/* Header (centered, mb-10) */}
-        <div className="text-center max-w-[760px] mx-auto mb-10">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-blue-400 bg-blue-500/10 border border-blue-500/30 mb-3 shadow-xs">
+        <div className="text-center max-w-4xl lg:max-w-5xl mx-auto mb-10 sm:mb-12">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-blue-400 bg-blue-500/10 border border-blue-500/30 mb-4 shadow-xs">
             <Building2 className="w-3.5 h-3.5" aria-hidden="true" />
             Why Institutes Choose EDBA
           </span>
           <h2
             id="why-edba-heading"
-            className="text-3xl lg:text-[44px] font-extrabold tracking-tight leading-[1.12] text-white"
+            className="text-2xl sm:text-3xl lg:text-4xl xl:text-[42px] font-extrabold tracking-tight leading-[1.2] text-white text-balance"
           >
-            One platform that{" "}
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              cuts paperwork
-            </span>
-            , keeps parents informed and keeps fees on track.
+            One platform that <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">cuts paperwork</span>, keeps parents informed and keeps fees on track.
           </h2>
-          <p className="text-[16px] text-slate-300 max-w-[600px] mx-auto mt-3 leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-300 max-w-2xl lg:max-w-3xl mx-auto mt-3.5 leading-relaxed text-balance">
             Six powerful reasons leading educational institutions choose EDBA as their trusted management platform.
           </p>
         </div>

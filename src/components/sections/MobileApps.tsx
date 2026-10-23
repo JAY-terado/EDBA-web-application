@@ -11,7 +11,7 @@ export const MobileApps: React.FC = () => {
   );
 
   const iosUrl = "https://apps.apple.com/in/app/edba/id6747445951";
-  const androidUrl = "https://play.google.com/store/apps/details?id=com.edba.app&hl=en_IN&pli=1";
+  const androidUrl = "https://play.google.com/store/apps/details?id=com.edba.app";
 
   return (
     <section id="mobile-apps" className="py-20 sm:py-28 smart-display-tight:py-12 bg-[#f8fafc] border-b border-slate-200/80">
