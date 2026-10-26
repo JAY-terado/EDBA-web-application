@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { 
   ArrowLeft, 
-  Search, 
   HelpCircle, 
   Sparkles, 
   Layers, 
@@ -12,7 +11,6 @@ import {
   Mail, 
   Calendar, 
   CheckCircle2, 
-  X,
   BookOpen,
   School,
   GraduationCap,
@@ -141,7 +139,6 @@ const FAQ_DATA: FaqItem[] = [
 ];
 
 export const FaqPage: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<"all" | "general" | "modules" | "getting-started">("all");
   const [openIds, setOpenIds] = useState<number[]>([1]); // Only 1st box open by default
 
@@ -159,19 +156,12 @@ export const FaqPage: React.FC = () => {
     );
   };
 
-  // Filter items based on active category & search query
+  // Filter items based on active category
   const filteredFaqs = useMemo(() => {
-    const q = searchQuery.toLowerCase().trim();
     return FAQ_DATA.filter((item) => {
-      const matchesCategory = activeCategory === "all" || item.category === activeCategory;
-      if (!matchesCategory) return false;
-      if (!q) return true;
-      const matchQuestion = item.question.toLowerCase().includes(q);
-      const matchAnswer = item.answer.toLowerCase().includes(q);
-      const matchTags = item.tags.some((t) => t.toLowerCase().includes(q));
-      return matchQuestion || matchAnswer || matchTags;
+      return activeCategory === "all" || item.category === activeCategory;
     });
-  }, [searchQuery, activeCategory]);
+  }, [activeCategory]);
 
   // Counts for pills
   const counts = useMemo(() => {
@@ -238,31 +228,6 @@ export const FaqPage: React.FC = () => {
           <p className="text-slate-300 text-sm sm:text-lg leading-relaxed max-w-2xl mx-auto font-normal">
             Everything you need to know about EDBA's education management platform, key modules, classroom tools, and rapid onboarding.
           </p>
-
-          {/* Search Box */}
-          <div className="mt-8 sm:mt-10 max-w-2xl mx-auto relative group">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-cyan-500/20 rounded-2xl blur-lg transition-opacity opacity-75 group-hover:opacity-100" />
-            <div className="relative flex items-center bg-[#0d1c32]/90 border border-slate-700/80 rounded-2xl px-4 py-3 sm:py-3.5 shadow-2xl backdrop-blur-md focus-within:border-blue-500 transition-all">
-              <Search className="w-5 h-5 text-slate-400 mr-3 flex-shrink-0" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search by keywords, admissions, fees, LMS, boards..."
-                className="w-full bg-transparent text-sm sm:text-base text-white placeholder-slate-400 focus:outline-none"
-              />
-              {searchQuery && (
-                <button
-                  type="button"
-                  onClick={() => setSearchQuery("")}
-                  className="p-1 rounded-full text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"
-                  aria-label="Clear search"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              )}
-            </div>
-          </div>
 
           {/* Category Filter Pills */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
@@ -341,50 +306,7 @@ export const FaqPage: React.FC = () => {
 
         {/* FAQs Accordion List */}
         <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 sm:pb-28">
-          
-          {/* Result counter if searching */}
-          {searchQuery && (
-            <div className="mb-6 flex items-center justify-between text-xs sm:text-sm text-slate-400 px-1">
-              <span>
-                Found <strong className="text-white">{filteredFaqs.length}</strong> matching questions for &ldquo;{searchQuery}&rdquo;
-              </span>
-              <button
-                type="button"
-                onClick={() => setSearchQuery("")}
-                className="text-blue-400 hover:text-blue-300 underline font-medium cursor-pointer"
-              >
-                Reset search
-              </button>
-            </div>
-          )}
-
-          {/* If no results */}
-          {filteredFaqs.length === 0 ? (
-            <div className="text-center py-16 px-6 bg-[#0c182a]/50 border border-slate-800 rounded-3xl">
-              <HelpCircle className="w-12 h-12 text-slate-500 mx-auto mb-4" />
-              <h3 className="text-lg font-bold text-white mb-2">No matching questions found</h3>
-              <p className="text-slate-400 text-sm max-w-md mx-auto mb-6">
-                We couldn&apos;t find an answer matching &ldquo;{searchQuery}&rdquo;. Feel free to contact our team or request a live demo.
-              </p>
-              <div className="flex flex-wrap gap-3 justify-center">
-                <button
-                  type="button"
-                  onClick={() => { setSearchQuery(""); setActiveCategory("all"); }}
-                  className="px-4 py-2 rounded-xl bg-slate-800 text-slate-200 hover:text-white text-xs font-semibold cursor-pointer"
-                >
-                  View All Questions
-                </button>
-                <button
-                  type="button"
-                  onClick={handleOpenDemo}
-                  className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold cursor-pointer"
-                >
-                  Book a Free Demo
-                </button>
-              </div>
-            </div>
-          ) : (
-            <div className="space-y-4">
+          <div className="space-y-4">
               {filteredFaqs.map((faq) => {
                 const isOpen = openIds.includes(faq.id);
                 return (
@@ -462,7 +384,6 @@ export const FaqPage: React.FC = () => {
                 );
               })}
             </div>
-          )}
 
           {/* Still Have Questions CTA Card */}
           <div className="mt-14 sm:mt-16 p-6 sm:p-10 rounded-3xl bg-gradient-to-br from-[#0c1a2e] to-[#081220] border border-blue-900/40 shadow-2xl relative overflow-hidden">
