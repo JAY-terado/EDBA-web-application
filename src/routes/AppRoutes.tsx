@@ -4,6 +4,7 @@ import HomePage from "@/pages/HomePage";
 
 // Lazy load non-landing pages for optimal initial load speed
 const PrivacyPage = lazy(() => import("@/pages/PrivacyPage"));
+const FaqPage = lazy(() => import("@/pages/FaqPage"));
 const NotFoundPage = lazy(() => import("@/pages/NotFoundPage"));
 
 const RouteFallback: React.FC = () => (
@@ -18,6 +19,8 @@ export const AppRoutes: React.FC = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/faq" element={<FaqPage />} />
+        <Route path="/faqs" element={<FaqPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>
