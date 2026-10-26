@@ -274,13 +274,7 @@ export default function EducationManagementPlatform() {
           onPointerUp={handlePointerUp}
           onPointerCancel={handlePointerUp}
         >
-          {/* Circular Orbital Ring with Connected Glow Nodes */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[620px] sm:w-[860px] lg:w-[1040px] h-[340px] sm:h-[460px] lg:h-[530px] rounded-[100%] border border-blue-400/25 pointer-events-none z-0">
-            {/* Left Node Dot */}
-            <div className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-blue-500 shadow-[0_0_12px_#3b82f6] border-2 border-white" />
-            {/* Right Node Dot */}
-            <div className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-blue-500 shadow-[0_0_12px_#3b82f6] border-2 border-white" />
-          </div>
+
 
           {/* Central Blue Aura Glow */}
           <div

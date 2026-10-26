@@ -17,11 +17,15 @@ export default defineConfig({
   server: {
     port: 3000,
     open: false,
-    host: true,
+    host: "0.0.0.0",
+    cors: true,
+    allowedHosts: true,
   },
   preview: {
     port: 3000,
-    host: true,
+    host: "0.0.0.0",
+    cors: true,
+    allowedHosts: true,
   },
   build: {
     target: "es2020",

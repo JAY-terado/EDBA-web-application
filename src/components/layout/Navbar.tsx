@@ -31,8 +31,8 @@ export default function Navbar() {
       aria-label="Main Navigation"
       className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ease-in-out ${
         scrolled
-          ? "top-2.5 sm:top-3.5 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2.5rem)] max-w-[1440px] rounded-full py-2 sm:py-2.5 apple-glass-scrolled"
-          : "top-0 w-full max-w-none rounded-none py-3.5 sm:py-4 apple-glass border-b border-slate-200/50 shadow-none border-x-0 border-t-0"
+          ? "top-0 w-full max-w-none rounded-none py-2.5 sm:py-3.5 apple-glass-scrolled border-b border-slate-200/80 shadow-xs border-x-0 border-t-0"
+          : "top-2.5 sm:top-3.5 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2.5rem)] max-w-[1440px] rounded-full py-2.5 sm:py-3 apple-glass border border-slate-200/70 shadow-lg shadow-slate-900/[0.04]"
       }`}
     >
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
