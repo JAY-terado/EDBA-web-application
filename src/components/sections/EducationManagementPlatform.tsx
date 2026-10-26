@@ -147,7 +147,7 @@ export default function EducationManagementPlatform() {
 
     try {
       (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
-    } catch {}
+    } catch { }
   };
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -178,7 +178,7 @@ export default function EducationManagementPlatform() {
 
     try {
       (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
-    } catch {}
+    } catch { }
 
     const current = pos;
     const slideVelocity = -(velocityRef.current * 1000) / DRAG_SENSITIVITY;
@@ -228,7 +228,7 @@ export default function EducationManagementPlatform() {
       />
 
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* ========================================================= */}
         {/* SECTION HEADER                                            */}
         {/* ========================================================= */}
@@ -294,7 +294,7 @@ export default function EducationManagementPlatform() {
             {/* ========================================================= */}
             <div
               style={{ zIndex: 1 }}
-              className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none select-none w-[600px] sm:w-[760px] lg:w-[860px] h-[130px] flex items-end justify-center"
+              className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none select-none w-[700px] sm:w-[900px] lg:w-[1080px] h-[130px] flex items-end justify-center"
             >
               <svg
                 viewBox="0 0 800 130"
@@ -452,27 +452,27 @@ export default function EducationManagementPlatform() {
                 const dist = k - pos;
                 const absDist = Math.abs(dist);
 
-                // Hide far offscreen cards
-                if (absDist > 2.8) return null;
+                // Show cards up to 3 slots on each side so spread reaches the "Book Free Demo" text
+                if (absDist > 3.2) return null;
 
                 const sign = dist < 0 ? -1 : 1;
 
-                // Smooth curved X-offset with cascading overlap matching reference
+                // Loosened curved X-offset calibrated so outer card reaches till the "Book Free Demo" text
                 let xPos = 0;
                 if (absDist <= 1) {
-                  xPos = sign * absDist * 180;
+                  xPos = sign * absDist * 185;
                 } else if (absDist <= 2) {
-                  xPos = sign * (180 + (absDist - 1) * 165);
+                  xPos = sign * (185 + (absDist - 1) * 165);
                 } else {
-                  xPos = sign * (345 + (absDist - 2) * 140);
+                  xPos = sign * (350 + (absDist - 2) * 155);
                 }
 
                 // Smooth 3D circular cylinder depth and inward rotation
-                const translateZ = -absDist * 32;
-                const rotateY = -sign * Math.min(absDist * 12, 22);
+                const translateZ = -absDist * 28;
+                const rotateY = -sign * Math.min(absDist * 10, 20);
 
                 // Gentle upward curve matching the 3D circular orbit
-                const yOffset = -absDist * 10;
+                const yOffset = -absDist * 8;
 
                 // Smooth scale
                 let scale = 1.0;
@@ -481,22 +481,22 @@ export default function EducationManagementPlatform() {
                 } else if (absDist <= 2) {
                   scale = 0.93 - (absDist - 1) * 0.08;
                 } else {
-                  scale = Math.max(0.75, 0.85 - (absDist - 2) * 0.08);
+                  scale = Math.max(0.72, 0.85 - (absDist - 2) * 0.08);
                 }
 
-                // Smooth opacity: center is 1.0, 1st offset is 0.88, 2nd is 0.65, fading to 0 at edges
+                // Smooth opacity: center 1.0, slot 1 0.92, slot 2 0.78, slot 3 0.55
                 let opacity = 1.0;
                 if (absDist <= 1) {
-                  opacity = 1.0 - absDist * (1.0 - 0.88);
+                  opacity = 1.0 - absDist * 0.08;
                 } else if (absDist <= 2) {
-                  opacity = 0.88 - (absDist - 1) * (0.88 - 0.65);
+                  opacity = 0.92 - (absDist - 1) * 0.14;
                 } else {
-                  opacity = Math.max(0, 0.65 - (absDist - 2) * (0.65 / 0.8));
+                  opacity = Math.max(0, 0.78 - (absDist - 2) * 0.23);
                 }
 
                 const isCenter = absDist < 0.25;
-                // Center card is Z-32; all cards are >= 10, strictly above stage (Z-5)
-                const zIndex = isCenter ? 32 : Math.max(10, Math.round(24 - absDist * 5));
+                // Center card is Z-35; all cards are >= 10, strictly above stage (Z-1)
+                const zIndex = isCenter ? 35 : Math.max(10, Math.round(28 - absDist * 6));
 
                 return (
                   <div
@@ -519,11 +519,10 @@ export default function EducationManagementPlatform() {
                         ? "none"
                         : "transform 600ms cubic-bezier(0.22, 1, 0.36, 1), opacity 600ms cubic-bezier(0.22, 1, 0.36, 1)",
                     }}
-                    className={`absolute rounded-[30px] overflow-hidden transition-shadow duration-300 ${
-                      isCenter
+                    className={`absolute rounded-[30px] overflow-hidden transition-shadow duration-300 ${isCenter
                         ? "shadow-[0_20px_45px_-12px_rgba(15,23,42,0.25)] bg-[#18191b]"
                         : "shadow-[0_16px_36px_-8px_rgba(15,23,42,0.18)] border-[5px] border-white/95 bg-white hover:opacity-100 cursor-pointer"
-                    }`}
+                      }`}
                   >
                     {/* Phone Screen Image with authentic native dynamic island */}
                     <img
@@ -576,11 +575,10 @@ export default function EducationManagementPlatform() {
                 <button
                   key={slide.id}
                   onClick={() => goToSlide(idx)}
-                  className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${
-                    isActive
+                  className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${isActive
                       ? "bg-blue-600 text-white shadow-md shadow-blue-500/25 scale-105"
                       : "bg-white text-slate-600 border border-slate-200 hover:border-blue-300 hover:bg-blue-50/50"
-                  }`}
+                    }`}
                 >
                   <IconComp className={`w-3.5 h-3.5 ${isActive ? "text-white" : "text-slate-400"}`} />
                   <span>{slide.category}</span>
@@ -589,7 +587,7 @@ export default function EducationManagementPlatform() {
             })}
           </div>
 
-          {/* Active Screen Details Badge */}
+          {/* Active Screen Details Description */}
           <motion.div
             key={currentSlide.id}
             initial={{ opacity: 0, y: 8 }}
@@ -597,16 +595,6 @@ export default function EducationManagementPlatform() {
             transition={{ duration: 0.25 }}
             className="flex flex-col items-center"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-white border border-slate-200/80 shadow-xs mb-2">
-              <span className="text-[11px] font-bold text-blue-700 uppercase tracking-wider">
-                {currentSlide.tag}
-              </span>
-              <span className="w-1 h-1 rounded-full bg-slate-300" />
-              <span className="text-xs font-semibold text-slate-800">
-                {currentSlide.title}
-              </span>
-            </div>
-
             <p className="text-xs sm:text-sm text-slate-500 max-w-2xl lg:max-w-3xl mx-auto leading-relaxed mb-6 font-normal">
               {currentSlide.description}
             </p>
