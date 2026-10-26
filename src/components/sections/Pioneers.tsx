@@ -136,7 +136,7 @@ export default function Pioneers() {
         </div>
 
         {/* ── Refined Headline Above Marquee ── */}
-        <p className="text-center text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest mb-8 sm:mb-10 font-mono">
+        <p className="text-center text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wider mb-8 sm:mb-10">
           Trusted by schools across India
         </p>
 

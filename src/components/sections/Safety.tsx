@@ -32,7 +32,7 @@ export const Safety: React.FC = () => {
                 <MapPin className="h-5 w-5 text-teal-400" aria-hidden="true" />
                 <span className="text-sm font-semibold text-white font-display">Bus Route GPS Tracker</span>
               </div>
-              <span className="text-xs text-slate-400 font-mono">Route 12B - Evening</span>
+              <span className="text-xs text-slate-400 font-medium">Route 12B - Evening</span>
             </div>
 
             {/* Simulated Map layout */}
@@ -80,7 +80,7 @@ export const Safety: React.FC = () => {
             {/* Bus Info footer */}
             <div className="flex justify-between items-center bg-slate-950 p-4 rounded-xl border border-slate-800">
               <div>
-                <span className="text-xs text-slate-400 block uppercase font-mono tracking-wider">Bus Status</span>
+                <span className="text-xs text-slate-400 block uppercase font-medium tracking-wider">Bus Status</span>
                 <span className="text-xs font-semibold text-slate-200">En Route - Next Stop: Oak Ridge Ave</span>
               </div>
               <div className="text-right">
@@ -97,7 +97,7 @@ export const Safety: React.FC = () => {
                 <Radio className="h-5 w-5 text-teal-400" aria-hidden="true" />
                 <span className="text-sm font-semibold text-white font-display">RFID Gate Entry Logs</span>
               </div>
-              <span className="text-xs text-slate-400 font-mono">Gate 2 - Active</span>
+              <span className="text-xs text-slate-400 font-medium">Gate 2 - Active</span>
             </div>
 
             {/* List of Gate Checks */}

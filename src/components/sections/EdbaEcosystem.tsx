@@ -66,8 +66,8 @@ export default function EdbaEcosystem() {
     return () => document.removeEventListener("visibilitychange", handleVisibility);
   }, []);
 
-  // Determine if progress rail fill is paused
-  const isPaused = isHovered || isFocused || !isIntersecting || isDocHidden;
+  // Determine if progress rail fill is paused (only pause when off-screen or tab is backgrounded)
+  const isPaused = !isIntersecting || isDocHidden;
 
   // Advance to next module
   const handleNext = () => {
@@ -81,8 +81,11 @@ export default function EdbaEcosystem() {
     setActiveIndex((prev) => (prev - 1 + ecosystemModules.length) % ecosystemModules.length);
   };
 
-  // Jump to specific slide
-  const handleSelect = (idx: number) => {
+  // Jump to specific slide and immediately start the loader timer
+  const handleSelect = (idx: number, e?: React.MouseEvent) => {
+    if (e) {
+      (e.currentTarget as HTMLElement).blur();
+    }
     setDirection(idx > activeIndex ? 1 : -1);
     setActiveIndex(idx);
   };
@@ -280,14 +283,18 @@ export default function EdbaEcosystem() {
 
             {/* Thin auto-advance progress loader */}
             <div className="h-[2.5px] bg-slate-950 overflow-hidden">
-              <div
-                key={`mobile-stage-loader-${activeIndex}`}
-                onAnimationEnd={handleNext}
-                className="h-full bg-gradient-to-r from-blue-500 to-cyan-400 animate-rail-fill shadow-[0_0_8px_rgba(56,189,248,0.8)]"
-                style={{
-                  animationPlayState: isPaused ? "paused" : "running",
-                }}
-              />
+              {shouldReduceMotion ? (
+                <div className="w-full h-full bg-blue-600/50" />
+              ) : (
+                <div
+                  key={`mobile-stage-loader-${activeIndex}`}
+                  onAnimationEnd={handleNext}
+                  className="h-full bg-gradient-to-r from-blue-500 to-cyan-400 animate-rail-fill shadow-[0_0_8px_rgba(56,189,248,0.8)]"
+                  style={{
+                    animationPlayState: isPaused ? "paused" : "running",
+                  }}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -315,7 +322,7 @@ export default function EdbaEcosystem() {
             className="relative overflow-hidden bg-slate-900 rounded-3xl shadow-[0_20px_44px_-18px_rgba(15,23,42,0.35)] min-h-[500px] stage-nest-hub block select-none cursor-grab active:cursor-grabbing"
           >
             {/* Background Images Stack (crossfade 0.5s without blank frames) */}
-            <div className="relative w-full aspect-auto absolute inset-0 h-full overflow-hidden bg-slate-900">
+            <div className="absolute inset-0 w-full h-full overflow-hidden bg-slate-900">
               {ecosystemModules.map((m, idx) => (
                 <img
                   key={m.title}
@@ -326,7 +333,7 @@ export default function EdbaEcosystem() {
                   loading={idx === 0 ? "eager" : "lazy"}
                   decoding="async"
                   fetchPriority={idx === 0 ? "high" : "low"}
-                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                  className={`absolute inset-0 w-full h-full object-cover object-right lg:object-center transition-opacity duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                     idx === activeIndex
                       ? "opacity-100 z-[1]"
                       : "opacity-0 pointer-events-none z-0"
@@ -340,7 +347,7 @@ export default function EdbaEcosystem() {
               className="absolute inset-0 pointer-events-none z-[2]"
               style={{
                 background:
-                  "linear-gradient(90deg, rgba(8,15,32,.92) 0%, rgba(8,15,32,.62) 42%, transparent 74%)",
+                  "linear-gradient(90deg, rgba(8,15,32,0.94) 0%, rgba(8,15,32,0.78) 40%, rgba(8,15,32,0.15) 72%, transparent 100%)",
               }}
               aria-hidden="true"
             />
@@ -399,7 +406,7 @@ export default function EdbaEcosystem() {
             {/* Full-Length Thin Loader Line at Bottom Border of Image Stage */}
             <div className="absolute bottom-0 left-0 right-0 z-20 h-[2.5px] bg-slate-950/40 backdrop-blur-xs overflow-hidden">
               {shouldReduceMotion ? (
-                <div className="w-full h-full bg-blue-500" />
+                <div className="w-full h-full bg-blue-600/50" />
               ) : (
                 <div
                   key={`stage-loader-${activeIndex}`}
@@ -433,7 +440,7 @@ export default function EdbaEcosystem() {
                   aria-selected={isActive}
                   aria-controls="stage-panel"
                   tabIndex={isActive ? 0 : -1}
-                  onClick={() => handleSelect(idx)}
+                  onClick={(e) => handleSelect(idx, e)}
                   onKeyDown={(e) => handleKeyDown(e, idx)}
                   className="group min-h-[68px] text-left flex flex-col gap-2 cursor-pointer focus:outline-hidden focus-visible:outline-2 focus-visible:outline-blue-600 focus-visible:outline-offset-2 rounded-lg p-1.5 min-w-0 shrink transition-colors"
                 >

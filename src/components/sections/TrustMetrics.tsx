@@ -69,7 +69,7 @@ export default function TrustMetrics() {
 
         {/* Header */}
         <div className="text-center mb-10 sm:mb-12">
-          <span className="text-xs font-bold tracking-widest uppercase text-slate-400 font-mono">
+          <span className="text-xs font-semibold tracking-wider uppercase text-slate-400">
             Trusted by India’s forward-thinking educational institutions
           </span>
         </div>

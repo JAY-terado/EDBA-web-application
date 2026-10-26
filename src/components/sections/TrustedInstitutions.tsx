@@ -94,7 +94,7 @@ export default function TrustedInstitutions() {
         </div>
 
         {/* Label */}
-        <p className="text-center text-xs font-bold text-slate-400 uppercase tracking-widest mb-6 sm:mb-8 font-mono">
+        <p className="text-center text-xs font-semibold text-slate-400 uppercase tracking-wider mb-6 sm:mb-8">
           Trusted by schools and colleges across India
         </p>
 

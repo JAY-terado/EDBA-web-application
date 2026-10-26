@@ -195,7 +195,7 @@ export default function DigitalTransformationJourney() {
   return (
     <section
       id="journey"
-      className="py-20 sm:py-28 bg-gradient-to-b from-white via-slate-50/60 to-white border-b border-slate-200/80 relative"
+      className="pt-20 sm:pt-28 pb-4 sm:pb-6 bg-gradient-to-b from-white via-slate-50/60 to-white border-b border-slate-200/80 relative"
     >
       <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -238,8 +238,6 @@ export default function DigitalTransformationJourney() {
                   top: "clamp(108px, 14vh, 128px)",
                   // Higher zIndex ensures later cards slide directly over previous cards
                   zIndex: (index + 1) * 10,
-                  // Full card height scroll distance (clamp 540px to 660px) so Card 4 overlaps Card 3 100%, and 0 on the last card so the screen immediately moves forward
-                  marginBottom: isLast ? 0 : "clamp(540px, 72vh, 660px)",
                 }}
               >
                 {/* Main Card Content (Teachmint Connected Classroom Layout) */}
@@ -354,25 +352,6 @@ export default function DigitalTransformationJourney() {
             );
           })}
         </div>
-
-        {/* Bottom Partnership Banner */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="mt-8 sm:mt-12 text-center p-6 sm:p-8 bg-white border border-slate-200/80 rounded-2xl sm:rounded-3xl max-w-3xl mx-auto shadow-xs"
-        >
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-            <div className="h-9 w-9 rounded-full bg-blue-50 border border-blue-200/60 flex items-center justify-center text-blue-600 flex-shrink-0 shadow-xs">
-              <Sparkles className="h-4.5 w-4.5" />
-            </div>
-            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed text-center sm:text-left">
-              <span className="font-bold text-slate-900">From your first discussion to campus-wide growth,</span> EDBA is your partner in digital education management — backed by dedicated experts every step of the way.
-            </p>
-          </div>
-        </motion.div>
-
       </div>
     </section>
   );
