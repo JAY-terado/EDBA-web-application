@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight } from "lucide-react";
 
 export default function Navbar() {
@@ -92,49 +93,55 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Drawer */}
-      <div
-        className={`absolute top-[calc(100%+8px)] left-3 right-3 sm:left-4 sm:right-4 z-45 p-5 sm:p-6 rounded-3xl apple-glass shadow-[0_24px_48px_rgba(0,0,0,0.1)] transition-all duration-300 md:hidden ${
-          isOpen ? "translate-y-0 opacity-100 pointer-events-auto" : "-translate-y-3 opacity-0 pointer-events-none"
-        }`}
-      >
-        <div className="space-y-4">
-          <div className="flex flex-col gap-1 items-center">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="text-sm font-semibold text-slate-800 hover:text-blue-600 hover:bg-black/[0.04] py-2.5 px-4 rounded-xl transition-all w-full text-center duration-150 min-h-[44px] flex items-center justify-center"
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
+      {/* Mobile Drawer (Apple-style spring sheet with AnimatePresence) */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: -8 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: -8 }}
+            transition={{ type: "spring", damping: 25, stiffness: 320 }}
+            className="drawer-container absolute top-[calc(100%+8px)] left-3 right-3 sm:left-4 sm:right-4 z-45 p-5 sm:p-6 rounded-3xl apple-glass shadow-[0_24px_48px_rgba(0,0,0,0.12)] border border-white/60 md:hidden overflow-hidden origin-top"
+          >
+            <div className="space-y-4">
+              <div className="flex flex-col gap-1 items-center">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className="text-sm font-semibold text-slate-800 hover:text-blue-600 hover:bg-black/[0.04] active:scale-[0.98] py-2.5 px-4 rounded-xl transition-all w-full text-center duration-100 min-h-[44px] flex items-center justify-center"
+                  >
+                    {link.name}
+                  </a>
+                ))}
+              </div>
 
-          <div className="flex flex-col gap-2.5 pt-3 border-t border-slate-200/60">
-            <a
-              href="https://appv1.edba.io/"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setIsOpen(false)}
-              className="w-full py-2.5 text-center font-semibold text-sm text-slate-800 hover:bg-black/[0.04] rounded-full transition-colors border border-slate-200/80 duration-150 min-h-[44px] flex items-center justify-center"
-            >
-              Log In
-            </a>
-            <button
-              type="button"
-              onClick={(e) => {
-                setIsOpen(false);
-                handleDemoClick(e);
-              }}
-              className="w-full py-2.5 text-center font-semibold text-sm text-white bg-blue-600 hover:bg-blue-500 rounded-full shadow-lg shadow-blue-500/25 transition-all duration-150 cursor-pointer min-h-[44px] flex items-center justify-center"
-            >
-              Book a Free Demo
-            </button>
-          </div>
-        </div>
-      </div>
+              <div className="flex flex-col gap-2.5 pt-3 border-t border-slate-200/60">
+                <a
+                  href="https://appv1.edba.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsOpen(false)}
+                  className="w-full py-2.5 text-center font-semibold text-sm text-slate-800 hover:bg-black/[0.04] active:scale-[0.98] rounded-full transition-all border border-slate-200/80 duration-100 min-h-[44px] flex items-center justify-center"
+                >
+                  Log In
+                </a>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    setIsOpen(false);
+                    handleDemoClick(e);
+                  }}
+                  className="w-full py-2.5 text-center font-semibold text-sm text-white bg-blue-600 hover:bg-blue-500 active:scale-[0.98] rounded-full shadow-lg shadow-blue-500/25 transition-all duration-100 cursor-pointer min-h-[44px] flex items-center justify-center"
+                >
+                  Book a Free Demo
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

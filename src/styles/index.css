@@ -85,13 +85,18 @@ p, .text-base {
 
 /* Small text & uppercase badges: Slightly positive tracking for legibility */
 .uppercase, [class*="uppercase"] {
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
 }
 
 /* ----------------------------------------------------
-   APPLE TACTILE PRESS FEEDBACK (KILL LATENCY)
+   APPLE TACTILE PRESS FEEDBACK (KILL LATENCY - WWDC 2018)
    ---------------------------------------------------- */
-button, a[role="button"], input[type="button"], input[type="submit"] {
+button, 
+a[role="button"], 
+input[type="button"], 
+input[type="submit"],
+[role="tab"],
+.interactive-pill {
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 }
@@ -100,13 +105,15 @@ button:active:not(:disabled),
 a[role="button"]:active,
 .btn:active,
 .neu-btn-blue:active,
-.neu-btn-light:active {
+.neu-btn-light:active,
+.neu-btn-dark:active,
+[role="tab"]:active {
   transform: scale(0.97);
   transition: transform 100ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* ----------------------------------------------------
-   ACCESSIBILITY & FOCUS CONTROLS
+   ACCESSIBILITY & SYSTEM CONTROLS (WWDC Principles)
    ---------------------------------------------------- */
 
 :focus-visible {
@@ -114,6 +121,7 @@ a[role="button"]:active,
   outline-offset: 2px;
 }
 
+/* 1. Reduced Motion: cross-fade, no elastic/overshoot */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -122,6 +130,38 @@ a[role="button"]:active,
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  .modal-container, .drawer-container {
+    transition: opacity 200ms ease !important;
+    transform: none !important;
+  }
+}
+
+/* 2. Reduced Transparency: solidify frosted glass */
+@media (prefers-reduced-transparency: reduce) {
+  .apple-glass,
+  .apple-glass-scrolled,
+  .apple-glass-card {
+    background-color: #ffffff !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .apple-glass-dark {
+    background-color: #0b1626 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+/* 3. High Contrast: distinct contrasting borders */
+@media (prefers-contrast: more) {
+  .apple-glass,
+  .apple-glass-scrolled,
+  .apple-glass-card {
+    border: 2px solid #0f172a !important;
+  }
+  .apple-glass-dark {
+    border: 2px solid #ffffff !important;
   }
 }
 

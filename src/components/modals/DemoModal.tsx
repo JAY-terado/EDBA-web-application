@@ -107,24 +107,24 @@ export default function DemoModal() {
           aria-modal="true"
           aria-labelledby="demo-modal-title"
         >
-          {/* Backdrop */}
+          {/* Backdrop with Apple translucent blur */}
           <motion.div
             key="backdrop"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setIsOpen(false)}
-            className="absolute inset-0 bg-slate-950/70 backdrop-blur-md"
+            className="absolute inset-0 bg-slate-950/65 backdrop-blur-xl"
           />
 
-          {/* Modal Container */}
+          {/* Modal Container with Apple critically damped spring */}
           <motion.div
             key="modal"
-            initial={{ opacity: 0, scale: 0.96, y: 16 }}
+            initial={{ opacity: 0, scale: 0.95, y: 14 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: 16 }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="relative w-full max-w-4xl bg-white rounded-3xl overflow-hidden shadow-[0_30px_90px_-15px_rgba(0,0,0,0.45)] flex flex-col lg:flex-row border-0 border-none max-h-[94vh] sm:max-h-[92vh] modal-nest-hub"
+            exit={{ opacity: 0, scale: 0.95, y: 14 }}
+            transition={{ type: "spring", damping: 28, stiffness: 320, mass: 0.85 }}
+            className="modal-container relative w-full max-w-4xl bg-white rounded-3xl overflow-hidden shadow-[0_30px_90px_-15px_rgba(0,0,0,0.45)] flex flex-col lg:flex-row border border-slate-200/60 max-h-[94vh] sm:max-h-[92vh] modal-nest-hub"
           >
             {/* ── Left panel ── */}
             <div className="hidden lg:flex lg:w-[42%] flex-col justify-between p-6 xl:p-10 bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-700 text-white relative overflow-y-auto modal-left-nest-hub">
@@ -188,7 +188,7 @@ export default function DemoModal() {
                 <button
                   onClick={() => setIsOpen(false)}
                   aria-label="Close dialog"
-                  className="h-9 w-9 rounded-full flex items-center justify-center border border-slate-200 text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors flex-shrink-0 focus-visible:ring-2 focus-visible:ring-blue-600 cursor-pointer"
+                  className="h-9 w-9 rounded-full flex items-center justify-center border border-slate-200 text-slate-400 hover:text-slate-700 hover:bg-slate-100 active:scale-95 transition-all flex-shrink-0 focus-visible:ring-2 focus-visible:ring-blue-600 cursor-pointer"
                 >
                   <X className="h-4 w-4" aria-hidden="true" />
                 </button>

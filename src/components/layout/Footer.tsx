@@ -441,7 +441,7 @@ export default function Footer() {
       <button
         type="button"
         onClick={scrollToTop}
-        className="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 p-2 rounded-full text-slate-400 hover:text-white bg-[#0d1c32]/80 hover:bg-[#132845] border border-slate-700/60 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 shadow-md"
+        className="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 p-2 rounded-full text-slate-400 hover:text-white bg-[#0d1c32]/80 hover:bg-[#132845] active:scale-90 border border-slate-700/60 transition-all duration-100 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 shadow-md"
         aria-label="Scroll to top"
         title="Scroll to top"
       >

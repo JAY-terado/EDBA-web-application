@@ -245,13 +245,16 @@ export default function WhyInstitutesChooseEdba() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.25, ease: "easeOut" }}
+                transition={{ type: "spring", damping: 26, stiffness: 300 }}
                 drag="x"
                 dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={0.2}
-                onDragEnd={(_e, { offset }) => {
-                  if (offset.x < -40) handleNext();
-                  else if (offset.x > 40) handlePrev();
+                dragElastic={0.25}
+                onDragEnd={(_e, { offset, velocity }) => {
+                  const isSwipe = Math.abs(offset.x) > 35 || Math.abs(velocity.x) > 350;
+                  if (isSwipe) {
+                    if (offset.x < 0 || velocity.x < -250) handleNext();
+                    else if (offset.x > 0 || velocity.x > 250) handlePrev();
+                  }
                 }}
                 className="w-full rounded-[22px] border border-[#223049] bg-gradient-to-b from-[#121B30] to-[#0D1527] p-5 shadow-2xl shadow-black/40 touch-pan-y"
               >

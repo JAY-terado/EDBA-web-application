@@ -9,13 +9,15 @@ import {
   Bot,
   Bell,
   LayoutDashboard,
+  Calendar,
 } from "lucide-react";
 
-import screenDashboard from "@/assets/screens/dashboard.png";
-import screenClasswall from "@/assets/screens/classwall.png";
-import screenAttendance from "@/assets/screens/attendance.png";
-import screenAssistant from "@/assets/screens/assistant.png";
-import screenCirculars from "@/assets/screens/circulars.png";
+import s4img1 from "@/assets/screens/s4img1-upscaled.webp";
+import s4img2 from "@/assets/screens/s4img2-upscaled.webp";
+import s4img3 from "@/assets/screens/s4img3-upscaled.webp";
+import s4img4 from "@/assets/screens/s4img4-upscaled.webp";
+import s4img5 from "@/assets/screens/s4img5-upscaled.webp";
+import s4img6 from "@/assets/screens/s4img6-upscaled.webp";
 
 interface SlideItem {
   id: number;
@@ -33,7 +35,7 @@ const SLIDES_DATA: SlideItem[] = [
     title: "Student & Parent Hub",
     category: "Overview",
     tag: "Quick Actions",
-    image: screenDashboard,
+    image: s4img4,
     icon: LayoutDashboard,
     description: "Daily timetable, notices, homework, leave requests and fee status in a unified dashboard.",
   },
@@ -42,7 +44,7 @@ const SLIDES_DATA: SlideItem[] = [
     title: "Class Wall & Curriculum",
     category: "Academics",
     tag: "Subjects & Progress",
-    image: screenClasswall,
+    image: s4img1,
     icon: BookOpen,
     description: "Interactive chapter tracking, assigned educators, syllabus breakdown and study material.",
   },
@@ -51,7 +53,7 @@ const SLIDES_DATA: SlideItem[] = [
     title: "Smart Attendance Tracking",
     category: "Attendance",
     tag: "Calendar View",
-    image: screenAttendance,
+    image: s4img2,
     icon: CalendarCheck,
     description: "Monthly calendar view with presence analytics, absent alerts, and instant leave requests.",
   },
@@ -60,18 +62,27 @@ const SLIDES_DATA: SlideItem[] = [
     title: "EDBA AI Assistant",
     category: "AI Doubts",
     tag: "24/7 Tutor",
-    image: screenAssistant,
+    image: s4img3,
     icon: Bot,
     description: "Instant doubt resolution, concept explanations, and personalized revision on demand.",
   },
   {
     id: 4,
-    title: "Institutional Circulars & Fees",
+    title: "Institutional Circulars & Notices",
     category: "Notices",
     tag: "Official Updates",
-    image: screenCirculars,
+    image: s4img5,
     icon: Bell,
     description: "Timely circulars, PTM alerts, fee payment tracking, and downloadable academic files.",
+  },
+  {
+    id: 5,
+    title: "Campus Events & Activities",
+    category: "Events",
+    tag: "School Life",
+    image: s4img6,
+    icon: Calendar,
+    description: "Upcoming sports meets, annual exhibitions, venue details, and shared campus highlights.",
   },
 ];
 
@@ -91,8 +102,8 @@ export default function EducationManagementPlatform() {
   // Autoplay control
   const [isHovered, setIsHovered] = useState(false);
 
-  const CARD_WIDTH = 285;
-  const CARD_HEIGHT = 633; // Exact 922:2048 (2.221) aspect ratio of native screenshots
+  const CARD_WIDTH = 286;
+  const CARD_HEIGHT = 636; // Exact integer dimensions matching 2.221 aspect ratio and zero subpixel blur
   const TOTAL_SLIDES = SLIDES_DATA.length;
   const DRAG_SENSITIVITY = 200; // pixels of drag per slide
 
@@ -495,8 +506,14 @@ export default function EducationManagementPlatform() {
                 }
 
                 const isCenter = absDist < 0.25;
+                const isStationaryCenter = absDist < 0.01 && !isDragging;
                 // Center card is Z-35; all cards are >= 10, strictly above stage (Z-1)
                 const zIndex = isCenter ? 35 : Math.max(10, Math.round(28 - absDist * 6));
+
+                // Clean integer-snapped planar 2D transform for center card to prevent 3D GPU mipmapping
+                const cardTransform = isStationaryCenter
+                  ? "translate3d(-50%, 0px, 0px)"
+                  : `translate3d(calc(-50% + ${xPos}px), ${yOffset}px, ${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
 
                 return (
                   <div
@@ -513,8 +530,11 @@ export default function EducationManagementPlatform() {
                       opacity,
                       bottom: "72px",
                       left: "50%",
-                      transform: `translate3d(calc(-50% + ${xPos}px), ${yOffset}px, ${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`,
-                      transformStyle: "preserve-3d",
+                      transform: cardTransform,
+                      transformStyle: isStationaryCenter ? "flat" : "preserve-3d",
+                      WebkitBackfaceVisibility: "hidden",
+                      backfaceVisibility: "hidden",
+                      willChange: isDragging ? "transform, opacity" : "auto",
                       transition: isDragging
                         ? "none"
                         : "transform 600ms cubic-bezier(0.22, 1, 0.36, 1), opacity 600ms cubic-bezier(0.22, 1, 0.36, 1)",
@@ -528,6 +548,11 @@ export default function EducationManagementPlatform() {
                     <img
                       src={slide.image}
                       alt={slide.title}
+                      style={{
+                        imageRendering: "-webkit-optimize-contrast",
+                        WebkitBackfaceVisibility: "hidden",
+                        backfaceVisibility: "hidden",
+                      }}
                       className="w-full h-full object-fill select-none pointer-events-none rounded-[25px]"
                       loading="eager"
                       decoding="sync"

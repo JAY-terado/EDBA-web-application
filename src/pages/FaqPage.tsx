@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import { 
   ArrowLeft, 
   HelpCircle, 
@@ -350,36 +351,47 @@ export const FaqPage: React.FC = () => {
                       </div>
                     </button>
 
-                    {/* Answer Collapsible */}
-                    {isOpen && (
-                      <div className="px-5 sm:px-6 pb-5 sm:pb-6 pt-1 text-slate-300 text-xs sm:text-sm leading-relaxed border-t border-slate-800/60 mt-1">
-                        <p className="font-normal">{faq.answer}</p>
-                        
-                        {/* Interactive actions for specific questions */}
-                        {faq.id === 12 && (
-                          <div className="mt-4 pt-3 border-t border-slate-800/40 flex items-center gap-3">
-                            <button
-                              type="button"
-                              onClick={handleOpenDemo}
-                              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 transition-all cursor-pointer shadow-md shadow-blue-600/30"
-                            >
-                              <Calendar className="w-3.5 h-3.5" />
-                              <span>Book Free Demo</span>
-                            </button>
-                            <span className="text-[11px] text-slate-400">
-                              Personalized 1-on-1 walkthrough for your campus
-                            </span>
-                          </div>
-                        )}
+                    {/* Answer Collapsible with Apple Spring Physics */}
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          key="answer"
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ type: "spring", damping: 28, stiffness: 320 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="px-5 sm:px-6 pb-5 sm:pb-6 pt-1 text-slate-300 text-xs sm:text-sm leading-relaxed border-t border-slate-800/60 mt-1">
+                            <p className="font-normal">{faq.answer}</p>
+                            
+                            {/* Interactive actions for specific questions */}
+                            {faq.id === 12 && (
+                              <div className="mt-4 pt-3 border-t border-slate-800/40 flex items-center gap-3">
+                                <button
+                                  type="button"
+                                  onClick={handleOpenDemo}
+                                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 active:scale-95 transition-all cursor-pointer shadow-md shadow-blue-600/30"
+                                >
+                                  <Calendar className="w-3.5 h-3.5" />
+                                  <span>Book Free Demo</span>
+                                </button>
+                                <span className="text-[11px] text-slate-400">
+                                  Personalized 1-on-1 walkthrough for your campus
+                                </span>
+                              </div>
+                            )}
 
-                        {faq.id === 11 && (
-                          <div className="mt-3.5 inline-flex items-center gap-2 text-xs text-emerald-400 font-medium">
-                            <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
-                            <span>Quick setup • Zero disruption • Dedicated data migration</span>
+                            {faq.id === 11 && (
+                              <div className="mt-3.5 inline-flex items-center gap-2 text-xs text-emerald-400 font-medium">
+                                <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
+                                <span>Quick setup • Zero disruption • Dedicated data migration</span>
+                              </div>
+                            )}
                           </div>
-                        )}
-                      </div>
-                    )}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 );
               })}
