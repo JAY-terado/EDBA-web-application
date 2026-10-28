@@ -8,7 +8,6 @@ import {
   BarChart2,
   GraduationCap,
   FileText,
-  ArrowUpRight,
   CheckCircle2,
 } from "lucide-react";
 
@@ -150,10 +149,6 @@ const highlights = [
 ];
 
 export default function ClassroomAcademicManagement() {
-  const handleOpenDemo = () => {
-    window.dispatchEvent(new CustomEvent("open-demo-modal"));
-  };
-
   return (
     <section
       id="academic-management"
@@ -204,18 +199,14 @@ export default function ClassroomAcademicManagement() {
                     <div className="w-full flex-1 flex flex-col justify-end">
                       {step.isTop ? (
                         <div
-                          onClick={handleOpenDemo}
-                          className={`w-full bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/90 shadow-[0_4px_24px_rgba(15,23,42,0.06)] hover:shadow-[0_12px_36px_rgba(15,23,42,0.12)] transition-all duration-200 hover:-translate-y-1 cursor-pointer flex flex-col justify-between min-h-[155px] sm:min-h-[165px] ${step.colors.borderHover}`}
+                          className={`w-full bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/90 shadow-[0_4px_24px_rgba(15,23,42,0.06)] hover:shadow-[0_12px_36px_rgba(15,23,42,0.12)] transition-all duration-200 hover:-translate-y-1 flex flex-col justify-between min-h-[155px] sm:min-h-[165px] ${step.colors.borderHover}`}
                         >
                           <div>
-                            <div className="flex items-center justify-between mb-3 sm:mb-3.5">
+                            <div className="flex items-center justify-start mb-3 sm:mb-3.5">
                               <div
                                 className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center shadow-2xs ${step.colors.iconBg} ${step.colors.iconColor}`}
                               >
                                 <Icon className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
-                              </div>
-                              <div className="w-6 h-6 sm:w-6.5 sm:h-6.5 rounded-full bg-slate-50 border border-slate-150 flex items-center justify-center text-slate-400 group-hover:text-blue-600 group-hover:bg-blue-50 group-hover:border-blue-200 transition-colors">
-                                <ArrowUpRight className="w-3.5 h-3.5" />
                               </div>
                             </div>
 
@@ -261,18 +252,14 @@ export default function ClassroomAcademicManagement() {
                     <div className="w-full flex-1 flex flex-col justify-start">
                       {!step.isTop ? (
                         <div
-                          onClick={handleOpenDemo}
-                          className={`w-full bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/90 shadow-[0_4px_24px_rgba(15,23,42,0.06)] hover:shadow-[0_12px_36px_rgba(15,23,42,0.12)] transition-all duration-200 hover:translate-y-1 cursor-pointer flex flex-col justify-between min-h-[155px] sm:min-h-[165px] ${step.colors.borderHover}`}
+                          className={`w-full bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/90 shadow-[0_4px_24px_rgba(15,23,42,0.06)] hover:shadow-[0_12px_36px_rgba(15,23,42,0.12)] transition-all duration-200 hover:translate-y-1 flex flex-col justify-between min-h-[155px] sm:min-h-[165px] ${step.colors.borderHover}`}
                         >
                           <div>
-                            <div className="flex items-center justify-between mb-3 sm:mb-3.5">
+                            <div className="flex items-center justify-start mb-3 sm:mb-3.5">
                               <div
                                 className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center shadow-2xs ${step.colors.iconBg} ${step.colors.iconColor}`}
                               >
                                 <Icon className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
-                              </div>
-                              <div className="w-6 h-6 sm:w-6.5 sm:h-6.5 rounded-full bg-slate-50 border border-slate-150 flex items-center justify-center text-slate-400 group-hover:text-blue-600 group-hover:bg-blue-50 group-hover:border-blue-200 transition-colors">
-                                <ArrowUpRight className="w-3.5 h-3.5" />
                               </div>
                             </div>
 

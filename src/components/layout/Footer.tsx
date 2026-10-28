@@ -30,7 +30,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-8">
           
           {/* ================= COLUMN 1: BRAND, CONTACT, SOCIAL, APPS (3.5 cols) ================= */}
-          <div className="lg:col-span-3 xl:col-span-3 flex flex-col items-start pr-2">
+          <div className="lg:col-span-4 xl:col-span-4 flex flex-col items-start pr-4">
             {/* Logo */}
             <Link
               to="/"
@@ -154,7 +154,7 @@ export default function Footer() {
               <div className="flex items-center gap-2">
                 {/* Google Play */}
                 <a
-                  href="https://play.google.com"
+                  href="https://play.google.com/store/apps/details?id=com.edba.app"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Get it on Google Play"
@@ -175,7 +175,7 @@ export default function Footer() {
 
                 {/* App Store */}
                 <a
-                  href="https://apple.com/app-store"
+                  href="https://apps.apple.com/in/app/edba/id6747445951"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Download on the App Store"
@@ -305,8 +305,8 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* ================= COLUMN 4: RESOURCES (2 cols) ================= */}
-          <div className="lg:col-span-2 xl:col-span-2">
+          {/* ================= COLUMN 4: RESOURCES (3 cols) ================= */}
+          <div className="lg:col-span-3 xl:col-span-3">
             <h3 className="text-xs font-bold uppercase tracking-wider text-white mb-5 sm:mb-6">
               RESOURCES
             </h3>
@@ -349,61 +349,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* ================= COLUMN 5: CONTACT US (2 cols) ================= */}
-          <div className="lg:col-span-2 xl:col-span-2">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-white mb-5 sm:mb-6">
-              CONTACT US
-            </h3>
-            <ul className="space-y-3 sm:space-y-3.5 text-[13.5px] sm:text-sm">
-              <li>
-                <a
-                  href="mailto:support@edba.io?cc=vidula.patil@edba.io"
-                  className="hover:text-white transition-colors duration-150 inline-block group"
-                  title="support@edba.io (CC: vidula.patil@edba.io)"
-                >
-                  <span className="text-slate-300 group-hover:text-white transition-colors">Email Us</span>
-                  <span className="block text-xs text-slate-400 group-hover:text-slate-300 transition-colors font-mono mt-0.5">
-                    support@edba.io
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="tel:+918956734701"
-                  className="hover:text-white transition-colors duration-150 inline-block group"
-                  title="+91 8956734701"
-                >
-                  <span className="text-slate-300 group-hover:text-white transition-colors">Call Our Team</span>
-                  <span className="block text-xs text-slate-400 group-hover:text-slate-300 transition-colors font-mono mt-0.5">
-                    +91 8956734701
-                  </span>
-                </a>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={handleOpenDemo}
-                  className="hover:text-white transition-colors duration-150 inline-block text-left cursor-pointer focus-visible:outline-none"
-                >
-                  Schedule a Demo
-                </button>
-              </li>
-              <li>
-                <a
-                  href="tel:+918356846130"
-                  className="hover:text-white transition-colors duration-150 inline-block group"
-                  title="+91 83568 46130"
-                >
-                  <span className="text-slate-300 group-hover:text-white transition-colors">Client Support</span>
-                  <span className="block text-xs text-slate-400 group-hover:text-slate-300 transition-colors font-mono mt-0.5">
-                    +91 83568 46130
-                  </span>
-                </a>
-              </li>
-            </ul>
-          </div>
-
-        </div>
+</div>
 
         {/* ================= BOTTOM BAR (Legal, Copyright & Scroll to Top) ================= */}
         <div className="mt-16 sm:mt-24 lg:mt-28 pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs sm:text-[13px] text-slate-400 font-normal">
