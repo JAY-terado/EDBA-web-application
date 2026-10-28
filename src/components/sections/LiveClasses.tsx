@@ -1,13 +1,94 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
-import { Radio, MessageSquare, Play, Video, Users, BookOpen, ArrowRight } from "lucide-react";
+import {
+  Volume2,
+  VolumeX,
+  Radio,
+  MessageSquare,
+  Users,
+  BookOpen,
+  ArrowRight,
+} from "lucide-react";
 
 export default function LiveClasses() {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isMuted, setIsMuted] = useState(true);
+
+  // Guarantee automatic, lag-free autoplay on page load without any user action
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Strict muted settings required by modern browsers for zero-click autoplay
+    video.muted = true;
+    video.defaultMuted = true;
+
+    const playVideo = () => {
+      const promise = video.play();
+      if (promise !== undefined) {
+        promise.catch(() => {
+          // If browser policy defers autoplay, start as soon as user touches or scrolls
+          const triggerPlay = () => {
+            if (videoRef.current) {
+              videoRef.current.play().catch(() => {});
+            }
+            window.removeEventListener("scroll", triggerPlay);
+            window.removeEventListener("touchstart", triggerPlay);
+            window.removeEventListener("click", triggerPlay);
+          };
+          window.addEventListener("scroll", triggerPlay, { once: true, passive: true });
+          window.addEventListener("touchstart", triggerPlay, { once: true, passive: true });
+          window.addEventListener("click", triggerPlay, { once: true });
+        });
+      }
+    };
+
+    playVideo();
+
+    const handleVolumeChange = () => {
+      if (videoRef.current) {
+        setIsMuted(videoRef.current.muted);
+      }
+    };
+
+    video.addEventListener("volumechange", handleVolumeChange);
+
+    return () => {
+      video.removeEventListener("volumechange", handleVolumeChange);
+    };
+  }, []);
+
+  // Infinite seamless loop restart
+  const handleVideoEnded = () => {
+    const video = videoRef.current;
+    if (video) {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    }
+  };
+
+  // Instant hardware-accelerated sound toggle (no toasts, no tooltips, no hover popups)
+  const toggleMute = useCallback((e?: React.MouseEvent) => {
+    if (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (video.muted) {
+      video.muted = false;
+      if (video.volume === 0) video.volume = 1;
+      setIsMuted(false);
+    } else {
+      video.muted = true;
+      setIsMuted(true);
+    }
+  }, []);
 
   const features = [
     {
-      icon: Video,
+      icon: VideoIcon,
       title: "Live Streaming Sessions",
       desc: "Teachers stream live classes directly through the platform with HD quality.",
     },
@@ -33,7 +114,7 @@ export default function LiveClasses() {
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
-          {/* Left: Video Player Mockup */}
+          {/* Left: Clean Infinite Video Display */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -41,113 +122,106 @@ export default function LiveClasses() {
             transition={{ duration: 0.7, ease: "easeOut" }}
             className="lg:col-span-6 relative"
           >
-            {/* Main Video Player Card */}
-            <div className="relative bg-slate-950 rounded-2xl overflow-hidden shadow-2xl shadow-slate-900/40 border border-slate-800/60">
-              {/* Video Placeholder */}
-              <div className="aspect-video bg-gradient-to-br from-slate-900 via-blue-950 to-indigo-950 relative flex items-center justify-center">
-                {/* Grid dot overlay */}
-                <div className="absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] [background-size:20px_20px]" />
-                
-                {/* Camera feed simulation */}
-                <div className="absolute top-4 right-4 w-24 h-16 bg-slate-800 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center">
-                  <div className="w-8 h-8 rounded-full bg-blue-600/40 flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">T</span>
+            {/* Ambient decorative soft halo behind container */}
+            <div className="absolute -inset-2 bg-gradient-to-r from-blue-600/15 via-sky-500/10 to-indigo-600/15 rounded-3xl blur-2xl -z-10 pointer-events-none" />
+
+            {/* Video Player Shell */}
+            <div className="relative bg-slate-950 rounded-2xl overflow-hidden shadow-2xl shadow-slate-900/35 border border-slate-800/80 select-none">
+              {/* Aspect Ratio Frame - No title attribute, no hover popups */}
+              <div
+                className="relative aspect-video w-full bg-black overflow-hidden flex items-center justify-center cursor-pointer"
+                onClick={toggleMute}
+                style={{
+                  transform: "translate3d(0, 0, 0)",
+                  WebkitTransform: "translate3d(0, 0, 0)",
+                  backfaceVisibility: "hidden",
+                  WebkitBackfaceVisibility: "hidden",
+                }}
+              >
+                {/* Hardware-accelerated Video (100% native quality, autoPlay on load, infinite loop) */}
+                <video
+                  ref={videoRef}
+                  playsInline
+                  autoPlay
+                  loop
+                  muted
+                  preload="auto"
+                  disablePictureInPicture
+                  onEnded={handleVideoEnded}
+                  style={{
+                    filter: "none",
+                    WebkitFilter: "none",
+                    imageRendering: "auto",
+                    transform: "translate3d(0, 0, 0)",
+                    willChange: "transform",
+                  }}
+                  className="w-full h-full object-contain block bg-black"
+                >
+                  <source src="/edba-tv-demo.mp4" type="video/mp4" />
+                  <source src="/EDBA%20TV%20demo%20(1).mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+
+                {/* Top-Left: Discreet Live Status Badge */}
+                <div className="absolute top-3.5 left-3.5 z-20 flex items-center gap-2 pointer-events-none">
+                  <div className="flex items-center gap-1.5 px-3 py-1 bg-slate-950/80 rounded-full shadow-md border border-white/10 text-white">
+                    <span className="h-2 w-2 rounded-full bg-red-500 animate-pulse" />
+                    <span className="text-[11px] font-bold tracking-wider uppercase text-slate-200">LIVE HD</span>
                   </div>
                 </div>
 
-                {/* LIVE badge */}
-                <div className="absolute top-4 left-4 flex items-center gap-1.5 px-3 py-1 bg-red-600 rounded-full">
-                  <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
-                  <span className="text-white text-xs font-bold uppercase tracking-wide">Live</span>
-                </div>
-
-                {/* Participant count */}
-                <div className="absolute top-4 left-20 flex items-center gap-1.5 px-3 py-1 bg-slate-800/80 backdrop-blur-sm rounded-full border border-slate-700">
-                  <Users className="w-3 h-3 text-slate-300" />
-                  <span className="text-slate-300 text-xs font-medium">147 watching</span>
-                </div>
-
-                {/* Center play button */}
-                <button
-                  onClick={() => setIsPlaying(!isPlaying)}
-                  className="relative z-10 h-16 w-16 rounded-full bg-white/15 hover:bg-white/25 backdrop-blur-sm border border-white/20 flex items-center justify-center transition-all duration-200 cursor-pointer group"
-                  aria-label="Play live class"
-                >
-                  <Play className="h-7 w-7 text-white fill-white ml-1 group-hover:scale-110 transition-transform" />
-                </button>
-
-                {/* Content label overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-slate-950/90 to-transparent">
-                  <p className="text-white text-sm font-semibold">Introduction to Organic Chemistry</p>
-                  <p className="text-slate-400 text-xs mt-0.5">Prof. Ananya Sharma • Class XI Science</p>
+                {/* Bottom-Right: Clean Sound Toggle Pill - Zero hover popups or browser tooltips */}
+                <div className="absolute bottom-3.5 right-3.5 z-20 pointer-events-auto">
+                  <button
+                    type="button"
+                    onClick={toggleMute}
+                    className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-colors duration-150 shadow-lg border cursor-pointer select-none ${
+                      isMuted
+                        ? "bg-slate-950/85 hover:bg-slate-900 text-white border-white/20"
+                        : "bg-blue-600 hover:bg-blue-500 text-white border-blue-400/50"
+                    }`}
+                    aria-label={isMuted ? "Unmute audio" : "Mute audio"}
+                  >
+                    {isMuted ? (
+                      <>
+                        <VolumeX className="w-3.5 h-3.5 text-amber-400" />
+                        <span className="text-slate-200 text-xs">Unmute</span>
+                      </>
+                    ) : (
+                      <>
+                        <Volume2 className="w-3.5 h-3.5 text-white" />
+                        <span className="text-white text-xs">Mute</span>
+                      </>
+                    )}
+                  </button>
                 </div>
               </div>
 
-              {/* Bottom Controls Bar */}
+              {/* Bottom Presenter Bar */}
               <div className="flex items-center justify-between px-4 py-3 bg-slate-900 border-t border-slate-800">
                 <div className="flex items-center gap-3">
-                  <div className="h-7 w-7 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold">A</div>
+                  <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center text-white text-xs font-bold shadow-md">
+                    E
+                  </div>
                   <div>
-                    <p className="text-white text-xs font-semibold">Prof. Ananya Sharma</p>
-                    <p className="text-teal-400 text-xs">Presenting</p>
+                    <p className="text-white text-xs font-semibold tracking-wide">EDBA Interactive TV Display</p>
+                    <p className="text-teal-400 text-[11px] font-medium flex items-center gap-1.5">
+                      <span className="h-1.5 w-1.5 rounded-full bg-teal-400 animate-pulse" />
+                      Live Streaming &amp; Classroom Screen
+                    </p>
                   </div>
                 </div>
+
                 <div className="flex items-center gap-2">
-                  <div className="px-2.5 py-1 bg-blue-600/20 border border-blue-500/30 rounded-md">
-                    <span className="text-blue-400 text-xs font-semibold">Chat Active</span>
+                  <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-blue-600/20 border border-blue-500/30 rounded-md">
+                    <span className="text-blue-300 text-xs font-semibold">Active Session</span>
                   </div>
-                  <div className="h-8 w-8 rounded-lg bg-slate-800 flex items-center justify-center">
-                    <Radio className="h-4 w-4 text-teal-400 animate-pulse" />
+                  <div className="h-8 w-8 rounded-lg bg-slate-800 flex items-center justify-center text-teal-400">
+                    <Radio className="h-4 w-4 animate-pulse" />
                   </div>
                 </div>
               </div>
             </div>
-
-            {/* Floating Live Chat Bubble */}
-            <motion.div
-              initial={{ opacity: 0, y: 20, scale: 0.9 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4, duration: 0.5 }}
-              className="absolute -bottom-6 right-0 sm:-right-4 w-56 sm:w-64 bg-white rounded-2xl shadow-xl border border-slate-200/80 p-3 sm:p-4 z-10"
-            >
-              <div className="flex items-center gap-2 mb-3 pb-2 border-b border-slate-100">
-                <MessageSquare className="h-4 w-4 text-blue-600" />
-                <span className="text-xs font-bold text-slate-700 uppercase tracking-wide">Live Chat</span>
-                <span className="ml-auto h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              </div>
-              <div className="space-y-2">
-                {[
-                  { initials: "RP", name: "Rahul P.", msg: "Can you explain the last equation again?" },
-                  { initials: "SM", name: "Sneha M.", msg: "Got it! Thank you 🙏" },
-                  { initials: "AP", name: "Amit's Parent", msg: "Very clear explanation!" },
-                ].map((chat, i) => (
-                  <div key={i} className="flex gap-2 items-start">
-                    <div className="h-5 w-5 rounded-full bg-blue-100 text-blue-700 text-[9px] font-bold flex items-center justify-center flex-shrink-0">{chat.initials}</div>
-                    <div>
-                      <span className="text-blue-700 text-[10px] font-semibold">{chat.name}: </span>
-                      <span className="text-slate-600 text-[10px]">{chat.msg}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Viewers badge */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5 }}
-              className="absolute -top-4 -left-4 bg-white rounded-xl shadow-lg border border-slate-200 px-3.5 py-2.5 flex items-center gap-2"
-            >
-              <div className="flex -space-x-1.5">
-                {["#2D76C4","#06b6d4","#8b5cf6"].map((c,i) => (
-                  <div key={i} className="h-5 w-5 rounded-full border-2 border-white" style={{background: c}} />
-                ))}
-              </div>
-              <span className="text-xs font-bold text-slate-700">+147 joined</span>
-            </motion.div>
           </motion.div>
 
           {/* Right: Text Content */}
@@ -191,7 +265,10 @@ export default function LiveClasses() {
               {features.map((feat, i) => {
                 const Icon = feat.icon;
                 return (
-                  <div key={i} className="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-blue-200 hover:bg-blue-50/30 transition-all duration-200">
+                  <div
+                    key={i}
+                    className="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-blue-200 hover:bg-blue-50/30 transition-all duration-200"
+                  >
                     <div className="h-8 w-8 rounded-lg bg-blue-600 flex items-center justify-center flex-shrink-0 shadow-sm">
                       <Icon className="h-4 w-4 text-white" />
                     </div>
@@ -217,5 +294,25 @@ export default function LiveClasses() {
         </div>
       </div>
     </section>
+  );
+}
+
+function VideoIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="m22 8-6 4 6 4V8Z" />
+      <rect width="14" height="12" x="2" y="6" rx="2" />
+    </svg>
   );
 }

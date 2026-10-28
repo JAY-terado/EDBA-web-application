@@ -107,6 +107,10 @@ export default function EducationManagementPlatform() {
   const TOTAL_SLIDES = SLIDES_DATA.length;
   const DRAG_SENSITIVITY = 200; // pixels of drag per slide
 
+  // High-visibility clove/glove cursors (deep charcoal/slate with crisp white outline for 100% contrast against white background)
+  const CLOVE_GRAB_CURSOR = `url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj4KICA8ZGVmcz4KICAgIDxmaWx0ZXIgaWQ9Imdsb3ciIHg9Ii0yMCUiIHk9Ii0yMCUiIHdpZHRoPSIxNTAlIiBoZWlnaHQ9IjE1MCUiPgogICAgICA8ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iMS41IiBzdGREZXZpYXRpb249IjEuNSIgZmxvb2QtY29sb3I9IiMwMDAwMDAiIGZsb29kLW9wYWNpdHk9IjAuMzUiLz4KICAgIDwvZmlsdGVyPgogIDwvZGVmcz4KICA8cGF0aCBmaWx0ZXI9InVybCgjZ2xvdykiIGQ9Ik0xMCAxNFY2LjVhMiAyIDAgMCAxIDQgMFYxM20wLTUuNWEyIDIgMCAwIDEgNCAwVjEzbTAtNC41YTIgMiAwIDAgMSA0IDB2OGE4IDggMCAwIDEtOCA4aC0yYTggOCAwIDAgMS02LjItM2wtMy44LTQuOGEyLjIgMi4yIDAgMCAxIDMuNC0yLjhMMTAgMTYuNVYxNHoiIGZpbGw9IiMxZTI5M2IiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4=") 16 16, grab`;
+  const CLOVE_GRABBING_CURSOR = `url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj4KICA8ZGVmcz4KICAgIDxmaWx0ZXIgaWQ9Imdsb3cyIiB4PSItMjAlIiB5PSItMjAlIiB3aWR0aD0iMTUwJSIgaGVpZ2h0PSIxNTAlIj4KICAgICAgPGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjEuNSIgc3RkRGV2aWF0aW9uPSIxLjUiIGZsb29kLWNvbG9yPSIjMDAwMDAwIiBmbG9vZC1vcGFjaXR5PSIwLjM1Ii8+CiAgICA8L2ZpbHRlcj4KICA8L2RlZnM+CiAgPHBhdGggZmlsdGVyPSJ1cmwoI2dsb3cyKSIgZD0iTTEwIDE0LjVhMi41IDIuNSAwIDAgMSA1IDB2LjVtMC0xYTIuNSAyLjUgMCAwIDEgNSAwdjFtMC0xYTIuNSAyLjUgMCAwIDEgNSAwdjJtMCAwYTIuNSAyLjUgMCAwIDEgNSAwdjQuNWE4IDggMCAwIDEtOCA4aC0zYTggOCAwIDAgMS02LjUtMy40bC0yLjUtMy4zYTIuNSAyLjUgMCAwIDEgMy45LTMuMUwxMCAxN3YtMi41eiIgZmlsbD0iIzFlMjkzYiIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPg==") 16 16, grabbing`;
+
   // Active slide index (0 to 4) calculated modularly from current pos
   const activeSlideIndex = ((Math.round(pos) % TOTAL_SLIDES) + TOTAL_SLIDES) % TOTAL_SLIDES;
   const currentSlide = SLIDES_DATA[activeSlideIndex];
@@ -276,8 +280,8 @@ export default function EducationManagementPlatform() {
         {/* 3D CIRCULAR CAROUSEL & STATIONARY IPHONE STAGE            */}
         {/* ========================================================= */}
         <div
-          className="relative w-full max-w-[1280px] mx-auto h-[480px] xs:h-[530px] sm:h-[600px] lg:h-[650px] flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing select-none"
-          style={{ perspective: "1200px", touchAction: "pan-y" }}
+          className="relative w-full max-w-[1280px] mx-auto h-[480px] xs:h-[530px] sm:h-[600px] lg:h-[650px] flex items-center justify-center overflow-hidden cursor-clove-grab active:cursor-clove-grabbing select-none"
+          style={{ perspective: "1200px", touchAction: "pan-y", cursor: isDragging ? CLOVE_GRABBING_CURSOR : CLOVE_GRAB_CURSOR }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           onPointerDown={handlePointerDown}
@@ -451,7 +455,7 @@ export default function EducationManagementPlatform() {
             {/* All cards are above stage (z >= 10); Center card is Z-35  */}
             {/* ========================================================= */}
             <div
-              className="relative w-full h-full flex items-end justify-center pointer-events-auto"
+              className="relative w-full h-full flex items-end justify-center pointer-events-auto cursor-clove-grab active:cursor-clove-grabbing"
               style={{ zIndex: 20, transformStyle: "preserve-3d" }}
             >
               {slots.map((k) => {
@@ -535,13 +539,14 @@ export default function EducationManagementPlatform() {
                       WebkitBackfaceVisibility: "hidden",
                       backfaceVisibility: "hidden",
                       willChange: isDragging ? "transform, opacity" : "auto",
+                      cursor: isDragging ? CLOVE_GRABBING_CURSOR : CLOVE_GRAB_CURSOR,
                       transition: isDragging
                         ? "none"
                         : "transform 600ms cubic-bezier(0.22, 1, 0.36, 1), opacity 600ms cubic-bezier(0.22, 1, 0.36, 1)",
                     }}
                     className={`absolute rounded-[30px] overflow-hidden transition-shadow duration-300 ${isCenter
                         ? "shadow-[0_20px_45px_-12px_rgba(15,23,42,0.25)] bg-[#18191b]"
-                        : "shadow-[0_16px_36px_-8px_rgba(15,23,42,0.18)] border-[5px] border-white/95 bg-white hover:opacity-100 cursor-pointer"
+                        : "shadow-[0_16px_36px_-8px_rgba(15,23,42,0.18)] border-[5px] border-white/95 bg-white hover:opacity-100 cursor-clove-grab active:cursor-clove-grabbing"
                       }`}
                   >
                     {/* Phone Screen Image with authentic native dynamic island */}

@@ -473,3 +473,17 @@ a[role="button"]:active,
 .animate-marquee-right:hover {
   animation-play-state: paused;
 }
+
+
+/* ----------------------------------------------------
+   HIGH-VISIBILITY CLOVE / GLOVE CURSORS (GRAB & GRABBING)
+   Crisp dark clove slate fill with white outline for 100% contrast
+   ---------------------------------------------------- */
+.cursor-clove-grab {
+  cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj4KICA8ZGVmcz4KICAgIDxmaWx0ZXIgaWQ9Imdsb3ciIHg9Ii0yMCUiIHk9Ii0yMCUiIHdpZHRoPSIxNTAlIiBoZWlnaHQ9IjE1MCUiPgogICAgICA8ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iMS41IiBzdGREZXZpYXRpb249IjEuNSIgZmxvb2QtY29sb3I9IiMwMDAwMDAiIGZsb29kLW9wYWNpdHk9IjAuMzUiLz4KICAgIDwvZmlsdGVyPgogIDwvZGVmcz4KICA8cGF0aCBmaWx0ZXI9InVybCgjZ2xvdykiIGQ9Ik0xMCAxNFY2LjVhMiAyIDAgMCAxIDQgMFYxM20wLTUuNWEyIDIgMCAwIDEgNCAwVjEzbTAtNC41YTIgMiAwIDAgMSA0IDB2OGE4IDggMCAwIDEtOCA4aC0yYTggOCAwIDAgMS02LjItM2wtMy44LTQuOGEyLjIgMi4yIDAgMCAxIDMuNC0yLjhMMTAgMTYuNVYxNHoiIGZpbGw9IiMxZTI5M2IiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4=") 16 16, grab !important;
+}
+
+.cursor-clove-grabbing,
+.cursor-clove-grab:active {
+  cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj4KICA8ZGVmcz4KICAgIDxmaWx0ZXIgaWQ9Imdsb3cyIiB4PSItMjAlIiB5PSItMjAlIiB3aWR0aD0iMTUwJSIgaGVpZ2h0PSIxNTAlIj4KICAgICAgPGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjEuNSIgc3RkRGV2aWF0aW9uPSIxLjUiIGZsb29kLWNvbG9yPSIjMDAwMDAwIiBmbG9vZC1vcGFjaXR5PSIwLjM1Ii8+CiAgICA8L2ZpbHRlcj4KICA8L2RlZnM+CiAgPHBhdGggZmlsdGVyPSJ1cmwoI2dsb3cyKSIgZD0iTTEwIDE0LjVhMi41IDIuNSAwIDAgMSA1IDB2LjVtMC0xYTIuNSAyLjUgMCAwIDEgNSAwdjFtMC0xYTIuNSAyLjUgMCAwIDEgNSAwdjJtMCAwYTIuNSAyLjUgMCAwIDEgNSAwdjQuNWE4IDggMCAwIDEtOCA4aC0zYTggOCAwIDAgMS02LjUtMy40bC0yLjUtMy4zYTIuNSAyLjUgMCAwIDEgMy45LTMuMUwxMCAxN3YtMi41eiIgZmlsbD0iIzFlMjkzYiIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPg==") 16 16, grabbing !important;
+}
