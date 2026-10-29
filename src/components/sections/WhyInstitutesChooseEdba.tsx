@@ -238,7 +238,7 @@ export default function WhyInstitutesChooseEdba() {
     <section
       id="why-edba"
       aria-labelledby="why-edba-heading"
-      className="py-14 sm:py-20 bg-[#0B1220] border-y border-slate-800/80 relative overflow-hidden"
+      className="scroll-mt-24 sm:scroll-mt-28 py-14 sm:py-20 bg-[#0B1220] border-y border-slate-800/80 relative overflow-hidden"
     >
       {/* Top radial blue glow background */}
       <div

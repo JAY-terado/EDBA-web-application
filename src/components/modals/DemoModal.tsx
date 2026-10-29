@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, CheckCircle2, Building2, Mail, Phone, User, Users, UsersRound, MapPin, ArrowRight, Shield, Zap, AlertCircle } from "lucide-react";
 import { siteStats } from "@/data/siteStats";
+import { submitDemoRequest, DemoRequestBody } from "@/services/api";
 
 const BENEFITS = [
   "Setup in under 48 hours",
@@ -32,6 +33,8 @@ export default function DemoModal() {
   });
   const [touched, setTouched] = useState<{ [key: string]: boolean }>({});
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [apiError, setApiError] = useState<string | null>(null);
+  const [apiSuccessMsg, setApiSuccessMsg] = useState<string | null>(null);
 
   useEffect(() => {
     const handleOpen = () => {
@@ -39,6 +42,8 @@ export default function DemoModal() {
       setIsSuccess(false);
       setLoading(false);
       setHasSubmitted(false);
+      setApiError(null);
+      setApiSuccessMsg(null);
       setTouched({});
       setFormData({ name: "", contactNo: "", email: "", instituteName: "", studentsCount: "", employeesCount: "", address: "" });
       setErrors({});
@@ -282,23 +287,72 @@ export default function DemoModal() {
     return true;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setHasSubmitted(true);
+    setApiError(null);
     if (!validateAll()) return;
+
     setLoading(true);
-    setTimeout(() => {
+
+    try {
+      const payload: DemoRequestBody = {
+        fullName: formData.name,
+        contactNumber: formData.contactNo,
+        workEmail: formData.email,
+        instituteName: formData.instituteName,
+        numberOfStudents: formData.studentsCount ? parseInt(formData.studentsCount, 10) : undefined,
+        numberOfEmployees: formData.employeesCount ? parseInt(formData.employeesCount, 10) : undefined,
+        instituteAddress: formData.address.trim() || undefined,
+      };
+
+      const res = await submitDemoRequest(payload);
+
+      // Check validation error (errCode === 1)
+      if (res.errCode === 1) {
+        setLoading(false);
+        setApiError(res.errMsg || "Please check your information and try again.");
+        const lower = (res.errMsg || "").toLowerCase();
+        if (lower.includes("name")) {
+          setErrors(prev => ({ ...prev, name: res.errMsg }));
+        } else if (lower.includes("contact") || lower.includes("phone") || lower.includes("number")) {
+          setErrors(prev => ({ ...prev, contactNo: res.errMsg }));
+        } else if (lower.includes("email")) {
+          setErrors(prev => ({ ...prev, email: res.errMsg }));
+        } else if (lower.includes("institute")) {
+          setErrors(prev => ({ ...prev, instituteName: res.errMsg }));
+        }
+        return;
+      }
+
+      // Success
       setLoading(false);
+      setApiSuccessMsg(
+        res.errMsg ||
+        "Thank you! Your demo request has been received. Our team will contact you shortly."
+      );
       setIsSuccess(true);
-      setTimeout(() => setIsOpen(false), 4000);
-    }, 1800);
+      setTimeout(() => setIsOpen(false), 5000);
+    } catch (err: unknown) {
+      setLoading(false);
+      let message = "Unable to submit demo request right now. Please check your connection and try again.";
+      if (err && typeof err === "object" && "response" in err) {
+        const responseData = (err as { response?: { data?: { errMsg?: string } } }).response?.data;
+        if (responseData?.errMsg) {
+          message = responseData.errMsg;
+        }
+      } else if (err instanceof Error && err.message) {
+        message = err.message;
+      }
+      setApiError(message);
+    }
   };
 
   return (
     <AnimatePresence>
       {isOpen && (
         <div 
-          className="fixed inset-0 z-[200] flex items-center justify-center p-3 sm:p-6"
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-6"
           role="dialog"
           aria-modal="true"
           aria-labelledby="demo-modal-title"
@@ -320,10 +374,10 @@ export default function DemoModal() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 14 }}
             transition={{ type: "spring", damping: 28, stiffness: 320, mass: 0.85 }}
-            className="modal-container relative w-full max-w-4xl bg-white rounded-3xl overflow-hidden shadow-[0_30px_90px_-15px_rgba(0,0,0,0.45)] flex flex-col lg:flex-row border border-slate-200/60 max-h-[94vh] sm:max-h-[92vh] modal-nest-hub"
+            className="modal-container relative w-full max-w-4xl bg-white rounded-3xl overflow-hidden shadow-[0_30px_90px_-15px_rgba(0,0,0,0.55)] flex flex-col lg:flex-row border-0 max-h-[94vh] sm:max-h-[92vh] modal-nest-hub"
           >
             {/* ── Left panel ── */}
-            <div className="hidden lg:flex lg:w-[42%] flex-col justify-between p-6 xl:p-10 bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-700 text-white relative overflow-y-auto modal-left-nest-hub">
+            <div className="hidden lg:flex lg:w-[42%] flex-col justify-between p-6 xl:p-10 bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-700 text-white relative overflow-y-auto modal-left-nest-hub lg:rounded-l-3xl">
               {/* Decorative blobs */}
               <div className="absolute -top-16 -left-16 h-48 w-48 bg-white/10 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute bottom-0 right-0 h-64 w-64 bg-cyan-400/10 rounded-full blur-3xl pointer-events-none" />
@@ -372,7 +426,7 @@ export default function DemoModal() {
             </div>
 
             {/* ── Right panel: Form ── */}
-            <div className="flex-1 flex flex-col overflow-hidden bg-white">
+            <div className="flex-1 flex flex-col overflow-hidden bg-white lg:rounded-r-3xl">
               {/* Top bar */}
               <div className="flex items-center justify-between px-5 sm:px-7 pt-4 sm:pt-6 pb-3.5 sm:pb-4 border-b border-slate-100 flex-shrink-0">
                 <div>
@@ -411,7 +465,11 @@ export default function DemoModal() {
                       </motion.div>
                       <h3 className="font-display font-extrabold text-xl sm:text-2xl text-slate-900 mb-2">You&apos;re all set!</h3>
                       <p className="text-slate-600 text-xs sm:text-sm max-w-sm leading-relaxed mb-6 sm:mb-8">
-                        Our education specialist will reach out on <span className="font-semibold text-slate-800">{formData.contactNo || "your number"}</span> within 2 business hours to schedule your personalized walkthrough.
+                        {apiSuccessMsg || (
+                          <>
+                            Our education specialist will reach out on <span className="font-semibold text-slate-800">{formData.contactNo || "your number"}</span> within 2 business hours to schedule your personalized walkthrough.
+                          </>
+                        )}
                       </p>
                       <div className="flex items-center gap-6 text-xs text-slate-500">
                         <div className="flex items-center gap-1.5">
@@ -575,6 +633,14 @@ export default function DemoModal() {
                           </div>
                         )}
                       </div>
+
+                      {/* API Error Notification */}
+                      {apiError && (
+                        <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2.5">
+                          <AlertCircle className="h-4 w-4 text-red-500 flex-shrink-0" aria-hidden="true" />
+                          <span className="font-medium leading-relaxed">{apiError}</span>
+                        </div>
+                      )}
 
                       {/* Submit Button */}
                       <button

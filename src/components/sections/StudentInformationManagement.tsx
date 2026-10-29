@@ -88,7 +88,7 @@ export default function StudentInformationManagement() {
   return (
     <section
       id="student-management"
-      className="py-20 sm:py-28 bg-[#f8fafc] border-b border-slate-200/80 overflow-hidden"
+      className="scroll-mt-24 sm:scroll-mt-28 py-20 sm:py-28 bg-[#f8fafc] border-b border-slate-200/80 overflow-hidden"
     >
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20 items-center">

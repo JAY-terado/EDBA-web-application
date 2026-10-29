@@ -3,6 +3,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FloatingCta from "@/components/layout/FloatingCta";
 import DemoModal from "@/components/modals/DemoModal";
+import ChatbotModal from "@/components/modals/ChatbotModal";
 
 // Section 1: Hero
 import Hero from "@/components/sections/Hero";
@@ -60,6 +61,7 @@ export const HomePage: React.FC = () => {
       <Footer />
       <FloatingCta />
       <DemoModal />
+      <ChatbotModal />
     </div>
   );
 };

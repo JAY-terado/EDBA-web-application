@@ -49,7 +49,7 @@ export default function TrustedInstitutions() {
   return (
     <section
       id="our-clients"
-      className="py-16 sm:py-24 bg-white border-b border-slate-200/80 overflow-x-clip relative"
+      className="scroll-mt-24 sm:scroll-mt-28 py-16 sm:py-24 bg-white border-b border-slate-200/80 overflow-x-clip relative"
     >
       {/* Ambient glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-40 bg-gradient-to-b from-blue-400/8 to-transparent blur-3xl pointer-events-none" />

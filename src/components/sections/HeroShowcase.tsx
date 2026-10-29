@@ -31,24 +31,22 @@ export const HeroShowcase: React.FC = () => {
         className="absolute -bottom-14 right-12 w-[360px] sm:w-[420px] h-[360px] sm:h-[420px] rounded-full bg-gradient-to-tl from-cyan-400/65 via-sky-400/55 to-blue-500/40 blur-[85px] pointer-events-none -z-10"
       />
 
-      {/* ── 3D Perspective Stage ── */}
-      <div className="relative w-full" style={{ perspective: "1400px" }}>
+      {/* ── High-Definition Crisp Showcase Stage ── */}
+      <div className="relative w-full">
         {/* ============================================================ */}
-        {/* 1. TILTED DESKTOP DISPLAY (High-Resolution Real Dashboard)   */}
+        {/* 1. DESKTOP DISPLAY (High-Resolution Real Dashboard)          */}
         {/* ============================================================ */}
         <motion.div
-          initial={{ opacity: 0, y: 30, rotateX: 6, rotateY: -10, rotateZ: 1 }}
-          animate={{ opacity: 1, y: 0, rotateX: 3.5, rotateY: -7, rotateZ: 1 }}
+          initial={{ opacity: 0, y: 25 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          style={{
-            transformStyle: "preserve-3d",
-            transformOrigin: "center center",
-          }}
-          className="relative w-full rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 shadow-[0_25px_60px_-15px_rgba(15,23,42,0.16),0_45px_100px_-20px_rgba(45,118,196,0.22)] overflow-hidden"
+          className="relative w-full rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 shadow-[0_20px_50px_-12px_rgba(15,23,42,0.14),0_35px_80px_-15px_rgba(37,99,235,0.18)] overflow-hidden"
         >
           <img
             src="/dashboardLandingWEB.png"
             alt="EDBA Admin Dashboard"
+            width={1672}
+            height={941}
             className="w-full h-auto block select-none pointer-events-none rounded-2xl sm:rounded-3xl"
             loading="eager"
             decoding="sync"
@@ -125,15 +123,7 @@ export const HeroShowcase: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.25, ease: "easeOut" }}
           className="absolute -bottom-6 sm:-bottom-9 lg:-bottom-11 right-0 sm:-right-4 md:-right-6 lg:-right-8 w-28 sm:w-36 md:w-44 lg:w-[185px] xl:w-[205px] z-30 pointer-events-none select-none drop-shadow-[0_25px_45px_rgba(15,23,42,0.35)]"
         >
-          <div
-            style={{
-              transform: "translateZ(50px) rotateX(4deg) rotateY(-8deg) rotateZ(5deg)",
-              transformStyle: "preserve-3d",
-              backfaceVisibility: "hidden",
-              WebkitBackfaceVisibility: "hidden",
-            }}
-            className="w-full h-full antialiased"
-          >
+          <div className="w-full h-full antialiased">
             <MobilePhoneSvg />
           </div>
         </motion.div>

@@ -174,7 +174,7 @@ export default function EdbaEcosystem() {
       ref={sectionRef}
       id="ecosystem"
       aria-labelledby="ecosystem-heading"
-      className="py-14 sm:py-16 bg-[#f8fafc] relative overflow-hidden border-b border-slate-200/80"
+      className="scroll-mt-24 sm:scroll-mt-28 py-14 sm:py-16 bg-[#f8fafc] relative overflow-hidden border-b border-slate-200/80"
       style={{
         backgroundImage:
           "radial-gradient(circle, rgba(148, 163, 184, 0.28) 1px, transparent 1px)",

@@ -27,9 +27,6 @@ export const MobilePhoneSvg: React.FC<MobilePhoneSvgProps> = ({ className = "" }
           className="w-full h-full object-cover block"
           loading="eager"
           decoding="sync"
-          style={{
-            imageRendering: "-webkit-optimize-contrast",
-          }}
         />
 
         {/* Specular Glass Sheen Overlay */}

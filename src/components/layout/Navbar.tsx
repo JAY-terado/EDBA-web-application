@@ -41,10 +41,12 @@ export default function Navbar() {
   }, [isOpen]);
 
   const navLinks = [
+    { name: "Live Classes", href: "#live-classes" },
     { name: "Features", href: "#why-edba" },
+    { name: "Platform", href: "#platform" },
     { name: "Solutions", href: "#ecosystem" },
     { name: "Users", href: "#student-management" },
-    { name: "AI Assistant", href: "#platform" },
+    { name: "Clients", href: "#our-clients" },
   ];
 
   const handleDemoClick = (e: React.MouseEvent) => {

@@ -100,7 +100,7 @@ export default function LiveClasses() {
   ];
 
   return (
-    <section id="live-classes" className="py-20 sm:py-28 bg-white border-b border-slate-200/80 overflow-hidden">
+    <section id="live-classes" className="scroll-mt-24 sm:scroll-mt-28 py-20 sm:py-28 bg-white border-b border-slate-200/80 overflow-hidden">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start lg:items-center">
 
