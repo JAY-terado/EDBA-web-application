@@ -218,7 +218,7 @@ export interface TrailCategory {
   startingQuestions: string[];
 }
 
-export const TRAIL_CATEGORIES: TrailCategory[] = [
+const TRAIL_CATEGORIES: TrailCategory[] = [
   {
     id: "about",
     name: "About EDBA",
