@@ -1,21 +1,25 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ChevronUp } from "lucide-react";
+import { scrollToSection } from "@/utils/scroll";
 
 export default function Footer() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const handleOpenDemo = (e?: React.MouseEvent) => {
     if (e) e.preventDefault();
     window.dispatchEvent(new CustomEvent("open-demo-modal"));
   };
 
-  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
-    if (targetId.startsWith("#")) {
-      const el = document.querySelector(targetId);
-      if (el) {
-        e.preventDefault();
-        el.scrollIntoView({ behavior: "smooth" });
-      }
-    }
+  const handleSmoothScroll = (e: React.MouseEvent, targetId: string) => {
+    e.preventDefault();
+    scrollToSection(targetId, location.pathname, navigate);
+  };
+
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    scrollToSection("hero", location.pathname, navigate);
   };
 
   const scrollToTop = () => {
@@ -34,7 +38,9 @@ export default function Footer() {
             {/* Logo */}
             <Link
               to="/"
-              className="inline-block transition-transform hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-lg"
+              onClick={handleLogoClick}
+              className="inline-block transition-transform hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-lg cursor-pointer"
+              aria-label="EDBA Home - Go to Hero Section"
             >
               <img
                 src="/logo.png"
@@ -131,39 +137,40 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3 sm:space-y-3.5 text-[13.5px] sm:text-sm">
               <li>
-                <Link
-                  to="/"
-                  className="hover:text-white transition-colors duration-150 inline-block"
+                <button
+                  type="button"
+                  onClick={handleLogoClick}
+                  className="hover:text-white transition-colors duration-150 inline-block cursor-pointer text-left"
                 >
                   Home
-                </Link>
+                </button>
               </li>
               <li>
-                <a
-                  href="#why-edba"
-                  onClick={(e) => handleSmoothScroll(e, "#why-edba")}
-                  className="hover:text-white transition-colors duration-150 inline-block"
+                <button
+                  type="button"
+                  onClick={(e) => handleSmoothScroll(e, "why-edba")}
+                  className="hover:text-white transition-colors duration-150 inline-block cursor-pointer text-left"
                 >
                   About Us
-                </a>
+                </button>
               </li>
               <li>
-                <a
-                  href="#ecosystem"
-                  onClick={(e) => handleSmoothScroll(e, "#ecosystem")}
-                  className="hover:text-white transition-colors duration-150 inline-block"
+                <button
+                  type="button"
+                  onClick={(e) => handleSmoothScroll(e, "ecosystem")}
+                  className="hover:text-white transition-colors duration-150 inline-block cursor-pointer text-left"
                 >
                   Solutions
-                </a>
+                </button>
               </li>
               <li>
-                <a
-                  href="#platform"
-                  onClick={(e) => handleSmoothScroll(e, "#platform")}
-                  className="hover:text-white transition-colors duration-150 inline-block"
+                <button
+                  type="button"
+                  onClick={(e) => handleSmoothScroll(e, "platform")}
+                  className="hover:text-white transition-colors duration-150 inline-block cursor-pointer text-left"
                 >
                   Features
-                </a>
+                </button>
               </li>
               <li>
                 <a
@@ -184,49 +191,49 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3 sm:space-y-3.5 text-[13.5px] sm:text-sm">
               <li>
-                <a
-                  href="#ecosystem"
-                  onClick={(e) => handleSmoothScroll(e, "#ecosystem")}
-                  className="hover:text-white transition-colors duration-150 inline-block"
+                <button
+                  type="button"
+                  onClick={(e) => handleSmoothScroll(e, "ecosystem")}
+                  className="hover:text-white transition-colors duration-150 inline-block cursor-pointer text-left"
                 >
                   School Management
-                </a>
+                </button>
               </li>
               <li>
-                <a
-                  href="#academic-management"
-                  onClick={(e) => handleSmoothScroll(e, "#academic-management")}
-                  className="hover:text-white transition-colors duration-150 inline-block"
+                <button
+                  type="button"
+                  onClick={(e) => handleSmoothScroll(e, "academic-management")}
+                  className="hover:text-white transition-colors duration-150 inline-block cursor-pointer text-left"
                 >
                   College Management
-                </a>
+                </button>
               </li>
               <li>
-                <a
-                  href="#student-management"
-                  onClick={(e) => handleSmoothScroll(e, "#student-management")}
-                  className="hover:text-white transition-colors duration-150 inline-block"
+                <button
+                  type="button"
+                  onClick={(e) => handleSmoothScroll(e, "student-management")}
+                  className="hover:text-white transition-colors duration-150 inline-block cursor-pointer text-left"
                 >
                   Student Information System
-                </a>
+                </button>
               </li>
               <li>
-                <a
-                  href="#academic-management"
-                  onClick={(e) => handleSmoothScroll(e, "#academic-management")}
-                  className="hover:text-white transition-colors duration-150 inline-block"
+                <button
+                  type="button"
+                  onClick={(e) => handleSmoothScroll(e, "academic-management")}
+                  className="hover:text-white transition-colors duration-150 inline-block cursor-pointer text-left"
                 >
                   Academic Management
-                </a>
+                </button>
               </li>
               <li>
-                <a
-                  href="#platform"
-                  onClick={(e) => handleSmoothScroll(e, "#platform")}
-                  className="hover:text-white transition-colors duration-150 inline-block"
+                <button
+                  type="button"
+                  onClick={(e) => handleSmoothScroll(e, "platform")}
+                  className="hover:text-white transition-colors duration-150 inline-block cursor-pointer text-left"
                 >
                   Education ERP
-                </a>
+                </button>
               </li>
             </ul>
           </div>
@@ -264,13 +271,13 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a
-                  href="#platform"
-                  onClick={(e) => handleSmoothScroll(e, "#platform")}
-                  className="hover:text-white transition-colors duration-150 inline-block"
+                <button
+                  type="button"
+                  onClick={(e) => handleSmoothScroll(e, "platform")}
+                  className="hover:text-white transition-colors duration-150 inline-block cursor-pointer text-left"
                 >
                   Product Updates
-                </a>
+                </button>
               </li>
             </ul>
           </div>

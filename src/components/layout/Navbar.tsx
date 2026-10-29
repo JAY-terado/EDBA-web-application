@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight } from "lucide-react";
+import { scrollToSection } from "@/utils/scroll";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,13 +44,23 @@ export default function Navbar() {
   }, [isOpen]);
 
   const navLinks = [
-    { name: "Live Classes", href: "#live-classes" },
-    { name: "Features", href: "#why-edba" },
-    { name: "Platform", href: "#platform" },
-    { name: "Solutions", href: "#ecosystem" },
-    { name: "Users", href: "#student-management" },
-    { name: "Clients", href: "#our-clients" },
+    { name: "Live Classes", targetId: "live-classes" },
+    { name: "Features", targetId: "why-edba" },
+    { name: "Platform", targetId: "platform" },
+    { name: "Solutions", targetId: "ecosystem" },
+    { name: "Users", targetId: "student-management" },
+    { name: "Clients", targetId: "our-clients" },
   ];
+
+  const handleNavClick = (e: React.MouseEvent, targetId: string) => {
+    e.preventDefault();
+    scrollToSection(targetId, location.pathname, navigate);
+  };
+
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    scrollToSection("hero", location.pathname, navigate);
+  };
 
   const handleDemoClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -70,7 +83,9 @@ export default function Navbar() {
             {/* Logo */}
             <Link
               to="/"
-              className="flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-blue-600 rounded-full p-1 transition-transform hover:scale-[1.02]"
+              onClick={handleLogoClick}
+              className="flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-blue-600 rounded-full p-1 transition-transform hover:scale-[1.02] cursor-pointer"
+              aria-label="EDBA Home - Go to Hero Section"
             >
               <img src="/logo.png" alt="EDBA Logo" className="h-7 sm:h-8 w-auto" />
             </Link>
@@ -78,13 +93,14 @@ export default function Navbar() {
             {/* Desktop Nav Links with Apple-style rounded pill hover */}
             <div className="hidden md:flex items-center gap-1 lg:gap-1.5">
               {navLinks.map((link) => (
-                <a
+                <button
                   key={link.name}
-                  href={link.href}
-                  className="text-[13px] font-medium text-slate-700 hover:text-slate-950 px-3.5 py-1.5 rounded-full hover:bg-black/[0.04] active:bg-black/[0.08] transition-all duration-150 focus-visible:ring-2 focus-visible:ring-blue-600"
+                  type="button"
+                  onClick={(e) => handleNavClick(e, link.targetId)}
+                  className="text-[13px] font-medium text-slate-700 hover:text-slate-950 px-3.5 py-1.5 rounded-full hover:bg-black/[0.04] active:bg-black/[0.08] transition-all duration-150 focus-visible:ring-2 focus-visible:ring-blue-600 cursor-pointer"
                 >
                   {link.name}
-                </a>
+                </button>
               ))}
             </div>
 
@@ -141,8 +157,12 @@ export default function Navbar() {
                 <div className="flex items-center justify-between pb-4 border-b border-slate-100 flex-shrink-0">
                   <Link
                     to="/"
-                    onClick={() => setIsOpen(false)}
-                    className="flex items-center gap-2"
+                    onClick={(e) => {
+                      setIsOpen(false);
+                      handleLogoClick(e);
+                    }}
+                    className="flex items-center gap-2 cursor-pointer"
+                    aria-label="EDBA Home - Go to Hero Section"
                   >
                     <img src="/logo.png" alt="EDBA Logo" className="h-8 w-auto" />
                   </Link>
@@ -159,15 +179,18 @@ export default function Navbar() {
                 {/* Nav Links in Center */}
                 <div className="flex-1 flex flex-col justify-center py-6 space-y-2">
                   {navLinks.map((link) => (
-                    <a
+                    <button
                       key={link.name}
-                      href={link.href}
-                      onClick={() => setIsOpen(false)}
-                      className="text-lg font-bold text-slate-900 hover:text-blue-600 hover:bg-slate-50 active:scale-[0.98] py-3.5 px-4 rounded-2xl transition-all w-full flex items-center justify-between group"
+                      type="button"
+                      onClick={(e) => {
+                        setIsOpen(false);
+                        handleNavClick(e, link.targetId);
+                      }}
+                      className="text-lg font-bold text-slate-900 hover:text-blue-600 hover:bg-slate-50 active:scale-[0.98] py-3.5 px-4 rounded-2xl transition-all w-full flex items-center justify-between group cursor-pointer text-left"
                     >
                       <span>{link.name}</span>
                       <ArrowRight className="h-4 w-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
-                    </a>
+                    </button>
                   ))}
                 </div>
 

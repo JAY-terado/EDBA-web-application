@@ -107,11 +107,11 @@ export default function EducationManagementPlatform() {
   const TOTAL_SLIDES = SLIDES_DATA.length;
   const DRAG_SENSITIVITY = 200; // pixels of drag per slide
 
-  // High-visibility clove/glove cursors (deep charcoal/slate with crisp white outline for 100% contrast against white background)
-  const CLOVE_GRAB_CURSOR = `url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj4KICA8ZGVmcz4KICAgIDxmaWx0ZXIgaWQ9Imdsb3ciIHg9Ii0yMCUiIHk9Ii0yMCUiIHdpZHRoPSIxNTAlIiBoZWlnaHQ9IjE1MCUiPgogICAgICA8ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iMS41IiBzdGREZXZpYXRpb249IjEuNSIgZmxvb2QtY29sb3I9IiMwMDAwMDAiIGZsb29kLW9wYWNpdHk9IjAuMzUiLz4KICAgIDwvZmlsdGVyPgogIDwvZGVmcz4KICA8cGF0aCBmaWx0ZXI9InVybCgjZ2xvdykiIGQ9Ik0xMCAxNFY2LjVhMiAyIDAgMCAxIDQgMFYxM20wLTUuNWEyIDIgMCAwIDEgNCAwVjEzbTAtNC41YTIgMiAwIDAgMSA0IDB2OGE4IDggMCAwIDEtOCA4aC0yYTggOCAwIDAgMS02LjItM2wtMy44LTQuOGEyLjIgMi4yIDAgMCAxIDMuNC0yLjhMMTAgMTYuNVYxNHoiIGZpbGw9IiMxZTI5M2IiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4=") 16 16, grab`;
-  const CLOVE_GRABBING_CURSOR = `url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj4KICA8ZGVmcz4KICAgIDxmaWx0ZXIgaWQ9Imdsb3cyIiB4PSItMjAlIiB5PSItMjAlIiB3aWR0aD0iMTUwJSIgaGVpZ2h0PSIxNTAlIj4KICAgICAgPGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjEuNSIgc3RkRGV2aWF0aW9uPSIxLjUiIGZsb29kLWNvbG9yPSIjMDAwMDAwIiBmbG9vZC1vcGFjaXR5PSIwLjM1Ii8+CiAgICA8L2ZpbHRlcj4KICA8L2RlZnM+CiAgPHBhdGggZmlsdGVyPSJ1cmwoI2dsb3cyKSIgZD0iTTEwIDE0LjVhMi41IDIuNSAwIDAgMSA1IDB2LjVtMC0xYTIuNSAyLjUgMCAwIDEgNSAwdjFtMC0xYTIuNSAyLjUgMCAwIDEgNSAwdjJtMCAwYTIuNSAyLjUgMCAwIDEgNSAwdjQuNWE4IDggMCAwIDEtOCA4aC0zYTggOCAwIDAgMS02LjUtMy40bC0yLjUtMy4zYTIuNSAyLjUgMCAwIDEgMy45LTMuMUwxMCAxN3YtMi41eiIgZmlsbD0iIzFlMjkzYiIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPg==") 16 16, grabbing`;
+  // High-visibility crisp hand cursors (grab & grabbing)
+  const DRAG_GRAB_CURSOR = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><defs><filter id='s' x='-30%25' y='-30%25' width='160%25' height='160%25'><feDropShadow dx='0' dy='1.5' stdDeviation='1.5' flood-color='%23000000' flood-opacity='0.45'/></filter></defs><g filter='url(%23s)'><path d='M12.5 14.5V5a1.75 1.75 0 0 1 3.5 0v6.5h.5V3.5a1.75 1.75 0 0 1 3.5 0v8h.5V4.75a1.75 1.75 0 0 1 3.5 0v7.25h.5v-4.5a1.75 1.75 0 0 1 3.5 0v9.5c0 6-4 10.5-9.5 10.5h-1c-4.5 0-7.5-2.5-9-5.5l-3.5-5.5a2 2 0 0 1 3-2.5l3 2.5V14.5a1.75 1.75 0 0 1 2-1.75 1.75 1.75 0 0 1 1.5 1.75z' fill='%23ffffff' stroke='%230f172a' stroke-width='1.8' stroke-linejoin='round' stroke-linecap='round'/><line x1='16.5' y1='11.5' x2='16.5' y2='15.5' stroke='%230f172a' stroke-width='1.5' stroke-linecap='round'/><line x1='20.5' y1='12.75' x2='20.5' y2='16' stroke='%230f172a' stroke-width='1.5' stroke-linecap='round'/><line x1='24.5' y1='14' x2='24.5' y2='16.5' stroke='%230f172a' stroke-width='1.5' stroke-linecap='round'/></g></svg>") 14 14, grab`;
+  const DRAG_GRABBING_CURSOR = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><defs><filter id='s2' x='-30%25' y='-30%25' width='160%25' height='160%25'><feDropShadow dx='0' dy='1.5' stdDeviation='1.5' flood-color='%23000000' flood-opacity='0.45'/></filter></defs><g filter='url(%23s2)'><path d='M11 15a2 2 0 0 1 3.5-1 2 2 0 0 1 3.5 0 2 2 0 0 1 3.5 0 2 2 0 0 1 3.5 1.5v3.5c0 5-3.5 8.5-8.5 8.5h-1c-4.5 0-7-2.5-8.5-5l-2.5-3.5a2 2 0 0 1 3-2.5l2 2V15a2 2 0 0 1 1.5-1.5z' fill='%23ffffff' stroke='%230f172a' stroke-width='1.8' stroke-linejoin='round' stroke-linecap='round'/><path d='M14.5 14v4M18 14v4M21.5 15v3.5' stroke='%230f172a' stroke-width='1.5' stroke-linecap='round'/></g></svg>") 14 14, grabbing`;
 
-  // Active slide index (0 to 4) calculated modularly from current pos
+  // Active slide index (0 to 5) calculated modularly from current pos
   const activeSlideIndex = ((Math.round(pos) % TOTAL_SLIDES) + TOTAL_SLIDES) % TOTAL_SLIDES;
   const currentSlide = SLIDES_DATA[activeSlideIndex];
 
@@ -280,8 +280,8 @@ export default function EducationManagementPlatform() {
         {/* 3D CIRCULAR CAROUSEL & STATIONARY IPHONE STAGE            */}
         {/* ========================================================= */}
         <div
-          className="relative w-full max-w-[1280px] mx-auto h-[550px] xs:h-[580px] sm:h-[610px] lg:h-[650px] flex items-center justify-center overflow-hidden cursor-clove-grab active:cursor-clove-grabbing select-none"
-          style={{ perspective: "1200px", touchAction: "pan-y", cursor: isDragging ? CLOVE_GRABBING_CURSOR : CLOVE_GRAB_CURSOR }}
+          className="relative w-full max-w-[1280px] mx-auto h-[550px] xs:h-[580px] sm:h-[610px] lg:h-[650px] flex items-center justify-center overflow-hidden cursor-hand-grab active:cursor-hand-grabbing select-none"
+          style={{ perspective: "1200px", touchAction: "pan-y", cursor: isDragging ? DRAG_GRABBING_CURSOR : DRAG_GRAB_CURSOR }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           onPointerDown={handlePointerDown}
@@ -289,8 +289,6 @@ export default function EducationManagementPlatform() {
           onPointerUp={handlePointerUp}
           onPointerCancel={handlePointerUp}
         >
-
-
           {/* Central Blue Aura Glow */}
           <div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[480px] sm:w-[680px] lg:w-[820px] h-[380px] sm:h-[520px] rounded-full pointer-events-none z-0"
@@ -455,7 +453,7 @@ export default function EducationManagementPlatform() {
             {/* All cards are above stage (z >= 10); Center card is Z-35  */}
             {/* ========================================================= */}
             <div
-              className="relative w-full h-full flex items-end justify-center pointer-events-auto cursor-clove-grab active:cursor-clove-grabbing"
+              className="relative w-full h-full flex items-end justify-center pointer-events-auto cursor-hand-grab active:cursor-hand-grabbing"
               style={{ zIndex: 20, transformStyle: "preserve-3d" }}
             >
               {slots.map((k) => {
@@ -539,14 +537,14 @@ export default function EducationManagementPlatform() {
                       WebkitBackfaceVisibility: "hidden",
                       backfaceVisibility: "hidden",
                       willChange: isDragging ? "transform, opacity" : "auto",
-                      cursor: isDragging ? CLOVE_GRABBING_CURSOR : CLOVE_GRAB_CURSOR,
+                      cursor: isDragging ? DRAG_GRABBING_CURSOR : DRAG_GRAB_CURSOR,
                       transition: isDragging
                         ? "none"
                         : "transform 600ms cubic-bezier(0.22, 1, 0.36, 1), opacity 600ms cubic-bezier(0.22, 1, 0.36, 1)",
                     }}
                     className={`absolute rounded-[30px] overflow-hidden transition-shadow duration-300 ${isCenter
                         ? "shadow-[0_20px_45px_-12px_rgba(15,23,42,0.25)] bg-[#18191b]"
-                        : "shadow-[0_16px_36px_-8px_rgba(15,23,42,0.18)] border-[5px] border-white/95 bg-white hover:opacity-100 cursor-clove-grab active:cursor-clove-grabbing"
+                        : "shadow-[0_16px_36px_-8px_rgba(15,23,42,0.18)] border-[5px] border-white/95 bg-white hover:opacity-100 cursor-hand-grab active:cursor-hand-grabbing"
                       }`}
                   >
                     {/* Phone Screen Image with authentic native dynamic island */}

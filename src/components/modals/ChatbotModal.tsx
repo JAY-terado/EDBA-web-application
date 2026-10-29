@@ -593,6 +593,7 @@ export const ChatbotModal: React.FC = () => {
   const [inputValue, setInputValue] = useState("");
   const [activeTrailId, setActiveTrailId] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   // Lead Form State
   const [formData, setFormData] = useState({
@@ -604,46 +605,6 @@ export const ChatbotModal: React.FC = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState("");
-
-  // Listen to open-chatbot event
-  useEffect(() => {
-    const handleOpen = () => setIsOpen(true);
-    const handleClose = () => setIsOpen(false);
-
-    window.addEventListener("open-chatbot", handleOpen);
-    window.addEventListener("close-chatbot", handleClose);
-
-    return () => {
-      window.removeEventListener("open-chatbot", handleOpen);
-      window.removeEventListener("close-chatbot", handleClose);
-    };
-  }, []);
-
-  // Initialize starting messages when modal opens
-  useEffect(() => {
-    if (isOpen && messages.length === 0) {
-      resetChat();
-    }
-  }, [isOpen]);
-
-  // Scroll to bottom on new messages
-  useEffect(() => {
-    if (isOpen) {
-      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [messages, isTyping, formSubmitted]);
-
-  // Lock body scroll on small screens when chat is open
-  useEffect(() => {
-    if (isOpen && window.innerWidth < 640) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
 
   const resetChat = () => {
     setActiveTrailId(null);
@@ -660,7 +621,82 @@ export const ChatbotModal: React.FC = () => {
         timestamp: "Just now",
       },
     ]);
+    requestAnimationFrame(() => {
+      if (chatContainerRef.current) {
+        chatContainerRef.current.scrollTop = 0;
+      }
+    });
   };
+
+  // Listen to open-chatbot and close-chatbot events
+  useEffect(() => {
+    const handleOpen = () => {
+      setIsOpen(true);
+      resetChat();
+      // Ensure the box always opens from the very top (welcome greeting), not from the bottom/last
+      requestAnimationFrame(() => {
+        if (chatContainerRef.current) {
+          chatContainerRef.current.scrollTop = 0;
+        }
+      });
+      setTimeout(() => {
+        if (chatContainerRef.current) {
+          chatContainerRef.current.scrollTop = 0;
+        }
+      }, 80);
+      setTimeout(() => {
+        if (chatContainerRef.current) {
+          chatContainerRef.current.scrollTop = 0;
+        }
+      }, 260);
+    };
+
+    const handleClose = () => setIsOpen(false);
+
+    window.addEventListener("open-chatbot", handleOpen);
+    window.addEventListener("close-chatbot", handleClose);
+
+    return () => {
+      window.removeEventListener("open-chatbot", handleOpen);
+      window.removeEventListener("close-chatbot", handleClose);
+    };
+  }, []);
+
+  // Initialize starting messages if empty
+  useEffect(() => {
+    if (isOpen && messages.length === 0) {
+      resetChat();
+    }
+  }, [isOpen]);
+
+  // Scroll to bottom ONLY on new interactions (user messages, bot replies, typing, or lead form submitted)
+  useEffect(() => {
+    if (!isOpen) return;
+
+    if (messages.length > 1 || isTyping || formSubmitted) {
+      const timer = setTimeout(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      }, 50);
+      return () => clearTimeout(timer);
+    } else {
+      // Keep scroll at top for initial welcome view so the greeting is never skipped
+      if (chatContainerRef.current) {
+        chatContainerRef.current.scrollTop = 0;
+      }
+    }
+  }, [messages, isTyping, formSubmitted, isOpen]);
+
+  // Lock body scroll on small screens when chat is open
+  useEffect(() => {
+    if (isOpen && window.innerWidth < 640) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   const handleToggleTrail = (trailId: string) => {
     setActiveTrailId((prev) => (prev === trailId ? null : trailId));
@@ -1091,6 +1127,7 @@ export const ChatbotModal: React.FC = () => {
 
             {/* ── CHAT MESSAGE STREAM (Scrollable & Scroll-Contained) ── */}
             <div
+              ref={chatContainerRef}
               onWheel={(e) => e.stopPropagation()}
               className="flex-1 overflow-y-auto overscroll-contain p-4 space-y-4 bg-slate-50/70 text-sm"
             >

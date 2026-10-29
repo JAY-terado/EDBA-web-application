@@ -10,18 +10,17 @@ import axios, { AxiosInstance } from "axios";
 function getApiBaseUrl(): string {
   const envUrl = (
     import.meta.env.VITE_API_BASE_URL ||
-    import.meta.env.VITE_API_URL ||
-    "http://192.168.68.103:3010"
+    import.meta.env.VITE_API_URL
   ).trim();
 
   let normalized = envUrl;
 
-  // Add http protocol if missing
+  // Add https protocol if missing
   if (!/^https?:\/\//i.test(normalized)) {
-    normalized = `http://${normalized}`;
+    normalized = `https://${normalized}`;
   }
 
-  // Handle accidental "host/port" formatting (e.g. 192.168.68.103/3010 -> 192.168.68.103:3010)
+  // Handle accidental "host/port" formatting
   normalized = normalized.replace(/(\d+\.\d+\.\d+\.\d+)\/(\d{2,5})($|\/.*)/, "$1:$2$3");
 
   // Remove trailing slashes

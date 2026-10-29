@@ -248,7 +248,7 @@ export default function StudentInformationManagement() {
                     <div className="flex items-center justify-between pb-3.5 border-b border-slate-100">
                       <div className="flex items-center gap-3">
                         <div className="h-10 w-10 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold text-sm shadow-sm ring-2 ring-blue-100">
-                          AM
+                          RM
                         </div>
                         <div>
                           <p className="text-sm font-bold text-slate-900 leading-snug">Riya Mehta</p>

@@ -8,6 +8,7 @@ import {
   Bus, 
   ArrowRight 
 } from "lucide-react";
+import { scrollToSection } from "@/utils/scroll";
 
 export default function LmsSolutions() {
   const lmsFeatures = [
@@ -93,13 +94,14 @@ export default function LmsSolutions() {
 
         {/* See All Features Link */}
         <div className="text-center">
-          <a
-            href="#cta"
-            className="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-700 hover:underline gap-1.5 group focus-visible:ring-2 focus-visible:ring-blue-600 rounded-sm"
+          <button
+            type="button"
+            onClick={() => scrollToSection("cta", window.location.pathname)}
+            className="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-700 hover:underline gap-1.5 group focus-visible:ring-2 focus-visible:ring-blue-600 rounded-sm cursor-pointer"
           >
             <span>Explore the Platform Blueprint</span>
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-          </a>
+          </button>
         </div>
 
       </div>

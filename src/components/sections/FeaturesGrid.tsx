@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ShieldCheck, Brain, User, HeartHandshake, ArrowRight } from "lucide-react";
+import { scrollToSection } from "@/utils/scroll";
 
 export default function FeaturesGrid() {
   const features = [
@@ -107,13 +108,14 @@ export default function FeaturesGrid() {
               </div>
 
               {/* Link Arrow */}
-              <a
-                href="#solutions"
-                className="inline-flex items-center text-sm font-semibold text-blue-600 group-hover:text-blue-700 hover:underline focus-visible:ring-2 focus-visible:ring-blue-600 rounded-sm pt-2"
+              <button
+                type="button"
+                onClick={() => scrollToSection("ecosystem", window.location.pathname)}
+                className="inline-flex items-center text-sm font-semibold text-blue-600 group-hover:text-blue-700 hover:underline focus-visible:ring-2 focus-visible:ring-blue-600 rounded-sm pt-2 cursor-pointer"
               >
                 <span>Learn More</span>
                 <ArrowRight className="ml-1.5 h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-              </a>
+              </button>
             </motion.div>
           ))}
         </motion.div>

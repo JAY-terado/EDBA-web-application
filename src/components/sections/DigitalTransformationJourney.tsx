@@ -227,8 +227,6 @@ export default function DigitalTransformationJourney() {
         {/* TEACHMINT-STYLE STACKING CARDS CONTAINER (Direct siblings in same sticky context) */}
         <div className="relative">
           {steps.map((step, index) => {
-            const isLast = index === steps.length - 1;
-
             return (
               <div
                 key={step.id}
@@ -276,7 +274,7 @@ export default function DigitalTransformationJourney() {
                     </div>
 
                     {/* Bottom Actions */}
-                    <div className="pt-3 sm:pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+                    <div className="pt-3 sm:pt-4 border-t border-slate-100 flex items-center justify-start">
                       <button
                         type="button"
                         onClick={() => window.dispatchEvent(new CustomEvent("open-demo-modal"))}
@@ -285,10 +283,6 @@ export default function DigitalTransformationJourney() {
                         <span>Book a Free Demo</span>
                         <ChevronRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 group-hover:translate-x-0.5 transition-transform" />
                       </button>
-
-                      <span className="text-[11px] sm:text-xs text-slate-400 font-medium">
-                        {isLast ? "Final Transformation Stage" : `Next: Step 0${index + 2}`}
-                      </span>
                     </div>
                   </div>
 

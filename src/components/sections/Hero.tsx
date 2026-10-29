@@ -19,7 +19,7 @@ const itemVariants = {
 
 export const Hero: React.FC = () => {
   return (
-    <section className="relative pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24 hero-compact overflow-x-clip overflow-y-visible bg-gradient-to-b from-blue-50/50 via-white/90 to-[#f8fafc]">
+    <section id="hero" className="relative pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24 hero-compact overflow-x-clip overflow-y-visible bg-gradient-to-b from-blue-50/50 via-white/90 to-[#f8fafc]">
       {/* Background glows */}
       <div className="absolute top-10 right-[10%] h-[400px] w-[400px] sm:h-[520px] sm:w-[520px] bg-blue-500/7 rounded-full blur-[130px] pointer-events-none" />
       <div className="absolute bottom-0 left-[5%] h-[280px] w-[280px] sm:h-[380px] sm:w-[380px] bg-cyan-500/10 rounded-full blur-[110px] pointer-events-none" />
