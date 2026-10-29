@@ -146,8 +146,8 @@ export const MobileApps: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 mb-5 rounded-full text-xs font-bold uppercase tracking-widest bg-blue-50 text-blue-700 border border-blue-200">
-            <Smartphone className="w-3.5 h-3.5" aria-hidden="true" />
+          <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 mb-3 sm:mb-4 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-blue-50 text-blue-700 border border-blue-200/80 shadow-2xs">
+            <Smartphone className="w-3 h-3" aria-hidden="true" />
             Mobile App Experience
           </span>
         </motion.div>
@@ -159,7 +159,7 @@ export const MobileApps: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.55, delay: 0.05 }}
-          className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl xl:text-[3.25rem] text-center leading-[1.15] tracking-tight text-slate-900 mb-5"
+          className="font-display font-extrabold text-2xl sm:text-4xl lg:text-[42px] text-center leading-[1.15] tracking-tight text-slate-900 mb-4 sm:mb-5"
         >
           Education Management,{" "}
           <br className="hidden sm:block" />
@@ -178,7 +178,7 @@ export const MobileApps: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-slate-500 text-base sm:text-lg leading-relaxed text-center max-w-2xl mb-8"
+          className="text-slate-600 text-sm sm:text-base leading-relaxed text-center max-w-2xl mb-6 sm:mb-8 font-normal"
         >
           A powerful mobile experience for students, teachers, and parents — stay connected,
           informed, and in control of the academic journey, all from your pocket.

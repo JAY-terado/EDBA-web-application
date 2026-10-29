@@ -216,8 +216,8 @@ export const FaqPage: React.FC = () => {
       <main className="flex-grow relative z-10">
         <section className="pt-14 sm:pt-20 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 text-center max-w-4xl mx-auto">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold text-blue-400 bg-blue-950/60 border border-blue-800/60 mb-6 backdrop-blur-md shadow-xs">
-            <HelpCircle className="w-4 h-4 text-blue-400" />
+          <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider text-blue-400 bg-blue-950/60 border border-blue-800/60 mb-5 sm:mb-6 backdrop-blur-md shadow-2xs">
+            <HelpCircle className="w-3 h-3 text-blue-400" />
             <span>Help Center &amp; Common Queries</span>
           </div>
 

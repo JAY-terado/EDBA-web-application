@@ -194,12 +194,12 @@ export default function EdbaEcosystem() {
       <div className="max-w-[1240px] mx-auto px-4 sm:px-5 relative z-10">
         {/* SECTION HEADER (centered, max-w-[900px], mb-6) */}
         <div className="text-center max-w-[900px] mx-auto mb-6">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200 mb-3 shadow-xs">
+          <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200/80 mb-2.5 shadow-2xs">
             AI-Powered Education Management Software
           </span>
           <h2
             id="ecosystem-heading"
-            className="text-3xl lg:text-[42px] font-extrabold tracking-tight leading-[1.14] text-slate-900"
+            className="font-display font-extrabold text-2xl sm:text-4xl lg:text-[42px] tracking-tight leading-[1.14] text-slate-900 mb-3"
           >
             One Intelligent Platform to{" "}
             <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
@@ -207,7 +207,7 @@ export default function EdbaEcosystem() {
             </span>{" "}
             Your Institution
           </h2>
-          <p className="text-[15px] sm:text-[16px] text-slate-600 leading-relaxed max-w-[760px] mx-auto mt-3">
+          <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-[760px] mx-auto font-normal">
             EDBA brings academic, administrative, financial, and communication processes together in
             one connected platform. Simplify everyday operations, improve coordination, and create a
             seamless digital experience for administrators, educators, students, and parents.

@@ -37,9 +37,9 @@ export const Hero: React.FC = () => {
             {/* Badge */}
             <motion.div
               variants={itemVariants}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50/90 border border-blue-200/80 mb-5 shadow-xs"
+              className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider text-blue-700 bg-blue-50/90 border border-blue-200/80 mb-4 sm:mb-5 shadow-2xs"
             >
-              <Sparkles className="h-3.5 w-3.5 text-cyan-600" aria-hidden="true" />
+              <Sparkles className="h-3 w-3 text-cyan-600" aria-hidden="true" />
               <span>AI-Powered Education Management</span>
             </motion.div>
 

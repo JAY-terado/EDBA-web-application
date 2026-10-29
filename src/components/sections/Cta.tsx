@@ -19,11 +19,11 @@ export const Cta: React.FC = () => {
 
           <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center">
 
-            <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight mb-4 tracking-tight">
+            <h2 className="font-display font-extrabold text-2xl sm:text-4xl lg:text-[42px] leading-tight mb-3 sm:mb-4 tracking-tight">
               Ready to <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-200 via-white to-blue-100">Transform Your Institute?</span>
             </h2>
 
-            <p className="text-blue-100 text-base sm:text-lg leading-relaxed mb-8 sm:mb-10 max-w-xl font-normal">
+            <p className="text-blue-100 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8 max-w-xl font-normal">
               Automate operations, engage students, and simplify administration—all from one powerful, modern platform.
             </p>
 

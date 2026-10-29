@@ -62,27 +62,33 @@ export const HeroShowcase: React.FC = () => {
         {/* Pill 1: 99.4% Attendance Today (Top Left) */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
-          animate={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: [0, -6, 0] }}
-          transition={shouldReduceMotion ? { duration: 0.4 } : { repeat: Infinity, duration: 4.5, ease: "easeInOut" }}
-          className="absolute -top-3 left-1 sm:-top-5 sm:-left-5 lg:-top-6 lg:-left-7 z-40 bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-[0_16px_36px_-6px_rgba(15,23,42,0.12)] rounded-2xl p-2 sm:p-3 flex items-center gap-2.5 sm:gap-3 select-none"
+          animate={{ opacity: 1, y: shouldReduceMotion ? 0 : [0, -5, 0] }}
+          transition={{
+            opacity: { duration: 0.5, ease: "easeOut" },
+            y: shouldReduceMotion ? { duration: 0.4 } : { repeat: Infinity, duration: 4.5, ease: "easeInOut" },
+          }}
+          className="absolute -top-3 left-1 sm:-top-5 sm:-left-5 lg:-top-6 lg:-left-7 z-40 bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-[0_12px_28px_-6px_rgba(15,23,42,0.12)] rounded-xl sm:rounded-2xl p-1.5 sm:p-3 flex items-center gap-2 sm:gap-3 select-none"
         >
-          <div className="h-7 w-7 sm:h-9 sm:w-9 rounded-xl bg-teal-50 text-teal-600 border border-teal-200/70 flex items-center justify-center flex-shrink-0 shadow-xs">
-            <CheckCircle2 className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
+          <div className="h-6 w-6 sm:h-9 sm:w-9 rounded-lg sm:rounded-xl bg-teal-50 text-teal-600 border border-teal-200/70 flex items-center justify-center flex-shrink-0 shadow-xs">
+            <CheckCircle2 className="h-3.5 w-3.5 sm:h-5 sm:w-5" aria-hidden="true" />
           </div>
-          <div className="flex flex-col text-left">
-            <span className="text-[11px] sm:text-sm font-bold text-slate-900 leading-tight">99.4% Attendance</span>
-            <span className="text-[9px] sm:text-xs text-slate-500 font-medium">Logged across 42 batches</span>
+          <div className="flex flex-col text-left pr-1 sm:pr-0">
+            <span className="text-[10px] sm:text-sm font-bold text-slate-900 leading-tight">99.4% Attendance</span>
+            <span className="text-[8.5px] sm:text-xs text-slate-500 font-medium">Logged across 42 batches</span>
           </div>
         </motion.div>
 
         {/* Pill 2: Parent Alert Sent (Top Right - visible on tablet and desktop) */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
-          animate={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: [0, 6, 0] }}
-          transition={shouldReduceMotion ? { duration: 0.4 } : { repeat: Infinity, duration: 5, ease: "easeInOut", delay: 0.4 }}
-          className="hidden sm:flex absolute -top-3 -right-2 sm:-top-4 sm:-right-4 lg:-top-5 lg:-right-5 z-40 bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-[0_16px_36px_-6px_rgba(15,23,42,0.12)] rounded-2xl p-2.5 sm:p-3 items-center gap-3 select-none"
+          animate={{ opacity: 1, y: shouldReduceMotion ? 0 : [0, 5, 0] }}
+          transition={{
+            opacity: { duration: 0.5, delay: 0.3, ease: "easeOut" },
+            y: shouldReduceMotion ? { duration: 0.4 } : { repeat: Infinity, duration: 5, ease: "easeInOut", delay: 0.4 },
+          }}
+          className="hidden sm:flex absolute -top-3 -right-2 sm:-top-4 sm:-right-4 lg:-top-5 lg:-right-5 z-40 bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-[0_12px_28px_-6px_rgba(15,23,42,0.12)] rounded-xl sm:rounded-2xl p-2 sm:p-3 items-center gap-2.5 sm:gap-3 select-none"
         >
-          <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-xl bg-blue-50 text-blue-600 border border-blue-200/70 flex items-center justify-center flex-shrink-0 shadow-xs">
+          <div className="h-7 w-7 sm:h-9 sm:w-9 rounded-lg sm:rounded-xl bg-blue-50 text-blue-600 border border-blue-200/70 flex items-center justify-center flex-shrink-0 shadow-xs">
             <Bell className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
           </div>
           <div className="flex flex-col text-left">
@@ -94,16 +100,19 @@ export const HeroShowcase: React.FC = () => {
         {/* Pill 3: Fee Collected +12% (Bottom Left) */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
-          animate={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: [-2, 6, -2] }}
-          transition={shouldReduceMotion ? { duration: 0.4 } : { repeat: Infinity, duration: 4.2, ease: "easeInOut", delay: 0.8 }}
-          className="absolute -bottom-3 left-1 sm:-bottom-5 sm:left-5 lg:-bottom-6 lg:left-6 z-40 bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-[0_16px_36px_-6px_rgba(15,23,42,0.12)] rounded-2xl p-2 sm:p-3 flex items-center gap-2.5 sm:gap-3 select-none"
+          animate={{ opacity: 1, y: shouldReduceMotion ? 0 : [-2, 4, -2] }}
+          transition={{
+            opacity: { duration: 0.5, delay: 0.2, ease: "easeOut" },
+            y: shouldReduceMotion ? { duration: 0.4 } : { repeat: Infinity, duration: 4.2, ease: "easeInOut", delay: 0.8 },
+          }}
+          className="absolute -bottom-2.5 left-2 sm:-bottom-5 sm:left-5 lg:-bottom-6 lg:left-6 z-40 bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-[0_12px_28px_-6px_rgba(15,23,42,0.12)] rounded-xl sm:rounded-2xl p-1.5 sm:p-3 flex items-center gap-2 sm:gap-3 select-none"
         >
-          <div className="h-7 w-7 sm:h-9 sm:w-9 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200/70 flex items-center justify-center flex-shrink-0 shadow-xs">
-            <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
+          <div className="h-6 w-6 sm:h-9 sm:w-9 rounded-lg sm:rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200/70 flex items-center justify-center flex-shrink-0 shadow-xs">
+            <TrendingUp className="h-3.5 w-3.5 sm:h-5 sm:w-5" aria-hidden="true" />
           </div>
-          <div className="flex flex-col text-left">
-            <span className="text-[11px] sm:text-sm font-bold text-slate-900 leading-tight">Fee Collected +12%</span>
-            <span className="text-[9px] sm:text-xs text-slate-500 font-medium">Auto-reconciled this term</span>
+          <div className="flex flex-col text-left pr-1 sm:pr-0">
+            <span className="text-[10px] sm:text-sm font-bold text-slate-900 leading-tight">Fee Collected +12%</span>
+            <span className="text-[8.5px] sm:text-xs text-slate-500 font-medium">Auto-reconciled this term</span>
           </div>
         </motion.div>
 

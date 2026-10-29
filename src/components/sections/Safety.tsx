@@ -14,10 +14,10 @@ export const Safety: React.FC = () => {
             <Radio className="w-3.5 h-3.5 text-teal-400 animate-pulse" aria-hidden="true" />
             Safety First
           </span>
-          <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white mt-2 mb-4 tracking-tight leading-tight">
+          <h2 className="font-display font-extrabold text-2xl sm:text-4xl lg:text-[42px] text-white mt-2 mb-3 sm:mb-4 tracking-tight leading-tight">
             Real-Time <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-cyan-400">Student Safety</span>
           </h2>
-          <p className="text-slate-400 text-base sm:text-lg leading-relaxed font-normal">
+          <p className="text-slate-400 text-sm sm:text-base leading-relaxed font-normal">
             Keep track of student location and status from transit to classrooms. Integrated RFID tracking gates and institute bus GPS modules keep parents updated.
           </p>
         </div>

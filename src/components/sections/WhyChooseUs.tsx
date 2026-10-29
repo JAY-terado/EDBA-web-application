@@ -92,8 +92,8 @@ export default function WhyChooseUs() {
             viewport={{ once: true }}
             className="mb-4"
           >
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200/70 shadow-xs">
-              <Workflow className="w-3.5 h-3.5" aria-hidden="true" />
+            <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200/70 shadow-2xs">
+              <Workflow className="w-3 h-3 text-blue-600" aria-hidden="true" />
               Why Choose Us
             </span>
           </motion.div>
@@ -101,7 +101,7 @@ export default function WhyChooseUs() {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight text-slate-900 mt-2 mb-3 sm:mb-4 tracking-tight"
+            className="font-display font-extrabold text-2xl sm:text-4xl lg:text-[42px] leading-tight text-slate-900 mt-2 mb-3 sm:mb-4 tracking-tight"
           >
             Solving Real Campus Challenges, <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500">Day-to-Day</span>
           </motion.h2>
@@ -110,7 +110,7 @@ export default function WhyChooseUs() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal"
+            className="text-slate-600 text-sm sm:text-base leading-relaxed font-normal"
           >
             See how EDBA simplifies operations, streamlines data, and guarantees absolute security through real-world dialogues with campus administrators, staff, and directors.
           </motion.p>

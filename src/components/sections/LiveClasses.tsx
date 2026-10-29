@@ -1,8 +1,6 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
-  Volume2,
-  VolumeX,
   Radio,
   MessageSquare,
   Users,
@@ -12,79 +10,71 @@ import {
 
 export default function LiveClasses() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isMuted, setIsMuted] = useState(true);
 
-  // Guarantee automatic, lag-free autoplay on page load without any user action
+  // Keep video unmuted by default with seamless autoplay
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    // Strict muted settings required by modern browsers for zero-click autoplay
-    video.muted = true;
-    video.defaultMuted = true;
+    video.muted = false;
+    video.defaultMuted = false;
+    video.volume = 1;
 
-    const playVideo = () => {
-      const promise = video.play();
-      if (promise !== undefined) {
-        promise.catch(() => {
-          // If browser policy defers autoplay, start as soon as user touches or scrolls
-          const triggerPlay = () => {
-            if (videoRef.current) {
-              videoRef.current.play().catch(() => {});
-            }
-            window.removeEventListener("scroll", triggerPlay);
-            window.removeEventListener("touchstart", triggerPlay);
-            window.removeEventListener("click", triggerPlay);
-          };
-          window.addEventListener("scroll", triggerPlay, { once: true, passive: true });
-          window.addEventListener("touchstart", triggerPlay, { once: true, passive: true });
-          window.addEventListener("click", triggerPlay, { once: true });
-        });
+    const startPlayback = async () => {
+      try {
+        video.muted = false;
+        video.volume = 1;
+        await video.play();
+      } catch {
+        // If the browser autoplay policy defers unmuted audio without prior interaction,
+        // start playback and immediately unmute on first user interaction (touch, click, scroll)
+        video.muted = true;
+        video.play().catch(() => {});
+
+        const enableAudioOnGesture = () => {
+          if (videoRef.current) {
+            videoRef.current.muted = false;
+            videoRef.current.volume = 1;
+            videoRef.current.play().catch(() => {});
+          }
+          window.removeEventListener("pointerdown", enableAudioOnGesture);
+          window.removeEventListener("touchstart", enableAudioOnGesture);
+          window.removeEventListener("click", enableAudioOnGesture);
+          window.removeEventListener("scroll", enableAudioOnGesture);
+          window.removeEventListener("keydown", enableAudioOnGesture);
+        };
+
+        window.addEventListener("pointerdown", enableAudioOnGesture, { once: true, passive: true });
+        window.addEventListener("touchstart", enableAudioOnGesture, { once: true, passive: true });
+        window.addEventListener("click", enableAudioOnGesture, { once: true });
+        window.addEventListener("scroll", enableAudioOnGesture, { once: true, passive: true });
+        window.addEventListener("keydown", enableAudioOnGesture, { once: true });
       }
     };
 
-    playVideo();
-
-    const handleVolumeChange = () => {
-      if (videoRef.current) {
-        setIsMuted(videoRef.current.muted);
-      }
-    };
-
-    video.addEventListener("volumechange", handleVolumeChange);
-
-    return () => {
-      video.removeEventListener("volumechange", handleVolumeChange);
-    };
+    startPlayback();
   }, []);
 
-  // Infinite seamless loop restart
+  // Infinite seamless loop restart (keeps unmuted)
   const handleVideoEnded = () => {
     const video = videoRef.current;
     if (video) {
       video.currentTime = 0;
+      video.muted = false;
+      video.volume = 1;
       video.play().catch(() => {});
     }
   };
 
-  // Instant hardware-accelerated sound toggle (no toasts, no tooltips, no hover popups)
-  const toggleMute = useCallback((e?: React.MouseEvent) => {
-    if (e) {
-      e.stopPropagation();
-      e.preventDefault();
-    }
+  const handleVideoClick = () => {
     const video = videoRef.current;
     if (!video) return;
-
-    if (video.muted) {
-      video.muted = false;
-      if (video.volume === 0) video.volume = 1;
-      setIsMuted(false);
-    } else {
-      video.muted = true;
-      setIsMuted(true);
+    video.muted = false;
+    video.volume = 1;
+    if (video.paused) {
+      video.play().catch(() => {});
     }
-  }, []);
+  };
 
   const features = [
     {
@@ -112,25 +102,62 @@ export default function LiveClasses() {
   return (
     <section id="live-classes" className="py-20 sm:py-28 bg-white border-b border-slate-200/80 overflow-hidden">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start lg:items-center">
 
-          {/* Left: Clean Infinite Video Display */}
+          {/* Top on Mobile / Right Row 1 on Desktop: Header & Story */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="lg:col-span-6 relative"
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="lg:col-span-6 lg:col-start-7 lg:row-start-1 flex flex-col items-center lg:items-start"
+          >
+            <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200/70 mb-3 sm:mb-4 w-fit shadow-2xs self-center lg:self-start">
+              <Radio className="w-3 h-3 text-blue-600 animate-pulse" aria-hidden="true" />
+              Live Classroom
+            </span>
+
+            <h2 className="font-display font-extrabold text-2xl sm:text-4xl lg:text-[42px] leading-[1.15] text-slate-900 tracking-tight mb-4 sm:mb-5 text-center lg:text-left">
+              Live Classes &amp; <br />
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-sky-600 to-cyan-500">
+                Interactive Learning
+              </span>
+            </h2>
+
+            <p className="text-slate-700 font-semibold text-base sm:text-lg leading-snug mb-3 text-center lg:text-left">
+              Bring Teachers, Students, and Parents Together in Real Time
+            </p>
+
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-3 sm:mb-4 font-normal">
+              Conduct live classes through the EDBA platform, allowing teachers to connect with students and parents through an interactive digital learning experience.
+            </p>
+
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-3 sm:mb-4 font-normal">
+              Teachers can stream live sessions, while students and parents can join, interact, and communicate through live chat. Important updates, discussions, and information can be highlighted and easily accessed when needed.
+            </p>
+
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-normal">
+              Recorded classroom highlights and short learning videos can also be made available alongside the live session, helping students quickly catch up on missed lessons and stay connected with their learning journey.
+            </p>
+          </motion.div>
+
+          {/* Middle on Mobile (under learning journey) / Left Col (spanning rows) on Desktop */}
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+            className="lg:col-span-6 lg:col-start-1 lg:row-start-1 lg:row-span-2 relative lg:self-center"
           >
             {/* Ambient decorative soft halo behind container */}
             <div className="absolute -inset-2 bg-gradient-to-r from-blue-600/15 via-sky-500/10 to-indigo-600/15 rounded-3xl blur-2xl -z-10 pointer-events-none" />
 
             {/* Video Player Shell */}
             <div className="relative bg-slate-950 rounded-2xl overflow-hidden shadow-2xl shadow-slate-900/35 border border-slate-800/80 select-none">
-              {/* Aspect Ratio Frame - No title attribute, no hover popups */}
+              {/* Aspect Ratio Frame */}
               <div
                 className="relative aspect-video w-full bg-black overflow-hidden flex items-center justify-center cursor-pointer"
-                onClick={toggleMute}
+                onClick={handleVideoClick}
                 style={{
                   transform: "translate3d(0, 0, 0)",
                   WebkitTransform: "translate3d(0, 0, 0)",
@@ -138,13 +165,12 @@ export default function LiveClasses() {
                   WebkitBackfaceVisibility: "hidden",
                 }}
               >
-                {/* Hardware-accelerated Video (100% native quality, autoPlay on load, infinite loop) */}
+                {/* Hardware-accelerated Video (100% native quality, autoPlay on load, infinite loop, unmuted by default) */}
                 <video
                   ref={videoRef}
                   playsInline
                   autoPlay
                   loop
-                  muted
                   preload="auto"
                   disablePictureInPicture
                   onEnded={handleVideoEnded}
@@ -163,103 +189,24 @@ export default function LiveClasses() {
                 </video>
 
                 {/* Top-Left: Discreet Live Status Badge */}
-                <div className="absolute top-3.5 left-3.5 z-20 flex items-center gap-2 pointer-events-none">
-                  <div className="flex items-center gap-1.5 px-3 py-1 bg-slate-950/80 rounded-full shadow-md border border-white/10 text-white">
-                    <span className="h-2 w-2 rounded-full bg-red-500 animate-pulse" />
-                    <span className="text-[11px] font-bold tracking-wider uppercase text-slate-200">LIVE HD</span>
-                  </div>
-                </div>
-
-                {/* Bottom-Right: Clean Sound Toggle Pill - Zero hover popups or browser tooltips */}
-                <div className="absolute bottom-3.5 right-3.5 z-20 pointer-events-auto">
-                  <button
-                    type="button"
-                    onClick={toggleMute}
-                    className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-colors duration-150 shadow-lg border cursor-pointer select-none ${
-                      isMuted
-                        ? "bg-slate-950/85 hover:bg-slate-900 text-white border-white/20"
-                        : "bg-blue-600 hover:bg-blue-500 text-white border-blue-400/50"
-                    }`}
-                    aria-label={isMuted ? "Unmute audio" : "Mute audio"}
-                  >
-                    {isMuted ? (
-                      <>
-                        <VolumeX className="w-3.5 h-3.5 text-amber-400" />
-                        <span className="text-slate-200 text-xs">Unmute</span>
-                      </>
-                    ) : (
-                      <>
-                        <Volume2 className="w-3.5 h-3.5 text-white" />
-                        <span className="text-white text-xs">Mute</span>
-                      </>
-                    )}
-                  </button>
-                </div>
-              </div>
-
-              {/* Bottom Presenter Bar */}
-              <div className="flex items-center justify-between px-4 py-3 bg-slate-900 border-t border-slate-800">
-                <div className="flex items-center gap-3">
-                  <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center text-white text-xs font-bold shadow-md">
-                    E
-                  </div>
-                  <div>
-                    <p className="text-white text-xs font-semibold tracking-wide">EDBA Interactive TV Display</p>
-                    <p className="text-teal-400 text-[11px] font-medium flex items-center gap-1.5">
-                      <span className="h-1.5 w-1.5 rounded-full bg-teal-400 animate-pulse" />
-                      Live Streaming &amp; Classroom Screen
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-blue-600/20 border border-blue-500/30 rounded-md">
-                    <span className="text-blue-300 text-xs font-semibold">Active Session</span>
-                  </div>
-                  <div className="h-8 w-8 rounded-lg bg-slate-800 flex items-center justify-center text-teal-400">
-                    <Radio className="h-4 w-4 animate-pulse" />
+                <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 z-20 flex items-center gap-1.5 pointer-events-none">
+                  <div className="flex items-center gap-1.5 px-2 py-0.5 sm:px-2.5 sm:py-0.5 bg-slate-950/80 rounded-full shadow-md border border-white/10 text-white backdrop-blur-xs">
+                    <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />
+                    <span className="text-[9.5px] sm:text-[10px] font-semibold tracking-wider uppercase text-slate-200">LIVE HD</span>
                   </div>
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Right: Text Content */}
+          {/* Bottom on Mobile / Right Row 2 on Desktop: Features & CTA */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="lg:col-span-6 flex flex-col"
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
+            className="lg:col-span-6 lg:col-start-7 lg:row-start-2 flex flex-col"
           >
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200/70 mb-5 w-fit shadow-xs">
-              <Radio className="w-3.5 h-3.5 text-blue-600 animate-pulse" aria-hidden="true" />
-              Live Classroom
-            </span>
-
-            <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-[42px] leading-[1.15] text-slate-900 tracking-tight mb-5">
-              Live Classes &amp; <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-sky-600 to-cyan-500">
-                Interactive Learning
-              </span>
-            </h2>
-
-            <p className="text-slate-700 font-semibold text-lg leading-snug mb-3">
-              Bring Teachers, Students, and Parents Together in Real Time
-            </p>
-
-            <p className="text-slate-600 text-base leading-relaxed mb-4 font-normal">
-              Conduct live classes through the EDBA platform, allowing teachers to connect with students and parents through an interactive digital learning experience.
-            </p>
-
-            <p className="text-slate-600 text-base leading-relaxed mb-4 font-normal">
-              Teachers can stream live sessions, while students and parents can join, interact, and communicate through live chat. Important updates, discussions, and information can be highlighted and easily accessed when needed.
-            </p>
-
-            <p className="text-slate-600 text-base leading-relaxed mb-8 font-normal">
-              Recorded classroom highlights and short learning videos can also be made available alongside the live session, helping students quickly catch up on missed lessons and stay connected with their learning journey.
-            </p>
-
             {/* Feature pills */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
               {features.map((feat, i) => {
@@ -281,14 +228,16 @@ export default function LiveClasses() {
               })}
             </div>
 
-            <button
-              type="button"
-              onClick={() => window.dispatchEvent(new CustomEvent("open-demo-modal"))}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 cursor-pointer w-fit group"
-            >
-              <span>See Live Classroom in Action</span>
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </button>
+            <div className="w-full flex justify-center lg:justify-start">
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new CustomEvent("open-demo-modal"))}
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 cursor-pointer group active:scale-95 mx-auto lg:mx-0 text-center"
+              >
+                <span>See Live Classroom in Action</span>
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 flex-shrink-0" />
+              </button>
+            </div>
           </motion.div>
 
         </div>

@@ -234,7 +234,7 @@ export default function EducationManagementPlatform() {
   return (
     <section
       id="platform"
-      className="scroll-mt-28 pt-12 pb-14 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-24 bg-gradient-to-b from-[#f8fafc] via-white to-[#f8fafc] border-b border-slate-200/80 overflow-hidden relative select-none"
+      className="scroll-mt-28 pt-8 pb-10 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-24 bg-gradient-to-b from-[#f8fafc] via-white to-[#f8fafc] border-b border-slate-200/80 overflow-hidden relative select-none"
     >
       {/* Ambient background lighting */}
       <div
@@ -247,7 +247,7 @@ export default function EducationManagementPlatform() {
         {/* ========================================================= */}
         {/* SECTION HEADER                                            */}
         {/* ========================================================= */}
-        <div className="text-center max-w-3xl lg:max-w-4xl mx-auto mb-6 sm:mb-8">
+        <div className="text-center max-w-3xl lg:max-w-4xl mx-auto mb-4 sm:mb-8">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -255,13 +255,13 @@ export default function EducationManagementPlatform() {
             transition={{ duration: 0.5 }}
           >
             {/* Unified Ecosystem Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50/90 border border-blue-200/80 mb-3 shadow-xs">
-              <Layers className="w-3.5 h-3.5 text-blue-600" aria-hidden="true" />
+            <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider text-blue-600 bg-blue-50/90 border border-blue-200/80 mb-2 sm:mb-2.5 shadow-2xs">
+              <Layers className="w-3 h-3 text-blue-600" aria-hidden="true" />
               <span>Unified Ecosystem</span>
             </div>
 
             {/* Heading matching User Design */}
-            <h2 className="font-display font-extrabold text-2xl sm:text-3xl lg:text-[40px] leading-[1.18] text-slate-900 tracking-tight mb-3">
+            <h2 className="font-display font-extrabold text-2xl sm:text-4xl lg:text-[42px] leading-[1.15] text-slate-900 tracking-tight mb-2 sm:mb-3">
               Education Management{" "}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500">
                 Platform
@@ -269,7 +269,7 @@ export default function EducationManagementPlatform() {
             </h2>
 
             {/* Subtitle cleanly balanced across exactly 2 lines */}
-            <p className="text-slate-600 text-xs sm:text-sm lg:text-[15px] leading-relaxed max-w-4xl mx-auto font-normal">
+            <p className="text-slate-600 text-xs sm:text-sm lg:text-[15px] leading-relaxed max-w-4xl mx-auto font-normal px-2">
               EDBA brings attendance, academics, exams, fees, communication and administration together in one connected platform,<br className="hidden sm:inline" />
               {" "}so administrators, teachers, staff, students and parents get their work done with ease.
             </p>
@@ -280,7 +280,7 @@ export default function EducationManagementPlatform() {
         {/* 3D CIRCULAR CAROUSEL & STATIONARY IPHONE STAGE            */}
         {/* ========================================================= */}
         <div
-          className="relative w-full max-w-[1280px] mx-auto h-[480px] xs:h-[530px] sm:h-[600px] lg:h-[650px] flex items-center justify-center overflow-hidden cursor-clove-grab active:cursor-clove-grabbing select-none"
+          className="relative w-full max-w-[1280px] mx-auto h-[550px] xs:h-[580px] sm:h-[610px] lg:h-[650px] flex items-center justify-center overflow-hidden cursor-clove-grab active:cursor-clove-grabbing select-none"
           style={{ perspective: "1200px", touchAction: "pan-y", cursor: isDragging ? CLOVE_GRABBING_CURSOR : CLOVE_GRAB_CURSOR }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
@@ -301,7 +301,7 @@ export default function EducationManagementPlatform() {
 
 
           {/* Scalable Container for 3D Stage, Stationary Frame & Cards */}
-          <div className="relative w-full h-full flex items-end justify-center scale-[0.58] xs:scale-[0.66] sm:scale-[0.76] lg:scale-[0.84] origin-bottom transition-transform duration-300">
+          <div className="relative w-full h-full flex items-end justify-center scale-[0.69] xs:scale-[0.73] sm:scale-[0.78] lg:scale-[0.84] origin-bottom transition-transform duration-300">
 
             {/* ========================================================= */}
             {/* 3D CYLINDRICAL STAGE / PEDESTAL (Lowest Layer: zIndex: 1)  */}
@@ -596,22 +596,24 @@ export default function EducationManagementPlatform() {
         {/* INTERACTIVE CONTROLS & PRIMARY CALL TO ACTION             */}
         {/* ========================================================= */}
         <div className="mt-6 sm:mt-8 flex flex-col items-center text-center">
-          {/* Interactive Screen Category Selector Pills */}
-          <div className="flex flex-wrap items-center justify-center gap-2 max-w-full overflow-x-auto pb-1 scrollbar-none px-2 mb-4">
+          {/* Interactive Screen Category Selector Pills - Stable fixed layout to prevent badge jumping */}
+          <div className="grid grid-cols-3 sm:flex sm:flex-wrap items-center justify-center gap-1.5 sm:gap-2 w-full max-w-sm sm:max-w-xl mx-auto mb-4 px-2">
             {SLIDES_DATA.map((slide, idx) => {
               const isActive = activeSlideIndex === idx;
               const IconComp = slide.icon;
               return (
                 <button
                   key={slide.id}
+                  type="button"
                   onClick={() => goToSlide(idx)}
-                  className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${isActive
-                      ? "bg-blue-600 text-white shadow-md shadow-blue-500/25 scale-105"
-                      : "bg-white text-slate-600 border border-slate-200 hover:border-blue-300 hover:bg-blue-50/50"
-                    }`}
+                  className={`inline-flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-semibold transition-colors duration-150 cursor-pointer select-none border ${
+                    isActive
+                      ? "bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-500/25"
+                      : "bg-white text-slate-600 border-slate-200/90 hover:border-blue-300 hover:bg-blue-50/50"
+                  }`}
                 >
-                  <IconComp className={`w-3.5 h-3.5 ${isActive ? "text-white" : "text-slate-400"}`} />
-                  <span>{slide.category}</span>
+                  <IconComp className={`w-3.5 h-3.5 shrink-0 ${isActive ? "text-white" : "text-slate-400"}`} />
+                  <span className="whitespace-nowrap">{slide.category}</span>
                 </button>
               );
             })}

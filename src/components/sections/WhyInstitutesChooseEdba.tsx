@@ -1,7 +1,13 @@
 /// <reference types="vite/client" />
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { Building2, ArrowRight, Image as ImageIcon } from "lucide-react";
+import {
+  Building2,
+  ArrowRight,
+  Image as ImageIcon,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 // Dynamically resolve point images from /src/assets/why/ (e.g. point1.png, point2.png, etc.)
 const whyImages = import.meta.glob<{ default: string }>(
@@ -74,18 +80,52 @@ const benefits = [
   },
 ];
 
+const AUTOPLAY_INTERVAL = 4500;
+
 export default function WhyInstitutesChooseEdba() {
   const shouldReduceMotion = useReducedMotion();
   const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({});
   const [activeMobileIdx, setActiveMobileIdx] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [timerKey, setTimerKey] = useState(0);
 
-  const handlePrev = () => {
+  // Instantly resets autoplay countdown and starts fresh without any action required
+  const resetAutoplay = useCallback(() => {
+    setIsPaused(false);
+    setTimerKey((k) => k + 1);
+  }, []);
+
+  const handlePrev = useCallback(() => {
+    setDirection(-1);
     setActiveMobileIdx((prev) => (prev > 0 ? prev - 1 : benefits.length - 1));
-  };
+    resetAutoplay();
+  }, [resetAutoplay]);
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
+    setDirection(1);
     setActiveMobileIdx((prev) => (prev < benefits.length - 1 ? prev + 1 : 0));
-  };
+    resetAutoplay();
+  }, [resetAutoplay]);
+
+  const handleDotClick = useCallback((idx: number) => {
+    if (idx === activeMobileIdx) return;
+    setDirection(idx > activeMobileIdx ? 1 : -1);
+    setActiveMobileIdx(idx);
+    resetAutoplay();
+  }, [activeMobileIdx, resetAutoplay]);
+
+  // Automatic sliding timer with dot animation sync
+  useEffect(() => {
+    if (isPaused || shouldReduceMotion) return;
+
+    const timer = setInterval(() => {
+      setDirection(1);
+      setActiveMobileIdx((prev) => (prev < benefits.length - 1 ? prev + 1 : 0));
+    }, AUTOPLAY_INTERVAL);
+
+    return () => clearInterval(timer);
+  }, [isPaused, shouldReduceMotion, activeMobileIdx, timerKey]);
 
   // Desktop Card Renderer
   const renderCard = (b: (typeof benefits)[0], i: number) => {
@@ -213,8 +253,8 @@ export default function WhyInstitutesChooseEdba() {
       <div className="max-w-[1360px] mx-auto px-4 sm:px-6 relative z-10">
         {/* Header (centered, mb-10) */}
         <div className="text-center max-w-4xl lg:max-w-5xl mx-auto mb-8 sm:mb-12">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-blue-400 bg-blue-500/10 border border-blue-500/30 mb-3 sm:mb-4 shadow-xs">
-            <Building2 className="w-3.5 h-3.5" aria-hidden="true" />
+          <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider text-blue-400 bg-blue-500/10 border border-blue-500/30 mb-2.5 sm:mb-3 shadow-2xs">
+            <Building2 className="w-3 h-3" aria-hidden="true" />
             Why Institutes Choose EDBA
           </span>
           <h2
@@ -234,38 +274,74 @@ export default function WhyInstitutesChooseEdba() {
         </div>
 
         {/* ============================================================== */}
-        {/* MOBILE UI (< md): Interactive Step Carousel                   */}
+        {/* MOBILE UI (< md): Interactive Step Carousel with Premium Dots */}
         {/* ============================================================== */}
         <div className="block md:hidden">
-          {/* Featured Reason Card */}
-          <div className="relative overflow-hidden">
-            <AnimatePresence mode="wait">
+          {/* Featured Reason Card - Fixed height container with pause-on-touch */}
+          {/* Featured Reason Card - Fixed height container with automatic resume */}
+          <div
+            className="relative overflow-hidden h-[460px]"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={resetAutoplay}
+            onTouchStart={() => setIsPaused(true)}
+            onTouchEnd={resetAutoplay}
+          >
+            <AnimatePresence mode="wait" custom={direction}>
               <motion.article
                 key={activeMobileIdx}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ type: "spring", damping: 26, stiffness: 300 }}
+                custom={direction}
+                variants={{
+                  enter: (dir: number) => ({
+                    opacity: 0,
+                    x: dir >= 0 ? 55 : -55,
+                    scale: 0.96,
+                  }),
+                  center: {
+                    opacity: 1,
+                    x: 0,
+                    scale: 1,
+                    transition: {
+                      duration: 0.32,
+                      ease: [0.16, 1, 0.3, 1],
+                    },
+                  },
+                  exit: (dir: number) => ({
+                    opacity: 0,
+                    x: dir >= 0 ? -55 : 55,
+                    scale: 0.96,
+                    transition: {
+                      duration: 0.22,
+                      ease: [0.4, 0, 1, 1],
+                    },
+                  }),
+                }}
+                initial="enter"
+                animate="center"
+                exit="exit"
                 drag="x"
                 dragConstraints={{ left: 0, right: 0 }}
                 dragElastic={0.25}
+                whileDrag={{ scale: 0.98 }}
+                onDragStart={() => setIsPaused(true)}
                 onDragEnd={(_e, { offset, velocity }) => {
-                  const isSwipe = Math.abs(offset.x) > 35 || Math.abs(velocity.x) > 350;
+                  const isSwipe = Math.abs(offset.x) > 30 || Math.abs(velocity.x) > 250;
                   if (isSwipe) {
-                    if (offset.x < 0 || velocity.x < -250) handleNext();
-                    else if (offset.x > 0 || velocity.x > 250) handlePrev();
+                    if (offset.x < 0 || velocity.x < -200) handleNext();
+                    else if (offset.x > 0 || velocity.x > 200) handlePrev();
+                  } else {
+                    resetAutoplay();
                   }
                 }}
-                className="w-full rounded-[22px] border border-[#223049] bg-gradient-to-b from-[#121B30] to-[#0D1527] p-5 shadow-2xl shadow-black/40 touch-pan-y"
+                className="w-full h-[460px] rounded-[22px] border border-[#223049] bg-gradient-to-b from-[#121B30] to-[#0D1527] p-5 shadow-2xl shadow-black/40 touch-pan-y flex flex-col justify-between select-none"
               >
-                {/* Round Illustration */}
-                <div className="mb-3.5">
+                {/* Header Row: Round Illustration (numbering tag removed) */}
+                <div className="flex items-center mb-3 flex-shrink-0">
                   {activeHasValidImage ? (
                     <img
                       src={activeImgSrc}
                       alt={activeMobileBenefit.alt}
-                      width={68}
-                      height={68}
+                      width={64}
+                      height={64}
                       className="w-16 h-16 rounded-full bg-white object-cover border-2 border-white/20 shadow-md shadow-blue-500/10"
                     />
                   ) : (
@@ -278,34 +354,124 @@ export default function WhyInstitutesChooseEdba() {
                   )}
                 </div>
 
-                {/* Headline: Full-width clear hierarchy */}
-                <h3 className="text-white text-lg font-extrabold tracking-tight leading-snug mb-2">
-                  {activeMobileBenefit.headline}
-                </h3>
+                {/* Middle Content Area */}
+                <div className="flex flex-col flex-1 justify-start">
+                  {/* Headline: min-h ensures 1-line and 2-line titles take equal space */}
+                  <h3 className="text-white text-[17px] font-extrabold tracking-tight leading-snug mb-1.5 min-h-[50px] flex items-start">
+                    {activeMobileBenefit.headline}
+                  </h3>
 
-                {/* Body description */}
-                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
-                  {activeMobileBenefit.body}
-                </p>
+                  {/* Body description */}
+                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-3 min-h-[44px]">
+                    {activeMobileBenefit.body}
+                  </p>
 
-                {/* Module chips: Full width */}
-                <div className="pt-3 border-t border-slate-800/80">
-                  <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold block mb-2">
-                    Connected Modules
-                  </span>
-                  <ul className="flex flex-wrap gap-1.5 list-none p-0 m-0">
-                    {activeMobileBenefit.modules.map((mod) => (
-                      <li
-                        key={mod}
-                        className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-[#1C2640] border border-slate-700/80 text-slate-200"
-                      >
-                        {mod}
-                      </li>
-                    ))}
-                  </ul>
+                  {/* Module chips */}
+                  <div className="pt-2.5 border-t border-slate-800/80 flex-1">
+                    <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold block mb-1.5">
+                      Connected Modules
+                    </span>
+                    <ul className="flex flex-wrap gap-1.5 list-none p-0 m-0">
+                      {activeMobileBenefit.modules.map((mod) => (
+                        <li
+                          key={mod}
+                          className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-[#1C2640] border border-slate-700/80 text-slate-200"
+                        >
+                          {mod}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Link Action - Anchored at bottom */}
+                <div className="pt-2.5 border-t border-slate-800/50 mt-auto flex-shrink-0">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      window.dispatchEvent(new CustomEvent("open-demo-modal"))
+                    }
+                    className="group/link text-xs font-bold text-blue-400 hover:text-blue-300 inline-flex items-center gap-1.5 min-h-[28px] cursor-pointer transition-colors"
+                  >
+                    <span>{activeMobileBenefit.card}</span>
+                    <ArrowRight
+                      className="w-3.5 h-3.5 shrink-0 transition-transform duration-200 group-hover/link:translate-x-1"
+                      aria-hidden="true"
+                    />
+                  </button>
                 </div>
               </motion.article>
             </AnimatePresence>
+          </div>
+
+          {/* Premium Minimal Pagination Dots with Animated Progress Fill */}
+          <div className="flex items-center justify-center mt-5">
+            <div
+              role="tablist"
+              aria-label="Cards pagination"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/90 border border-slate-800/90 backdrop-blur-md shadow-lg shadow-black/40"
+            >
+              {/* Subtle Prev Chevron */}
+              <button
+                type="button"
+                onClick={handlePrev}
+                aria-label="Previous reason"
+                className="p-1 -ml-1 text-slate-400 hover:text-white active:scale-85 transition-all cursor-pointer flex items-center justify-center"
+              >
+                <ChevronLeft className="w-3.5 h-3.5" />
+              </button>
+
+              {/* Animated Dots Indicator with Layout Springs */}
+              <div className="flex items-center gap-1.5 px-1.5">
+                {benefits.map((b, idx) => {
+                  const isActive = idx === activeMobileIdx;
+                  return (
+                    <button
+                      key={b.no}
+                      type="button"
+                      role="tab"
+                      aria-selected={isActive}
+                      aria-label={`Go to slide ${idx + 1} of ${benefits.length}: ${b.headline}`}
+                      onClick={() => handleDotClick(idx)}
+                      className="p-1 -m-1 focus:outline-none cursor-pointer flex items-center justify-center group"
+                    >
+                      <motion.div
+                        layout
+                        transition={{ type: "spring", stiffness: 450, damping: 30 }}
+                        className={`h-2 rounded-full relative overflow-hidden transition-colors duration-200 ${
+                          isActive
+                            ? "w-8 bg-slate-800/90 shadow-inner"
+                            : "w-2 bg-slate-700/80 group-hover:bg-slate-500"
+                        }`}
+                      >
+                        {isActive && (
+                          <motion.span
+                            key={`progress-${activeMobileIdx}-${timerKey}`}
+                            initial={{ width: "0%" }}
+                            animate={{ width: isPaused ? undefined : "100%" }}
+                            transition={{
+                              duration: AUTOPLAY_INTERVAL / 1000,
+                              ease: "linear",
+                            }}
+                            className="absolute inset-0 bg-gradient-to-r from-blue-400 via-sky-400 to-cyan-400 rounded-full shadow-[0_0_10px_rgba(56,189,248,0.9)]"
+                          />
+                        )}
+                      </motion.div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Subtle Next Chevron */}
+              <button
+                type="button"
+                onClick={handleNext}
+                aria-label="Next reason"
+                className="p-1 -mr-1 text-slate-400 hover:text-white active:scale-85 transition-all cursor-pointer flex items-center justify-center"
+              >
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
           </div>
         </div>
 

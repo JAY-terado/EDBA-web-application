@@ -37,40 +37,60 @@ export default function ParentCommunicationPlatform() {
       className="py-20 sm:py-28 bg-white border-b border-slate-200/80 overflow-hidden"
     >
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 xl:gap-14 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-14 items-start lg:items-center">
 
-          {/* Left: Text Content */}
+          {/* Top on Mobile / Left Row 1 on Desktop: Header & Intro text */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7 }}
-            className="lg:col-span-6 flex flex-col"
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="w-full lg:col-span-6 lg:col-start-1 lg:row-start-1 flex flex-col items-center lg:items-start"
           >
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200/70 mb-5 w-fit shadow-xs">
-              <Users className="w-3.5 h-3.5" aria-hidden="true" />
-              Parent & Institutional Communication
+            <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200/70 mb-3 sm:mb-4 w-fit shadow-2xs self-center lg:self-start">
+              <Users className="w-3 h-3 text-blue-600" aria-hidden="true" />
+              Parent &amp; Institutional Communication
             </span>
 
-            <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-[42px] leading-[1.15] text-slate-900 tracking-tight mb-5">
+            <h2 className="font-display font-extrabold text-2xl sm:text-4xl lg:text-[42px] leading-[1.15] text-slate-900 tracking-tight mb-4 sm:mb-5 text-center lg:text-left">
               Bringing Parents and Educational{" "}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500">
                 Institutions Closer Together
               </span>
             </h2>
 
-            <p className="text-slate-600 text-base leading-relaxed mb-4 font-normal">
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-3 sm:mb-4 font-normal">
               EDBA helps strengthen the connection between educational institutions and families by making important information and updates easier to share and access. Through centralized communication, parents can stay informed about their children's academic activities, attendance, announcements, and other important institutional updates.
             </p>
 
-            <p className="text-slate-600 text-base leading-relaxed mb-4 font-normal">
-              With integrated features for Announcements, Messages, Attendance, Academics, and Fees & Payments, EDBA supports transparent communication and helps parents remain actively involved in their children's educational journey.
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-3 sm:mb-4 font-normal">
+              With integrated features for Announcements, Messages, Attendance, Academics, and Fees &amp; Payments, EDBA supports transparent communication and helps parents remain actively involved in their children's educational journey.
             </p>
 
-            <p className="text-slate-600 text-base leading-relaxed mb-8 font-normal">
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-normal">
               Designed for schools, colleges, and other educational institutions, EDBA helps make communication simpler, more accessible, and more effective.
             </p>
+          </motion.div>
 
+          {/* Middle on Mobile (under 'more effective.') / Right Column (spanning rows) on Desktop */}
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+            className="my-3 lg:my-0 lg:col-span-6 lg:col-start-7 lg:row-start-1 lg:row-span-2 relative flex flex-col items-center justify-center w-full lg:self-center"
+          >
+            <TabletMockup />
+          </motion.div>
+
+          {/* Bottom on Mobile / Left Row 2 on Desktop: Features & CTA Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
+            className="w-full lg:col-span-6 lg:col-start-1 lg:row-start-2 flex flex-col"
+          >
             {/* Feature cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
               {communicationFeatures.map((f, i) => {
@@ -89,25 +109,16 @@ export default function ParentCommunicationPlatform() {
               })}
             </div>
 
-            <button
-              type="button"
-              onClick={() => window.dispatchEvent(new CustomEvent("open-demo-modal"))}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl transition-all shadow-lg shadow-blue-500/25 cursor-pointer w-fit group"
-            >
-              <span>See Parent Communication in Action</span>
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </button>
-          </motion.div>
-
-          {/* Right: Floating Tablet Mockup with Connected Portals Graphic */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-6 relative flex flex-col items-center justify-center w-full"
-          >
-            <TabletMockup />
+            <div className="w-full flex justify-center lg:justify-start">
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new CustomEvent("open-demo-modal"))}
+                className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 cursor-pointer group active:scale-95 mx-auto lg:mx-0 text-center"
+              >
+                <span>See Parent Communication in Action</span>
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 flex-shrink-0" />
+              </button>
+            </div>
           </motion.div>
 
         </div>

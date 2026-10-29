@@ -60,14 +60,14 @@ const steps: Step[] = [
         icon: FileCheck2,
         title: "Needs Assessment Complete",
         subtitle: "360° Workflow Mapped",
-        position: "top-4 left-4 sm:top-6 sm:left-6",
+        position: "top-2.5 left-2.5 sm:top-6 sm:left-6",
         colorClass: "text-blue-600 bg-blue-50 border-blue-100",
       },
       {
         icon: Sparkles,
         title: "Personalized Roadmap Ready",
         subtitle: "Aligned with Institutional Goals",
-        position: "bottom-4 right-4 sm:bottom-6 sm:right-6",
+        position: "bottom-2.5 right-2.5 sm:bottom-6 sm:right-6",
         colorClass: "text-indigo-600 bg-indigo-50 border-indigo-100",
       },
     ],
@@ -97,14 +97,14 @@ const steps: Step[] = [
         icon: Sliders,
         title: "Custom Workflows Active",
         subtitle: "Curriculum & Timetables Configured",
-        position: "top-4 left-4 sm:top-6 sm:left-6",
+        position: "top-2.5 left-2.5 sm:top-6 sm:left-6",
         colorClass: "text-cyan-600 bg-cyan-50 border-cyan-100",
       },
       {
         icon: ShieldCheck,
         title: "Granular RBAC Security",
         subtitle: "Role-Based Access Verified",
-        position: "bottom-4 right-4 sm:bottom-6 sm:right-6",
+        position: "bottom-2.5 right-2.5 sm:bottom-6 sm:right-6",
         colorClass: "text-blue-600 bg-blue-50 border-blue-100",
       },
     ],
@@ -134,14 +134,14 @@ const steps: Step[] = [
         icon: Cloud,
         title: "Uploaded to Cloud",
         subtitle: "Encrypted & Secure Sync",
-        position: "top-4 left-4 sm:top-6 sm:left-6",
+        position: "top-2.5 left-2.5 sm:top-6 sm:left-6",
         colorClass: "text-blue-600 bg-blue-50 border-blue-100",
       },
       {
         icon: Users,
         title: "Faculty & Staff Onboarded",
         subtitle: "100% Adoption Milestone",
-        position: "bottom-4 right-4 sm:bottom-6 sm:right-6",
+        position: "bottom-2.5 right-2.5 sm:bottom-6 sm:right-6",
         colorClass: "text-violet-600 bg-violet-50 border-violet-100",
       },
     ],
@@ -171,14 +171,14 @@ const steps: Step[] = [
         icon: TrendingUp,
         title: "99.98% System Uptime",
         subtitle: "High-Availability Cloud",
-        position: "top-4 left-4 sm:top-6 sm:left-6",
+        position: "top-2.5 left-2.5 sm:top-6 sm:left-6",
         colorClass: "text-emerald-600 bg-emerald-50 border-emerald-100",
       },
       {
         icon: HeartHandshake,
         title: "Dedicated Success Partner",
         subtitle: "Proactive Priority Support",
-        position: "bottom-4 right-4 sm:bottom-6 sm:right-6",
+        position: "bottom-2.5 right-2.5 sm:bottom-6 sm:right-6",
         colorClass: "text-teal-600 bg-teal-50 border-teal-100",
       },
     ],
@@ -207,19 +207,19 @@ export default function DigitalTransformationJourney() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-4xl lg:max-w-5xl mx-auto mb-14 sm:mb-20"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50/90 border border-blue-200/80 mb-5 shadow-xs backdrop-blur-sm">
-            <Zap className="w-3.5 h-3.5 text-blue-600" aria-hidden="true" />
+          <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider text-blue-700 bg-blue-50/90 border border-blue-200/80 mb-3 sm:mb-4 shadow-2xs backdrop-blur-sm">
+            <Zap className="w-3 h-3 text-blue-600" aria-hidden="true" />
             <span>Digital Transformation</span>
           </div>
 
-          <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight text-slate-900 tracking-tight mb-4">
+          <h2 className="font-display font-extrabold text-2xl sm:text-4xl lg:text-[42px] leading-tight text-slate-900 tracking-tight mb-3 sm:mb-4">
             4 Simple Steps Towards{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-sky-600 to-cyan-500">
               Digital Transformation
             </span>
           </h2>
 
-          <p className="text-slate-500 text-sm sm:text-base lg:text-[16px] leading-relaxed max-w-4xl lg:max-w-5xl mx-auto">
+          <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-normal max-w-4xl lg:max-w-5xl mx-auto">
             From initial consultation to campus-wide deployment and continuous evolution, EDBA is your dedicated partner in modern education management.
           </p>
         </motion.div>
@@ -313,20 +313,20 @@ export default function DigitalTransformationJourney() {
                         return (
                           <div
                             key={badge.title}
-                            className={`absolute ${badge.position} z-20`}
+                            className={`absolute ${badge.position} z-20 max-w-[65%] sm:max-w-none`}
                           >
-                            <div className="flex items-center gap-3 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/92 backdrop-blur-md border border-white/80 shadow-xl shadow-slate-900/10 text-slate-900 hover:scale-[1.02] transition-transform duration-200">
+                            <div className="flex items-center gap-1.5 sm:gap-3 px-2 sm:px-4 py-1.5 sm:py-3 rounded-xl sm:rounded-2xl bg-white/95 backdrop-blur-md border border-white/80 shadow-md sm:shadow-xl shadow-slate-900/10 text-slate-900 hover:scale-[1.02] transition-transform duration-200">
                               <div
-                                className={`h-8 w-8 sm:h-9 sm:w-9 rounded-xl flex items-center justify-center flex-shrink-0 border ${badge.colorClass}`}
+                                className={`h-6 w-6 sm:h-9 sm:w-9 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0 border ${badge.colorClass}`}
                               >
-                                <BadgeIcon className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
+                                <BadgeIcon className="h-3 w-3 sm:h-4.5 sm:w-4.5" />
                               </div>
-                              <div className="text-left pr-1">
-                                <p className="text-xs sm:text-sm font-bold text-slate-900 leading-tight">
+                              <div className="text-left pr-0.5 sm:pr-1 min-w-0">
+                                <p className="text-[10px] sm:text-sm font-bold text-slate-900 leading-tight truncate sm:whitespace-normal">
                                   {badge.title}
                                 </p>
                                 {badge.subtitle && (
-                                  <p className="text-[10px] sm:text-xs font-medium text-slate-500 leading-none mt-1">
+                                  <p className="text-[8.5px] sm:text-xs font-medium text-slate-500 leading-none mt-0.5 sm:mt-1 truncate sm:whitespace-normal">
                                     {badge.subtitle}
                                   </p>
                                 )}
@@ -337,9 +337,9 @@ export default function DigitalTransformationJourney() {
                       })}
 
                       {/* Live Connected Ecosystem Pill */}
-                      <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 z-20">
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-950/70 backdrop-blur-md border border-white/20 text-white shadow-lg text-[11px] font-semibold">
-                          <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                      <div className="absolute bottom-2.5 left-2.5 sm:bottom-6 sm:left-6 z-20">
+                        <div className="inline-flex items-center gap-1.5 px-2 py-1 sm:px-3 sm:py-1.5 rounded-full bg-slate-950/75 backdrop-blur-md border border-white/20 text-white shadow-md text-[9px] sm:text-[11px] font-semibold">
+                          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
                           <span>Connected EDBA Ecosystem</span>
                         </div>
                       </div>

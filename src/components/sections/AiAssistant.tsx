@@ -350,9 +350,9 @@ export default function AiAssistant() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-cyan-300 bg-cyan-950/60 border border-cyan-800/70 mb-5 sm:mb-6 shadow-xs"
+              className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider text-cyan-300 bg-cyan-950/60 border border-cyan-800/70 mb-3 sm:mb-4 shadow-2xs"
             >
-              <Sparkles className="h-3.5 w-3.5 text-cyan-400" aria-hidden="true" />
+              <Sparkles className="h-3 w-3 text-cyan-400" aria-hidden="true" />
               <span>EDBA Autopilot</span>
             </motion.div>
             
@@ -361,7 +361,7 @@ export default function AiAssistant() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white mb-5 sm:mb-6 tracking-tight leading-tight"
+              className="font-display font-extrabold text-2xl sm:text-4xl lg:text-[42px] text-white mb-4 sm:mb-5 tracking-tight leading-tight"
             >
               Enter the EDBA Nexus: <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-300">Operations on Absolute Autopilot</span>.
             </motion.h2>
@@ -371,7 +371,7 @@ export default function AiAssistant() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-slate-400 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 font-normal"
+              className="text-slate-400 text-sm sm:text-base leading-relaxed mb-5 sm:mb-6 font-normal"
             >
               Command your campus infrastructure using simple language. Surface deep operational telemetry, draft contextual updates, and isolate student risk profiles instantly via a secure conversational interface.
             </motion.p>

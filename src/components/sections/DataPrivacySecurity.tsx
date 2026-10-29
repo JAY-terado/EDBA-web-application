@@ -71,8 +71,8 @@ export default function DataPrivacySecurity() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-5xl xl:max-w-[1160px] mx-auto mb-14"
         >
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-400 bg-blue-500/10 border border-blue-500/30 mb-5">
-            <ShieldCheck className="w-3.5 h-3.5" aria-hidden="true" />
+          <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider text-blue-400 bg-blue-500/10 border border-blue-500/30 mb-3 sm:mb-4 shadow-2xs">
+            <ShieldCheck className="w-3 h-3" aria-hidden="true" />
             Data Privacy & Security
           </span>
           <h2 className="font-display font-extrabold text-2xl sm:text-3xl lg:text-4xl xl:text-[42px] leading-tight text-white tracking-tight mb-4 whitespace-normal lg:whitespace-nowrap">

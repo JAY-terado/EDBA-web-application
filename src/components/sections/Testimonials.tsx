@@ -38,14 +38,14 @@ export const Testimonials: React.FC = () => {
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 smart-display-tight:mb-8">
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200/70 mb-4 shadow-xs">
-            <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" aria-hidden="true" />
+          <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200/70 mb-3 shadow-2xs">
+            <Star className="w-3 h-3 fill-amber-400 text-amber-400" aria-hidden="true" />
             Endorsements • Rated {siteStats.rating.display}
           </span>
-          <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight text-slate-900 mt-2 mb-4 tracking-tight">
+          <h2 className="font-display font-extrabold text-2xl sm:text-4xl lg:text-[42px] leading-tight text-slate-900 mt-2 mb-3 sm:mb-4 tracking-tight">
             Loved by Educators Across <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500">{siteStats.institutes.display} Institutes</span>
           </h2>
-          <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal">
+          <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-normal">
             See how principals and administrative teams globally are transforming their campuses with EDBA.
           </p>
         </div>

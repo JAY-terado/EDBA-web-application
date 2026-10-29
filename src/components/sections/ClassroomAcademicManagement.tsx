@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useRef } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
 import {
   User,
   CreditCard,
@@ -149,6 +150,21 @@ const highlights = [
 ];
 
 export default function ClassroomAcademicManagement() {
+  const mobileTimelineRef = useRef<HTMLDivElement>(null);
+
+  // Scroll tracking for the mobile vertical connected journey
+  const { scrollYProgress } = useScroll({
+    target: mobileTimelineRef,
+    offset: ["start 75%", "end 60%"],
+  });
+
+  // Physical spring smoothing for fluid animated line drawing
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 220,
+    damping: 28,
+    restDelta: 0.001,
+  });
+
   return (
     <section
       id="academic-management"
@@ -157,13 +173,13 @@ export default function ClassroomAcademicManagement() {
       <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#eff6ff] border border-blue-200/80 text-blue-600 text-[11px] sm:text-xs font-bold uppercase tracking-wider mb-3 shadow-2xs">
-            <User className="w-3.5 h-3.5 text-blue-600" aria-hidden="true" />
+        <div className="text-center max-w-4xl lg:max-w-5xl mx-auto mb-10 sm:mb-14">
+          <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-[#eff6ff] border border-blue-200/80 text-blue-600 text-[11px] font-semibold uppercase tracking-wider mb-2.5 shadow-2xs">
+            <User className="w-3 h-3 text-blue-600" aria-hidden="true" />
             <span>CLASSROOM & ACADEMIC MANAGEMENT</span>
           </div>
 
-          <h2 className="font-display font-extrabold text-2xl sm:text-3xl lg:text-[38px] leading-tight text-slate-900 tracking-tight mb-2.5">
+          <h2 className="font-display font-extrabold text-2xl sm:text-3xl lg:text-4xl xl:text-[40px] leading-tight text-slate-900 tracking-tight mb-2.5 md:whitespace-nowrap">
             Classroom & Academic{" "}
             <span className="text-[#0284c7]">
               Management Software
@@ -175,11 +191,23 @@ export default function ClassroomAcademicManagement() {
           </p>
         </div>
 
-        {/* ── MOBILE: Clean Vertical Connected Journey (< md) ── */}
-        <div className="block md:hidden relative px-1 max-w-lg mx-auto">
-          {/* Continuous Vertical Gradient Connector Line */}
+        {/* ── MOBILE: Clean Vertical Connected Journey with Scroll Animation (< md) ── */}
+        <div ref={mobileTimelineRef} className="block md:hidden relative px-1 max-w-lg mx-auto">
+          {/* Inactive Base Connecting Line Track */}
           <div
-            className="absolute left-[19px] top-5 bottom-6 w-[2px] bg-gradient-to-b from-[#f97316] via-[#8b5cf6] to-[#06b6d4] opacity-45 z-0 pointer-events-none"
+            className="absolute left-[19px] top-5 bottom-6 w-[2px] bg-slate-200/80 z-0 pointer-events-none rounded-full"
+            aria-hidden="true"
+          />
+
+          {/* Active Animated Gradient Line (Linked to user scroll - matches exact color of each node as it passes) */}
+          <motion.div
+            style={{
+              scaleY,
+              transformOrigin: "top",
+              background:
+                "linear-gradient(to bottom, #f97316 0%, #f59e0b 14.3%, #3b82f6 28.6%, #8b5cf6 42.9%, #10b981 57.1%, #f43f5e 71.4%, #2563eb 85.7%, #06b6d4 100%)",
+            }}
+            className="absolute left-[18.5px] top-5 bottom-6 w-[3px] z-0 pointer-events-none rounded-full shadow-[0_0_10px_rgba(59,130,246,0.5)]"
             aria-hidden="true"
           />
 
@@ -188,17 +216,25 @@ export default function ClassroomAcademicManagement() {
               const Icon = step.icon;
 
               return (
-                <div
+                <motion.div
                   key={step.number}
+                  initial={{ opacity: 0.5, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, margin: "-45px" }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
                   className="flex items-start gap-3.5 group"
                 >
                   {/* Step Number Node on Vertical Line */}
                   <div className="flex-shrink-0 pt-2.5 relative">
-                    <div
+                    <motion.div
+                      initial={{ scale: 0.88 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={{ once: false, margin: "-45px" }}
+                      transition={{ type: "spring", stiffness: 350, damping: 20 }}
                       className={`w-10 h-10 rounded-full ${step.colors.nodeBg} text-white font-bold text-xs flex items-center justify-center shadow-md ring-4 ring-[#fbfcfd] transition-transform group-active:scale-95 duration-200`}
                     >
                       {step.number}
-                    </div>
+                    </motion.div>
                   </div>
 
                   {/* Step Card */}
@@ -217,22 +253,9 @@ export default function ClassroomAcademicManagement() {
                       {step.desc}
                     </p>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
-
-          {/* Mobile Bottom Benefits Grid (2x2) */}
-          <div className="mt-8 grid grid-cols-2 gap-2.5">
-            {highlights.map((item) => (
-              <div
-                key={item}
-                className="flex items-center gap-2 p-2.5 rounded-xl bg-blue-50/70 border border-blue-100/90 text-[11px] sm:text-xs font-semibold text-slate-700 shadow-2xs"
-              >
-                <CheckCircle2 className="w-3.5 h-3.5 text-blue-500 flex-shrink-0" />
-                <span className="truncate">{item}</span>
-              </div>
-            ))}
           </div>
         </div>
 
@@ -241,9 +264,13 @@ export default function ClassroomAcademicManagement() {
           <div className="min-w-[1180px] 2xl:min-w-0">
             <div className="grid grid-cols-8 gap-3 sm:gap-4 lg:gap-4.5 items-stretch relative">
               
-              {/* Continuous Horizontal Straight Line behind the nodes */}
+              {/* Continuous Horizontal Straight Line behind the nodes matching each node's exact color */}
               <div
-                className="absolute left-[3%] right-[3%] top-1/2 -translate-y-1/2 h-[2px] bg-gradient-to-r from-[#f97316] via-[#8b5cf6] to-[#06b6d4] opacity-55 z-0 pointer-events-none"
+                style={{
+                  background:
+                    "linear-gradient(to right, #f97316 0%, #f59e0b 14.3%, #3b82f6 28.6%, #8b5cf6 42.9%, #10b981 57.1%, #f43f5e 71.4%, #2563eb 85.7%, #06b6d4 100%)",
+                }}
+                className="absolute left-[3%] right-[3%] top-1/2 -translate-y-1/2 h-[2.5px] opacity-75 z-0 pointer-events-none rounded-full shadow-xs"
                 aria-hidden="true"
               />
 
