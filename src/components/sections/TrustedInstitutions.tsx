@@ -11,7 +11,7 @@ const clientListRow1: ClientInstitution[] = [
   { name: "VIVA Group of Institutes", logo: "/LOGOS/vivalogo.png" },
   { name: "AIKTC Technical Campus", logo: "/LOGOS/AIKTC.png" },
   { name: "Saraswati College of Eng.", logo: "/LOGOS/Saraswati_logo.jpg" },
-  { name: "Rizvi College of Arts & Sci.", logo: "/LOGOS/rizvi_logo.png" },
+  { name: "K.C. College of Engineering", logo: "/LOGOS/kc.jpg" },
   { name: "Utkarsha Vidyalaya & Jr. Col.", logo: "/LOGOS/vivautkarsha-english-logo.png" },
   { name: "Sardar Patel Institute of Tech", logo: "/LOGOS/SPIT.jpg" },
   { name: "New Horizon Inst. of Tech", logo: "/LOGOS/NHITM_LOGO_new_logo.png" },

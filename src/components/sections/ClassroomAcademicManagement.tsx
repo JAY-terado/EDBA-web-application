@@ -175,8 +175,69 @@ export default function ClassroomAcademicManagement() {
           </p>
         </div>
 
-        {/* 8-Step Timeline with Straight Connecting Line */}
-        <div className="overflow-x-auto pb-4 pt-1 scrollbar-none">
+        {/* ── MOBILE: Clean Vertical Connected Journey (< md) ── */}
+        <div className="block md:hidden relative px-1 max-w-lg mx-auto">
+          {/* Continuous Vertical Gradient Connector Line */}
+          <div
+            className="absolute left-[19px] top-5 bottom-6 w-[2px] bg-gradient-to-b from-[#f97316] via-[#8b5cf6] to-[#06b6d4] opacity-45 z-0 pointer-events-none"
+            aria-hidden="true"
+          />
+
+          <div className="space-y-3.5 relative z-10">
+            {steps.map((step) => {
+              const Icon = step.icon;
+
+              return (
+                <div
+                  key={step.number}
+                  className="flex items-start gap-3.5 group"
+                >
+                  {/* Step Number Node on Vertical Line */}
+                  <div className="flex-shrink-0 pt-2.5 relative">
+                    <div
+                      className={`w-10 h-10 rounded-full ${step.colors.nodeBg} text-white font-bold text-xs flex items-center justify-center shadow-md ring-4 ring-[#fbfcfd] transition-transform group-active:scale-95 duration-200`}
+                    >
+                      {step.number}
+                    </div>
+                  </div>
+
+                  {/* Step Card */}
+                  <div className={`flex-1 bg-white rounded-2xl p-4 border border-slate-200/90 shadow-[0_2px_12px_rgba(15,23,42,0.04)] active:scale-[0.99] transition-all duration-150 ${step.colors.borderHover}`}>
+                    <div className="flex items-center gap-2.5 mb-1.5">
+                      <div
+                        className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 shadow-2xs ${step.colors.iconBg} ${step.colors.iconColor}`}
+                      >
+                        <Icon className="w-4 h-4" />
+                      </div>
+                      <h3 className="font-display font-bold text-slate-900 text-[13.5px] leading-snug">
+                        {step.title}
+                      </h3>
+                    </div>
+                    <p className="text-slate-500 text-xs leading-relaxed font-normal">
+                      {step.desc}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Mobile Bottom Benefits Grid (2x2) */}
+          <div className="mt-8 grid grid-cols-2 gap-2.5">
+            {highlights.map((item) => (
+              <div
+                key={item}
+                className="flex items-center gap-2 p-2.5 rounded-xl bg-blue-50/70 border border-blue-100/90 text-[11px] sm:text-xs font-semibold text-slate-700 shadow-2xs"
+              >
+                <CheckCircle2 className="w-3.5 h-3.5 text-blue-500 flex-shrink-0" />
+                <span className="truncate">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── DESKTOP: 8-Step Timeline with Straight Connecting Line (>= md) ── */}
+        <div className="hidden md:block overflow-x-auto pb-4 pt-1 scrollbar-none">
           <div className="min-w-[1180px] 2xl:min-w-0">
             <div className="grid grid-cols-8 gap-3 sm:gap-4 lg:gap-4.5 items-stretch relative">
               
@@ -285,8 +346,8 @@ export default function ClassroomAcademicManagement() {
           </div>
         </div>
 
-        {/* Bottom Benefits Pill */}
-        <div className="mt-10 sm:mt-12 max-w-4xl mx-auto px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-[#eff6ff]/70 border border-blue-100/90 shadow-2xs flex flex-wrap items-center justify-between sm:justify-around gap-4 text-xs sm:text-[13px] font-semibold text-slate-700">
+        {/* Desktop Bottom Benefits Pill (>= md) */}
+        <div className="hidden md:flex mt-10 sm:mt-12 max-w-4xl mx-auto px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-[#eff6ff]/70 border border-blue-100/90 shadow-2xs items-center justify-around gap-4 text-xs sm:text-[13px] font-semibold text-slate-700">
           {highlights.map((item) => (
             <div key={item} className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-blue-500 flex-shrink-0" />
